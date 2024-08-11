@@ -1,8 +1,8 @@
 { config, pkgs, ... }:
 
 {
-  services.gpg-agent = {
-    enable = true;
-    pinentryPackage = pkgs.pinentry-gtk2;
-  };
+  # services.gpg-agent = {
+  #   enable = true;
+  #   pinentryPackage = pkgs.pinentry-gtk2;
+  # };
 }
