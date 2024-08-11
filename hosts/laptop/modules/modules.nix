@@ -3,6 +3,6 @@
 {
     imports = [
         ./home-manager/git.nix
-        .home-manager/studying.nix
+        ./home-manager/studying.nix
     ];
 }
