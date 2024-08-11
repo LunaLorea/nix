@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 
 {
+  home.programs = [
+    pinentry-gtk2
+  ];
+
   programs.gpg = {
     enable = true;
   };
