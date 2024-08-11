@@ -5,5 +5,5 @@
     obsidian
     anki
     ki
-  ]
+  ];
 }
