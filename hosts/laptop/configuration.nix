@@ -134,7 +134,7 @@
      wget
      git
      gitui
-     gnupg
+     #gnupg
      openssh
      zip
      tldr
