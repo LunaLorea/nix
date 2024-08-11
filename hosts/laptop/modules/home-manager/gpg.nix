@@ -1,11 +1,11 @@
 { config, pkgs, ... }:
 
 {
-    home.packages = with pkgs; [
+  home.packages = with pkgs; [
     pinentry-gtk2
   ];
 
-  programs.gpg = {
+  programs.gnupg = {
     enable = true;
     agent = {
       enable = true;
