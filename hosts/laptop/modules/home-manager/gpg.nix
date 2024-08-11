@@ -2,7 +2,7 @@
 
 {
   home.programs = [
-    pinentry-gtk2
+    pkgs.pinentry-gtk2
   ];
 
   programs.gpg = {
