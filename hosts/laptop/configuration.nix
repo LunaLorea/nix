@@ -146,7 +146,7 @@
   programs.gnupg.agent = {                                                      
     enable = true;
     enableSSHSupport = true;
-    pinentryFlavor = "qt";
+    pinentryPackage = pkgs.pinentry-gtk2;
   };
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
