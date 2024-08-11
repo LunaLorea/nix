@@ -10,6 +10,6 @@
     agent = {
       enable = true;
       pinentryFlavor = "gtk2";
-    }
+    };
   };
 }
