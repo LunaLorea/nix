@@ -1,15 +1,8 @@
 { config, pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    pinentry-gtk2
-  ];
-
-  programs.gnupg = {
+  services.gpg-agent = {
     enable = true;
-    agent = {
-      enable = true;
-      pinentryFlavor = "gtk2";
-    };
+    pinentryPackage = pkgs.pinentry-gtk2;
   };
 }
