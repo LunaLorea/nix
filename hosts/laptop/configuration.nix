@@ -134,6 +134,7 @@
      wget
      git
      gitui
+     gnupg
      openssh
      zip
      tldr
