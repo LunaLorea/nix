@@ -6,6 +6,10 @@
   home.username = "luna";
   home.homeDirectory = "/home/luna";
 
+  imports = [
+    ./modules/modules.nix
+  ];
+
   nixpkgs = {
     config = {
       allowUnfree = true;

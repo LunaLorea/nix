@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-    import = [
+    imports = [
         ./home-manager/git.nix
     ];
 }
