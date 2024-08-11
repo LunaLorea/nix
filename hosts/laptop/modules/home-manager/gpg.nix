@@ -1,8 +1,8 @@
 { config, pkgs, ... }:
 
 {
-  home.programs = [
-    pkgs.pinentry-gtk2
+    home.packages = with pkgs; [
+    pinentry-gtk2
   ];
 
   programs.gpg = {
