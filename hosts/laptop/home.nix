@@ -53,13 +53,6 @@
     ki
   ];
 
-  # Setting up git
-  programs.git = {
-    enable = true;
-    userEmail = "luna.zehnder@laptop.nix";
-    userName = "Luna";
-    };
-
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
