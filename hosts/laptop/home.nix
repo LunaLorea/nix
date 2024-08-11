@@ -40,7 +40,6 @@
     vscode
     filezilla
     zed-editor
-    nextcloud-client
     vlc
     beets
     clementine

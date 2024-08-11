@@ -5,5 +5,6 @@
         ./git.nix
         ./studying.nix
         ./nextcloud-client.nix
+        ./pass.nix
     ];
 }
