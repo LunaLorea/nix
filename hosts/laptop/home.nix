@@ -50,6 +50,7 @@
     vim
     libation
     modrinth-app
+    ki
   ];
 
   # Setting up git
