@@ -40,9 +40,7 @@
     vscode
     filezilla
     zed-editor
-    obsidian   
     nextcloud-client
-    anki
     vlc
     beets
     clementine
@@ -54,7 +52,6 @@
     vim
     libation
     modrinth-app
-    ki
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
