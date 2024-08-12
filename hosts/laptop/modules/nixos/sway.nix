@@ -34,9 +34,7 @@ in
         };
       };
       modes.default = {
-        bindsym = [
-          "$mod+t exec kitty"
-        ];
+        Space = "exec fuzzel";
       };
 
 
