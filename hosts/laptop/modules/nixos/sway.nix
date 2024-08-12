@@ -9,7 +9,6 @@ in
     fuzzel
     kitty
   ];
-  programs.wshowkeys.enable = true;
 
   wayland.windowManager.sway = {
     enable = true;
