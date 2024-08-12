@@ -2,7 +2,7 @@
 
 let
   colors-accent = #529699;
-
+in
 {
   wayland.windowManager.sway = {
     enable = true;
