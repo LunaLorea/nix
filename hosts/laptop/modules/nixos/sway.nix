@@ -6,7 +6,7 @@ in
 {
   home.packages = with pkgs; {
     fuzzel
-  }
+  };
 
 
   wayland.windowManager.sway = {
