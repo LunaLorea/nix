@@ -34,10 +34,7 @@ in
         };
       };
       modes.default = {
-        bindsym = {
-          # open program launcher
-          "$mod+t" = "exec kitty";
-        };
+        bindsym "$mod+t" = "exec kitty";
       };
     };
 
