@@ -34,7 +34,9 @@ in
         };
       };
       modes.default = {
-        bindsym $mod+t = "exec kitty";
+        bindsym = {
+          $mod+t = "exec kitty";
+        };
       };
     };
 
