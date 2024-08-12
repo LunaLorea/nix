@@ -8,9 +8,8 @@ in
   home.packages = with pkgs; [
     fuzzel
     kitty
-    wshowkeys
   ];
-
+  programs.wshowkeys.enable = true;
 
   wayland.windowManager.sway = {
     enable = true;
