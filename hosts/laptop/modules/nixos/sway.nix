@@ -8,6 +8,7 @@ in
   home.packages = with pkgs; [
     fuzzel
     kitty
+    wshowkeys
   ];
 
 
@@ -37,7 +38,7 @@ in
       };
       keybindings = {
         "${modifier}+Space" = "exec fuzzel";
-        "${modifier}+enter" = "exec kitty";
+        #"${modifier}+enter" = "exec kitty";
         };
     };
   };
