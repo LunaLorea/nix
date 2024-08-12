@@ -37,7 +37,7 @@ in
       };
       keybindings = {
         "${modifier}+Space" = "exec fuzzel";
-        "${modifier}+Enter" = "exec kitty";
+        "${modifier}+enter" = "exec kitty";
         };
     };
   };
