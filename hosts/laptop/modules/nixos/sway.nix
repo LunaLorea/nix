@@ -38,6 +38,7 @@ in
         "${modifier}+Space" = "exec fuzzel";
         "${modifier}+Return" = "exec kitty";
         "${modifier}+Shift+c" = "reload";
+        "${modifier}+q" = "kill";
         };
     };
   };
