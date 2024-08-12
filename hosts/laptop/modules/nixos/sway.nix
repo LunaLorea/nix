@@ -7,6 +7,7 @@ in
 {
   home.packages = with pkgs; [
     fuzzel
+    kitty
   ];
 
 
@@ -34,8 +35,9 @@ in
           text = "#ffffff";
         };
       };
-      keybindings = lib.mkOptionDefault {
-        "${modifier}+Space" = lib.mkForce "exec fuzzel";
+      keybindings = {
+        "${modifier}+Space" = "exec fuzzel";
+        "${modifier}+Enter" = "exec kitty";
         };
     };
   };
