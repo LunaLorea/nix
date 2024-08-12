@@ -35,7 +35,7 @@ in
         };
       };
       keybindings = lib.mkOptionDefault {
-        "${modifier}+Space" = "exec fuzzel";
+        "${modifier}+Space" = lib.mkForce "exec fuzzel";
         };
     };
   };
