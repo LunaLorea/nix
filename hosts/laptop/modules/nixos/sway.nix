@@ -2,6 +2,7 @@
 
 let
   colors-accent = "#529699";
+  modifier = config.wayland.windowManager.sway.config.modifier;
 in
 {
   home.packages = with pkgs; [
@@ -33,11 +34,10 @@ in
           text = "#ffffff";
         };
       };
-      bindsym Mod4+Space exec fuzzel;
-
-
+      keybindings = lib.mkOptionDefault {
+        "${modifier}+Space" = "exec fuzzel";
+        };
     };
-
   };
 
   # enables monitor hotplugging
