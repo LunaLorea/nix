@@ -1,9 +1,10 @@
 
 {
+  outputs = { self, nixpkgs, ... }@inputs:
   let
     colors-accent = #529699;
-  in
-  outputs = { config, pkgs, ... }: {
+  in 
+  {
     wayland.windowManager.sway = {
       enable = true;
       config = {
