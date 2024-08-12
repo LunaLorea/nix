@@ -62,6 +62,11 @@
     variant = "de_nodeadkeys";
   };
 
+  programs.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true;
+  };
+
   # Enabling Fingerprint reader
   services.fprintd.enable = true;
 
