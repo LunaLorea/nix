@@ -37,6 +37,7 @@ in
       keybindings = {
         "${modifier}+Space" = "exec fuzzel";
         "${modifier}+Return" = "exec kitty";
+        "${modifier}+Shift+c" = "reload";
         };
     };
   };
