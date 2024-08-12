@@ -33,8 +33,11 @@ in
           text = "#ffffff";
         };
       };
-      modes = {
-        "bindsym Mod4+space exec fuzzel";
+      modes.default = {
+        bindsym = {
+          # open program launcher
+          "$mod+t" = "exec kitty";
+        };
       };
     };
 
