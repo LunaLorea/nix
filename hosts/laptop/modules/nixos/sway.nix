@@ -1,22 +1,25 @@
 { config, pkgs, ... }:
 
+let
+  colors-accent = #529699;
+
 {
   wayland.windowManager.sway = {
     enable = true;
     config = {
       colors = {
         focused = {
-          border = "#529699";
+          border = colors-accent;
           background = "#040811";
-          childBorder = "#529699";
-          indicator = "#529699";
+          childBorder = colors-accent;
+          indicator = colors-accent;
           text = "#ffffff";
         };
         focusedInactive = {
-          border = "#529699";
+          border = colors-accent;
           background = "#040811";
-          childBorder = "#529699";
-          indicator = "#529699";
+          childBorder = colors-accent;
+          indicator = colors-accent;
           text = "#ffffff";
         };
       };
