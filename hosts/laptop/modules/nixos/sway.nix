@@ -33,9 +33,7 @@ in
           text = "#ffffff";
         };
       };
-      modes.default = {
-        Mod4 + Space = "exec fuzzel";
-      };
+      bindsym $mod+Space exec fuzzel;
 
 
     };
