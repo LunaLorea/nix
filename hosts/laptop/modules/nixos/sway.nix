@@ -34,7 +34,7 @@ in
         };
       };
       modes.default = {
-        Space = "exec fuzzel";
+        Mod4 + Space = "exec fuzzel";
       };
 
 
