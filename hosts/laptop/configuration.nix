@@ -67,7 +67,7 @@
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "ch";
-    Variant = "de_nodeadkeys";
+    variant = "de_nodeadkeys";
   };
 
   # Enabling Fingerprint reader
