@@ -33,7 +33,7 @@ in
           text = "#ffffff";
         };
       };
-      bindsym $mod+Space exec fuzzel;
+      bindsym Mod4+Space exec fuzzel;
 
 
     };
