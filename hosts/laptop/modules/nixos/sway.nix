@@ -4,9 +4,19 @@ let
   colors-accent = "#529699";
 in
 {
+  home.packages = with pkgs; {
+    fuzzel
+  }
+
+
   wayland.windowManager.sway = {
     enable = true;
-    config = {
+    config = rec {
+
+      modifier = "Mod4";
+      # Use kitty as default terminal
+      terminal = "kitty";
+
       colors = {
         focused = {
           border = colors-accent;
@@ -23,6 +33,19 @@ in
           text = "#ffffff";
         };
       };
+      modes = {
+        "bindsym Mod4+space exec fuzzel";
+      };
+    };
+
+  };
+
+  # enables monitor hotplugging
+  systemd.user.services.kanshi = {
+    description = "kanshi daemon";
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = ''${pkgs.kanshi}/bin/kanshi -c kanshi_config_file'';
     };
   };
 }
