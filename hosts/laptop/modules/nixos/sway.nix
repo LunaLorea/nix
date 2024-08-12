@@ -4,9 +4,9 @@ let
   colors-accent = "#529699";
 in
 {
-  home.packages = with pkgs; {
+  home.packages = with pkgs; [
     fuzzel
-  };
+  ];
 
 
   wayland.windowManager.sway = {
