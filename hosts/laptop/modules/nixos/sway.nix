@@ -131,7 +131,7 @@ in
           format = "{icon}";
           format-icons = {
             "default" = "○";
-            "active" = "●";
+            "focused" = "●";
           };
         };
       };
