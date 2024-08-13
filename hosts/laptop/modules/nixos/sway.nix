@@ -92,7 +92,7 @@ in
       };
       bars = [ 
         {
-          position = "top";
+          command = "waybar";
         }
        ];
     };
