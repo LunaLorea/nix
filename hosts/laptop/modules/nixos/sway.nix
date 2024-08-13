@@ -128,7 +128,7 @@ in
           on-click = "activate";
           disable-scroll = true;
           all-outputs = true;
-          format = "<span style=\"font-size: 20;\">{icon}</span>";
+          format = "{icon}";
           format-icons = {
             "default" = "○";
             "focused" = "●";
