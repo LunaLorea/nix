@@ -91,6 +91,11 @@ in
     };
   };
 
+  programs.waybar = {
+    enable = true;
+  };
+
+
   # enables monitor hotplugging
   systemd.user.services.kanshi = {
     # description = "kanshi daemon";
