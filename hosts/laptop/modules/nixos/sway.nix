@@ -87,8 +87,10 @@ in
           xkb_layout = "ch";
         };
       };
-      bars."*" = {
-        position = "top";
+      bars = {
+        "*" = {
+          position = "top";
+        };
       };
     };
   };
