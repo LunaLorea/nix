@@ -91,7 +91,11 @@ in
           xkb_layout = "ch";
         };
       };
-      bars = [ waybar ];
+      bars = [ 
+        {
+          position = "top";
+        }
+       ];
     };
   };
 
