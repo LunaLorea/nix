@@ -46,12 +46,12 @@ in
       };
 
       gaps = {
-        inner = 5;
-        right = 5;
-        outer = 5;
-        left = 5;
-        top = 5;
-        bottom = 5;
+        inner = 50;
+        right = 50;
+        outer = 50;
+        left = 50;
+        top = 50;
+        bottom = 50;
       };
 
       output = {
