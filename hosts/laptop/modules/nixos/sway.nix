@@ -3,6 +3,7 @@
 let
   colors-background = "#060A13";
   colors-accent = "#529699";
+  colors-accent-dark = "#4B7BA6";
   modifier = config.wayland.windowManager.sway.config.modifier;
 in
 {
@@ -145,7 +146,7 @@ in
       }
       window#waybar {
         background: ${colors-background};
-        color: #AAB2BF;
+        color: ${colors-accent};
       }
       #workspaces button {
         padding: 0 5px;
