@@ -3,7 +3,6 @@
 let
   colors-accent = "#529699";
   modifier = config.wayland.windowManager.sway.config.modifier;
-  waybar = programs.waybar;
 in
 {
   home.packages = with pkgs; [
@@ -99,7 +98,7 @@ in
     };
   };
 
-  waybar = {
+  programs.waybar = {
     enable = true;
     systemd.enable = true;
   };
