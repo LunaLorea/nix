@@ -126,7 +126,7 @@ in
           all-outputs = true;
           format = "{icons}";
           format-icons = {
-            "1" = "󰈹";
+            "1" = "O";
             "2" = "";
             "3" = "";
             "4" = "";
