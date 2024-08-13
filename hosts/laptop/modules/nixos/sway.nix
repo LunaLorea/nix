@@ -57,7 +57,7 @@ in
       output = {
         eDP-1 = {
           scale = "1";
-          bg = "/home/luna/.config/nix/media/background.jpg fill";
+          bg = "./background.jpg fill";
         };
       };
 
