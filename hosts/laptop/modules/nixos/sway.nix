@@ -3,6 +3,7 @@
 let
   colors-accent = "#529699";
   modifier = config.wayland.windowManager.sway.config.modifier;
+  waybar = programs.waybar;
 in
 {
   home.packages = with pkgs; [
@@ -16,6 +17,9 @@ in
 
   wayland.windowManager.sway = {
     enable = true;
+
+
+
     config = rec {
 
       modifier = "Mod4";
@@ -87,11 +91,11 @@ in
           xkb_layout = "ch";
         };
       };
-      bars = [ programs.waybar ];
+      bars = [ waybar ];
     };
   };
 
-  programs.waybar = {
+  waybar = {
     enable = true;
     systemd.enable = true;
   };
