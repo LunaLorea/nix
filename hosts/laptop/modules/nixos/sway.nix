@@ -133,6 +133,7 @@ in
             "default" = "○";
             "focused" = "●";
           };
+          font-size = 50;
         };
       };
     };
