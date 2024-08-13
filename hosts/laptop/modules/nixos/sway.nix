@@ -47,7 +47,7 @@ in
 
       gaps = {
         inner = 5;
-        outer = 5;
+        #outer = 5;
       };
 
       output = {
