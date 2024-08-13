@@ -43,7 +43,12 @@ in
         "${modifier}+Return" = "exec kitty";
         "${modifier}+Shift+c" = "reload";
         "${modifier}+q" = "kill";
+      };
+      input {
+        "*" = {
+          xkb_variant = "ch";
         };
+      };
     };
   };
 
