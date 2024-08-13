@@ -93,6 +93,9 @@ in
       bars = [ 
         {
           command = "waybar";
+          colors = {
+            background = "#ffffff";
+          };
         }
        ];
     };
@@ -102,6 +105,7 @@ in
     enable = true;
     systemd.enable = true;
     settings = {
+
       mainBar = {
         layer = "top";
         position = "top";
@@ -114,6 +118,7 @@ in
           "eDP-1"
           "HDMI-A-1"
         ];
+
         modules-left = [ "sway/workspaces"];
         modules-center = [ ];
         modules-right = [ ];
