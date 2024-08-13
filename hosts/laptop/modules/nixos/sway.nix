@@ -47,7 +47,7 @@ in
       };
 
       gaps = {
-        inner = ${gaps};
+        inner = gaps;
         #outer = 5;
       };
 
@@ -120,9 +120,9 @@ in
         layer = "top";
         position = "top";
         height = 30;
-        margin-left = ${gaps};
-        margin-right = ${gaps};
-        margin-top = ${gaps};
+        margin-left = gaps;
+        margin-right = gaps;
+        margin-top = gaps;
         margin-bottom = 0;
         output = [
           "eDP-1"
