@@ -124,7 +124,7 @@ in
           on-click = "activate";
           disable-scroll = true;
           all-outputs = true;
-          format = "{icons}";
+          format = "{icon1}";
           format-icons = [
             "O"
           ];
