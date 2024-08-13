@@ -46,7 +46,7 @@ in
       };
       input = {
         "*" = {
-          xkb_variant = "ch";
+          xkb_layout = "ch";
         };
       };
     };
