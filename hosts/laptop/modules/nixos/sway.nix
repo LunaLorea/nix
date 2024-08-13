@@ -97,7 +97,7 @@ in
       ];
       fonts = {
         names = [ "JetBrainsMono Nerd Font" ];
-        size = 16;
+        size = 16.0;
       };
     };
   };
