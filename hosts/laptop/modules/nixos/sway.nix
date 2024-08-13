@@ -47,11 +47,7 @@ in
 
       gaps = {
         inner = 5;
-        right = 5;
         outer = 5;
-        left = 5;
-        top = 5;
-        bottom = 5;
       };
 
       output = {
