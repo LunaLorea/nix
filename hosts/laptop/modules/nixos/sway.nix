@@ -19,7 +19,7 @@ in
   wayland.windowManager.sway = {
     enable = true;
 
-
+    checkConfig = false;
 
     config = rec {
 
@@ -50,7 +50,7 @@ in
         #outer = 5;
       };
 
-      checkConfig = false;
+      
 
       output = {
         eDP-1 = {
