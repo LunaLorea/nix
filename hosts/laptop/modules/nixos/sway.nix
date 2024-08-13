@@ -22,6 +22,7 @@ in
       # Use kitty as default terminal
       terminal = "kitty";
 
+      # Setup the colors for a beautiful sway enviornemnt
       colors = {
         focused = {
           border = colors-accent;
@@ -38,11 +39,13 @@ in
           text = "#ffffff";
         };
       };
+
+      # Change the Keybindings
       keybindings = {
         # Open Application Launcher
         "${modifier}+Space" = "exec fuzzel";
         # Open Console
-        "${modifier}+Return" = "exec kitty";
+        "${modifier}+Return" = "exec ${terminal}";
         # Reload Sway configs
         "${modifier}+Shift+c" = "reload";
         # Kill focused window
