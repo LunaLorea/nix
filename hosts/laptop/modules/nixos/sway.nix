@@ -57,7 +57,7 @@ in
       output = {
         eDP-1 = {
           scale = "1";
-          bg = "/home/luna/.background-image.jpg fill";
+          #bg = "/home/luna/.background-image.jpg fill";
         };
       };
 
