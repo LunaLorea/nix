@@ -10,6 +10,10 @@ in
     kitty
   ];
 
+  home.keyboard =  [
+    layout = "ch";
+  ];
+
   wayland.windowManager.sway = {
     enable = true;
     config = rec {
