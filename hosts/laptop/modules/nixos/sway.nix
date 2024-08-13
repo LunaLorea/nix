@@ -44,7 +44,7 @@ in
         "${modifier}+Shift+c" = "reload";
         "${modifier}+q" = "kill";
       };
-      input {
+      input = {
         "*" = {
           xkb_variant = "ch";
         };
