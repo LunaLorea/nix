@@ -4,6 +4,7 @@ let
   colors-background = "#060A13";
   colors-accent = "#529699";
   colors-accent-dark = "#4B7BA6";
+  gaps = 8;
   modifier = config.wayland.windowManager.sway.config.modifier;
 in
 {
@@ -46,7 +47,7 @@ in
       };
 
       gaps = {
-        inner = 5;
+        inner = ${gaps};
         #outer = 5;
       };
 
@@ -119,9 +120,9 @@ in
         layer = "top";
         position = "top";
         height = 30;
-        margin-left = 5;
-        margin-right = 5;
-        margin-top = 5;
+        margin-left = ${gaps};
+        margin-right = ${gaps};
+        margin-top = ${gaps};
         margin-bottom = 0;
         output = [
           "eDP-1"
