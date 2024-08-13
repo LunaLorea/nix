@@ -1,6 +1,7 @@
 { lib, config, pkgs, ... }:
 
 let
+  colors-background = "#060A13";
   colors-accent = "#529699";
   modifier = config.wayland.windowManager.sway.config.modifier;
 in
@@ -143,7 +144,7 @@ in
         font-size: 30;
       }
       window#waybar {
-        background: #16191C;
+        background: ${colors-background};
         color: #AAB2BF;
       }
       #workspaces button {
