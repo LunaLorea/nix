@@ -124,10 +124,19 @@ in
           on-click = "activate";
           disable-scroll = true;
           all-outputs = true;
-          format = "{icon1}";
-          format-icons = [
-            "O"
-          ];
+          format = "{icon}";
+          format-icons = {
+            "1" = "O";
+            "2" = "";
+            "3" = "";
+            "4" = "";
+            "5" = "";
+            "6" = "";
+            "7" = "󰠮";
+            "8" = "";
+            "9" = "";
+            "10" =  "";
+          };
         };
       };
     };
