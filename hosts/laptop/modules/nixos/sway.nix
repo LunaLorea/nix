@@ -140,7 +140,7 @@ in
       * {
         border: none;
         border-radius: 0;
-        font-size: 50;
+        font-size: 30;
       }
       window#waybar {
         background: #16191C;
