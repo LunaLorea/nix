@@ -94,7 +94,11 @@ in
         {
           command = "waybar";
         }
-       ];
+      ];
+      fonts = {
+        names = [ "JetBrainsMono Nerd Font" ];
+        size = 16;
+      };
     };
   };
 
