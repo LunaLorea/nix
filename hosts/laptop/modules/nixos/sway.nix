@@ -128,12 +128,11 @@ in
           on-click = "activate";
           disable-scroll = true;
           all-outputs = true;
-          format = "{icon}";
+          format = "<span style=\"font-size: 20\">{icon}</span>";
           format-icons = {
             "default" = "○";
             "focused" = "●";
           };
-          font-size = 50;
         };
       };
     };
