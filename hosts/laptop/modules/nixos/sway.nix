@@ -50,11 +50,14 @@ in
         right = 5;
         outer = 5;
         left = 5;
+        top = 5;
+        bottom = 5;
       };
 
       output = {
         eDP-1 = {
           scale = "1";
+          bg = "~/.config/nix/media/background.jpg fill";
         };
       };
 
