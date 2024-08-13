@@ -113,9 +113,9 @@ in
         layer = "top";
         position = "top";
         height = 30;
-        margin-left = 5;
-        margin-right = 5;
-        margin-top = 5;
+        margin-left = 0;
+        margin-right = 0;
+        margin-top = 0;
         margin-bottom = 0;
         output = [
           "eDP-1"
