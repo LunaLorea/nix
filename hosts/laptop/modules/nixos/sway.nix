@@ -45,6 +45,13 @@ in
         };
       };
 
+      gaps = {
+        inner = 5;
+        right = 5;
+        outer = 5;
+        left = 5;
+      };
+
       output = {
         eDP-1 = {
           scale = "1";
@@ -113,9 +120,9 @@ in
         layer = "top";
         position = "top";
         height = 30;
-        margin-left = 0;
-        margin-right = 0;
-        margin-top = 0;
+        margin-left = 5;
+        margin-right = 5;
+        margin-top = 5;
         margin-bottom = 0;
         output = [
           "eDP-1"
