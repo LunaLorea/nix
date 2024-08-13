@@ -124,6 +124,7 @@ in
           on-click = "activate";
           disable-scroll = true;
           all-outputs = true;
+          format = "{icons}";
           format-icons = {
             "1" = "󰈹";
             "2" = "";
