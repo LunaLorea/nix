@@ -44,7 +44,7 @@ in
         "eDP-1" = {
           scale = 1;
         };
-      }:
+      };
 
       # Change the Keybindings
       keybindings = {
