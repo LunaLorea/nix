@@ -87,9 +87,7 @@ in
           xkb_layout = "ch";
         };
       };
-      bars = [
-        waybar
-      ];
+      bars = [ ];
     };
   };
 
