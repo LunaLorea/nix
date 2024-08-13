@@ -92,7 +92,7 @@ in
       };
       bars = [ 
         {
-          command = "waybar";yy
+          command = "waybar";
         }
        ];
     };
