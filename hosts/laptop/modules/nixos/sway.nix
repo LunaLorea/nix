@@ -101,6 +101,30 @@ in
   programs.waybar = {
     enable = true;
     systemd.enable = true;
+    settings = {
+      mainBar = {
+        layer = "top";
+        position = "top";
+        height = 30;
+        margin-left = 5;
+        margin-right = 5;
+        margin-top = 5;
+        margin-bottom = 0;
+        output = [
+          "eDP-1"
+          "HDMI-A-1"
+        ];
+        modules-left = [ "sway/workspaces"];
+        modules-center = [ ];
+        modules-right = [ ];
+
+        "sway/workspaces" = {
+          on-click = "activate";
+          disable-scroll = true;
+          all-outputs = true;
+        };
+      };
+    };
   };
 
 
