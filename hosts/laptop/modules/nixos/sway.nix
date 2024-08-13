@@ -39,10 +39,27 @@ in
         };
       };
       keybindings = {
+        # Open Application Launcher
         "${modifier}+Space" = "exec fuzzel";
+        # Open Console
         "${modifier}+Return" = "exec kitty";
+        # Reload Sway configs
         "${modifier}+Shift+c" = "reload";
+        # Kill focused window
         "${modifier}+q" = "kill";
+
+        # Workspaces:
+        # Switching between Workspaces
+        "${modifier}+1" = "workspace number $ws1";
+        "${modifier}+2" = "workspace number $ws2";
+        "${modifier}+3" = "workspace number $ws3";
+        "${modifier}+4" = "workspace number $ws4";
+        "${modifier}+5" = "workspace number $ws5";
+        "${modifier}+6" = "workspace number $ws6";
+        "${modifier}+7" = "workspace number $ws7";
+        "${modifier}+8" = "workspace number $ws8";
+        "${modifier}+9" = "workspace number $ws9";
+        "${modifier}+0" = "workspace number $ws10";
       };
       input = {
         "*" = {
