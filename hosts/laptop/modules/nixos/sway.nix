@@ -89,7 +89,7 @@ in
       };
       bars = {
         "*" = [
-          position = "top";
+          "position = top";
         ];
       };
     };
