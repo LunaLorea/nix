@@ -169,7 +169,6 @@ in
       * {
         border: none;
         border-radius: 0;
-        font-size: 30;
         font-family: "JetBrainsMono Nerd Font", "otf-font-awesome", "font-awesome";
       }
       .module {
@@ -180,15 +179,16 @@ in
         padding-right: 20;
         margin-right: 5;
         margin-left: 5;
+        font-size: 25;
       }
       window#waybar {
         background: rgba(0,0,0,0);
       }
       #workspaces button {
         padding: 0 5px;
+        font-size: 30;
       }
       #clock {
-        font-size: 25;
       }
       #network {
         
