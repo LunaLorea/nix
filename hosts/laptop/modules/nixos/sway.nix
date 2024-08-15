@@ -167,6 +167,9 @@ in
         padding: 0 5px;
         color: white;
       }
+      #clock {
+        font-size: 20;
+      }
 
     '';
   };
