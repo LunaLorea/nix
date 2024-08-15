@@ -173,6 +173,7 @@ in
       }
       .module {
         background: ${colors-background};
+        color: ${colors-waybar-text};
         border-radius: 1000px;
         padding-left: 20;
         padding-right: 20;
@@ -184,11 +185,9 @@ in
       }
       #workspaces button {
         padding: 0 5px;
-        color: ${colors-waybar-text};
       }
       #clock {
         font-size: 25;
-        color: ${colors-waybar-text};
       }
       #network {
         
