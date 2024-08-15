@@ -162,6 +162,7 @@ in
           format-linked = "{ifname} (No IP) ";
           format-disconnected = "󰀦";
           format-alt = "{ifname}";
+          on-click = "nm-connection-editor";
         };
       };
     };
