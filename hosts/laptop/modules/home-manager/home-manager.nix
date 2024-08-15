@@ -7,5 +7,6 @@
         ./nextcloud-client.nix
         ./pass.nix
         ./gpg.nix
+        ./defaultApps.nix
     ];
 }
