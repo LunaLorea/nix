@@ -155,7 +155,7 @@ in
 
         "network" = {
           interval = 1;
-          format-wifi = ''{bandwidthTotalBytes:>3} <i class="fa-solid fa-wifi"></i>'';
+          format-wifi = "{bandwidthTotalBytes:>3} ";
           format-ethernet = "{ipaddr}/{cidr} ";
           tooltip-format-wifi = "{ipaddr} ({signalStrength}%) ";
           tooltip-format = "{ifname} via {gwaddr} ";
