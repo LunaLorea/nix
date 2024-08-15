@@ -133,8 +133,8 @@ in
           "HDMI-A-1"
         ];
 
-        modules-left = [ "sway/workspaces" "clock" ];
-        modules-center = [ ];
+        modules-left = [ "sway/workspaces" ];
+        modules-center = [ "clock" ];
         modules-right = [ ];
 
         "sway/workspaces" = {
@@ -152,7 +152,7 @@ in
           format = "  {:%a %b %d  %I:%M %p}";
           tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
           format-alt = "{:%Y-%m-%d %H:%M:%S  }";
-        }
+        };
       };
     };
     style = ''
