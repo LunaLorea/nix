@@ -134,8 +134,8 @@ in
         ];
 
         modules-left = [ "sway/workspaces" ];
-        modules-center = [ "clock" ];
-        modules-right = [ ];
+        modules-center = [ ];
+        modules-right = [ "clock" ];
 
         "sway/workspaces" = {
           on-click = "activate";
@@ -149,9 +149,8 @@ in
         };
         "clock" = {
           interval = 60;
-          format = "  {:%a %b %d  %I:%M %p}";
-          tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-          format-alt = "{:%Y-%m-%d %H:%M:%S  }";
+          format = "{:%H:%M}";
+          tooltip-format = "<tt><small>{calendar}</small></tt>";
         };
       };
     };
