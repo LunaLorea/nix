@@ -138,6 +138,7 @@
      eza
      cifs-utils
      jre17_minimal
+     networkmanagerapplet
   ];
 
   programs.gnupg.agent = {                                                      
