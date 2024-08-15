@@ -104,9 +104,9 @@ in
         };
       };
       bars = [ 
-        #{
-          #command = "waybar";
-        #}
+        {
+          command = "waybar";
+        }
       ];
       fonts = {
         names = [ "JetBrainsMono Nerd Font" ];
@@ -167,11 +167,13 @@ in
       #workspaces button {
         padding: 0 5px;
         color: white;
+        opacity: 1;
       }
       #clock {
         font-size: 25;
         margin-left: 5;
         margin-right: 5;
+        opacity: 1;
       }
 
     '';
