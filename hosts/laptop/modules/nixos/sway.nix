@@ -162,7 +162,7 @@ in
       }
       window#waybar {
         background: ${colors-background};
-        opacity: o;
+        opacity: 0;
       }
       #workspaces button {
         padding: 0 5px;
