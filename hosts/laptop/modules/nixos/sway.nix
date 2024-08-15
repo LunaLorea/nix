@@ -163,6 +163,10 @@ in
       .module {
         background: ${colors-background};
         border-radius: 1000px;
+        padding-left: 20;
+        padding-right: 20;
+        margin-right: 10;
+        margin-left: 10;
       }
       window#waybar {
         background: rgba(0,0,0,0);
@@ -174,8 +178,7 @@ in
       #clock {
         font-size: 25;
         color: ${colors-waybar-text};
-        padding-left: 20;
-        padding-right: 20;
+        
       }
 
     '';
