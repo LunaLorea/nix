@@ -104,9 +104,9 @@ in
         };
       };
       bars = [ 
-        {
+        #{
           #command = "waybar";
-        }
+        #}
       ];
       fonts = {
         names = [ "JetBrainsMono Nerd Font" ];
@@ -133,7 +133,7 @@ in
           "HDMI-A-1"
         ];
 
-        modules-left = [ "sway/workspaces"];
+        modules-left = [ "sway/workspaces" "clock" ];
         modules-center = [ ];
         modules-right = [ ];
 
@@ -147,6 +147,12 @@ in
             "focused" = "●";
           };
         };
+        "clock" = {
+          interval = 60;
+          format = "  {:%a %b %d  %I:%M %p}";
+          tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+          format-alt = "{:%Y-%m-%d %H:%M:%S  }";
+        }
       };
     };
     style = ''
@@ -157,11 +163,12 @@ in
       }
       window#waybar {
         background: ${colors-background};
-        color: white;
       }
       #workspaces button {
         padding: 0 5px;
+        color: white;
       }
+
     '';
   };
 
