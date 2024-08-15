@@ -174,8 +174,8 @@ in
       #clock {
         font-size: 25;
         color: ${colors-waybar-text};
-        padding-left: 100;
-        padding-right: 5;
+        padding-left: 20;
+        padding-right: 20;
       }
 
     '';
