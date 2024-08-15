@@ -9,8 +9,11 @@ in
 {
   home.packages = with pkgs; [
     fuzzel
-    kitty
   ];
+
+  programs.kitty = {
+    enable = true;
+  };
 
   home.keyboard =  {
     layout = "ch";
