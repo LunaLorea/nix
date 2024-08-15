@@ -150,7 +150,6 @@ in
         "clock" = {
           interval = 60;
           format = "{:%H:%M}";
-          tooltip-format = "<tt><small>{calendar}</small></tt>";
         };
       };
     };
@@ -159,16 +158,20 @@ in
         border: none;
         border-radius: 0;
         font-size: 30;
+        opacity: 1;
       }
       window#waybar {
         background: ${colors-background};
+        opacity: o;
       }
       #workspaces button {
         padding: 0 5px;
         color: white;
       }
       #clock {
-        font-size: 20;
+        font-size: 25;
+        margin-left: 5;
+        margin-right: 5;
       }
 
     '';
