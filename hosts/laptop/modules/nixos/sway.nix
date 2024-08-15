@@ -155,7 +155,7 @@ in
 
         "network" = {
           interval = 1;
-          format-wifi = "{bandwidthTotalBytes:>3}  ";
+          format-wifi = ''{bandwidthTotalBytes:>3} <i class="fa-solid fa-wifi"></i>'';
           format-ethernet = "{ipaddr}/{cidr} ";
           tooltip-format-wifi = "{ipaddr} ({signalStrength}%) ";
           tooltip-format = "{ifname} via {gwaddr} ";
@@ -170,6 +170,7 @@ in
         border: none;
         border-radius: 0;
         font-size: 30;
+        font-family: "JetBrainsMono Nerd Font", "otf-font-awesome";
       }
       .module {
         background: ${colors-background};
