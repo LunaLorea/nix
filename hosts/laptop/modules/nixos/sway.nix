@@ -161,6 +161,9 @@ in
       }
       .module {
         background: ${colors-background};
+        padding-left: 5;
+        padding-right: 5;
+        border-radius: 1000px;
       }
       window#waybar {
         background: rgba(0,0,0,0);
@@ -171,8 +174,6 @@ in
       }
       #clock {
         font-size: 25;
-        margin-left: 5;
-        margin-right: 5;
       }
 
     '';
