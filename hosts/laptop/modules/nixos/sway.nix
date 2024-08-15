@@ -158,15 +158,12 @@ in
         border: none;
         border-radius: 0;
         font-size: 30;
-        opacity: 1;
       }
       .module {
-        opacity: 1;
         background: ${colors-background};
       }
       window#waybar {
-        background: ${colors-background};
-        opacity: 0;
+        background: rgba(0,0,0,0);
       }
       #workspaces button {
         padding: 0 5px;
