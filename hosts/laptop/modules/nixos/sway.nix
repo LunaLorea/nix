@@ -157,7 +157,7 @@ in
       }
       window#waybar {
         background: ${colors-background};
-        color: ${colors-accent};
+        
       }
       #workspaces button {
         padding: 0 5px;
