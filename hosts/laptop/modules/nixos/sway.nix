@@ -152,6 +152,17 @@ in
           interval = 60;
           format = "{:%H:%M}";
         };
+
+        "network" = {
+          interval = 1;
+          format-wifi = "{bandwidthTotalBytes:>3}  ";
+          format-ethernet = "{ipaddr}/{cidr} ";
+          tooltip-format-wifi = "{ipaddr} ({signalStrength}%) ";
+          tooltip-format = "{ifname} via {gwaddr} ";
+          format-linked = "{ifname} (No IP) ";
+          format-disconnected = "󰀦";
+          format-alt = "{ifname}";
+        }
       };
     };
     style = ''
@@ -178,6 +189,8 @@ in
       #clock {
         font-size: 25;
         color: ${colors-waybar-text};
+      }
+      #network {
         
       }
 
