@@ -105,7 +105,7 @@ in
       };
       bars = [ 
         {
-          command = "waybar";
+          #command = "waybar";
         }
       ];
       fonts = {
@@ -157,7 +157,7 @@ in
       }
       window#waybar {
         background: ${colors-background};
-        
+        color: white;
       }
       #workspaces button {
         padding: 0 5px;
