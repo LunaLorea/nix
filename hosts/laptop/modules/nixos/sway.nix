@@ -4,6 +4,7 @@ let
   colors-background = "#060A13";
   colors-accent = "#529699";
   colors-accent-dark = "#4B7BA6";
+  colors-waybar-text = "#efefef";
   modifier = config.wayland.windowManager.sway.config.modifier;
 in
 {
@@ -168,11 +169,12 @@ in
       }
       #workspaces button {
         padding: 0 5px;
-        color: white;
+        color: ${colors-waybar-text};
       }
       #clock {
         font-size: 25;
-        padding-left: 5;
+        color: ${colors-waybar-text};
+        padding-left: 100;
         padding-right: 5;
       }
 
