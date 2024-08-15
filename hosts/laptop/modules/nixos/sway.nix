@@ -110,7 +110,7 @@ in
         #}
       ];
       fonts = {
-        names = [ "JetBrainsMono Nerd Font" ];
+        names = [ "JetBrainsMono Nerd Font" "font-awesome"];
         size = 16.0;
       };
     };
