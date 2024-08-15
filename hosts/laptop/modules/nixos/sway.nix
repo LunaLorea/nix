@@ -104,9 +104,9 @@ in
         };
       };
       bars = [ 
-        {
-          command = "waybar";
-        }
+        #{
+        #  command = "waybar";
+        #}
       ];
       fonts = {
         names = [ "JetBrainsMono Nerd Font" ];
@@ -161,8 +161,6 @@ in
       }
       .module {
         background: ${colors-background};
-        padding-left: 5;
-        padding-right: 5;
         border-radius: 1000px;
       }
       window#waybar {
@@ -174,6 +172,8 @@ in
       }
       #clock {
         font-size: 25;
+        padding-left: 5;
+        padding-right: 5;
       }
 
     '';
