@@ -170,7 +170,7 @@ in
         border: none;
         border-radius: 0;
         font-size: 30;
-        font-family: "JetBrainsMono Nerd Font", "otf-font-awesome";
+        font-family: "JetBrainsMono Nerd Font", "otf-font-awesome", "font-awesome";
       }
       .module {
         background: ${colors-background};
