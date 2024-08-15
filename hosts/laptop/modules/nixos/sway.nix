@@ -160,22 +160,22 @@ in
         font-size: 30;
         opacity: 1;
       }
+      .module {
+        opacity: 1;
+        background: ${colors-background};
+      }
       window#waybar {
         background: ${colors-background};
         opacity: 0;
       }
       #workspaces button {
-        background: ${colors-background};
         padding: 0 5px;
         color: white;
-        opacity: 1;
       }
       #clock {
-        background: ${colors-background};
         font-size: 25;
         margin-left: 5;
         margin-right: 5;
-        opacity: 1;
       }
 
     '';
