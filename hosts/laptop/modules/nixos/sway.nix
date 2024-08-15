@@ -136,7 +136,7 @@ in
 
         modules-left = [ "sway/workspaces" ];
         modules-center = [ ];
-        modules-right = [ "clock" ];
+        modules-right = [ "network" "clock" ];
 
         "sway/workspaces" = {
           on-click = "activate";
@@ -176,8 +176,8 @@ in
         border-radius: 1000px;
         padding-left: 20;
         padding-right: 20;
-        margin-right: 10;
-        margin-left: 10;
+        margin-right: 5;
+        margin-left: 5;
       }
       window#waybar {
         background: rgba(0,0,0,0);
