@@ -165,11 +165,13 @@ in
         opacity: 0;
       }
       #workspaces button {
+        background: ${colors-background};
         padding: 0 5px;
         color: white;
         opacity: 1;
       }
       #clock {
+        background: ${colors-background};
         font-size: 25;
         margin-left: 5;
         margin-right: 5;
