@@ -46,6 +46,7 @@
     jellyfin-media-player
     zoxide
     fzf
+    hugo
     # oh-my-posh
     hugo
     vim
