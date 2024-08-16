@@ -5,5 +5,6 @@
     obsidian
     anki
     ki
+    libreoffice-still
   ];
 }
