@@ -94,6 +94,8 @@ in
         "${modifier}+q" = "kill";
         # Open Notification Center
         "${modifier}+Shift+n" = "exec swaync-client -t -sw";
+        # Lock Sway
+        "${modifier}+l" = "exec swaylock";
 
         # Workspaces:
         # Switching between Workspaces
