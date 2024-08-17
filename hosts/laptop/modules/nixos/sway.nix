@@ -204,7 +204,8 @@ in
       #clock {
       }
       #network {
-        min-width: 110px;
+        min-width: 120px;
+        text-align: center;
       }
 
     '';
