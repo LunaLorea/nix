@@ -8,5 +8,6 @@
         ./pass.nix
         ./gpg.nix
         ./defaultApps.nix
+        ./packages.nix
     ];
 }
