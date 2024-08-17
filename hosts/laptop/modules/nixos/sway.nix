@@ -54,7 +54,9 @@ in
         #outer = 5;
       };
 
-      
+      window = {
+        titlebar = false;
+      };
 
       output = {
         "*" = {
