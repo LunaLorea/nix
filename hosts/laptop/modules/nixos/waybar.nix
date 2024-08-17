@@ -20,7 +20,7 @@
 
         modules-left = [ "sway/workspaces" ];
         modules-center = [ "sway/window" ];
-        modules-right = [ "battery" "network" "sway/language" "clock" ];
+        modules-right = [ "battery" "network" "sway/language" "clock" "custom/notifications" ];
 
         "sway/workspaces" = {
           on-click = "activate";
@@ -65,6 +65,10 @@
           tooltip-format = "Usage: {power}W\n{timeTo}\n{cycles} cycles\n{health}";
           full-at = 98;
         };
+        "custom/notifications" = {
+          format = "";
+          on-click = "swaync-client -t -sw";
+        }
       };
     };
     style = ./waybar.css;

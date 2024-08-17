@@ -92,6 +92,8 @@ in
         "${modifier}+Shift+c" = "reload";
         # Kill focused window
         "${modifier}+q" = "kill";
+        # Open Notification Center
+        "${modifier}+Shift+n" = "exec swaync-client -t -sw";
 
         # Workspaces:
         # Switching between Workspaces
