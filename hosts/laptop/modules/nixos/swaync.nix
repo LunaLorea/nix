@@ -6,7 +6,7 @@
     enable = true;
     style = ./swaync.css;
     settings = {
-      positionX = "right";
+      positionX = "left";
       positionY = "top";
       layer = "overlay";
       control-center-layer = "top";
