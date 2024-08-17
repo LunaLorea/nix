@@ -1,7 +1,7 @@
-@define-color cc-bg #32302f;
-@define-color noti-border-color #32302f;
-@define-color noti-bg #3c3836;
-@define-color noti-bg-darker #3c3836;
+@define-color cc-bg #161A23;
+@define-color noti-border-color #161A23;
+@define-color noti-bg #161A23;
+@define-color noti-bg-darker #060A13;
 @define-color noti-bg-hover rgb(27, 27, 43);
 @define-color noti-bg-focus rgba(27, 27, 27, 0.6);
 @define-color text-color #f9f5d7;
@@ -9,9 +9,9 @@
 @define-color bg-selected #fabd2f;
  
 * {
-    font-family: JetBrainsMono NFP;
+    font-family: "0xProto";
     font-weight: bold;
-	font-size: 14px
+	font-size: 25px
 }
  
 .control-center .notification-row:focus,
