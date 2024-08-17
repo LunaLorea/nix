@@ -204,7 +204,7 @@ in
       #clock {
       }
       #network {
-        min-width = 110;
+        min-width: 110;
       }
 
     '';
