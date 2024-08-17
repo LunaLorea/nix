@@ -64,48 +64,48 @@
           show-per-app = true;
         };
         buttons-grid = {
-            actions = [
-                {
-                    "label" = "󰐥";
-                    "command" = "systemctl poweroff";
-                }
-                {
-                    "label" = "󰜉";
-                    "command" = "systemctl reboot";
-                }
-                {
-                    "label" = "󰌾";
-                    "command"= "$HOME/.config/hypr/scripts/lock-session.sh";
-                }
-                {
-                    "label" = "󰍃";
-                    "command" = "hyprctl dispatch exit";
-                }
-                {
-                    "label" = "󰤄";
-                    "command" = "systemctl suspend";
-                }
-                {
-                    "label" = "󰕾";
-                    "command" = "swayosd-client --output-volume mute-toggle";
-                }
-                {
-                    "label" = "󰍬";
-                    "command" = "swayosd-client --input-volume mute-toggle";
-                }
-                {
-                    "label" = "󰖩";
-                    "command" = "$HOME/.local/bin/shved/rofi-menus/wifi-menu.sh";
-                }
-                {
-                    "label" = "󰂯";
-                    "command" = "blueman-manager";
-                }
-                {
-                    "label" = "";
-                    "command" = "os";
-                }
-            ]
+          actions = [
+            {
+              "label" = "󰐥";
+              "command" = "systemctl poweroff";
+            }
+            {
+              "label" = "󰜉";
+              "command" = "systemctl reboot";
+            }
+            {
+              "label" = "󰌾";
+              "command"= "$HOME/.config/hypr/scripts/lock-session.sh";
+            }
+            {
+              "label" = "󰍃";
+              "command" = "hyprctl dispatch exit";
+            }
+            {
+              "label" = "󰤄";
+              "command" = "systemctl suspend";
+            }
+            {
+              "label" = "󰕾";
+              "command" = "swayosd-client --output-volume mute-toggle";
+            }
+            {
+              "label" = "󰍬";
+              "command" = "swayosd-client --input-volume mute-toggle";
+            }
+            {
+              "label" = "󰖩";
+              "command" = "$HOME/.local/bin/shved/rofi-menus/wifi-menu.sh";
+            }
+            {
+              "label" = "󰂯";
+              "command" = "blueman-manager";
+            }
+            {
+              "label" = "";
+              "command" = "os";
+            }
+          ];
         };
       };
     };
