@@ -190,7 +190,7 @@ in
         "battery" = {
           format = "{capacity}";
           tooltip-format = "{power} {timeTo}";
-        }
+        };
       };
     };
     style = ''
