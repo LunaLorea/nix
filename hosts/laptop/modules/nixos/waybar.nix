@@ -67,6 +67,6 @@
         };
       };
     };
-    style = "./waybar.nix";
+    style = ./waybar.css;
   };
 }
