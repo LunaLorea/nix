@@ -150,7 +150,7 @@ in
 
         modules-left = [ "sway/workspaces" ];
         modules-center = [ "sway/window" ];
-        modules-right = [ "network" "sway/language" "clock" ];
+        modules-right = [ "battery" "network" "sway/language" "clock" ];
 
         "sway/workspaces" = {
           on-click = "activate";
@@ -187,6 +187,10 @@ in
           on-click = "swaymsg input type:keyboard xkb_switch_layout next";
           tooltip-format = "{short} {variant}";
         };
+        "battery" = {
+          format = "{capacity}";
+          tooltip-format = "{power} {timeTo}";
+        }
       };
     };
     style = ''
@@ -216,7 +220,7 @@ in
       #clock {
       }
       #network {
-        min-width: 200px;
+        min-width: 160px;
       }
 
     '';
