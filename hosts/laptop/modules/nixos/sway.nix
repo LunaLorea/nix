@@ -174,7 +174,6 @@ in
           format-linked = "{ifname} (No IP) ";
           format-disconnected = "󰀦";
           on-click = "nm-connection-editor";
-          justify = "center";
         };
       };
     };
