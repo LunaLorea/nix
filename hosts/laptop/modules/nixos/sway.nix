@@ -148,7 +148,7 @@ in
 
         modules-left = [ "sway/workspaces" ];
         modules-center = [ ];
-        modules-right = [ "network" "clock" ];
+        modules-right = [ "network" "clock" "tray" ];
 
         "sway/workspaces" = {
           on-click = "activate";
@@ -174,6 +174,12 @@ in
           format-linked = "{ifname} (No IP) ";
           format-disconnected = "󰀦";
           on-click = "nm-connection-editor";
+        };
+
+        "tray" = {
+          icon-size = 18;
+          spacing = 5;
+          show-passive-items = true;
         };
       };
     };
@@ -204,7 +210,7 @@ in
       #clock {
       }
       #network {
-        min-width: 120px;
+        min-width: 130px;
       }
 
     '';
