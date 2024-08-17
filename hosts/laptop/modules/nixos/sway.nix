@@ -199,11 +199,12 @@ in
       #workspaces button {
         padding: 0 5px;
         font-size: 30;
+        color: ${colors-waybar-text};
       }
       #clock {
       }
       #network {
-        
+        min-width = 110;
       }
 
     '';
