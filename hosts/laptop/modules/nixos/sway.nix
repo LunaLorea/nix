@@ -188,8 +188,10 @@ in
           tooltip-format = "{short} {variant}";
         };
         "battery" = {
-          format = "{capacity}";
-          tooltip-format = "{power} {timeTo}";
+          interval = 30;
+          format = "{capacity}%";
+          tooltip-format = "usage: {power}W\n{timeTo}\n{cycles} cycles\n{health}";
+          full-at = 98;
         };
       };
     };
