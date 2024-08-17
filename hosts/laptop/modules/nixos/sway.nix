@@ -124,9 +124,9 @@ in
       };
       
       bars = [ 
-        #{
-        #  command = "waybar";
-        #}
+        {
+          command = "waybar";
+        }
       ];
       fonts = {
         names = [ "JetBrainsMono Nerd Font" "0xProto Nerd Font"];
