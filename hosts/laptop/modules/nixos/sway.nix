@@ -72,6 +72,7 @@ in
         "*" = {
           xkb_layout = "ch";
         };
+      };
 
       # Change the Keybindings
       keybindings = {
@@ -110,7 +111,6 @@ in
         "${modifier}+Shift+0" = "move container to workspace number 10; workspace number 10";
       };
       
-      };
       bars = [ 
         #{
         #  command = "waybar";
