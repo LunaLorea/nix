@@ -133,7 +133,7 @@ in
     systemd.enable = true;
     settings = {
 
-      mainBar = {
+      default = {
         layer = "top";
         position = "top";
         height = 36;
@@ -144,6 +144,7 @@ in
         output = [
           "eDP-1"
           "HDMI-A-1"
+          "DP-4"
         ];
 
         modules-left = [ "sway/workspaces" ];
