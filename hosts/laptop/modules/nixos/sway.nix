@@ -147,7 +147,7 @@ in
         ];
 
         modules-left = [ "sway/workspaces" ];
-        modules-center = [ ];
+        modules-center = [ "sway/window" ];
         modules-right = [ "network" "clock" "tray" ];
 
         "sway/workspaces" = {
