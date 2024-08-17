@@ -4,8 +4,8 @@
     font-family: "0xProto";
 }
 .module {
-    background: ${colors-background};
-    color: ${colors-waybar-text};
+    background: #060A13;
+    color: #efefef;
     border-radius: 1000px;
     padding-left: 20px;
     padding-right: 20px;
@@ -19,7 +19,7 @@ window#waybar {
 #workspaces button {
     padding: 0px 5px;
     font-size: 30px;
-    color: ${colors-waybar-text};
+    color: #efefef;
 }
 
 #network {
