@@ -73,9 +73,9 @@ in
           xkb_layout = "ch";
         };
         "type:touchpad" = {
-          tap = enable;
+          tap = "enabled";
           tap_button_map = "lrm";
-          dwt = enable;
+          dwt = "enabled";
         };
       };
 
