@@ -164,7 +164,7 @@ in
         "clock" = {
           interval = 60;
           format = "{:%H:%M}";
-
+        };
         "network" = {
           interval = 1;
           format-wifi = "{bandwidthTotalBytes:>3} ";
