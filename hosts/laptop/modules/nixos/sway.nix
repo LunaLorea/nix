@@ -136,7 +136,7 @@ in
       mainBar = {
         layer = "top";
         position = "top";
-        height = 30;
+        height = 36;
         margin-left = 8;
         margin-right = 8;
         margin-top = 8;
