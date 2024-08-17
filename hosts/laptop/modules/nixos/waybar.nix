@@ -68,6 +68,7 @@
         "custom/notifications" = {
           format = "";
           on-click = "swaync-client -t -sw";
+          tooltip = false;
         };
       };
     };

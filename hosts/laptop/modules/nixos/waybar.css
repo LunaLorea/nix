@@ -25,3 +25,7 @@ window#waybar {
 #network {
     min-width: 160px;
 }
+#custom-notifications {
+    padding-left: 0px;
+    padding-right: 0px;
+}
