@@ -56,6 +56,7 @@ in
 
       window = {
         titlebar = false;
+        border = 4;
       };
 
       output = {
