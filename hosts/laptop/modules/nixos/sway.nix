@@ -125,7 +125,7 @@ in
         #}
       ];
       fonts = {
-        names = [ "JetBrainsMono Nerd Font" "font-awesome"];
+        names = [ "JetBrainsMono Nerd Font" "0xProto Nerd Font"];
         size = 16.0;
       };
     };
@@ -168,12 +168,12 @@ in
         };
         "network" = {
           interval = 1;
-          format-wifi = "{bandwidthTotalBytes:>3} ";
-          format-ethernet = "{ipaddr}/{cidr} ";
-          tooltip-format-wifi = "{ipaddr} ({signalStrength}%) ";
-          tooltip-format = "{ifname} via {gwaddr} ";
+          format-wifi = "{essid} ";
+          format-ethernet = "Wired 󰈀";
+          tooltip-format-wifi = "{ipaddr} ({signalStrength}%)";
+          tooltip-format = "{ipaddr}";
           format-linked = "{ifname} (No IP) ";
-          format-disconnected = "󰀦";
+          format-disconnected = "󰤮";
           on-click = "nm-connection-editor";
         };
 
@@ -189,8 +189,14 @@ in
         };
         "battery" = {
           interval = 30;
-          format = "{capacity}%";
-          tooltip-format = "usage: {power}W\n{timeTo}\n{cycles} cycles\n{health}";
+          format = "{capacity}%{icon}";
+          format-icons = {
+            "0" = "󰂎";
+            "1" = "󱊡";
+            "2" = "󱊢";
+            "3" = "󱊣";            
+          };
+          tooltip-format = "Usage: {power}W\n{timeTo}\n{cycles} cycles\n{health}";
           full-at = 98;
         };
       };
@@ -199,7 +205,7 @@ in
       * {
         border: none;
         border-radius: 0;
-        font-family: "JetBrainsMono Nerd Font", "otf-font-awesome", "font-awesome";
+        font-family: "JetBrainsMono Nerd Font", "0xProto Nerd Font";
       }
       .module {
         background: ${colors-background};
