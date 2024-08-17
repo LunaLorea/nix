@@ -187,24 +187,24 @@ in
         background: ${colors-background};
         color: ${colors-waybar-text};
         border-radius: 1000px;
-        padding-left: 20;
-        padding-right: 20;
-        margin-right: 5;
-        margin-left: 5;
-        font-size: 25;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-right: 5px;
+        margin-left: 5px;
+        font-size: 25px;
       }
       window#waybar {
         background: rgba(0,0,0,0);
       }
       #workspaces button {
-        padding: 0 5px;
-        font-size: 30;
+        padding: 0px 5px;
+        font-size: 30px;
         color: ${colors-waybar-text};
       }
       #clock {
       }
       #network {
-        min-width: 110;
+        min-width: 110px;
       }
 
     '';
