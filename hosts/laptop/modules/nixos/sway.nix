@@ -185,6 +185,7 @@ in
         "sway/language" = {
           format = "{short}";
           on-click = "swaymsg input type:keyboard xkb_switch_layout next";
+          tooltip-format = "{short} {variant}"
         };
       };
     };
