@@ -165,6 +165,7 @@ in
         "clock" = {
           interval = 60;
           format = "{:%H:%M}";
+          tooltip = false;
         };
         "network" = {
           interval = 1;
@@ -177,15 +178,10 @@ in
           on-click = "nm-connection-editor";
         };
 
-        "tray" = {
-          icon-size = 18;
-          spacing = 5;
-          show-passive-items = true;
-        };
         "sway/language" = {
           format = "{short}";
           on-click = "swaymsg input type:keyboard xkb_switch_layout next";
-          tooltip-format = "{short} {variant}";
+          tooltip = false;
         };
         "battery" = {
           interval = 30;
@@ -233,6 +229,10 @@ in
 
     '';
   };
+
+  services.swaync = {
+    enable = true;
+  }
 
 
   # enables monitor hotplugging

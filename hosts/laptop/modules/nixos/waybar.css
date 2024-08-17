@@ -1,0 +1,27 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "0xProto";
+}
+.module {
+    background: ${colors-background};
+    color: ${colors-waybar-text};
+    border-radius: 1000px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-right: 5px;
+    margin-left: 5px;
+    font-size: 25px;
+}
+window#waybar {
+    background: rgba(0,0,0,0);
+}
+#workspaces button {
+    padding: 0px 5px;
+    font-size: 30px;
+    color: ${colors-waybar-text};
+}
+
+#network {
+    min-width: 160px;
+}
