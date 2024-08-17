@@ -150,7 +150,7 @@ in
 
         modules-left = [ "sway/workspaces" ];
         modules-center = [ "sway/window" ];
-        modules-right = [ "network" "clock" "tray" ];
+        modules-right = [ "network" "sway/language" "clock" ];
 
         "sway/workspaces" = {
           on-click = "activate";
@@ -182,6 +182,10 @@ in
           spacing = 5;
           show-passive-items = true;
         };
+        "sway/language" = {
+          format = "{short}";
+          on-click = "swaymsg input type:keyboard xkb_switch_layout next";
+        };
       };
     };
     style = ''
@@ -211,7 +215,7 @@ in
       #clock {
       }
       #network {
-        min-width: 130px;
+        min-width: 200px;
       }
 
     '';
