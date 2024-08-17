@@ -10,6 +10,6 @@ in
     imports = [
         ./sway.nix
         ./swaync.nix
-        ./wayhar.nix
+        ./waybar.nix
     ];
 }
