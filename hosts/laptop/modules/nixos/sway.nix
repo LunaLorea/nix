@@ -174,6 +174,7 @@ in
           format-linked = "{ifname} (No IP) ";
           format-disconnected = "󰀦";
           on-click = "nm-connection-editor";
+          justify = "center";
         };
       };
     };
@@ -205,7 +206,6 @@ in
       }
       #network {
         min-width: 120px;
-        text-align: center;
       }
 
     '';
