@@ -76,7 +76,7 @@ in
           tap = enable;
           tap_button_map = "lrm";
           dwt = enable;
-        }
+        };
       };
 
       # Change the Keybindings
