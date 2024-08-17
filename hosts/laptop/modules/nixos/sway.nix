@@ -205,7 +205,7 @@ in
       * {
         border: none;
         border-radius: 0;
-        font-family: "JetBrainsMono Nerd Font", "0xProto Nerd Font";
+        font-family: "0xProto Nerd Font";
       }
       .module {
         background: ${colors-background};
