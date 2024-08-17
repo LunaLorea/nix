@@ -72,6 +72,11 @@ in
         "*" = {
           xkb_layout = "ch";
         };
+        "type:touchpad" = {
+          tap = enable;
+          tap_button_map = "lrm";
+          dwt = enable;
+        }
       };
 
       # Change the Keybindings
