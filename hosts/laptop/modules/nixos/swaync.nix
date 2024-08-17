@@ -75,23 +75,11 @@
             }
             {
               "label" = "󰌾";
-              "command"= "$HOME/.config/hypr/scripts/lock-session.sh";
-            }
-            {
-              "label" = "󰍃";
-              "command" = "hyprctl dispatch exit";
+              "command"= "swaylock";
             }
             {
               "label" = "󰤄";
               "command" = "systemctl suspend";
-            }
-            {
-              "label" = "󰕾";
-              "command" = "swayosd-client --output-volume mute-toggle";
-            }
-            {
-              "label" = "󰍬";
-              "command" = "swayosd-client --input-volume mute-toggle";
             }
             {
               "label" = "󰖩";
@@ -100,10 +88,6 @@
             {
               "label" = "󰂯";
               "command" = "blueman-manager";
-            }
-            {
-              "label" = "";
-              "command" = "os";
             }
           ];
         };
