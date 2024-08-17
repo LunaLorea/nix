@@ -142,9 +142,7 @@ in
         margin-top = 8;
         margin-bottom = 0;
         output = [
-          "eDP-1"
-          "HDMI-A-1"
-          "DP-4"
+          "*"
         ];
 
         modules-left = [ "sway/workspaces" ];
@@ -164,7 +162,6 @@ in
         "clock" = {
           interval = 60;
           format = "{:%H:%M}";
-        };
 
         "network" = {
           interval = 1;
