@@ -57,11 +57,21 @@ in
       
 
       output = {
+        "*" = {
+          bg = "/home/luna/.background-image.jpg fill";          
+        };
         eDP-1 = {
           scale = "1";
-          bg = "/home/luna/.background-image.jpg fill";
+        };
+        DP-4 = {
+
         };
       };
+
+      input = {
+        "*" = {
+          xkb_layout = "ch";
+        };
 
       # Change the Keybindings
       keybindings = {
@@ -99,10 +109,7 @@ in
         "${modifier}+Shift+9" = "move container to workspace number 9; workspace number 9";
         "${modifier}+Shift+0" = "move container to workspace number 10; workspace number 10";
       };
-      input = {
-        "*" = {
-          xkb_layout = "ch";
-        };
+      
       };
       bars = [ 
         #{
