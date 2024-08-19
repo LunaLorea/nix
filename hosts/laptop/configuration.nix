@@ -11,6 +11,7 @@
       inputs.home-manager.nixosModules.default
     ];
 
+
   
     fonts.packages = with pkgs; [
         nerdfonts

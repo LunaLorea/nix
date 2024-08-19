@@ -7,6 +7,12 @@
 @define-color text-color #f9f5d7;
 @define-color text-color-disabled #bdae93;
 @define-color bg-selected #fabd2f;
+
+OKLCH
+
+
+
+
  
 * {
     font-family: "0xProto";
@@ -40,7 +46,7 @@
 }
  
 .close-button {
-    background: #d79921;
+    background: ${background-400};
     color: @cc-bg;
     text-shadow: none;
     padding: 0;
@@ -128,7 +134,7 @@
 }
  
 .widget-title>button:hover {
-    background: #d79921;
+    background: ${background-400};
     color: @cc-bg;
 }
  
@@ -147,7 +153,7 @@
 }
  
 .widget-dnd>switch:checked {
-    background: #d79921;
+    background: ${background-400};
     border: 1px solid #d79921;
 }
  
@@ -212,7 +218,7 @@
 }
  
 .widget-buttons-grid>flowbox>flowboxchild>button:hover {
-    background: #d79921;
+    background: ${background-400};
     color: @cc-bg;
 }
  
