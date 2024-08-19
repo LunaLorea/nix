@@ -313,5 +313,5 @@
         border: none;
         background: transparent
     }
-  ''
+  '';
 }
