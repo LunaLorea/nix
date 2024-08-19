@@ -155,7 +155,7 @@ in
       };
     };
     # CSS Style settings
-  Style = ''
+  style = ''
     * {
         font-family: "0xProto";
         font-weight: bold;
