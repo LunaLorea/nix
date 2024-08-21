@@ -63,10 +63,6 @@ let
   modifier = config.wayland.windowManager.sway.config.modifier;
 in
 {
-  home.packages = with pkgs; [
-    fuzzel
-  ];
-
   programs.kitty = {
     enable = true;
   };
@@ -189,6 +185,26 @@ in
       };
     };
   };
+
+  programs.fuzzel = {
+    enable = true;
+    
+    settings = {
+      main = {
+        terminal = "${terminal}";
+        layer = "overlay";
+      };
+      colors = {
+        background = background-800;
+        text = text-100;
+        match = primary-400;
+        selection = background-600;
+        selection-text = text-100;
+        selection-match = primary-400;
+        border = accent-400;
+      }
+    };
+  }
 
 
   # enables monitor hotplugging
