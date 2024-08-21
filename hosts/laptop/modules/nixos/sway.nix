@@ -69,7 +69,7 @@ in
     
     settings = {
       main = {
-        terminal = "${terminal}";
+        terminal = "kitty";
         layer = "overlay";
       };
       colors = {
