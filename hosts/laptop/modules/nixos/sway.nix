@@ -60,6 +60,12 @@ let
   accent-800 = "#320c5a";
   accent-900 = "#19062d";
   accent-950 = "#0c0317";
+  fuzzel-background = background-800 + "dd";
+  fuzzel-text = text-100 + "ff";
+  fuzzel-match = primary-400 + "ff";
+  fuzzel-selection = background-600 + "dd";
+  fuzzel-border = accent-400 + "ff";
+  
   modifier = config.wayland.windowManager.sway.config.modifier;
 in
 {
@@ -73,13 +79,13 @@ in
         layer = "overlay";
       };
       colors = {
-        background = background-800;
-        text = text-100;
-        match = primary-400;
-        selection = background-600;
-        selection-text = text-100;
-        selection-match = primary-400;
-        border = accent-400;
+        background = fuzzel-background;
+        text = fuzzel-text;
+        match = fuzzel-match;
+        selection = fuzzel-selection;
+        selection-text = fuzzel-text;
+        selection-match = fuzzel-match;
+        border = fuzzel-border;
       };
     };
   };
