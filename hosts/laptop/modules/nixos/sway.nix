@@ -116,7 +116,7 @@ in
 
       output = {
         "*" = {
-          bg = "/home/luna/.config/nix/media/background-image.jpg fill";          
+          bg = "/home/luna/.config/nix/media/background-image.png fill";          
         };
         eDP-1 = {
           scale = "1";
