@@ -20,7 +20,7 @@
 
         modules-left = [ "sway/workspaces" ];
         modules-center = [ "sway/window" ];
-        modules-right = [ "battery" "network" "sway/language" "clock" "custom/notifications" ];
+        modules-right = [ "battery" "tray" "sway/language" "clock" "custom/notifications" ];
 
         "sway/workspaces" = {
           on-click = "activate";
@@ -45,7 +45,7 @@
           tooltip-format = "{ipaddr}";
           format-linked = "{ifname} (No IP) ";
           format-disconnected = "󰤮";
-          on-click = "nm-connection-editor";
+          on-click = "nm-applet";
         };
 
         "sway/language" = {
@@ -69,6 +69,10 @@
           format = "";
           on-click = "swaync-client -t -sw";
           tooltip = false;
+        };
+        "tray" = {
+          icon-size = 21;
+          spacing = 10;
         };
       };
     };
