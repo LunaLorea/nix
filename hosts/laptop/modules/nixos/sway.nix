@@ -80,7 +80,7 @@ in
         selection-text = text-100;
         selection-match = primary-400;
         border = accent-400;
-      }
+      };
     };
   };
 
