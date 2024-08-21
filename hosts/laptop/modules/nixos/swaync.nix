@@ -155,8 +155,8 @@ in
       };
     };
     # CSS Style settings
-  style = ''
-    * {
+    style = ''
+      * {
         font-family: "0xProto";
         font-weight: bold;
         font-size: 25px
@@ -165,7 +165,7 @@ in
       .control-center .notification-row:focus,
       .control-center .notification-row:hover {
           opacity: 1;
-          background: ${background-900}
+          background: ${background-900};
       }
       
       .notification-row {
@@ -227,7 +227,7 @@ in
       .time {
           font-size: 11px;
           background: ${text-400};
-          margin-right: 24px
+          margin-right: 24px;
       }
       
       .body {
@@ -242,19 +242,19 @@ in
       }
       
       .control-center-list {
-          background: transparent
+          background: transparent;
       }
       
       .control-center-list-placeholder {
-          opacity: .5
+          opacity: .5;
       }
       
       .floating-notifications {
-          background: transparent
+          background: transparent;
       }
       
       .blank-window {
-          background: alpha(black, 0.1)
+          background: alpha(black, 0.1);
       }
       
       .widget-title {
@@ -301,12 +301,12 @@ in
       
       .widget-dnd>switch slider {
           background: ${background-800};
-          border-radius: 5px
+          border-radius: 5px;
       }
       
       .widget-dnd>switch:checked slider {
           background: ${background-800};
-          border-radius: 5px
+          border-radius: 5px;
       }
       
       .widget-label {
@@ -332,16 +332,16 @@ in
       
       .widget-mpris-player {
           padding: 5px 10px;
-          margin: 10px
+          margin: 10px;
       }
       
       .widget-mpris-title {
           font-weight: 700;
-          font-size: 1.25rem
+          font-size: 1.25rem;
       }
       
       .widget-mpris-subtitle {
-          font-size: 1.1rem
+          font-size: 1.1rem;
       }
       
       .widget-buttons-grid {
@@ -356,22 +356,22 @@ in
           margin: 3px;
           background: ${background-800};
           border-radius: 5px;
-          color: ${text-100}
+          color: ${text-100};
       }
       
       .widget-buttons-grid>flowbox>flowboxchild>button:hover {
-          background: ${primary-400}
+          background: ${primary-400};
           color: ${background-800};
       }
       
       .widget-menubar>box>.menu-button-bar>button {
           border: none;
-          background: transparent
+          background: transparent;
       }
       
       .topbar-buttons>button {
           border: none;
-          background: transparent
+          background: transparent;
       }
     '';
   };
