@@ -65,7 +65,7 @@
 
   systemd.services = {
     plymouth-wait-for-animation = {
-      name = plymouth-wait-for-animation;
+      name = "plymouth-wait-for-animation";
       description = "Waits for Plymouth animation to finish";
       before = [ "plymouth-quit.service" "display-manager.service" ];
       wantedBy = [ "plymouth-start.service" ];
