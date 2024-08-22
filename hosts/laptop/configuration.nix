@@ -24,7 +24,11 @@
     splashImage = /home/luna/.config/nix/media/splashscreen.png;
     splashMode = "normal";
     efiSupport = true;
+    device = "/dev/nvme0n1p1";
   };
+  
+
+
   # Enable Flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
