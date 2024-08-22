@@ -17,9 +17,14 @@
         nerdfonts
     ];
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.enable = false;
   boot.loader.efi.canTouchEfiVariables = true;
-
+  boot.loader.grub = {
+    enable = true;
+    splashImage = /home/luna/.config/nix/media/splashscreen.png;
+    splashMode = "normal";
+    efiSupport = true;
+  };
   # Enable Flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -84,14 +89,7 @@
 
   services.fprintd.tod.driver = pkgs.libfprint-2-tod1-vfs0090;
 
-  # Change boot settings
-
-  boot.loader.grub = {
-    enable = true;
-    splashImage = /home/luna/.config/nix/media/splashscreen.png;
-    splashMode = "normal";
-    efiSupport = true;
-  };
+  
 
   # Configure console keymap
   console.keyMap = "sg";
