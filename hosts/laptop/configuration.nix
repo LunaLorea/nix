@@ -17,14 +17,14 @@
         nerdfonts
     ];
   # Bootloader.
-  boot.loader.systemd-boot.enable = false;
+  # boot.loader.systemd-boot.enable = false;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub = {
     enable = true;
     splashImage = /home/luna/.config/nix/media/splashscreen.png;
     splashMode = "normal";
     efiSupport = true;
-    device = "/dev/nvme0n1p1";
+    device = "/dev/nvme0n1";
   };
   
 
