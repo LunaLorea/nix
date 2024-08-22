@@ -62,7 +62,7 @@
     # It will just not appear on screen unless a key is pressed
     loader.timeout = 0;
   };
-  
+
   systemd.services = {
     plymouth-wait-for-animation = {
       name = plymouth-wait-for-animation;
@@ -72,7 +72,7 @@
       serviceConfig = {
         Type = oneshot;
         ExecStart = /usr/bin/sleep 4;
-      }
+      };
     };
   };
 
