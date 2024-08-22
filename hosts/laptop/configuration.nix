@@ -21,13 +21,15 @@
   boot = {
     loader.efi.canTouchEfiVariables = true;
     
-    loader.grub = {
-      enable = true;
-      splashImage = /home/luna/.config/nix/media/splashscreen.png;
-      splashMode = "normal";
-      efiSupport = true;
-      device = "nodev";
-    };
+    loader.systemd-boot.enable = true;
+
+    # loader.grub = {
+    #   enable = true;
+    #   # splashImage = /home/luna/.config/nix/media/splashscreen.png;
+    #   # splashMode = "normal";
+    #   efiSupport = true;
+    #   device = "nodev";
+    # };
 
     plymouth = {
       enable = true;
