@@ -42,18 +42,7 @@
       ];
     };
 
-  systemd.services = {
-    plymouth-wait-for-animation = {
-      name = plymouth-wait-for-animation;
-      description = "Waits for Plymouth animation to finish";
-      before = [ "plymouth-quit.service" "display-manager.service" ];
-      wantedBy = [ "plymouth-start.service" ];
-      serviceConfig = {
-        Type = oneshot;
-        ExecStart = /usr/bin/sleep 4;
-      }
-    };
-  };
+  
     # Enable "Silent Boot"
     consoleLogLevel = 0;
     initrd.verbose = false;
@@ -74,6 +63,18 @@
     loader.timeout = 0;
   };
   
+  systemd.services = {
+    plymouth-wait-for-animation = {
+      name = plymouth-wait-for-animation;
+      description = "Waits for Plymouth animation to finish";
+      before = [ "plymouth-quit.service" "display-manager.service" ];
+      wantedBy = [ "plymouth-start.service" ];
+      serviceConfig = {
+        Type = oneshot;
+        ExecStart = /usr/bin/sleep 4;
+      }
+    };
+  };
 
 
   # Enable Flakes
