@@ -87,7 +87,10 @@
   # Change boot settings
 
   boot.loader.grub = {
+    enable = true;
     splashImage = /home/luna/.config/nix/media/splashscreen.png;
+    splashMode = "normal";
+    efiSupport = true;
   };
 
   # Configure console keymap
