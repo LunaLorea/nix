@@ -31,12 +31,10 @@
 
     plymouth = {
       enable = true;
-      theme = "rings";
+      theme = "Hexagon Dots Alt";
       themePackages = with pkgs; [
         # By default we would install all themes
-        (adi1090x-plymouth-themes.override {
-          selected_themes = [ "Hexagon Dots Alt" ];
-        })
+        adi1090x-plymouth-themes
       ];
     };
 
