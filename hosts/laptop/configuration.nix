@@ -31,7 +31,7 @@
 
     plymouth = {
       enable = true;
-      theme = "Hexagon Dots Alt";
+      theme = "hexagon_dots_alt";
       themePackages = with pkgs; [
         # By default we would install all themes
         adi1090x-plymouth-themes
