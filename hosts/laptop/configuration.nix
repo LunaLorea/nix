@@ -70,7 +70,7 @@
       before = [ "plymouth-quit.service" "display-manager.service" ];
       wantedBy = [ "plymouth-start.service" ];
       serviceConfig = {
-        Type = oneshot;
+        Type = "oneshot";
         ExecStart = /usr/bin/sleep 4;
       };
     };
