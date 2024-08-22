@@ -13,7 +13,7 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
-  boot.loader.grub.device = "/dev/nvme0n1";
+  boot.loader.grub.device = "/nvme0n1";
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/1a2858ba-4116-49e7-8c1d-e16343e0679a";
