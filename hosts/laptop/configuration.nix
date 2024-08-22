@@ -24,7 +24,7 @@
     splashImage = /home/luna/.config/nix/media/splashscreen.png;
     splashMode = "normal";
     efiSupport = true;
-    device = "/dev/nvme0n1";
+    device = "nodev";
   };
   
 
