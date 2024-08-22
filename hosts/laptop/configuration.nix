@@ -84,6 +84,12 @@
 
   services.fprintd.tod.driver = pkgs.libfprint-2-tod1-vfs0090;
 
+  # Change boot settings
+
+  boot.loader.grub = {
+    splashImage = /home/luna/.config/nix/media/splashscreen.png
+  };
+
   # Configure console keymap
   console.keyMap = "sg";
 
