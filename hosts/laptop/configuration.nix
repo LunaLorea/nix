@@ -71,7 +71,7 @@
       wantedBy = [ "plymouth-start.service" ];
       serviceConfig = {
         Type = "oneshot";
-        ExecStart = /usr/bin/sleep 4;
+        ExecStart = "/usr/bin/sleep 4";
       };
     };
   };
