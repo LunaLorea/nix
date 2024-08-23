@@ -9,6 +9,7 @@
         ./gpg.nix
         ./defaultApps.nix
         ./packages.nix
+        ./neovim.nix
     ];
 
     services.blueman-applet = {
