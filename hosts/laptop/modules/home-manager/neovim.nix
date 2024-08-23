@@ -20,13 +20,13 @@
     plugins = with pkgs.vimPlugins; [
 
       (nvim-treesitter.withPlugins (p: [
-        p.trees-sitter-nix
-        p.trees-sitter-vim
-        p.trees-sitter-bash
-        p.trees-sitter-lua
-        p.trees-sitter-python
-        p.trees-sitter-java
-        p.trees-sitter-json
+        p.tree-sitter-nix
+        p.tree-sitter-vim
+        p.tree-sitter-bash
+        p.tree-sitter-lua
+        p.tree-sitter-python
+        p.tree-sitter-java
+        p.tree-sitter-json
       ]))
 
       vim-nix
