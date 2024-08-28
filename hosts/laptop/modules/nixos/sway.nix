@@ -176,10 +176,10 @@ in
         "${modifier}+l" = "exec swaylock";
         # Change focused Window
         "${modifier}+Left" = "focus left";
-        "Shift+Alt+Tab" = "focus left";
+        "Shift+Alt+Tab" = "exec swaymsg [con_id=$(swaymsg -t get_tree | ~/.config/nix/scripts/alttab t)] focus";
         "${modifier}+Up" = "focus up";
         "${modifier}+Right" = "focus right";
-        "Alt+Tab" = "focus right";
+        "Alt+Tab" = "exec swaymsg [con_id=$(swaymsg -t get_tree | ~/.config/nix/scripts/alttab t)] focus";
         "${modifier}+Down" = "focus down";
 
 
