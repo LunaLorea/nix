@@ -174,6 +174,14 @@ in
         "${modifier}+Shift+n" = "exec swaync-client -t -sw";
         # Lock Sway
         "${modifier}+l" = "exec swaylock";
+        # Change focused Window
+        "${modifier}+Left" = "focus left";
+        "Shift+Alt+Tab" = "focus left";
+        "${modifier}+Up" = "focus up";
+        "${modifier}+Right" = "focus right";
+        "Alt+Tab" = "focus right";
+        "${modifier}+Down" = "focus down";
+
 
         # Workspaces:
         # Switching between Workspaces
