@@ -10,7 +10,8 @@
         ./defaultApps.nix
         ./packages.nix
         ./neovim.nix
-    ];
+        ./messages.nix
+      ];
 
     services.blueman-applet = {
         enable = true;
