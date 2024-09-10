@@ -186,10 +186,8 @@
   programs.steam.enable = true;
 
   # Install firefox.
-  programs.firefox = {
-    enable = true;
-    profiles.default.id = 0;
-  };
+  programs.firefox.enable = true;
+  
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
