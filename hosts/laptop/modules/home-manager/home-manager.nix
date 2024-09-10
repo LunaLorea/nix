@@ -10,7 +10,7 @@
         ./defaultApps.nix
         ./packages.nix
         ./neovim.nix
-        ./messages.nix
+        ./firefox.nix
       ];
 
     services.blueman-applet = {
