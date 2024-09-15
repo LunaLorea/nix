@@ -182,6 +182,8 @@ in
         "${modifier}+Right" = "focus right";
         "Alt+Tab" = "exec swaymsg [con_id=$(swaymsg -t get_tree | ~/.config/nix/scripts/alttab t)] focus";
         "${modifier}+Down" = "focus down";
+        # Open Messages App
+        "${modifier}+m" = "exec firefox -P messages -no-remote";
 
 
         # Workspaces:
