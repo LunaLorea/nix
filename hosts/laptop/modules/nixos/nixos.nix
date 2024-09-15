@@ -11,7 +11,5 @@ in
         ./sway.nix
         ./swaync.nix
         ./waybar.nix
-    ];
-
-    services.pasystray.enable = true;
+    ];  
 }
