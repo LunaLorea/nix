@@ -5,5 +5,7 @@
     jq
     gimp
     taskwarrior3
+    github-desktop
+    chromium
   ];
 }
