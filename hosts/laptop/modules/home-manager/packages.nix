@@ -7,5 +7,6 @@
     taskwarrior3
     github-desktop
     chromium
+    musescore
   ];
 }
