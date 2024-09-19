@@ -11,5 +11,6 @@ in
         ./sway.nix
         ./swaync.nix
         ./waybar.nix
+        ./swaylock.nix
     ];  
 }

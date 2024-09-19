@@ -174,7 +174,16 @@ in
         # Open Notification Center
         "${modifier}+Shift+n" = "exec swaync-client -t -sw";
         # Lock Sway
-        "${modifier}+l" = "exec swaylock";
+        "${modifier}+l" = ''exec swaylock \
+	  --screenshots \
+	  --clock \
+	  --indicator \
+	  --indicator-radius 100 \
+          --indicator-thickness 7 \
+	  --effect-blur 7x5 \
+          --effect-vignette 0.5:0.5 \
+          --fade-in 0.2
+          '';
         # Change focused Window
         "${modifier}+Left" = "focus left";
         "Shift+Alt+Tab" = "exec swaymsg [con_id=$(swaymsg -t get_tree | ~/.config/nix/scripts/alttab t)] focus";
