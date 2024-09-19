@@ -11,6 +11,7 @@
         ./packages.nix
         ./neovim.nix
         ./firefox.nix
+#        ./nvim.nix
       ];
 
     services.blueman-applet = {
