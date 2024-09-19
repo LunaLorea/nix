@@ -8,5 +8,6 @@
     github-desktop
     chromium
     musescore
+    usbutils
   ];
 }
