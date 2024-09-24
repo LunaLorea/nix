@@ -101,11 +101,6 @@ in
     };
   };
 
-  programs.kitty = {
-    enable = true;
-    theme = "Afterglow";
-  };
-
   home.keyboard =  {
     layout = "ch";
   };
