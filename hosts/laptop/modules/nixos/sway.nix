@@ -170,6 +170,12 @@ in
         };
       };
 
+      # Commands to be executed on startup
+      startup = [
+        # Start 1Password in the background
+        { command = "1password --silent"; }
+      ];
+
       # Change the Keybindings
       keybindings = {
         # Open Application Launcher
@@ -193,7 +199,8 @@ in
         "${modifier}+Down" = "focus down";
         # Open Messages App
         "${modifier}+m" = "exec firefox -P messages -no-remote";
-
+        # Open 1Password Quick Access
+        "${modifier}+p" = "exec 1password --quick-access";
 
         # Workspaces:
         # Switching between Workspaces
