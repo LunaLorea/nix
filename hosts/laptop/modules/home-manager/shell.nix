@@ -5,7 +5,9 @@
     kitty = {
       enable = true;
       theme = "Afterglow";
-
+      settings = {
+        background_opacity = "0.7";
+      };
     };
 
     bash = {

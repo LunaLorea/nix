@@ -45,11 +45,18 @@
     {
       "alignment": "left",
       "segments": [
+	{
+	   "type": "nix-shell",
+	   "style": "diamond",
+	   "leading_diamond": "\ue0b6",
+	   "foreground": "p:white",
+	   "background": "p:teal",
+	   "template": "(nix-{{ .Type }})"
+	},
         {
           "background": "p:plum",
           "foreground": "p:white",
-          "leading_diamond": "\ue0b6",
-          "style": "diamond",
+          "style": "powerline",
           "template": "{{ .UserName }} ",
           "type": "session"
         },
