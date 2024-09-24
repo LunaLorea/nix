@@ -206,7 +206,8 @@
      cifs-utils
      jre17_minimal
      networkmanagerapplet
-  ];
+   ];
+   environment.pathsToLink = [ "/share/bash-completion" ];
 
   programs.gnupg.agent = {                                                      
     enable = true;
