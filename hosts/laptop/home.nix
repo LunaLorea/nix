@@ -36,21 +36,12 @@
     protonmail-bridge
     newsflash
     _1password-gui
-    # threema-desktop
     discord
     vscode
     filezilla
-    zed-editor
     vlc
-    beets
-    clementine
-    jellyfin-media-player
-    zoxide
-    fzf
     hugo
-    # oh-my-posh
-    hugo
-    vim
+    #vim
     libation
     modrinth-app
   ];
