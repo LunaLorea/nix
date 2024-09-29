@@ -11,7 +11,7 @@
         ./packages.nix
         ./neovim.nix
         ./firefox.nix
-#        ./nvim.nix
+        ./neovim.nix
         ./shell.nix
       ];
 

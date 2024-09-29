@@ -18,6 +18,33 @@
     '';
 
     plugins = with pkgs.vimPlugins; [
+#      {
+#	plugin = some-plugin;
+#	config = toLua "some lua command";
+#      }
+#      {
+#	plugin = some-plugin;
+#	config = toLuaFile ./some/path/to/config;
+#      }      
+#      {
+#	plugin = some-plugin;
+#	config = "vimScript 1 liner"
+#      }
+      {
+        plugin = telescope-nvim;
+	config = toLuaFile ./neovim/telescope.lua;
+      }
+      
+      rose-pine
+      harpoon
+      undotree
+      vim-fugitive
+      lsp-zero-nvim
+      cmp-nvim-lsp
+      nvim-lspconfig
+      nvim-cmp
+      vim-lsp
+      luasnip
 
       (nvim-treesitter.withPlugins (p: [
         p.tree-sitter-nix
@@ -27,12 +54,15 @@
         p.tree-sitter-python
         p.tree-sitter-java
         p.tree-sitter-json
+	p.tree-sitter-c
+	p.tree-sitter-cpp
       ]))
-
-      vim-nix
-
     ];
 
   };
-
+  home.packages = with pkgs; [
+    clang-tools
+    nixd
+    lua-language-server
+  ];
 }

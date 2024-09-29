@@ -56,7 +56,8 @@
         {
           "background": "p:plum",
           "foreground": "p:white",
-          "style": "powerline",
+          "powerline_symbol": "\ue0b0",
+	  "style": "powerline",
           "template": "{{ .UserName }} ",
           "type": "session"
         },

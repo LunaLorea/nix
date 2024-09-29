@@ -206,6 +206,7 @@
      cifs-utils
      jre17_minimal
      networkmanagerapplet
+     pulseaudio
    ];
    environment.pathsToLink = [ "/share/bash-completion" ];
 

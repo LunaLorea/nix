@@ -129,7 +129,7 @@ in
           text = text-200;
         };
         focusedInactive = {
-          border = accent-400;
+          border = -400;
           background = background-900;
           childBorder = accent-300;
           indicator = accent-400;
@@ -180,8 +180,11 @@ in
       keybindings = {
         # Open Application Launcher
         "${modifier}+Space" = "exec fuzzel";
+        
         # Open Console
-        "${modifier}+Return" = "exec ${terminal}";
+        "${modifier}+t" = "exec ${terminal}";
+        # Open firefox
+        "${modifier}+b" = "exec firefox";
         # Reload Sway configs
         "${modifier}+Shift+c" = "reload";
         # Kill focused window
@@ -189,18 +192,29 @@ in
         # Open Notification Center
         "${modifier}+Shift+n" = "exec swaync-client -t -sw";
         # Lock Sway
-        "${modifier}+l" = lock;
+        "${modifier}+Shift+l" = lock;
         # Change focused Window
-        "${modifier}+Left" = "focus left";
+        "${modifier}+h" = "focus left";
         "Shift+Alt+Tab" = "exec swaymsg [con_id=$(swaymsg -t get_tree | ~/.config/nix/scripts/alttab t)] focus";
-        "${modifier}+Up" = "focus up";
-        "${modifier}+Right" = "focus right";
+        "${modifier}+k" = "focus up";
+        "${modifier}+l" = "focus right";
+        "${modifier}+s" = "splitv";
+        "${modifier}+Shift+s" = "splith";
+        "${modifier}+Shift+Return" = "move scratchpad";
+        "${modifier}+Return" = "scratchpad showt ";
+
         "Alt+Tab" = "exec swaymsg [con_id=$(swaymsg -t get_tree | ~/.config/nix/scripts/alttab t)] focus";
-        "${modifier}+Down" = "focus down";
+        "${modifier}+j" = "focus down";
         # Open Messages App
         "${modifier}+m" = "exec firefox -P messages -no-remote";
         # Open 1Password Quick Access
         "${modifier}+p" = "exec 1password --quick-access";
+        "${modifier}+F11" = "exec brightnessctl set 10%-";
+        "${modifier}+F12" = "exec brightnessctl set 10%+";
+        "XF86AudioRaiseVolume" = "exec --no-startup-id wpctl set-volume @DEFAULT_SINK@ 0.1+";
+        "XF86AudioLowerVolume" = "exec --no-startup-id wpctl set-volume @DEFAULT_SINK@ 0.1-";
+        "XF86AudioMute" = "exec --no-startup-id wpctl set-mute @DEFAULT_SINK@ toggle";
+        "XF86AudioMicMute" = "exec --no-startup-id wpctl set-mute @DEFAULT_SOURCE@ toggle";
 
         # Workspaces:
         # Switching between Workspaces

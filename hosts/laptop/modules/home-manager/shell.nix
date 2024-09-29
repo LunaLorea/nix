@@ -4,9 +4,9 @@
   programs = {
     kitty = {
       enable = true;
-      theme = "Afterglow";
+      themeFile = "Afterglow";
       settings = {
-        background_opacity = "0.7";
+        background_opacity = "0.8";
       };
     };
 
