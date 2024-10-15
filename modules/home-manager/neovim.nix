@@ -45,6 +45,7 @@
       nvim-cmp
       vim-lsp
       luasnip
+      knap
 
       (nvim-treesitter.withPlugins (p: [
         p.tree-sitter-nix
@@ -54,8 +55,13 @@
         p.tree-sitter-python
         p.tree-sitter-java
         p.tree-sitter-json
-	p.tree-sitter-c
-	p.tree-sitter-cpp
+        p.tree-sitter-c
+        p.tree-sitter-cpp
+        p.tree-sitter-css
+        p.tree-sitter-html
+        p.tree-sitter-javascript
+        p.tree-sitter-typescript
+        p.tree-sitter-latex
       ]))
     ];
 
@@ -64,5 +70,7 @@
     clang-tools
     nixd
     lua-language-server
+    ltex-ls
+    texlab
   ];
 }

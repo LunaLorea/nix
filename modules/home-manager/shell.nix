@@ -13,6 +13,7 @@
     bash = {
       enable = true;
       enableCompletion = true;
+      bashrcExtra = ''eval "$(oh-my-posh init bash)"'';
     };
     
     oh-my-posh = {

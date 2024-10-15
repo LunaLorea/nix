@@ -143,12 +143,8 @@ in
               "command" = "systemctl suspend";
             }
             {
-              "label" = "󰖩";
-              "command" = "$HOME/.local/bin/shved/rofi-menus/wifi-menu.sh";
-            }
-            {
-              "label" = "󰂯";
-              "command" = "blueman-manager";
+              "label" = "";
+              "command" = "sway logout";
             }
           ];
         };

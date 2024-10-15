@@ -100,9 +100,10 @@ in
       };
     };
   };
+  services.swayosd.enable = true;
 
   home.keyboard =  {
-    layout = "ch";
+    layout = "ch,dvorak";
   };
 
   wayland.windowManager.sway = {
@@ -111,7 +112,7 @@ in
     checkConfig = false;
     
     extraConfig = ''
-      bindswitch --reload --locked lid:on exec ${lock}
+      bindswitch --reload --locked lid:on ${lock}
     '';
     config = rec {
 
@@ -129,7 +130,7 @@ in
           text = text-200;
         };
         focusedInactive = {
-          border = -400;
+          border = accent-400;
           background = background-900;
           childBorder = accent-300;
           indicator = accent-400;
@@ -158,10 +159,11 @@ in
 
         };
       };
-
+ 
       input = {
         "*" = {
-          xkb_layout = "ch";
+            xkb_layout = "ch,us";
+            xkb_variant = "de,dvorak";
         };
         "type:touchpad" = {
           tap = "enabled";
@@ -195,15 +197,16 @@ in
         "${modifier}+Shift+l" = lock;
         # Change focused Window
         "${modifier}+h" = "focus left";
-        "Shift+Alt+Tab" = "exec swaymsg [con_id=$(swaymsg -t get_tree | ~/.config/nix/scripts/alttab t)] focus";
+        "Shift+Alt+Tab" = "[con_id=$(swaymsg -t get_tree | ~/.config/nix/scripts/alttab t)] focus";
         "${modifier}+k" = "focus up";
         "${modifier}+l" = "focus right";
         "${modifier}+s" = "splitv";
         "${modifier}+Shift+s" = "splith";
         "${modifier}+Shift+Return" = "move scratchpad";
         "${modifier}+Return" = "scratchpad showt ";
+        "${modifier}+Alt+Space" = "input type:keyboard xkb_switch_layout next"; 
 
-        "Alt+Tab" = "exec swaymsg [con_id=$(swaymsg -t get_tree | ~/.config/nix/scripts/alttab t)] focus";
+        "Alt+Tab" = "[con_id=$(swaymsg -t get_tree | ~/.config/nix/scripts/alttab t)] focus";
         "${modifier}+j" = "focus down";
         # Open Messages App
         "${modifier}+m" = "exec firefox -P messages -no-remote";
@@ -211,8 +214,8 @@ in
         "${modifier}+p" = "exec 1password --quick-access";
         "${modifier}+F11" = "exec brightnessctl set 10%-";
         "${modifier}+F12" = "exec brightnessctl set 10%+";
-        "XF86AudioRaiseVolume" = "exec --no-startup-id wpctl set-volume @DEFAULT_SINK@ 0.1+";
-        "XF86AudioLowerVolume" = "exec --no-startup-id wpctl set-volume @DEFAULT_SINK@ 0.1-";
+        "XF86AudioRaiseVolume" = "exec swayosd-client --output-volume raise";
+        "XF86AudioLowerVolume" = "exec swayosd-client --output-volume lower";
         "XF86AudioMute" = "exec --no-startup-id wpctl set-mute @DEFAULT_SINK@ toggle";
         "XF86AudioMicMute" = "exec --no-startup-id wpctl set-mute @DEFAULT_SOURCE@ toggle";
 

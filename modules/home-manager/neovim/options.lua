@@ -36,8 +36,16 @@ lsp_zero.preset("recommended")
 
 require'lspconfig'.clangd.setup{}
 require'lspconfig'.nixd.setup{}
-require'lspconfig'.lua_ls.setup {
+require'lspconfig'.ltex.setup{
+  settings = {
+      ltex = {
+        language = "de-CH",
+      },
+    },
+}
+require'lspconfig'.texlab.setup{}
 
+require'lspconfig'.lua_ls.setup {
   on_init = function(client)
     if client.workspace_folders then
       local path = client.workspace_folders[1].name
@@ -127,3 +135,46 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
+
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+
+
+-- set shorter name for keymap function
+local kmap = vim.keymap.set
+
+-- F5 processes the document once, and refreshes the view
+kmap({ 'n', 'v', 'i' },'<F5>', function() require("knap").process_once() end)
+
+-- F6 closes the viewer application, and allows settings to be reset
+kmap({ 'n', 'v', 'i' },'<F6>', function() require("knap").close_viewer() end)
+
+-- F7 toggles the auto-processing on and off
+kmap({ 'n', 'v', 'i' },'<F7>', function() require("knap").toggle_autopreviewing() end)
+
+-- F8 invokes a SyncTeX forward search, or similar, where appropriate
+kmap({ 'n', 'v', 'i' },'<F8>', function() require("knap").forward_jump() end)
+
+local gknapsettings = {
+    texoutputext = "pdf",
+    textopdf = "pdflatex -synctex=1 -halt-on-error -interaction=batchmode %docroot%",
+    delay = 0
+}
+vim.g.knap_settings = gknapsettings
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

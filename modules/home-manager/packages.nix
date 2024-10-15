@@ -9,5 +9,12 @@
     chromium
     musescore
     usbutils
+    # PDF viewer
+    sioyek
+    # Latex distro
+    rubber
+    texliveFull
+    spotify
+    quickemu
   ];
 }
