@@ -119,7 +119,6 @@
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -195,17 +194,12 @@
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
      wget
-     git
-     gitui
-     #gnupg
      openssh
      zip
      tldr
      eza
      cifs-utils
-     jre17_minimal
      networkmanagerapplet
-     pulseaudio
    ];
    environment.pathsToLink = [ "/share/bash-completion" ];
 
