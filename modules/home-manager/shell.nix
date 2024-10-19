@@ -1,6 +1,11 @@
 { config, pkgs, ... }:
 
 {
+  
+  home.packages = with pkgs; [
+    neofetch
+  ];
+
   programs = {
     kitty = {
       enable = true;
@@ -14,6 +19,10 @@
       enable = true;
       enableCompletion = true;
       bashrcExtra = ''eval "$(oh-my-posh init bash)"'';
+      # initExtra = ''neofetch'';
+      shellAliases = {
+        tree = "eza --tree --level=5";
+      };
     };
     
     oh-my-posh = {

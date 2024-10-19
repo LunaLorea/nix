@@ -34,18 +34,30 @@
         plugin = telescope-nvim;
 	config = toLuaFile ./neovim/telescope.lua;
       }
-      
+      # Theme
       rose-pine
+      
+      # Quickly switch between Files
       harpoon
+
+      # Undo Tree. Duh.
       undotree
+
+      # git client
       vim-fugitive
+
+      # Language servers
       lsp-zero-nvim
       cmp-nvim-lsp
       nvim-lspconfig
       nvim-cmp
       vim-lsp
-      luasnip
+
+
+      # Latex auto compile automation
       knap
+      # File Tree
+      nvim-tree-lua
 
       (nvim-treesitter.withPlugins (p: [
         p.tree-sitter-nix

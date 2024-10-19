@@ -163,16 +163,65 @@ local gknapsettings = {
 vim.g.knap_settings = gknapsettings
 
 
+-- disable netrw at the very start of your init.lua
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
+-- optionally enable 24-bit colour
+vim.opt.termguicolors = true
 
+-- empty setup using defaults
+require("nvim-tree").setup()
 
+-- OR setup with some options
+require("nvim-tree").setup({
+  sort = {
+    sorter = "case_sensitive",
+  },
+  view = {
+    width = 30,
+    side = "right",
+  },
+  renderer = {
+    group_empty = true,
+    highlight_opened_files = "all",
+    highlight_modified = "icon",
+  },
+  filters = {
+    dotfiles = false,
+  },
+  actions = {
+    open_file = {
+      quit_on_open = true,
+    },
+  },
+})
 
+kmap( 'n', '<leader>d', vim.cmd.NvimTreeToggle )
+TerminalWindow = nil
+CurrentWindow = nil
 
+function ToggleTerm()
+  local tempWindow = vim.api.nvim_get_current_win()
+  if TerminalWindow == nil or not vim.api.nvim_win_is_valid(TerminalWindow) then
+    CurrentWindow = vim.api.nvim_get_current_win()
+    -- Open terminal if it doesn't exist or was closed
+    vim.cmd(':split | wincmd j | :res 20 | terminal')
+    TerminalWindow = vim.api.nvim_get_current_win()
+    vim.cmd('wincmd k')
+    ToggleTerm()
+  elseif tempWindow == TerminalWindow then
+    -- Switch to the previous window
+    vim.api.nvim_set_current_win(CurrentWindow)
+  else
+    -- Switch to the terminal window
+    vim.api.nvim_set_current_win(TerminalWindow)
+    CurrentWindow = tempWindow
+  end
+end
 
-
-
-
-
+vim.api.nvim_set_keymap('n', '<leader>t', ':lua ToggleTerm()<CR>', { noremap = true, silent = true })
+kmap({'n', 'v'}, 'Y', '"+y')
 
 
 

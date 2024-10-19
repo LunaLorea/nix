@@ -3,11 +3,12 @@
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "luna";
-  home.homeDirectory = "/home/luna";
+  home.username = config.username;
+  home.homeDirectory = "/home/${config.username}";
 
   imports = [
     ./modules/modules.nix
+    ./global-variables.nix
   ];
 
   nixpkgs = {

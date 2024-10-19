@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       inputs.home-manager.nixosModules.default
+      ./global-variables.nix
     ];
 
 
@@ -145,6 +146,9 @@
   # Configure console keymap
   console.keyMap = "sg";
 
+  # Gnome Keyring for applications to store passwords and similar things.
+  services.gnome.gnome-keyring.enable = true;
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -168,17 +172,16 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.luna = {
+  users.users.${config.username} = {
     isNormalUser = true;
-    description = "Luna";
+    description = config.username;
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
   };
 
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
     users = {
-      "luna" = import ./home.nix;
+      ${config.username} = import ./home.nix;
     };
   };
 
@@ -192,16 +195,26 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
-     wget
-     openssh
-     zip
-     tldr
-     eza
-     cifs-utils
-     networkmanagerapplet
-   ];
-   environment.pathsToLink = [ "/share/bash-completion" ];
+    # Keyring
+    libsecret
+    # wget
+    wget
+
+    openssh
+    networkmanagerapplet 
+    zip
+
+    # Easier to read man pages
+    tldr
+    
+    # Replacaement for ls
+    eza
+
+    # used for mounting SAMBA shares
+    cifs-utils
+  ];
+  
+  environment.pathsToLink = [ "/share/bash-completion" ];
 
   programs.gnupg.agent = {                                                      
     enable = true;

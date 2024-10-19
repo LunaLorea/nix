@@ -81,6 +81,11 @@ let
 in
 {
 
+  home.packages = with pkgs; [
+    wayshot
+    slurp
+    wl-clipboard
+  ];
   programs.fuzzel = {
     enable = true;
     
@@ -123,16 +128,16 @@ in
       # Setup the colors for a beautiful sway enviornemnt
       colors = {
         focused = {
-          border = accent-400;
+          border = "#ffffff30";
           background = background-900;
-          childBorder = accent-300;
+          childBorder = accent-400;
           indicator = accent-400;
           text = text-200;
         };
         focusedInactive = {
-          border = accent-400;
+          border = "#ffffff30";
           background = background-900;
-          childBorder = accent-300;
+          childBorder = "#ffffff30";
           indicator = accent-400;
           text = text-200;
         };
@@ -140,7 +145,7 @@ in
 
       gaps = {
         inner = 8;
-        #outer = 5;
+        smartBorders = "on";
       };
 
       window = {
@@ -150,7 +155,7 @@ in
 
       output = {
         "*" = {
-          bg = "/home/luna/.config/nix/media/background-image.png fill";          
+          bg = ''${builtins.path { path = ../../media/background-image.png; }} fill'';
         };
         eDP-1 = {
           scale = "1";
@@ -203,7 +208,8 @@ in
         "${modifier}+s" = "splitv";
         "${modifier}+Shift+s" = "splith";
         "${modifier}+Shift+Return" = "move scratchpad";
-        "${modifier}+Return" = "scratchpad showt ";
+        "${modifier}+Alt+Return" = "floating toggle";
+        "${modifier}+Return" = "scratchpad show";
         "${modifier}+Alt+Space" = "input type:keyboard xkb_switch_layout next"; 
 
         "Alt+Tab" = "[con_id=$(swaymsg -t get_tree | ~/.config/nix/scripts/alttab t)] focus";
@@ -218,6 +224,11 @@ in
         "XF86AudioLowerVolume" = "exec swayosd-client --output-volume lower";
         "XF86AudioMute" = "exec --no-startup-id wpctl set-mute @DEFAULT_SINK@ toggle";
         "XF86AudioMicMute" = "exec --no-startup-id wpctl set-mute @DEFAULT_SOURCE@ toggle";
+
+        # Screenshots
+        # Copy Selection to Clipboard
+        "${modifier}+F2" = ''exec wayshot -s "$(slurp)" --stdout | wl-copy'';
+
 
         # Workspaces:
         # Switching between Workspaces
