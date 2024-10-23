@@ -1,10 +1,8 @@
 vim.g.mapleader = " "
 vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
-
 -- setup telescope fuzzy file finder
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
-
 -- Set Colorscheme and remove background
 function ColorMyPencils(color)
 	color = color or "rose-pine"
@@ -12,6 +10,7 @@ function ColorMyPencils(color)
 
 	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+	vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
 end
 
 ColorMyPencils()
@@ -139,6 +138,7 @@ vim.opt.colorcolumn = "80"
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
+vim.opt.linebreak = true
 
 -- set shorter name for keymap function
 local kmap = vim.keymap.set
@@ -197,16 +197,18 @@ require("nvim-tree").setup({
   },
 })
 
+vim.keymap.set('t', '<escape>', "<C-\\><C-n><C-w>h",{silent = true})
 kmap( 'n', '<leader>d', vim.cmd.NvimTreeToggle )
 TerminalWindow = nil
 CurrentWindow = nil
+TermSize = 20
 
 function ToggleTerm()
   local tempWindow = vim.api.nvim_get_current_win()
   if TerminalWindow == nil or not vim.api.nvim_win_is_valid(TerminalWindow) then
     CurrentWindow = vim.api.nvim_get_current_win()
     -- Open terminal if it doesn't exist or was closed
-    vim.cmd(':split | wincmd j | :res 20 | terminal')
+    vim.cmd(':split | wincmd j | :res ' ..TermSize.. ' | terminal')
     TerminalWindow = vim.api.nvim_get_current_win()
     vim.cmd('wincmd k')
     ToggleTerm()
@@ -217,12 +219,12 @@ function ToggleTerm()
     -- Switch to the terminal window
     vim.api.nvim_set_current_win(TerminalWindow)
     CurrentWindow = tempWindow
+    vim.cmd(':res ' ..TermSize)
   end
 end
 
 vim.api.nvim_set_keymap('n', '<leader>t', ':lua ToggleTerm()<CR>', { noremap = true, silent = true })
 kmap({'n', 'v'}, 'Y', '"+y')
-
 
 
 
