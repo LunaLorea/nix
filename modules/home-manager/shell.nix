@@ -1,7 +1,8 @@
-{ config, pkgs, ... }:
-
 {
-  
+  config,
+  pkgs,
+  ...
+}: {
   home.packages = with pkgs; [
     neofetch
   ];
@@ -24,7 +25,7 @@
         tree = "eza --tree --level=5";
       };
     };
-    
+
     oh-my-posh = {
       enable = true;
       enableBashIntegration = true;
@@ -42,5 +43,4 @@
       enableBashIntegration = true;
     };
   };
-
 }

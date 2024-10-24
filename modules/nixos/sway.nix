@@ -1,6 +1,9 @@
-{ lib, config, pkgs, ... }:
-
-let
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}: let
   colors-background = "#060A13";
   colors-accent = "#529699";
   colors-accent-dark = "#4B7BA6";
@@ -65,22 +68,20 @@ let
   fuzzel-match = primary-400 + "ff";
   fuzzel-selection = background-600 + "dd";
   fuzzel-border = accent-400 + "ff";
-  
+
   modifier = config.wayland.windowManager.sway.config.modifier;
   lock = ''
-          exec swaylock \
-	  --screenshots \
-	  --clock \
-	  --indicator \
-	  --indicator-radius 100 \
-          --indicator-thickness 7 \
-	  --effect-blur 7x5 \
-          --effect-vignette 0.5:0.5 \
-          --fade-in 0.2
-          '';
-in
-{
-
+           exec swaylock \
+    --screenshots \
+    --clock \
+    --indicator \
+    --indicator-radius 100 \
+           --indicator-thickness 7 \
+    --effect-blur 7x5 \
+           --effect-vignette 0.5:0.5 \
+           --fade-in 0.2
+  '';
+in {
   home.packages = with pkgs; [
     wayshot
     slurp
@@ -88,7 +89,7 @@ in
   ];
   programs.fuzzel = {
     enable = true;
-    
+
     settings = {
       main = {
         terminal = "kitty";
@@ -107,7 +108,7 @@ in
   };
   services.swayosd.enable = true;
 
-  home.keyboard =  {
+  home.keyboard = {
     layout = "ch,dvorak";
   };
 
@@ -115,12 +116,11 @@ in
     enable = true;
 
     checkConfig = false;
-    
+
     extraConfig = ''
       bindswitch --reload --locked lid:on ${lock}
     '';
     config = rec {
-
       modifier = "Mod4";
       # Use kitty as default terminal
       terminal = "kitty";
@@ -155,20 +155,19 @@ in
 
       output = {
         "*" = {
-          bg = ''${builtins.path { path = ../../media/background-image.png; }} fill'';
+          bg = ''${builtins.path {path = ../../media/background-image.png;}} fill'';
         };
         eDP-1 = {
           scale = "1";
         };
         DP-4 = {
-
         };
       };
- 
+
       input = {
         "*" = {
-            xkb_layout = "ch,us";
-            xkb_variant = "de,dvorak";
+          xkb_layout = "ch,us";
+          xkb_variant = "de,dvorak";
         };
         "type:touchpad" = {
           tap = "enabled";
@@ -180,14 +179,14 @@ in
       # Commands to be executed on startup
       startup = [
         # Start 1Password in the background
-        { command = "1password --silent"; }
+        {command = "1password --silent";}
       ];
 
       # Change the Keybindings
       keybindings = {
         # Open Application Launcher
         "${modifier}+Space" = "exec fuzzel";
-        
+
         # Open Console
         "${modifier}+t" = "exec ${terminal}";
         # Open firefox
@@ -210,7 +209,7 @@ in
         "${modifier}+Shift+Return" = "move scratchpad";
         "${modifier}+Alt+Return" = "floating toggle";
         "${modifier}+Return" = "scratchpad show";
-        "${modifier}+Alt+Space" = "input type:keyboard xkb_switch_layout next"; 
+        "${modifier}+Alt+Space" = "input type:keyboard xkb_switch_layout next";
 
         "Alt+Tab" = "[con_id=$(swaymsg -t get_tree | ~/.config/nix/scripts/alttab t)] focus";
         "${modifier}+j" = "focus down";
@@ -228,7 +227,6 @@ in
         # Screenshots
         # Copy Selection to Clipboard
         "${modifier}+F2" = ''exec wayshot -s "$(slurp)" --stdout | wl-copy'';
-
 
         # Workspaces:
         # Switching between Workspaces
@@ -255,20 +253,18 @@ in
         "${modifier}+Shift+9" = "move container to workspace number 9; workspace number 9";
         "${modifier}+Shift+0" = "move container to workspace number 10; workspace number 10";
       };
-      
-      bars = [ 
+
+      bars = [
         {
           command = "waybar";
         }
       ];
       fonts = {
-        names = [ "JetBrainsMono Nerd Font" "0xProto Nerd Font"];
+        names = ["JetBrainsMono Nerd Font" "0xProto Nerd Font"];
         size = 16.0;
       };
     };
   };
-
-
 
   # enables monitor hotplugging
   systemd.user.services.kanshi = {

@@ -1,12 +1,14 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   programs.firefox = {
     enable = true;
     profiles = {
       default = {
         name = "default";
-      }; 
+      };
       messages = {
         id = 1;
         isDefault = false;
@@ -20,13 +22,13 @@
           "layout.css.prefers-color-scheme.content-override" = 0;
         };
         userChrome = ''
-                      /* Hide different gui items*/
-                      #nav-bar, 
-                      #navigator-toolbox,
-                      #newtab-button-container  {
-                        visibility: collapse !important;
-                      }
-                    '';
+          /* Hide different gui items*/
+          #nav-bar,
+          #navigator-toolbox,
+          #newtab-button-container  {
+            visibility: collapse !important;
+          }
+        '';
       };
     };
   };
@@ -35,8 +37,7 @@
     messages = {
       name = "Messages";
       exec = "firefox -P messages -no-remote";
-      icon = builtins.path { path = ../../media/messages_icon.png; };
+      icon = builtins.path {path = ../../media/messages_icon.png;};
     };
   };
 }
-

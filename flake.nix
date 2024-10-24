@@ -10,7 +10,11 @@
     };
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: {
+  outputs = {
+    self,
+    nixpkgs,
+    ...
+  } @ inputs: {
     nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       modules = [
@@ -25,10 +29,10 @@
       modules = [
         ./hosts/desktop/hardware-configuration.nix
         ./hosts/desktop/desktop-config.nix
+        ./nvidia.nix
         ./configuration.nix
       ];
     };
-  
 
     nixosConfigurations.live = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";

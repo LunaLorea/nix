@@ -1,5 +1,9 @@
-{ lib, config, pkgs, ... }:
-let
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}: let
   colors-background = "#060A13";
   colors-accent = "#529699";
   colors-accent-dark = "#4B7BA6";
@@ -60,13 +64,11 @@ let
   accent-900 = "#19062d";
   accent-950 = "#0c0317";
   modifier = config.wayland.windowManager.sway.config.modifier;
-in
-{
+in {
   programs.waybar = {
     enable = true;
     systemd.enable = false;
     settings = {
-
       default = {
         layer = "top";
         position = "top";
@@ -79,9 +81,9 @@ in
           "*"
         ];
 
-        modules-left = [ "sway/workspaces" ];
-        modules-center = [ "sway/window" ];
-        modules-right = [ "battery" "tray" "sway/language" "clock" "custom/notifications" ];
+        modules-left = ["sway/workspaces"];
+        modules-center = ["sway/window"];
+        modules-right = ["battery" "tray" "sway/language" "clock" "custom/notifications"];
 
         "sway/workspaces" = {
           on-click = "activate";
@@ -121,7 +123,7 @@ in
             "0" = "󰂎";
             "1" = "󱊡";
             "2" = "󱊢";
-            "3" = "󱊣";            
+            "3" = "󱊣";
           };
           tooltip-format = "Usage: {power}W\n{timeTo}\n{cycles} cycles\n{health}";
           full-at = 98;

@@ -1,12 +1,12 @@
-{ config, pkgs, ... }:
-
 {
-  programs.neovim = 
-  let
+  config,
+  pkgs,
+  ...
+}: {
+  programs.neovim = let
     toLua = str: "lua << EOF\n${str}\nEOF\n";
     toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
-  in
-  {
+  in {
     enable = true;
 
     viAlias = true;
@@ -14,29 +14,29 @@
     vimdiffAlias = true;
 
     extraLuaConfig = ''
-        ${builtins.readFile ./neovim/options.lua}
+      ${builtins.readFile ./neovim/options.lua}
     '';
 
     plugins = with pkgs.vimPlugins; [
-#      {
-#	plugin = some-plugin;
-#	config = toLua "some lua command";
-#      }
-#      {
-#	plugin = some-plugin;
-#	config = toLuaFile ./some/path/to/config;
-#      }      
-#      {
-#	plugin = some-plugin;
-#	config = "vimScript 1 liner"
-#      }
+      #      {
+      #	plugin = some-plugin;
+      #	config = toLua "some lua command";
+      #      }
+      #      {
+      #	plugin = some-plugin;
+      #	config = toLuaFile ./some/path/to/config;
+      #      }
+      #      {
+      #	plugin = some-plugin;
+      #	config = "vimScript 1 liner"
+      #      }
       {
         plugin = telescope-nvim;
-	config = toLuaFile ./neovim/telescope.lua;
+        config = toLuaFile ./neovim/telescope.lua;
       }
       # Theme
       rose-pine
-      
+
       # Quickly switch between Files
       harpoon
 
@@ -52,7 +52,6 @@
       nvim-lspconfig
       nvim-cmp
       vim-lsp
-
 
       # Latex auto compile automation
       knap
@@ -76,13 +75,17 @@
         p.tree-sitter-latex
       ]))
     ];
-
   };
+
   home.packages = with pkgs; [
+    # Language Servers
     clang-tools
     nixd
     lua-language-server
     ltex-ls
     texlab
+
+    # Code Formatter
+    alejandra
   ];
 }

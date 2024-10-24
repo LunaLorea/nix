@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   home.packages = with pkgs; [
     jq
     usbutils
@@ -10,5 +12,6 @@
     # Latex distro
     rubber
     texliveFull
+    protonmail-desktop
   ];
 }

@@ -1,26 +1,26 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, inputs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      inputs.home-manager.nixosModules.default
-      ./global-variables.nix
-    ];
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    inputs.home-manager.nixosModules.default
+    ./global-variables.nix
+  ];
 
-
-  
-    fonts.packages = with pkgs; [
-        nerdfonts
-    ];
+  fonts.packages = with pkgs; [
+    nerdfonts
+  ];
   # Bootloader.
   # boot.loader.systemd-boot.enable = false;
   boot = {
     loader.efi.canTouchEfiVariables = true;
-    
+
     loader.systemd-boot.enable = true;
 
     # loader.grub = {
@@ -37,12 +37,11 @@
       themePackages = with pkgs; [
         # By default we would install all themes
         (adi1090x-plymouth-themes.override {
-          selected_themes = [ "hexagon_dots_alt" ];
+          selected_themes = ["hexagon_dots_alt"];
         })
       ];
     };
 
-  
     # Enable "Silent Boot"
     consoleLogLevel = 0;
     initrd.verbose = false;
@@ -66,8 +65,8 @@
     plymouth-wait-for-animation = {
       # name = "plymouth-wait-for-animation";
       description = "Waits for Plymouth animation to finish";
-      before = [ "plymouth-quit.service" "display-manager.service" ];
-      wantedBy = [ "plymouth-start.service" ];
+      before = ["plymouth-quit.service" "display-manager.service"];
+      wantedBy = ["plymouth-start.service"];
       serviceConfig = {
         Type = "oneshot";
         ExecStart = "/usr/bin/sleep 20";
@@ -75,9 +74,10 @@
     };
   };
 
-
   # Enable Flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
+
+  nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -175,11 +175,11 @@
   users.users.${config.username} = {
     isNormalUser = true;
     description = config.username;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = ["networkmanager" "wheel"];
   };
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = {inherit inputs;};
     users = {
       ${config.username} = import ./home.nix;
     };
@@ -194,29 +194,29 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     # Keyring
     libsecret
     # wget
     wget
 
     openssh
-    networkmanagerapplet 
+    networkmanagerapplet
     zip
 
     # Easier to read man pages
     tldr
-    
+
     # Replacaement for ls
     eza
 
     # used for mounting SAMBA shares
     cifs-utils
   ];
-  
-  environment.pathsToLink = [ "/share/bash-completion" ];
 
-  programs.gnupg.agent = {                                                      
+  environment.pathsToLink = ["/share/bash-completion"];
+
+  programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
     pinentryPackage = pkgs.pinentry-gtk2;
@@ -247,5 +247,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.05"; # Did you read the comment?
-
 }
