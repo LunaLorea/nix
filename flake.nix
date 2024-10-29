@@ -29,7 +29,7 @@
       modules = [
         ./hosts/desktop/hardware-configuration.nix
         ./hosts/desktop/desktop-config.nix
-        ./nvidia.nix
+        #./nvidia.nix
         ./configuration.nix
       ];
     };

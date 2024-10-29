@@ -13,5 +13,7 @@
     rubber
     texliveFull
     protonmail-desktop
+
+    teamspeak_client
   ];
 }
