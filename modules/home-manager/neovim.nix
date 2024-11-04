@@ -53,10 +53,7 @@
       nvim-cmp
       cmp-nvim-lsp
       vim-lsp
-<<<<<<< HEAD
-=======
       luasnip
->>>>>>> afe43e5 (changing neovim and other stuff)
 
       # Latex auto compile automation
       knap
@@ -89,12 +86,9 @@
     lua-language-server
     ltex-ls
     texlab
-<<<<<<< HEAD
 
     # Code Formatter
     alejandra
-=======
     typescript-language-server
->>>>>>> afe43e5 (changing neovim and other stuff)
   ];
 }

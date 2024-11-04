@@ -164,11 +164,8 @@ in {
         };
       };
 
-<<<<<<< HEAD
-=======
       defaultWorkspace = "1";
 
->>>>>>> afe43e5 (changing neovim and other stuff)
       input = {
         "*" = {
           xkb_layout = "ch,us";
