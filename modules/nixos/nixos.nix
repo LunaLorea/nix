@@ -8,6 +8,7 @@
   colors-accent-dark = "#4B7BA6";
   colors-waybar-text = "#efefef";
   modifier = config.wayland.windowManager.sway.config.modifier;
+<<<<<<< HEAD
 in {
   imports = [
     ./sway.nix
@@ -15,4 +16,15 @@ in {
     ./waybar.nix
     ./swaylock.nix
   ];
+=======
+in
+{
+    imports = [
+        ./sway.nix
+        ./swaync.nix
+        ./waybar.nix
+        ./swaylock.nix
+        ./man.nix
+    ];  
+>>>>>>> afe43e5 (changing neovim and other stuff)
 }

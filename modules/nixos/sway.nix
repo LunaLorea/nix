@@ -158,12 +158,17 @@ in {
           bg = ''${builtins.path {path = ../../media/background-image.png;}} fill'';
         };
         eDP-1 = {
-          scale = "1";
+          scale = "1"; 
         };
         DP-4 = {
         };
       };
 
+<<<<<<< HEAD
+=======
+      defaultWorkspace = "1";
+
+>>>>>>> afe43e5 (changing neovim and other stuff)
       input = {
         "*" = {
           xkb_layout = "ch,us";

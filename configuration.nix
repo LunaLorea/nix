@@ -212,6 +212,9 @@
 
     # used for mounting SAMBA shares
     cifs-utils
+
+    # Controlling PipeWire Audio/Video Streams
+    qpwgraph
   ];
 
   environment.pathsToLink = ["/share/bash-completion"];
