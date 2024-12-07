@@ -80,6 +80,11 @@
   nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
 
   networking.hostName = "nixos"; # Define your hostname.
+  
+  networking.firewall = {
+    allowedTCPPortRanges = [ { from = 1714; to = 1764; } ]; #kde-connect
+    allowedUDPPortRanges = [ { from = 1714; to = 1764; } ]; #kde-connect
+  };
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary

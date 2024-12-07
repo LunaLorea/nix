@@ -188,6 +188,8 @@ in {
       keybindings = {
         # Open Application Launcher
         "${modifier}+Space" = "exec fuzzel";
+        # Open Firefox
+        "${modifier}+f" = "exec firefox";
 
         # Open Console
         "${modifier}+t" = "exec ${terminal}";

@@ -15,6 +15,7 @@
     ./firefox.nix
     ./neovim.nix
     ./shell.nix
+    ./kde-connect.nix
   ];
 
   services.blueman-applet = {
