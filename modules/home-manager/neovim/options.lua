@@ -91,6 +91,18 @@ require'lspconfig'.lua_ls.setup {
     Lua = {}
   }
 }
+--Enable (broadcasting) snippet capability for completion
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+require'lspconfig'.html.setup {
+  capabilities = capabilities,
+}
+require'lspconfig'.cssls.setup {
+  capabilities = capabilities,
+}
+
+require'lspconfig'.glsl_analyzer.setup{}
 
 -- lsp_attach is where you enable features that only work
 -- if there is a language server active in the file

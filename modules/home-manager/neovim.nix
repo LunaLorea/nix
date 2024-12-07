@@ -75,6 +75,7 @@
         p.tree-sitter-javascript
         p.tree-sitter-typescript
         p.tree-sitter-latex
+        p.tree-sitter-glsl
       ]))
     ];
   };
@@ -86,6 +87,10 @@
     lua-language-server
     ltex-ls
     texlab
+    glsl_analyzer
+
+    #HTML/CSS/JSON/ESLint language servers extracted from vscode.
+    vscode-langservers-extracted
 
     # Code Formatter
     alejandra
