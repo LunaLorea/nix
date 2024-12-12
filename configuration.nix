@@ -82,8 +82,8 @@
   networking.hostName = "nixos"; # Define your hostname.
   
   networking.firewall = {
-    allowedTCPPortRanges = [ { from = 1714; to = 1764; } ]; #kde-connect
-    allowedUDPPortRanges = [ { from = 1714; to = 1764; } ]; #kde-connect
+    allowedTCPPortRanges = [ { from = 1714; to = 1764; } { from = 1313; to = 1313; } ]; #kde-connect
+    allowedUDPPortRanges = [ { from = 1714; to = 1764; } { from = 1313; to = 1313; } ]; #kde-connect
   };
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
