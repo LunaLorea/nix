@@ -85,7 +85,6 @@
     clang-tools
     nixd
     lua-language-server
-    ltex-ls
     texlab
     glsl_analyzer
 

@@ -49,13 +49,6 @@ require'lspconfig'.nixd.setup{
     }
   }
 }
-require'lspconfig'.ltex.setup{
-  settings = {
-      ltex = {
-        language = "de-CH",
-      },
-    },
-}
 require'lspconfig'.texlab.setup{}
 require'lspconfig'.ts_ls.setup{}
 require'lspconfig'.lua_ls.setup {
