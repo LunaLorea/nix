@@ -4,7 +4,9 @@
 {
   config,
   pkgs,
+  pkgs-stable,
   inputs,
+  lib,
   ...
 }: {
   imports = [
@@ -13,9 +15,7 @@
     ./global-variables.nix
   ];
 
-  fonts.packages = with pkgs; [
-    nerdfonts
-  ];
+  fonts.packages = [] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
   # Bootloader.
   # boot.loader.systemd-boot.enable = false;
   boot = {
@@ -185,7 +185,10 @@
   };
 
   home-manager = {
-    extraSpecialArgs = {inherit inputs;};
+    extraSpecialArgs = {
+      inherit inputs;
+      pkgs-unstable = pkgs-stable;
+    };
     users = {
       ${config.username} = import ./home.nix;
     };
@@ -199,30 +202,34 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    # File Manager
-    gnome.nautilus
-    # Keyring
-    libsecret
-    # wget
-    wget
+  environment.systemPackages = [
 
-    openssh
-    networkmanagerapplet
-    zip
+
+    # File Manager
+    pkgs.nautilus
+    # Keyring
+    pkgs.libsecret
+    # wget
+    pkgs.wget
+
+    pkgs.openssh
+    pkgs.networkmanagerapplet
+    pkgs.zip
 
     # Easier to read man pages
-    tldr
+    pkgs.tldr
 
     # Replacaement for ls
-    eza
+    pkgs.eza
 
     # used for mounting SAMBA shares
-    cifs-utils
+    pkgs.cifs-utils
 
     # Controlling PipeWire Audio/Video Streams
-    qpwgraph
+    pkgs.qpwgraph
+
+    pkgs.lutris
+    pkgs.pciutils
   ];
 
   environment.pathsToLink = ["/share/bash-completion"];

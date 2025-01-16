@@ -3,6 +3,8 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -13,10 +15,13 @@
   outputs = {
     self,
     nixpkgs,
+    nixpkgs-stable,
     ...
   } @ inputs: {
     nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs;};
+      specialArgs = {
+        inherit inputs;
+        };
       modules = [
         ./hosts/laptop/hardware-configuration.nix
         ./hosts/laptop/laptop-config.nix
@@ -25,10 +30,12 @@
     };
 
     nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs;};
+      specialArgs = {
+        inherit inputs;
+        };
       modules = [
         ./hosts/desktop/hardware-configuration.nix
-        #./hosts/desktop/desktop-config.nix
+        ./hosts/desktop/desktop-config.nix
         ./nvidia.nix
         ./configuration.nix
       ];

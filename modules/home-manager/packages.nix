@@ -1,21 +1,28 @@
 {
   config,
   pkgs,
+  pkgs-stable,
   ...
 }: {
-  home.packages = with pkgs; [
-    jq
-    usbutils
-    heroic
+  home.packages = [
+    pkgs.jq
+    pkgs.usbutils
+    pkgs.heroic
     # PDF viewer
-    sioyek
+    pkgs.sioyek
     # Latex distro
-    rubber
-    texliveFull
-    protonmail-desktop
+    pkgs.rubber
+    pkgs.texliveFull
+    pkgs.protonmail-desktop
     
-    teamspeak_client
+    pkgs.teamspeak_client
 
-    obs-studio
+    pkgs.obs-studio
+
+    # Emoji Picker
+    pkgs.smile
+
+    pkgs.modrinth-app
+
   ];
 }

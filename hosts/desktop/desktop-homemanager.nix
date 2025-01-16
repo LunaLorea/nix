@@ -1,5 +1,7 @@
 {
-  inputs
+  ...
 }: {
-  wayland.windowManager.sway.extraOptions = [ "--unsupported-gpu" ];
+  wayland.windowManager.sway.extraOptions = [ 
+    "--unsupported-gpu" 
+  ];
 }
