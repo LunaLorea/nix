@@ -22,8 +22,6 @@
     # Emoji Picker
     pkgs.smile
 
-    pkgs.modrinth-app
-    
     pkgs.krita
   ];
 }
