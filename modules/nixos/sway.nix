@@ -62,7 +62,7 @@ in {
   services.swayosd.enable = true;
 
   home.keyboard = {
-    layout = "ch,dvorak";
+    layout = "dvorak,ch";
   };
 
   wayland.windowManager.sway = {

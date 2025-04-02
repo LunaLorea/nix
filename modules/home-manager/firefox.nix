@@ -13,7 +13,7 @@
         id = 1;
         isDefault = false;
         settings = {
-          "browser.startup.homepage" = "https://web.whatsapp.com/|https://web.threema.ch/#!/welcome|https://discord.com/channels/@me|https://web.telegram.org/";
+          "browser.startup.homepage" = "https://web.whatsapp.com/|https://web.threema.ch/#!/welcome|https://discord.com/channels/@me|https://web.telegram.org/|https://mail.proton.me/";
           "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
           "extensions.activeThemeID" = "firefox-compact-dark@mozilla.org";
           "sidebar.revamp" = true;
