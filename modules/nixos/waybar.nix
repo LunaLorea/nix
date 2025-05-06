@@ -64,7 +64,11 @@
   accent-900 = "#19062d";
   accent-950 = "#0c0317";
   modifier = config.wayland.windowManager.sway.config.modifier;
+
+  waybar-module-pomodoro = import ''${builtins.path {path = ../../custom-pkgs/waybar-module-pomodoro.nix;}}'' { inherit pkgs; };
 in {
+  
+  home.packages = [ waybar-module-pomodoro ]; # Pomodoro module import
   programs.waybar = {
     enable = true;
     systemd.enable = false;
@@ -83,7 +87,7 @@ in {
 
         modules-left = ["sway/workspaces"];
         modules-center = ["sway/window"];
-        modules-right = ["battery" "tray" "sway/language" "clock" "custom/notifications"];
+        modules-right = ["battery" "tray" "sway/language" "clock" "custom/pomodoro" "custom/notifications"];
 
         "sway/workspaces" = {
           on-click = "activate";
@@ -133,6 +137,13 @@ in {
           on-click = "swaync-client -t -sw";
           tooltip = false;
         };
+        "custom/pomodoro" = {
+          format = "{}";
+          return-type = "json";
+          exec = "waybar-module-pomodoro";
+          on-click = "waybar-module-pomodoro toggle";
+          on-click-right = "waybar-module-pomodoro reset";
+        };
         "tray" = {
           icon-size = 21;
           spacing = 10;
@@ -171,6 +182,18 @@ in {
       #custom-notifications {
         padding-left: 0px;
         padding-right: 0px;
+      }
+      .work {
+        background: #F19292;
+        color: #333333;
+      }
+      .break {
+        background: #CBE2B0;
+        color: #333333;
+      }
+      .pause {
+        background: #F6D186;
+        color: #333333;
       }
     '';
   };
