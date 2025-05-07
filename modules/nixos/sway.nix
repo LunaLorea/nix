@@ -132,8 +132,8 @@ in {
 
       input = {
         "*" = {
-          xkb_layout = "ch,us";
-          xkb_variant = "de,dvorak";
+          xkb_layout = "us,ch";
+          xkb_variant = "dvorak,de";
         };
         "type:touchpad" = {
           tap = "enabled";
