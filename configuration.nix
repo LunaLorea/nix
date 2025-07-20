@@ -263,7 +263,12 @@
     pkgs.pciutils
   ];
 
-  environment.pathsToLink = ["/share/bash-completion"];
+
+  # Set default shell
+  programs.zsh.enable = true;
+  users.defaultUserShell = pkgs.zsh;
+  environment.shells = with pkgs; [ zsh ];
+  environment.pathsToLink = [ "/share/zsh" ];
 
   programs.gnupg.agent = {
     enable = true;
