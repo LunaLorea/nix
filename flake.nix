@@ -11,17 +11,23 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-
+  
+  
+  
   outputs = {
     self,
     nixpkgs,
     nixpkgs-stable,
     ...
-  } @ inputs: {
+  } @ inputs: 
+  let
+    colors = import ./colors.nix;
+  in {
     nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
       specialArgs = {
         inherit inputs;
-        };
+        inherit colors;
+      };
       modules = [
         ./hosts/laptop/hardware-configuration.nix
         ./hosts/laptop/laptop-config.nix
