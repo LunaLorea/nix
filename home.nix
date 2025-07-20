@@ -36,7 +36,6 @@
     thunderbird
     protonmail-bridge
     newsflash
-    _1password-gui
     discord
     vscode
     filezilla
