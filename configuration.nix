@@ -6,6 +6,7 @@
   pkgs,
   pkgs-stable,
   inputs,
+  colors,
   lib,
   ...
 }: {
@@ -41,6 +42,8 @@
         })
       ];
     };
+    
+    
 
     # Enable "Silent Boot"
     consoleLogLevel = 0;
@@ -61,6 +64,7 @@
     loader.timeout = 0;
   };
 
+  # programs.wshowkeys.enable = true;
   systemd.services = {
     plymouth-wait-for-animation = {
       # name = "plymouth-wait-for-animation";
@@ -124,8 +128,8 @@
   security.polkit.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -204,6 +208,7 @@
   home-manager = {
     extraSpecialArgs = {
       inherit inputs;
+      inherit colors;
       pkgs-unstable = pkgs-stable;
     };
     users = {
@@ -217,6 +222,14 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # Enable 1Password (Needs to be part of NixOS instead of Home Manager to allow for complete functionality)
+  programs._1password.enable = true;
+  programs._1password-gui = {
+    enable = true;
+    # Certain features, including CLI integration and system authentication support,
+    # require enabling PolKit integration on some desktop environments (e.g. Plasma).
+    polkitPolicyOwners = [ "luna" ];
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
