@@ -2,6 +2,7 @@
   lib,
   config,
   pkgs,
+  colors,
   ...
 }: let
   colors-background = "#060A13";
@@ -26,10 +27,6 @@
   background-400 = "#9960d2";
   background-500 = "#7f38c7";
   background-600 = "#662d9f";
-  background-700 = "#4c2277";
-  background-800 = "#331650";
-  background-900 = "#190b28";
-  background-950 = "#0d0614";
   primary-50 = "#f2eafa";
   primary-100 = "#e5d6f5";
   primary-200 = "#cbacec";
@@ -109,7 +106,7 @@ in {
         title = {
           text = "Notification Center";
           clear-all-button = true;
-          button-text = "󰆴 Clear All";
+          button-text = "󰆴";
         };
         dnd = {
           text = "Do Not Disturb";
@@ -160,11 +157,6 @@ in {
         font-size: 25px
       }
 
-      .control-center .notification-row:focus,
-      .control-center .notification-row:hover {
-          opacity: 1;
-          background: ${background-900};
-      }
 
       .notification-row {
           outline: none;
@@ -178,16 +170,14 @@ in {
       }
 
       .notification-content {
-          background: ${background-700};
+          background: ${colors.surface0};
           padding: 7px;
           border-radius: 0px;
-          border: 2px solid ${primary-400};
+          border: 2px solid ${colors.crust};
           margin: 0;
       }
 
       .close-button {
-          background: ${primary-300};
-          color: ${text-950};
           text-shadow: none;
           padding: 0;
           border-radius: 0px;
@@ -197,45 +187,40 @@ in {
 
       .close-button:hover {
           box-shadow: none;
-          background: ${accent-400};
           transition: all .15s ease-in-out;
           border: none
       }
 
       .notification-action {
-          color: ${text-200};
-          border: 2px solid ${accent-400};
           border-top: none;
           border-radius: 0px;
-          background: ${background-800};
+          background: ${colors.surface0};
       }
 
       .notification-default-action:hover,
       .notification-action:hover {
-          color: ${text-200};
-          background: ${background-900};
       }
 
       .summary {
         padding-top: 7px;
           font-size: 13px;
-          color: ${text-200};
+          color: ${colors.subtext0};
       }
 
       .time {
           font-size: 11px;
-          background: ${text-400};
           margin-right: 24px;
       }
 
       .body {
           font-size: 12px;
-          color: ${text-200};
+          background: ${colors.base};
+          color: ${colors.text};
+          opacity: 0.7;
       }
 
       .control-center {
-          background: ${background-950};
-          border: 2px solid #85796f;
+          border: 0;
           border-radius: 0px;
       }
 
@@ -256,8 +241,6 @@ in {
       }
 
       .widget-title {
-          color: ${text-100};
-          background: ${background-950};
           padding: 5px 10px;
           margin: 10px 10px 5px 10px;
           font-size: 3rem;
@@ -266,44 +249,39 @@ in {
 
       .widget-title>button {
           font-size: 1rem;
-          color: ${text-100};
           text-shadow: none;
-          background: ${background-800};
+          background: ${colors.surface0};
           box-shadow: none;
           border-radius: 5px;
       }
 
       .widget-title>button:hover {
-          background: ${primary-400};
-          color: ${background-400};
+          background: ${colors.red};
+          color: ${colors.crust};
       }
 
       .widget-dnd {
-          background: ${background-950};
           padding: 5px 10px;
           margin: 5px 10px 10px 10px;
-          border-radius: 5px;
           font-size: large;
-          color: ${text-100};
       }
 
       .widget-dnd>switch {
-          border-radius: 4px;
-          background: ${accent-400};
+          background: ${colors.red};
       }
 
       .widget-dnd>switch:checked {
-          background: ${primary-400};
-          border: 1px solid ${primary-400};
+          background: ${colors.green};
       }
 
       .widget-dnd>switch slider {
-          background: ${background-800};
+          background: ${colors.surface0};
+          border: 0;
           border-radius: 5px;
       }
 
       .widget-dnd>switch:checked slider {
-          background: ${background-800};
+          background: ${colors.surface0};
           border-radius: 5px;
       }
 
@@ -313,12 +291,9 @@ in {
 
       .widget-label>label {
           font-size: 1rem;
-          color: ${text-100};
       }
 
       .widget-mpris {
-          color: ${text-100};
-          background: ${background-950};
           padding: 5px 10px 0px 0px;
           margin: 5px 10px 5px 10px;
           border-radius: 0px;
@@ -347,19 +322,16 @@ in {
           padding: 5px;
           margin: 5px 10px 10px 10px;
           border-radius: 5px;
-          background: ${background-950};
       }
 
       .widget-buttons-grid>flowbox>flowboxchild>button {
           margin: 3px;
-          background: ${background-800};
+          background: ${colors.surface0};
           border-radius: 5px;
-          color: ${text-100};
       }
 
       .widget-buttons-grid>flowbox>flowboxchild>button:hover {
-          background: ${primary-400};
-          color: ${background-800};
+          background: ${colors.overlay0};
       }
 
       .widget-menubar>box>.menu-button-bar>button {
