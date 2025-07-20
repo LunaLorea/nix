@@ -35,7 +35,7 @@
         config = toLuaFile ./neovim/telescope.lua;
       }
       # Theme
-      rose-pine
+      catppuccin-nvim
 
       # Quickly switch between Files
       harpoon
