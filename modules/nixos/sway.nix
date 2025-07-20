@@ -1,68 +1,67 @@
 {
   lib,
-  config,
-  pkgs,
-  ...
+    config,
+    pkgs,
+    colors,
+    ...
 }: let
-  text-100 = "#e5daf1";
-  text-200 = "#cbb6e2";
-  background-600 = "#662d9f";
-  background-800 = "#331650";
-  background-900 = "#190b28";
-  primary-400 = "#975ad8";
-  accent-400 = "#964ae8";
-  fuzzel-background = background-800 + "dd";
-  fuzzel-text = text-100 + "ff";
-  fuzzel-match = primary-400 + "ff";
-  fuzzel-selection = background-600 + "dd";
-  fuzzel-border = accent-400 + "ff";
+text-200 = "#cbb6e2";
+background-900 = "#190b28";
+accent-400 = "#964ae8";
+fuzzel-background = colors.base + "dd";
+fuzzel-text = colors.text + "ff";
+fuzzel-match = colors.teal + "ff";
+fuzzel-selection = colors.mauve + "dd";
+fuzzel-border = colors.mauve + "ff";
 
-  modifier = config.wayland.windowManager.sway.config.modifier;
-  lock = ''
-           exec swaylock \
-    --screenshots \
-    --clock \
-    --indicator \
-    --indicator-radius 100 \
-           --indicator-thickness 7 \
-    --effect-blur 7x5 \
-           --effect-vignette 0.5:0.5 \
-           --fade-in 0.2
-  '';
-in {
-  home.packages = with pkgs; [
-    wayshot
-    slurp
-    wl-clipboard
-  ];
-  programs.fuzzel = {
-    enable = true;
+modifier = config.wayland.windowManager.sway.config.modifier;
+lock = ''
+exec swaylock \
+       --screenshots \
+       --clock \
+       --indicator \
+       --indicator-radius 100 \
+       --indicator-thickness 7 \
+       --effect-blur 7x5 \
+       --effect-vignette 0.5:0.5 \
+       --fade-in 0\
+       --ring-color ${lib.strings.removePrefix "#" colors.peach}
+       '';
+       in {
+         home.packages = with pkgs; [
+           wayshot
+             slurp
+             wl-clipboard
+         ];
+         programs.fuzzel = {
+           enable = true;
 
-    settings = {
-      main = {
-        terminal = "kitty";
-        layer = "overlay";
-      };
-      colors = {
-        background = fuzzel-background;
-        text = fuzzel-text;
-        match = fuzzel-match;
-        selection = fuzzel-selection;
-        selection-text = fuzzel-text;
-        selection-match = fuzzel-match;
-        border = fuzzel-border;
-      };
-    };
-  };
+           settings = {
+             main = {
+               terminal = "kitty";
+               layer = "overlay";
+             };
+             colors = {
+               background = fuzzel-background;
+               text = fuzzel-text;
+               match = fuzzel-match;
+               selection = fuzzel-selection;
+               selection-text = fuzzel-text;
+               selection-match = fuzzel-match;
+               border = fuzzel-border;
+             };
+           };
+         };
 
-  # Enable audio applet that allows you to switch default audio devices
-  services.pasystray.enable = true;
+# Enable audio applet that allows you to switch default audio devices
+         services.pasystray.enable = true;
 
 
-  services.swayosd.enable = true;
+         services.swayosd.enable = true;
 
-  home.keyboard = {
-    layout = "dvorak,ch";
+         home.keyboard = {
+           layout = "us,ch,de";
+           variant = "dvorak,nodeadkeys,neo2";
   };
 
   wayland.windowManager.sway = {
@@ -73,28 +72,39 @@ in {
     extraConfig = ''
       bindswitch --reload --locked lid:on ${lock}
     '';
-    config = rec {
+
+    config = let
+      sway-colors = {
+        focused = {
+          border = "#00000000";
+          background = colors.base;
+          childBorder = colors.mauve;
+          indicator = colors.red;
+          text = colors.text;
+        };
+        focusedInactive = {
+          border = "#000000";
+          background = colors.base;
+          childBorder = colors.lavender;
+          indicator = colors.red;
+          text = colors.text;
+        };
+        unfocused = {
+          border = "#00000000";
+          background = colors.base;
+          childBorder = "#00000000";
+          indicator = colors.red;
+          text = colors.text;
+        };
+      };
+    in
+    rec {
       modifier = "Mod4";
       # Use kitty as default terminal
       terminal = "kitty";
-
+      
+      colors = sway-colors;
       # Setup the colors for a beautiful sway enviornemnt
-      colors = {
-        focused = {
-          border = "#ffffff30";
-          background = background-900;
-          childBorder = accent-400;
-          indicator = accent-400;
-          text = text-200;
-        };
-        focusedInactive = {
-          border = "#ffffff30";
-          background = background-900;
-          childBorder = "#ffffff30";
-          indicator = accent-400;
-          text = text-200;
-        };
-      };
 
       gaps = {
         inner = 8;
@@ -132,8 +142,8 @@ in {
 
       input = {
         "*" = {
-          xkb_layout = "us,ch";
-          xkb_variant = "dvorak,de";
+          xkb_layout = "us,ch,de,de";
+          xkb_variant = "dvorak,de,neo,noted";
         };
         "type:touchpad" = {
           tap = "enabled";
@@ -150,7 +160,7 @@ in {
 
       # Change the Keybindings
       keybindings = {
-        # Open Application Launcher
+        # Open Appliation Launcher
         "${modifier}+Space" = "exec fuzzel";
         # Open Firefox
         "${modifier}+f" = "exec firefox";
@@ -166,7 +176,7 @@ in {
         # Open Notification Center
         "${modifier}+Shift+n" = "exec swaync-client -t -sw";
         # Lock Sway
-        "${modifier}+Section" = lock;
+        "${modifier}+Grave" = lock;
         # Change focused Window
         "Shift+Alt+Tab" = "[con_id=$(swaymsg -t get_tree | ~/.config/nix/scripts/alttab t)] focus";
         "${modifier}+s" = "splitv";
