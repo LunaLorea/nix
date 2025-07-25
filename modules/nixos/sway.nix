@@ -70,7 +70,13 @@ exec swaylock \
     checkConfig = false;
 
     extraConfig = ''
+      # Enable locking on closing the lid
       bindswitch --reload --locked lid:on ${lock}
+      
+      # Applications that should float on start
+      for_window [app_id=".blueman-manager-wrapped"] move scratchpad; scratchpad show
+      for_window [app_id="nm-connection-editor"] move scratchpad; scratchpad show
+      for_window [class="1Password"] move scratchpad; scratchpad show
     '';
 
     config = let
@@ -112,7 +118,7 @@ exec swaylock \
       };
 
       window = {
-        titlebar = false;
+        titlebar = true;
         border = 4;
       };
 
@@ -152,7 +158,7 @@ exec swaylock \
         };
       };
 
-      # Commands to be executed on startup
+# Commands to be executed on startup
       startup = [
         # Start 1Password in the background
         {command = "1password --silent";}
@@ -164,6 +170,8 @@ exec swaylock \
         "${modifier}+Space" = "exec fuzzel";
         # Open Firefox
         "${modifier}+f" = "exec firefox";
+        # Open ncspot (tui spotify)
+        "${modifier}+v" = "exec ${terminal} ncspot; move scratchpad; scratchpad show";
 
         # Open Console
         "${modifier}+t" = "exec ${terminal}";

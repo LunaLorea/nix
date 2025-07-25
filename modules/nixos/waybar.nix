@@ -26,7 +26,7 @@ in {
           "*"
         ];
 
-        modules-left = ["clock" "battery" "network"];
+        modules-left = ["clock" "battery" "mpris"];
         modules-center = ["sway/workspaces"];
         modules-right = ["tray" "sway/language" "custom/pomodoro" "custom/notifications"];
 
@@ -50,6 +50,19 @@ in {
           tooltip-format-ethernet = "{ifname} ";
           tooltip-format-disconnected = "Disconnected";
           max-length = 50;
+        };
+        "mpris" = {
+          format = "{player_icon} {dynamic}";
+          format-paused = "{status_icon} <i>{dynamic}</i>";
+          interval = 1;
+          player-icons = {
+            default = "▶";
+            mpv = "🎵";
+          };
+          status-icons = {
+            paused = "⏸";
+          };
+          ignored-players = [ "firefox" ];
         };
         "clock" = {
           interval = 60;
