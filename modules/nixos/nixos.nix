@@ -15,5 +15,6 @@ in {
         ./waybar.nix
         ./swaylock.nix
         ./man.nix
+        ./cheatsheet.nix
     ];  
 }

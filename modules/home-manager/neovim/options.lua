@@ -13,6 +13,8 @@ end
 
 ColorMyPencils()
 
+vim.opt.title = true
+vim.opt.titlestring = "Nvim"
 
 local mark = require("harpoon.mark")
 local ui = require("harpoon.ui")

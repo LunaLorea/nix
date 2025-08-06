@@ -1,67 +1,89 @@
 {
+  config,
   lib,
-    config,
-    pkgs,
-    colors,
-    ...
-}: let
-text-200 = "#cbb6e2";
-background-900 = "#190b28";
-accent-400 = "#964ae8";
-fuzzel-background = colors.base + "dd";
-fuzzel-text = colors.text + "ff";
-fuzzel-match = colors.teal + "ff";
-fuzzel-selection = colors.mauve + "dd";
-fuzzel-border = colors.mauve + "ff";
+  pkgs,
+  colors,
+  ...
+}: 
+let
+  fuzzel-background = colors.base + "dd";
+  fuzzel-text = colors.text + "ff";
+  fuzzel-match = colors.teal + "ff";
+  fuzzel-selection = colors.mauve + "dd";
+  fuzzel-border = colors.mauve + "ff";
 
-modifier = config.wayland.windowManager.sway.config.modifier;
-lock = ''
-exec swaylock \
-       --screenshots \
-       --clock \
-       --indicator \
-       --indicator-radius 100 \
-       --indicator-thickness 7 \
-       --effect-blur 7x5 \
-       --effect-vignette 0.5:0.5 \
-       --fade-in 0\
-       --ring-color ${lib.strings.removePrefix "#" colors.peach}
-       '';
-       in {
-         home.packages = with pkgs; [
-           wayshot
-             slurp
-             wl-clipboard
-         ];
-         programs.fuzzel = {
-           enable = true;
+  sway-floating = pkgs.writeShellScriptBin "floating" ''
+    $@ &
+    pid=$!
 
-           settings = {
-             main = {
-               terminal = "kitty";
-               layer = "overlay";
-             };
-             colors = {
-               background = fuzzel-background;
-               text = fuzzel-text;
-               match = fuzzel-match;
-               selection = fuzzel-selection;
-               selection-text = fuzzel-text;
-               selection-match = fuzzel-match;
-               border = fuzzel-border;
-             };
-           };
-         };
+    ${pkgs.sway}/bin/swaymsg -t subscribe -m '[ "window" ]' \
+      | jq --unbuffered --argjson pid "$pid" '.container | select(.pid == $pid) | .id' \
+      | xargs -I '@' -- ${pkgs.sway}/bin/swaymsg '[ con_id=@ ] move scratchpad'
+    ${pkgs.sway}/bin/swaymsg -t subscribe -m '[ "window" ]' \
+      | jq --unbuffered --argjson pid "$pid" '.container | select(.pid == $pid) | .id' \
+      | xargs -I '@' -- ${pkgs.sway}/bin/swaymsg '[ con_id=@ ] scratchpad show &'
+
+    subscription=$!
+
+    echo Going into wait state
+
+    # Wait for our process to close
+    tail --pid=$pid -f /dev/null
+
+    echo Killing subscription
+    kill $subscription
+    '';
+
+  modifier = config.wayland.windowManager.sway.config.modifier;
+  lock = ''
+  exec swaylock \
+         --screenshots \
+         --clock \
+         --indicator \
+         --indicator-radius 100 \
+         --indicator-thickness 7 \
+         --effect-blur 7x5 \
+         --effect-vignette 0.5:0.5 \
+         --fade-in 0\
+         --ring-color ${lib.strings.removePrefix "#" colors.peach}
+         '';
+in {
+  home.packages = [
+    pkgs.wayshot
+    pkgs.slurp
+    pkgs.wl-clipboard
+    sway-floating
+  ];
+
+  programs.fuzzel = {
+    enable = true;
+
+    settings = {
+      main = {
+        terminal = "kitty";
+        layer = "overlay";
+      };
+      colors = {
+        background = fuzzel-background;
+        text = fuzzel-text;
+        match = fuzzel-match;
+        selection = fuzzel-selection;
+        selection-text = fuzzel-text;
+        selection-match = fuzzel-match;
+        border = fuzzel-border;
+      };
+    };
+  };
 
 # Enable audio applet that allows you to switch default audio devices
-         services.pasystray.enable = true;
+  services.pasystray.enable = true;
 
 
-         services.swayosd.enable = true;
+  services.swayosd.enable = true;
 
-         home.keyboard = {
-           layout = "us,ch,de";
-           variant = "dvorak,nodeadkeys,neo2";
+  home.keyboard = {
+    layout = "us,ch,de";
+    variant = "dvorak,nodeadkeys,neo2";
   };
 
   wayland.windowManager.sway = {
@@ -77,6 +99,7 @@ exec swaylock \
       for_window [app_id=".blueman-manager-wrapped"] move scratchpad; scratchpad show
       for_window [app_id="nm-connection-editor"] move scratchpad; scratchpad show
       for_window [class="1Password"] move scratchpad; scratchpad show
+      for_window [title="ncspot"] move scratchpad; scratchpad show
     '';
 
     config = let
@@ -118,7 +141,7 @@ exec swaylock \
       };
 
       window = {
-        titlebar = true;
+        titlebar = false;
         border = 4;
       };
 
@@ -171,7 +194,7 @@ exec swaylock \
         # Open Firefox
         "${modifier}+f" = "exec firefox";
         # Open ncspot (tui spotify)
-        "${modifier}+v" = "exec ${terminal} ncspot; move scratchpad; scratchpad show";
+        "${modifier}+c" = "exec switch-cheatsheet";
 
         # Open Console
         "${modifier}+t" = "exec ${terminal}";
@@ -199,16 +222,26 @@ exec swaylock \
         "${modifier}+m" = "exec firefox -P messages -no-remote";
         # Open 1Password Quick Access
         "${modifier}+p" = "exec 1password --quick-access";
-        "${modifier}+F11" = "exec brightnessctl set 10%-";
-        "${modifier}+F12" = "exec brightnessctl set 10%+";
+        
+        #FN Audiocontroll
         "XF86AudioRaiseVolume" = "exec swayosd-client --output-volume raise";
         "XF86AudioLowerVolume" = "exec swayosd-client --output-volume lower";
         "XF86AudioMute" = "exec --no-startup-id wpctl set-mute @DEFAULT_SINK@ toggle";
         "XF86AudioMicMute" = "exec --no-startup-id wpctl set-mute @DEFAULT_SOURCE@ toggle";
+        "XF86AudioNext" = "exec swayosd-client --playerctl=next";
+        "XF86AudioPrev" = "exec swayosd-client --playerctl=prev";
+        "XF86AudioPlay" = "exec swayosd-client --playerctl=play-pause";
+        
+        # FN Brightnesscontroll
+        "XF86MonBrightnessUp " = "exec swayosd-client --brightness=raise";
+        "XF86MonBrightnessDown " = "exec swayosd-client --brightness=lower";
 
-        # Screenshots
-        # Copy Selection to Clipboard
-        "${modifier}+F2" = ''exec wayshot -s "$(slurp)" --stdout | wl-copy'';
+        # Start ncspot a tui spotify client
+        "XF86AudioMedia" = "exec floating ${terminal} ncspot;";
+
+        # Make a screenshot
+        "Print" = ''exec wayshot -s "$(slurp)" --stdout | wl-copy'';
+        
 
         # Move focus
         "${modifier}+l" = "focus right";
