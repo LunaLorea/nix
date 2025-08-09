@@ -37,5 +37,7 @@
       filezilla
       vlc
     ];
+
+    programs.kitty.font.size = 14;
   };
 }
