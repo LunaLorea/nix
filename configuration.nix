@@ -11,16 +11,9 @@
   lib,
   ...
 }: 
-let
-  var = "global-variables.nix";
-in
 {
   imports = [
     inputs.home-manager.nixosModules.default
-
-
-    ./${var}
-    #./lightdm.nix
   ];
 
   fonts.packages = [] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
@@ -90,7 +83,7 @@ in
 
   nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
 
-  networking.hostName = ${host.hostName}; # Define your hostname.
+  networking.hostName = host.hostName; # Define your hostname.
   
   networking.firewall = {
     allowedTCPPortRanges = [ { from = 1714; to = 1764; } { from = 1313; to = 1313; } ]; #kde-connect
