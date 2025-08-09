@@ -1,5 +1,5 @@
 {
-  colors,
+  host,
   pkgs,
   ...
 }: {
@@ -24,7 +24,7 @@
 
       shellAliases = {
         ll = "ls -l";
-        rebuild = "sudo nixos-rebuild switch --flake /home/luna/.config/nix#laptop";
+        rebuild = "sudo nixos-rebuild switch --flake /home/luna/.config/nix#${host.hostName}";
         update = "nix flake update --flake /home/luna/.config/nix#laptop";
         tree = "eza --tree --level=5";
       };

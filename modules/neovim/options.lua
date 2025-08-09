@@ -4,14 +4,23 @@ vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
 -- Set Colorscheme and remove background
-function ColorMyPencils(color)
+function ColorMyPencils()
   vim.cmd.colorscheme "catppuccin-mocha"
 	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 	vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+	vim.api.nvim_set_hl(0, "NeoTreeNormal", { bg = "none" })
+	vim.api.nvim_set_hl(0, "NeoTreeEndOfBuffer", { bg = "none" })
+	vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { bg = "none" })
+end
+function LineNumberColors()
+    vim.api.nvim_set_hl(0, 'LineNrAbove', { fg='#f38ba8', bold=true })
+    vim.api.nvim_set_hl(0, 'LineNr', { fg='#cad3f5', bold=true })
+    vim.api.nvim_set_hl(0, 'LineNrBelow', { fg='#89b4fa', bold=true })
 end
 
 ColorMyPencils()
+LineNumberColors()
 
 vim.opt.title = true
 vim.opt.titlestring = "Nvim"
@@ -21,7 +30,7 @@ local ui = require("harpoon.ui")
 
 -- Use Harpoon
 vim.keymap.set('n', '<leader>a', mark.add_file)
-vim.keymap.set('n', 'C-e', ui.toggle_quick_menu)
+vim.keymap.set('n', '<leader>b', ui.toggle_quick_menu)
 
 --Toggle the undotree
 vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)

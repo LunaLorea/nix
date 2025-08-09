@@ -1,5 +1,5 @@
 { 
-  config,
+  host,
   pkgs,
   ... 
 }: {
@@ -10,7 +10,7 @@
     
   ];
 
-  home-manager.users.${config.username} = { ... }: {
+  home-manager.users.${host.userName} = { ... }: {
 
     # Modules
     imports = [

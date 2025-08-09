@@ -7,6 +7,7 @@
   pkgs-stable,
   inputs,
   colors,
+  host,
   lib,
   ...
 }: 
@@ -89,7 +90,7 @@ in
 
   nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = ${host.hostName}; # Define your hostname.
   
   networking.firewall = {
     allowedTCPPortRanges = [ { from = 1714; to = 1764; } { from = 1313; to = 1313; } ]; #kde-connect
@@ -205,9 +206,9 @@ in
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.${config.username} = {
+  users.users.${host.userName} = {
     isNormalUser = true;
-    description = config.username;
+    description = host.userName;
     extraGroups = ["networkmanager" "wheel"];
   };
 
@@ -215,10 +216,11 @@ in
     extraSpecialArgs = {
       inherit inputs;
       inherit colors;
+      inherit host;
       pkgs-unstable = pkgs-stable;
     };
     users = {
-      ${config.username} = import ./home.nix;
+      ${host.userName} = import ./home.nix;
     };
   };
 

@@ -159,16 +159,6 @@ in {
         "*" = {
           bg = ''${builtins.path {path = ../../media/background-image.png;}} fill'';
         };
-        eDP-1 = {
-          scale = "1"; 
-        };
-        HDMI-A-1 = {
-          position = "1920 0";
-          transform = "270";
-        };
-        HDMI-A-2 = {
-          position = "0 700";
-        };
       };
 
       defaultWorkspace = "1";

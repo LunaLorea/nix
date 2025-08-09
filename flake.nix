@@ -2,8 +2,8 @@
   description = "Nixos config flake";
 
   inputs = {
+
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
 
     home-manager = {
@@ -11,8 +11,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  
-  
   
   outputs = {
     self,
@@ -23,41 +21,30 @@
   } @ inputs: 
 
   let
-
     colors = import ./colors.nix;
 
-  in
-  {
-    nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
+    mkHost = host: nixpkgs.lib.nixosSystem {
       specialArgs = {
-        inherit inputs;
-        inherit colors;
+        inherit inputs colors host;
       };
       modules = [
-        ./hosts/laptop
+        ./hosts/${host.hostName}
         ./configuration.nix
       ];
-    };
+    };      
+  in {
+    nixosConfigurations = {
 
-    nixosConfigurations.desktop = let
-      hostName = "desktop";
-    in nixpkgs.lib.nixosSystem {
-      specialArgs = {
-        inherit inputs;
-        inherit hostName;
-        };
-      modules = [
-        ./hosts/desktop
-        ./configuration.nix
-      ];
-    };
+      framework13 = mkHost {
+        hostName = "framework13";
+        userName = "luna";
+      };
 
-    nixosConfigurations.live = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        (nixpkgs + "/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix")
-        ./hosts/laptop/configuration.nix
-      ];
+      desktop = mkHost {
+        hostName = "desktop";
+        userName = "luna";
+      };
+
     };
   };
 }

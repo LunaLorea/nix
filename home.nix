@@ -1,13 +1,12 @@
 {
-  lib,
-  config,
+  host,
   pkgs,
   ...
 }: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = config.username;
-  home.homeDirectory = "/home/${config.username}";
+  home.username = host.userName;
+  home.homeDirectory = "/home/${host.userName}";
 
   imports = [
     ./global-variables.nix
