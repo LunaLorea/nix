@@ -15,14 +15,14 @@
     # Modules
     imports = [
       # Window manager plus all the additional pkgs like waybar
-      ../../modules/sway
-      ../../modules/firefox.nix
-      ../../modules/ncspot.nix
-      ../../modules/neovim
-      ../../modules/git.nix
-      ../../modules/studying.nix
-      ../../modules/nextcloud-client.nix
-      ../../modules/man.nix
+      ../../homemanager-modules/sway
+      ../../homemanager-modules/firefox
+      ../../homemanager-modules/ncspot
+      ../../homemanager-modules/neovim
+      ../../homemanager-modules/git
+      ../../homemanager-modules/studying
+      ../../homemanager-modules/nextcloud-client
+      ../../homemanager-modules/man
     ];
 
     home.packages = with pkgs; [

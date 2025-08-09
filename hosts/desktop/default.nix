@@ -8,6 +8,7 @@
     # Hardware Configuration for this spcific device
     ./hardware-configuration.nix
     
+    ../../nix-modules/steam
   ];
 
   home-manager.users.${host.userName} = { ... }: {
@@ -15,15 +16,15 @@
     # Modules
     imports = [
       # Window manager plus all the additional pkgs like waybar
-      ../../modules/sway
-      ../../modules/neovim
-      ../../modules/shell.nix
-      ../../modules/git.nix
-      ../../modules/studying.nix
-      ../../modules/nextcloud-client.nix
-      ../../modules/man.nix
-      ../../modules/firefox.nix
-      ../../modules/ncspot.nix
+      ../../homemanager-modules/sway
+      ../../homemanager-modules/neovim
+      ../../homemanager-modules/shell
+      ../../homemanager-modules/git
+      ../../homemanager-modules/studying
+      ../../homemanager-modules/nextcloud-client
+      ../../homemanager-modules/man
+      ../../homemanager-modules/firefox
+      ../../homemanager-modules/ncspot
     ];
 
     home.packages = with pkgs; [
@@ -57,6 +58,11 @@
         scale = "1";
         position = "3000 400";
       };
+    };
+
+    programs.zsh.shellAliases = {
+      # Reboot into windows
+      reboot-windows = "systemctl reboot --boot-loader-entry=auto-windows";
     };
   };
 }
