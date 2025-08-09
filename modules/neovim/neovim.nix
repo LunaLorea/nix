@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   ...
 }: {
@@ -14,7 +13,7 @@
     vimdiffAlias = true;
 
     extraLuaConfig = ''
-      ${builtins.readFile ./neovim/options.lua}
+      ${builtins.readFile ./options.lua}
     '';
 
     plugins = with pkgs.vimPlugins; [
@@ -32,7 +31,7 @@
       #      }
       {
         plugin = telescope-nvim;
-        config = toLuaFile ./neovim/telescope.lua;
+        config = toLuaFile ./telescope.lua;
       }
       # Theme
       catppuccin-nvim

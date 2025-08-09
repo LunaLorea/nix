@@ -32,7 +32,7 @@
 
       oh-my-zsh = { 
         enable = true;
-        plugins = [ "git" "fzf" ];
+        plugins = [ "git" "fzf" "git" ];
         theme = "robbyrussell";
       };
     };

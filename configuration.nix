@@ -9,12 +9,17 @@
   colors,
   lib,
   ...
-}: {
+}: 
+let
+  var = "global-variables.nix";
+in
+{
   imports = [
-    # Include the results of the hardware scan.
     inputs.home-manager.nixosModules.default
-    ./global-variables.nix
-    ./lightdm.nix
+
+
+    ./${var}
+    #./lightdm.nix
   ];
 
   fonts.packages = [] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
@@ -129,7 +134,7 @@
   security.polkit.enable = true;
 
   # Enable the GNOME Desktop Environment
-  # services.displayManager.gdm.enable = true;
+  services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11

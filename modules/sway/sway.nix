@@ -19,9 +19,6 @@ let
     ${pkgs.sway}/bin/swaymsg -t subscribe -m '[ "window" ]' \
       | jq --unbuffered --argjson pid "$pid" '.container | select(.pid == $pid) | .id' \
       | xargs -I '@' -- ${pkgs.sway}/bin/swaymsg '[ con_id=@ ] move scratchpad'
-    ${pkgs.sway}/bin/swaymsg -t subscribe -m '[ "window" ]' \
-      | jq --unbuffered --argjson pid "$pid" '.container | select(.pid == $pid) | .id' \
-      | xargs -I '@' -- ${pkgs.sway}/bin/swaymsg '[ con_id=@ ] scratchpad show &'
 
     subscription=$!
 
@@ -34,7 +31,6 @@ let
     kill $subscription
     '';
 
-  modifier = config.wayland.windowManager.sway.config.modifier;
   lock = ''
   exec swaylock \
          --screenshots \
@@ -54,6 +50,14 @@ in {
     pkgs.wl-clipboard
     sway-floating
   ];
+
+  services.blueman-applet = {
+    enable = true;
+  };
+
+  services.network-manager-applet = {
+    enable = true;
+  };
 
   programs.fuzzel = {
     enable = true;
@@ -237,7 +241,7 @@ in {
         "XF86MonBrightnessDown " = "exec swayosd-client --brightness=lower";
 
         # Start ncspot a tui spotify client
-        "XF86AudioMedia" = "exec floating ${terminal} ncspot;";
+        "XF86AudioMedia" = "exec floating ${terminal} ncspot; scratchpad show";
 
         # Make a screenshot
         "Print" = ''exec wayshot -s "$(slurp)" --stdout | wl-copy'';

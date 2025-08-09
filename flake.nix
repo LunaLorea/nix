@@ -18,31 +18,36 @@
     self,
     nixpkgs,
     nixpkgs-stable,
+    home-manager,
     ...
   } @ inputs: 
+
   let
+
     colors = import ./colors.nix;
-  in {
+
+  in
+  {
     nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
       specialArgs = {
         inherit inputs;
         inherit colors;
       };
       modules = [
-        ./hosts/laptop/hardware-configuration.nix
-        ./hosts/laptop/laptop-config.nix
+        ./hosts/laptop
         ./configuration.nix
       ];
     };
 
-    nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.desktop = let
+      hostName = "desktop";
+    in nixpkgs.lib.nixosSystem {
       specialArgs = {
         inherit inputs;
+        inherit hostName;
         };
       modules = [
-        ./hosts/desktop/hardware-configuration.nix
-        ./hosts/desktop/desktop-config.nix
-        ./nvidia.nix
+        ./hosts/desktop
         ./configuration.nix
       ];
     };

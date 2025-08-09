@@ -37,7 +37,7 @@
     messages = {
       name = "Messages";
       exec = "firefox -P messages -no-remote";
-      icon = builtins.path {path = ../../media/messages_icon.png;};
+      icon = builtins.path {path = ../media/messages_icon.png;};
     };
   };
 }
