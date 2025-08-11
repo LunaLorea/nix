@@ -38,6 +38,10 @@
       vlc
     ];
 
-    programs.kitty.font.size = 14;
+    programs.kitty.font.size = 16;
+ 
+    wayland.windowManager.sway.config.output.eDP-1 = {
+      scale = "1";
+      };
   };
 }
