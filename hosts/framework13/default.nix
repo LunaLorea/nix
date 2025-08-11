@@ -8,6 +8,7 @@
     # Hardware Configuration for this spcific device
     ./hardware-configuration.nix
     
+    ../../nix-modules/silent-boot
   ];
 
   home-manager.users.${host.userName} = { ... }: {

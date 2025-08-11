@@ -9,6 +9,7 @@
     ./hardware-configuration.nix
     
     ../../nix-modules/steam
+    ../../nix-modules/silent-boot
   ];
 
   home-manager.users.${host.userName} = { ... }: {
