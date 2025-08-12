@@ -3,12 +3,18 @@
   pkgs,
   ... 
 }: {
-  imports = [
+  imports = let
+    custom-module = str: ../../nix-modules/${str};
+  in [
 
     # Hardware Configuration for this spcific device
     ./hardware-configuration.nix
     
-    ../../nix-modules/silent-boot
+    (custom-module "silent-boot")
+    (custom-module "sway")
+    (custom-module "fingerprintreader")
+    (custom-module "1password")
+    
   ];
 
   home-manager.users.${host.userName} = { ... }: {
@@ -16,7 +22,6 @@
     # Modules
     imports = [
       # Window manager plus all the additional pkgs like waybar
-      ../../homemanager-modules/sway
       ../../homemanager-modules/firefox
       ../../homemanager-modules/ncspot
       ../../homemanager-modules/neovim

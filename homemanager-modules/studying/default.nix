@@ -6,7 +6,5 @@
   home.packages = with pkgs; [
     obsidian
     anki
-    ki
-    libreoffice-still
   ];
 }

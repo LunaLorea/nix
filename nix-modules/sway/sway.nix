@@ -1,36 +1,9 @@
 {
-  config,
   lib,
-  pkgs,
   colors,
   ...
 }: 
 let
-  fuzzel-background = colors.base + "dd";
-  fuzzel-text = colors.text + "ff";
-  fuzzel-match = colors.teal + "ff";
-  fuzzel-selection = colors.mauve + "dd";
-  fuzzel-border = colors.mauve + "ff";
-
-  sway-floating = pkgs.writeShellScriptBin "floating" ''
-    $@ &
-    pid=$!
-
-    ${pkgs.sway}/bin/swaymsg -t subscribe -m '[ "window" ]' \
-      | jq --unbuffered --argjson pid "$pid" '.container | select(.pid == $pid) | .id' \
-      | xargs -I '@' -- ${pkgs.sway}/bin/swaymsg '[ con_id=@ ] move scratchpad'
-
-    subscription=$!
-
-    echo Going into wait state
-
-    # Wait for our process to close
-    tail --pid=$pid -f /dev/null
-
-    echo Killing subscription
-    kill $subscription
-    '';
-
   lock = ''
   exec swaylock \
          --screenshots \
@@ -43,53 +16,8 @@ let
          --fade-in 0\
          --ring-color ${lib.strings.removePrefix "#" colors.peach}
          '';
-in {
-  home.packages = [
-    pkgs.wayshot
-    pkgs.slurp
-    pkgs.wl-clipboard
-    sway-floating
-  ];
-
-  services.blueman-applet = {
-    enable = true;
-  };
-
-  services.network-manager-applet = {
-    enable = true;
-  };
-
-  programs.fuzzel = {
-    enable = true;
-
-    settings = {
-      main = {
-        terminal = "kitty";
-        layer = "overlay";
-      };
-      colors = {
-        background = fuzzel-background;
-        text = fuzzel-text;
-        match = fuzzel-match;
-        selection = fuzzel-selection;
-        selection-text = fuzzel-text;
-        selection-match = fuzzel-match;
-        border = fuzzel-border;
-      };
-    };
-  };
-
-# Enable audio applet that allows you to switch default audio devices
-  services.pasystray.enable = true;
-
-
-  services.swayosd.enable = true;
-
-  home.keyboard = {
-    layout = "us,ch,de";
-    variant = "dvorak,nodeadkeys,neo2";
-  };
-
+in 
+{
   wayland.windowManager.sway = {
     enable = true;
 
@@ -288,7 +216,6 @@ in {
         "${modifier}+Control+Up" = "move workspace to output up";
         "${modifier}+Control+Down" = "move workspace to output down";
       };
-
       bars = [
         {
           command = "waybar";
@@ -298,15 +225,6 @@ in {
         names = ["JetBrainsMono Nerd Font" "0xProto Nerd Font"];
         size = 16.0;
       };
-    };
-  };
-
-  # enables monitor hotplugging
-  systemd.user.services.kanshi = {
-    # description = "kanshi daemon";
-    serviceConfig = {
-      Type = "simple";
-      ExecStart = ''${pkgs.kanshi}/bin/kanshi -c kanshi_config_file'';
     };
   };
 }

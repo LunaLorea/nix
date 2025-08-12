@@ -8,8 +8,10 @@
     # Hardware Configuration for this spcific device
     ./hardware-configuration.nix
     
-    ../../nix-modules/steam
     ../../nix-modules/silent-boot
+    ../../nix-modules/sway
+
+    ../../nix-modules/steam
   ];
 
   home-manager.users.${host.userName} = { ... }: {
@@ -17,7 +19,6 @@
     # Modules
     imports = [
       # Window manager plus all the additional pkgs like waybar
-      ../../homemanager-modules/sway
       ../../homemanager-modules/neovim
       ../../homemanager-modules/shell
       ../../homemanager-modules/git
