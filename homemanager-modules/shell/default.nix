@@ -28,6 +28,8 @@
         rebuild = "sudo nixos-rebuild switch --flake /home/luna/.config/nix#${host.hostName}";
         update = "nix flake update --flake /home/luna/.config/nix#laptop";
         tree = "eza --tree --level=5";
+      
+        reboot-bios = "systemctl reboot --firmware-setup";
       };
       history.size = 10000;
 

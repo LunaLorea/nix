@@ -41,7 +41,8 @@
 
 
       heroic
-      steam
+      gamemode
+      mangohud
     ];
 
     wayland.windowManager.sway.config.output = {
@@ -53,6 +54,7 @@
       DP-1 = {
         scale = "1";
         position = "1080 400";
+        mode = "1920x1080@144Hz";
       };
       DP-2 = {
         scale = "1";
