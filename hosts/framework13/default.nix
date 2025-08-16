@@ -1,13 +1,21 @@
 { 
   host,
   pkgs,
+  lib,
   ... 
 }: {
-  imports = [
+  imports = let
+    custom-modules = module-list: lib.lists.forEach module-list (x: ../../nix-modules/${x});
+  in [
 
     # Hardware Configuration for this spcific device
     ./hardware-configuration.nix
     
+  ] ++ custom-modules [
+    "silent-boot"
+    "sway"
+    "fingerprintreader"
+    "1password"
   ];
 
   home-manager.users.${host.userName} = { ... }: {
@@ -15,7 +23,6 @@
     # Modules
     imports = [
       # Window manager plus all the additional pkgs like waybar
-      ../../homemanager-modules/sway
       ../../homemanager-modules/firefox
       ../../homemanager-modules/ncspot
       ../../homemanager-modules/neovim
@@ -38,6 +45,10 @@
       vlc
     ];
 
-    programs.kitty.font.size = 14;
+    programs.kitty.font.size = 16;
+ 
+    wayland.windowManager.sway.config.output.eDP-1 = {
+      scale = "1";
+      };
   };
 }

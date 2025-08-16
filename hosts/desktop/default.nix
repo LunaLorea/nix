@@ -1,14 +1,23 @@
 {
-  config,
+  custom-modules,
   pkgs,
   host,
+  lib,
   ...
-}: {
+}: 
+let 
+  custom-modules = module-list: lib.lists.forEach module-list (x: ../../nix-modules/${x});
+in 
+{
   imports = [
     # Hardware Configuration for this spcific device
     ./hardware-configuration.nix
-    
-    ../../nix-modules/steam
+  ] ++ custom-modules [ 
+    "sway"
+    "silent-boot"
+
+    "gaming"
+    "1password"
   ];
 
   home-manager.users.${host.userName} = { ... }: {
@@ -16,7 +25,6 @@
     # Modules
     imports = [
       # Window manager plus all the additional pkgs like waybar
-      ../../homemanager-modules/sway
       ../../homemanager-modules/neovim
       ../../homemanager-modules/shell
       ../../homemanager-modules/git

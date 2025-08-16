@@ -19,8 +19,9 @@ in
   };
 
   home-manager.users.${host.userName} = { ... }: {
-    home.packages = [
-      pkgs.heroic
+    home.packages = with pkgs; [
+      heroic
+      prismlauncher
     ];
 
     home.file.switchLayoutToCh = {
