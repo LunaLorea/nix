@@ -34,6 +34,8 @@ in {
     enable = true;
     wrapperFeatures.gtk = true;
   };
+  
+  programs.dconf.enable = true;
 
   home-manager.users.${host.userName} = {...}: {
     imports = [
@@ -55,6 +57,8 @@ in {
       pkgs.networkmanagerapplet
       pkgs.qpwgraph
     ];
+
+    services.easyeffects.enable = true;
 
     services.blueman-applet = {
       enable = true;
