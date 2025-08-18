@@ -3,7 +3,6 @@
   pkgs,
   ...
 }: {
-
   environment.systemPackages = with pkgs; [
     # Easier to read man pages
     tldr
@@ -11,20 +10,18 @@
     eza
     # wget
     wget
-    
+
     openssh
   ];
 
   # Set default shell
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
-  environment.shells = with pkgs; [ zsh ];
-  environment.pathsToLink = [ "/share/zsh" ];
+  environment.shells = with pkgs; [zsh];
+  environment.pathsToLink = ["/share/zsh"];
 
-  home-manager.users.${host.userName} = { ... }: {
-
+  home-manager.users.${host.userName} = {...}: {
     programs = {
-
       zsh = {
         enable = true;
         enableCompletion = true;
@@ -39,9 +36,9 @@
         };
         history.size = 10000;
 
-        oh-my-zsh = { 
+        oh-my-zsh = {
           enable = true;
-          plugins = [ "git" "fzf" "git" ];
+          plugins = ["git" "fzf" "git"];
           theme = "robbyrussell";
         };
       };
@@ -49,9 +46,7 @@
       tmux = {
         enable = true;
         clock24 = true;
-        
       };
-
 
       zoxide = {
         enable = true;

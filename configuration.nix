@@ -8,11 +8,9 @@
   colors,
   host,
   ...
-}: 
-{
+}: {
   imports = [
     inputs.home-manager.nixosModules.default
-
 
     # Shell Module is needed in every system
     ./nix-modules/shell
@@ -30,7 +28,7 @@
   nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
 
   networking.hostName = host.hostName; # Define your hostname.
-  
+
   # Enable networking
   networking.networkmanager.enable = true;
 
@@ -93,15 +91,12 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = [
     # used for mounting SAMBA shares
     pkgs.cifs-utils
   ];
-
-
 
   programs.gnupg.agent = {
     enable = true;

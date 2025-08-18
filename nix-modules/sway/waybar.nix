@@ -5,11 +5,9 @@
   colors,
   ...
 }: let
-
-  waybar-module-pomodoro = import ''${builtins.path {path = ../../custom-pkgs/waybar-module-pomodoro.nix;}}'' { inherit pkgs; };
+  waybar-module-pomodoro = import ''${builtins.path {path = ../../custom-pkgs/waybar-module-pomodoro.nix;}}'' {inherit pkgs;};
 in {
-  
-  home.packages = [ waybar-module-pomodoro ]; # Pomodoro module import
+  home.packages = [waybar-module-pomodoro]; # Pomodoro module import
   programs.waybar = {
     enable = true;
     systemd.enable = false;
@@ -61,9 +59,9 @@ in {
           format-connected-battery = " {device_alias} {device_battery_percentage}%";
           format-connected = " {device_alias}";
           tooltip-format = "{controller_alias}\t{controller_address}\n\n{num_connections} connected";
-	        tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}";
-	        tooltip-format-enumerate-connected = "{device_alias}\t{device_address}";
-	        tooltip-format-enumerate-connected-battery = "{device_alias}\t{device_address}\t{device_battery_percentage}%";
+          tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}";
+          tooltip-format-enumerate-connected = "{device_alias}\t{device_address}";
+          tooltip-format-enumerate-connected-battery = "{device_alias}\t{device_address}\t{device_battery_percentage}%";
         };
 
         "mpris" = {
@@ -77,7 +75,7 @@ in {
           status-icons = {
             paused = "⏸";
           };
-          ignored-players = [ "firefox" ];
+          ignored-players = ["firefox"];
         };
         "clock" = {
           interval = 60;
@@ -110,7 +108,7 @@ in {
         "custom/pomodoro" = {
           format = "{}";
           return-type = "json";
-        exec = "waybar-module-pomodoro";
+          exec = "waybar-module-pomodoro";
           on-click = "waybar-module-pomodoro toggle";
           on-click-right = "waybar-module-pomodoro reset";
         };

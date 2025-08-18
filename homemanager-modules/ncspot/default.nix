@@ -1,5 +1,4 @@
-{ ... }: {
-
+{...}: {
   programs.ncspot = {
     enable = true;
     settings = {
@@ -25,5 +24,4 @@
       cmdline_bg = "colors.text";
     };
   };
-
 }

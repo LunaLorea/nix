@@ -1,25 +1,24 @@
-{ 
+{
   host,
   pkgs,
   lib,
-  ... 
+  ...
 }: {
   imports = let
     custom-modules = module-list: lib.lists.forEach module-list (x: ../../nix-modules/${x});
-  in [
+  in
+    [
+      # Hardware Configuration for this spcific device
+      ./hardware-configuration.nix
+    ]
+    ++ custom-modules [
+      "silent-boot"
+      "sway"
+      "fingerprintreader"
+      "1password"
+    ];
 
-    # Hardware Configuration for this spcific device
-    ./hardware-configuration.nix
-    
-  ] ++ custom-modules [
-    "silent-boot"
-    "sway"
-    "fingerprintreader"
-    "1password"
-  ];
-
-  home-manager.users.${host.userName} = { ... }: {
-
+  home-manager.users.${host.userName} = {...}: {
     # Modules
     imports = [
       # Window manager plus all the additional pkgs like waybar
@@ -46,9 +45,9 @@
     ];
 
     programs.kitty.font.size = 16;
- 
+
     wayland.windowManager.sway.config.output.eDP-1 = {
       scale = "1";
-      };
+    };
   };
 }

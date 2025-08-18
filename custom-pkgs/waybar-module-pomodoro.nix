@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> { } }:
+{pkgs ? import <nixpkgs> {}}:
 pkgs.rustPlatform.buildRustPackage rec {
   pname = "waybar-module-pomodoro";
   version = "0.1";
@@ -11,8 +11,7 @@ pkgs.rustPlatform.buildRustPackage rec {
   };
 
   checkPhase = ''
-  export HOME=$TMPDIR
-  cargo test --release
+    export HOME=$TMPDIR
+    cargo test --release
   '';
 }
-

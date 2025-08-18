@@ -1,13 +1,11 @@
-{ 
+{
   pkgs,
   host,
-  ... 
-}: 
-let
+  ...
+}: let
   setToChLayout = pkgs.writeShellScriptBin "setToChLayout" "setxkbmap ch";
   setToDvorakLayout = pkgs.writeShellScriptBin "setToChLayout" "setxkbmap us dvorak";
-in
-{
+in {
   programs.steam = {
     enable = true;
     package = pkgs.steam.override {
@@ -18,7 +16,7 @@ in
     localNetworkGameTransfers.openFirewall = true;
   };
 
-  home-manager.users.${host.userName} = { ... }: {
+  home-manager.users.${host.userName} = {...}: {
     home.packages = with pkgs; [
       heroic
       prismlauncher

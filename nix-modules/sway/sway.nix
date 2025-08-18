@@ -2,22 +2,20 @@
   lib,
   colors,
   ...
-}: 
-let
+}: let
   lock = ''
-  exec swaylock \
-         --screenshots \
-         --clock \
-         --indicator \
-         --indicator-radius 100 \
-         --indicator-thickness 7 \
-         --effect-blur 7x5 \
-         --effect-vignette 0.5:0.5 \
-         --fade-in 0\
-         --ring-color ${lib.strings.removePrefix "#" colors.peach}
-         '';
-in 
-{
+    exec swaylock \
+           --screenshots \
+           --clock \
+           --indicator \
+           --indicator-radius 100 \
+           --indicator-thickness 7 \
+           --effect-blur 7x5 \
+           --effect-vignette 0.5:0.5 \
+           --fade-in 0\
+           --ring-color ${lib.strings.removePrefix "#" colors.peach}
+  '';
+in {
   wayland.windowManager.sway = {
     enable = true;
 
@@ -26,7 +24,7 @@ in
     extraConfig = ''
       # Enable locking on closing the lid
       bindswitch --reload --locked lid:on ${lock}
-      
+
       # Applications that should float on start
       for_window [app_id=".blueman-manager-wrapped"] move scratchpad; scratchpad show
       for_window [app_id="nm-connection-editor"] move scratchpad; scratchpad show
@@ -58,12 +56,11 @@ in
           text = colors.text;
         };
       };
-    in
-    rec {
+    in rec {
       modifier = "Mod4";
       # Use kitty as default terminal
       terminal = "kitty";
-      
+
       colors = sway-colors;
       # Setup the colors for a beautiful sway enviornemnt
 
@@ -103,7 +100,7 @@ in
         };
       };
 
-# Commands to be executed on startup
+      # Commands to be executed on startup
       startup = [
         # Start 1Password in the background
         {command = "1password --silent";}
@@ -144,7 +141,7 @@ in
         "${modifier}+m" = "exec firefox -P messages -no-remote";
         # Open 1Password Quick Access
         "${modifier}+p" = "exec 1password --quick-access";
-        
+
         #FN Audiocontroll
         "XF86AudioRaiseVolume" = "exec swayosd-client --output-volume raise";
         "XF86AudioLowerVolume" = "exec swayosd-client --output-volume lower";
@@ -153,7 +150,7 @@ in
         "XF86AudioNext" = "exec swayosd-client --playerctl=next";
         "XF86AudioPrev" = "exec swayosd-client --playerctl=prev";
         "XF86AudioPlay" = "exec swayosd-client --playerctl=play-pause";
-        
+
         # FN Brightnesscontroll
         "XF86MonBrightnessUp " = "exec swayosd-client --brightness=raise";
         "XF86MonBrightnessDown " = "exec swayosd-client --brightness=lower";
@@ -163,7 +160,6 @@ in
 
         # Make a screenshot
         "Print" = ''exec wayshot -s "$(slurp)" --stdout | wl-copy'';
-        
 
         # Move focus
         "${modifier}+l" = "focus right";

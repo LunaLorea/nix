@@ -1,7 +1,4 @@
-{ pkgs,
-  ...
-}: 
-{
+{pkgs, ...}: {
   boot = {
     # Enable "Silent Boot"
     consoleLogLevel = 0;

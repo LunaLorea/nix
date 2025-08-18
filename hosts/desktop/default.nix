@@ -4,24 +4,23 @@
   host,
   lib,
   ...
-}: 
-let 
+}: let
   custom-modules = module-list: lib.lists.forEach module-list (x: ../../nix-modules/${x});
-in 
-{
-  imports = [
-    # Hardware Configuration for this spcific device
-    ./hardware-configuration.nix
-  ] ++ custom-modules [ 
-    "sway"
-    "silent-boot"
+in {
+  imports =
+    [
+      # Hardware Configuration for this spcific device
+      ./hardware-configuration.nix
+    ]
+    ++ custom-modules [
+      "sway"
+      "silent-boot"
 
-    "gaming"
-    "1password"
-  ];
+      "gaming"
+      "1password"
+    ];
 
-  home-manager.users.${host.userName} = { ... }: {
-
+  home-manager.users.${host.userName} = {...}: {
     # Modules
     imports = [
       # Window manager plus all the additional pkgs like waybar
@@ -46,7 +45,6 @@ in
       discord
       filezilla
       vlc
-
 
       heroic
       gamemode
