@@ -22,6 +22,15 @@ in {
       prismlauncher
     ];
 
+    home.file.heroicCatppuccinTheme = {
+      enable = true;
+      source = pkgs.fetchzip {
+        url = "https://github.com/PrismLauncher/Themes/releases/download/2025-06-06_1749223820/Catppuccin-Mocha-theme.zip";
+        hash = "sha256-wJCz8NVfxwPpUM+DqeCBrych0DB/9GgDR3psBAE+/pc=";
+      };
+      target = "./.local/share/PrismLauncher/themes";
+    };
+
     home.file.switchLayoutToCh = {
       enable = true;
       source = setToChLayout;
