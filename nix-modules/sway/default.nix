@@ -60,7 +60,6 @@ in
     services.blueman-applet = {
       enable = true;
     };
-
     services.network-manager-applet = {
       enable = true;
     };
@@ -104,6 +103,11 @@ in
       variant = "dvorak,nodeadkeys,neo2";
     };
   };
+
+  systemd.services.bluetooth.serviceConfig.ExecStart = lib.mkForce [
+      ""
+      "${pkgs.bluez}/libexec/bluetooth/bluetoothd -f /etc/bluetooth/main.conf --experimental"
+  ];
 
   fonts.packages = [] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
   

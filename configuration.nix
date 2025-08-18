@@ -37,6 +37,9 @@
   # Enable Blueman bluetooth manager
   services.blueman.enable = true;
 
+  # Enable bluetooth
+  hardware.bluetooth.enable = true;
+
   # Set your time zone.
   time.timeZone = "Europe/Zurich";
 

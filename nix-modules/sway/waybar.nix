@@ -26,7 +26,7 @@ in {
           "*"
         ];
 
-        modules-left = ["clock" "battery" "mpris"];
+        modules-left = ["clock" "battery" "bluetooth"];
         modules-center = ["sway/workspaces"];
         modules-right = ["tray" "sway/language" "custom/pomodoro" "custom/notifications"];
 
@@ -51,6 +51,21 @@ in {
           tooltip-format-disconnected = "Disconnected";
           max-length = 50;
         };
+
+        "bluetooth" = {
+          on-click = "blueman-manager";
+          format = " {status}";
+          format-disabled = " disabled";
+          format-off = " off";
+          format-on = " -";
+          format-connected-battery = " {device_alias} {device_battery_percentage}%";
+          format-connected = " {device_alias}";
+          tooltip-format = "{controller_alias}\t{controller_address}\n\n{num_connections} connected";
+	        tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}";
+	        tooltip-format-enumerate-connected = "{device_alias}\t{device_address}";
+	        tooltip-format-enumerate-connected-battery = "{device_alias}\t{device_address}\t{device_battery_percentage}%";
+        };
+
         "mpris" = {
           format = "{player_icon} {dynamic}";
           format-paused = "{status_icon} <i>{dynamic}</i>";
