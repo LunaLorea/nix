@@ -90,8 +90,8 @@ in {
 
       input = {
         "*" = {
-          xkb_layout = "us,ch,de,de";
-          xkb_variant = "dvorak,de,neo,noted";
+          xkb_layout = "de,ch,us";
+          xkb_variant = "noted,de,dvorak";
         };
         "type:touchpad" = {
           tap = "enabled";
