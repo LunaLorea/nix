@@ -14,6 +14,7 @@
 
     # Shell Module is needed in every system
     ./nix-modules/shell
+
   ];
 
   # Bootloader.
@@ -56,9 +57,9 @@
     LC_TIME = "de_CH.UTF-8";
   };
 
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "ch";
+  services.xserver.xkb = { 
+    layout = "de";
+    variant = "noted";
   };
 
   services.avahi = {
