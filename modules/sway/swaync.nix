@@ -143,7 +143,7 @@ in {
             }
             {
               "label" = "";
-              "command" = "sway logout";
+              "command" = "loginctl terminate-user $USER";
             }
           ];
         };

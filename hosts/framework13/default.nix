@@ -4,25 +4,24 @@
   lib,
   ...
 }: {
-  imports = let
-    custom-modules = module-list: lib.lists.forEach module-list (x: ../../nix-modules/${x});
-  in
-    [
-      # Hardware Configuration for this spcific device
-      ./hardware-configuration.nix
-    ]
-    ++ custom-modules [
-      "silent-boot"
-      "sway"
-      "fingerprintreader"
-      "1password"
-    ];
+  imports = [
+    # Hardware Configuration for this spcific device
+    ./hardware-configuration.nix
+  ];
+
+  modules = {
+    silent-boot.enable = true;
+    sway.enable = true;
+    fingerprintreader.enable = true;
+    _1password.enable = true;
+    firefox.enable = true;
+  };
+ 
 
   home-manager.users.${host.userName} = {...}: {
     # Modules
     imports = [
       # Window manager plus all the additional pkgs like waybar
-      ../../homemanager-modules/firefox
       ../../homemanager-modules/ncspot
       ../../homemanager-modules/neovim
       ../../homemanager-modules/git

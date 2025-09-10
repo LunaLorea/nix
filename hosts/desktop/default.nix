@@ -4,21 +4,29 @@
   host,
   lib,
   ...
-}: let
-  custom-modules = module-list: lib.lists.forEach module-list (x: ../../nix-modules/${x});
-in {
+}: 
+{
   imports =
     [
       # Hardware Configuration for this spcific device
       ./hardware-configuration.nix
-    ]
-    ++ custom-modules [
-      "sway"
-      "silent-boot"
-
-      "gaming"
-      "1password"
     ];
+
+  modules = {
+    sway.enable = true;
+    silent-boot.enable = true;
+    gaming.enable = true;
+    _1password.enable = true;
+    firefox.enable = true;
+  };
+  
+  environment.defaultPackages = with pkgs; [ 
+    usbutils
+    libsForQt5.xp-pen-g430-driver
+
+  ];
+
+  programs.wshowkeys.enable = true;
 
   home-manager.users.${host.userName} = {...}: {
     # Modules
@@ -30,7 +38,6 @@ in {
       ../../homemanager-modules/studying
       ../../homemanager-modules/nextcloud-client
       ../../homemanager-modules/man
-      ../../homemanager-modules/firefox
       ../../homemanager-modules/ncspot
     ];
 
@@ -49,6 +56,8 @@ in {
       heroic
       gamemode
       mangohud
+
+      
     ];
 
     wayland.windowManager.sway.config.output = {

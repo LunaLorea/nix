@@ -12,10 +12,12 @@
   imports = [
     inputs.home-manager.nixosModules.default
 
-    # Shell Module is needed in every system
-    ./nix-modules/shell
-
+    # This only imports the modules, to activate set the respective enable option.
+    # e.g. modules.sway.enable = true;
+    ./modules
   ];
+
+  modules.shell.enable = true;
 
   # Bootloader.
   boot = {
