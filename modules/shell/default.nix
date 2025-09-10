@@ -5,10 +5,9 @@
   config,
   ...
 }: {
-
   options.modules.shell = {
-      enable = lib.mkEnableOption "the shell module";
-    };
+    enable = lib.mkEnableOption "the shell module";
+  };
 
   config = lib.mkIf config.modules.shell.enable {
     environment.systemPackages = with pkgs; [

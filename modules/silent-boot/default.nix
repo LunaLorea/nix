@@ -4,10 +4,9 @@
   lib,
   ...
 }: {
-  
   options.modules.silent-boot = {
-      enable = lib.mkEnableOption "silent boot with a nice splashscreen";
-    };
+    enable = lib.mkEnableOption "silent boot with a nice splashscreen";
+  };
 
   config = lib.mkIf config.modules.silent-boot.enable {
     boot = {

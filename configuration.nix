@@ -59,7 +59,7 @@
     LC_TIME = "de_CH.UTF-8";
   };
 
-  services.xserver.xkb = { 
+  services.xserver.xkb = {
     layout = "de";
     variant = "noted";
   };

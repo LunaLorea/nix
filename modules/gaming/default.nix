@@ -8,7 +8,6 @@
   setToChLayout = pkgs.writeShellScriptBin "setToChLayout" "setxkbmap ch";
   setTonotedLayout = pkgs.writeShellScriptBin "setTonotedLayout" "setxkbmap de noted";
 in {
-
   options.modules.gaming = {
     enable = lib.mkEnableOption "steam and other gaming focused applications";
   };
@@ -27,9 +26,9 @@ in {
     home-manager.users.${host.userName} = {...}: {
       home.packages = with pkgs; [
         heroic
-          prismlauncher
-          setToChLayout
-          setTonotedLayout
+        prismlauncher
+        setToChLayout
+        setTonotedLayout
       ];
 
       home.file.heroicCatppuccinTheme = {
@@ -55,7 +54,7 @@ in {
       wayland.windowManager.sway.extraConfig = ''
         for_window [title="Friends List" class="steam"] move scratchpad; scratchpad show
         for_window [title="Steam Settings" class="steam"] move scratchpad; scratchpad show
-        '';
+      '';
     };
   };
 }

@@ -1,7 +1,6 @@
 {
   host,
   pkgs,
-  lib,
   ...
 }: {
   imports = [
@@ -16,7 +15,6 @@
     _1password.enable = true;
     firefox.enable = true;
   };
- 
 
   home-manager.users.${host.userName} = {...}: {
     # Modules

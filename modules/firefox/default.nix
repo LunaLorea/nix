@@ -1,16 +1,15 @@
-{ 
+{
   host,
   config,
   lib,
   ...
 }: {
-  
   options.modules.firefox = {
     enable = lib.mkEnableOption "the firefox module";
   };
 
   config = lib.mkIf config.modules.firefox.enable {
-    home-manager.users.${host.userName} = { ... }: {
+    home-manager.users.${host.userName} = {...}: {
       programs.firefox = {
         enable = true;
         profiles = {

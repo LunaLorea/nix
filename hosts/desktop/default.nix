@@ -4,13 +4,11 @@
   host,
   lib,
   ...
-}: 
-{
-  imports =
-    [
-      # Hardware Configuration for this spcific device
-      ./hardware-configuration.nix
-    ];
+}: {
+  imports = [
+    # Hardware Configuration for this spcific device
+    ./hardware-configuration.nix
+  ];
 
   modules = {
     sway.enable = true;
@@ -19,11 +17,10 @@
     _1password.enable = true;
     firefox.enable = true;
   };
-  
-  environment.defaultPackages = with pkgs; [ 
+
+  environment.defaultPackages = with pkgs; [
     usbutils
     libsForQt5.xp-pen-g430-driver
-
   ];
 
   programs.wshowkeys.enable = true;
@@ -56,8 +53,6 @@
       heroic
       gamemode
       mangohud
-
-      
     ];
 
     wayland.windowManager.sway.config.output = {

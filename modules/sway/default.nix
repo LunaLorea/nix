@@ -31,12 +31,9 @@
   fuzzel-selection = colors.mauve + "dd";
   fuzzel-border = colors.mauve + "ff";
 in {
-  
   options.modules.sway = {
-      enable = lib.mkEnableOption "Sway WM and the associated configurations";
-    };
-
-
+    enable = lib.mkEnableOption "Sway WM and the associated configurations";
+  };
 
   config = lib.mkIf config.modules.sway.enable {
     programs.sway = {
@@ -46,26 +43,25 @@ in {
 
     programs.dconf.enable = true;
 
-
     home-manager.users.${host.userName} = {...}: {
       imports = [
         ./sway.nix
-          ./swaync.nix
-          ./swaylock.nix
-          ./waybar.nix
-          ./cheatsheet.nix
+        ./swaync.nix
+        ./swaylock.nix
+        ./waybar.nix
+        ./cheatsheet.nix
       ];
 
       home.packages = [
         pkgs.wayshot
-          pkgs.slurp
-          pkgs.wl-clipboard
-          pkgs.baobab
-          pkgs.gnome-calculator
-          pkgs.gnome-system-monitor
-          pkgs.nautilus
-          pkgs.networkmanagerapplet
-          pkgs.qpwgraph
+        pkgs.slurp
+        pkgs.wl-clipboard
+        pkgs.baobab
+        pkgs.gnome-calculator
+        pkgs.gnome-system-monitor
+        pkgs.nautilus
+        pkgs.networkmanagerapplet
+        pkgs.qpwgraph
       ];
 
       services.easyeffects.enable = true;
@@ -105,7 +101,7 @@ in {
         };
       };
 
-# Enable audio applet that allows you to switch default audio devices
+      # Enable audio applet that allows you to switch default audio devices
       services.pasystray.enable = true;
 
       services.swayosd.enable = true;
@@ -118,40 +114,40 @@ in {
 
     systemd.services.bluetooth.serviceConfig.ExecStart = lib.mkForce [
       ""
-        "${pkgs.bluez}/libexec/bluetooth/bluetoothd -f /etc/bluetooth/main.conf --experimental"
+      "${pkgs.bluez}/libexec/bluetooth/bluetoothd -f /etc/bluetooth/main.conf --experimental"
     ];
 
     fonts.packages = [] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
-# polkit for sway
+    # polkit for sway
     security.polkit.enable = true;
 
-# Enable the gnome display manager
+    # Enable the gnome display manager
     services.displayManager.gdm.enable = true;
 
-# enables monitor hotplugging
+    # enables monitor hotplugging
     systemd.user.services.kanshi = {
-# description = "kanshi daemon";
+      # description = "kanshi daemon";
       serviceConfig = {
         Type = "simple";
         ExecStart = ''${pkgs.kanshi}/bin/kanshi -c kanshi_config_file'';
       };
     };
 
-# Enable the X11 windowing system.
+    # Enable the X11 windowing system.
     services.xserver.enable = true;
 
-# Gnome Keyring for applications to store passwords and similar things.
+    # Gnome Keyring for applications to store passwords and similar things.
     services.gnome.gnome-keyring.enable = true;
 
-# Enable sound with pipewire.
+    # Enable sound with pipewire.
     services.pipewire = {
       enable = true;
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
-# If you want to use JACK applications, uncomment this
-#jack.enable = true;
+      # If you want to use JACK applications, uncomment this
+      #jack.enable = true;
     };
   };
 }
