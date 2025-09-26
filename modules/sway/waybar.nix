@@ -101,9 +101,20 @@ in {
           full-at = 98;
         };
         "custom/notifications" = {
-          format = "";
-          on-click = "swaync-client -t -sw";
+          format = "{icon}";
           tooltip = false;
+          format-icons = {
+            notification = "󰅸";
+            none = "󰂜";
+            dnd-notification = "󱏨";
+            dnd-none = "󱏨";
+          };
+          return-type = "json";
+          exec-if = "which swaync-client";
+          exec = "swaync-client -swb";
+          on-click = "swaync-client -t -sw";
+          on-click-right = "swaync-client -d -sw";
+          escape = true;
         };
         "custom/pomodoro" = {
           format = "{}";

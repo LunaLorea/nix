@@ -30,6 +30,19 @@
   fuzzel-match = colors.teal + "ff";
   fuzzel-selection = colors.mauve + "dd";
   fuzzel-border = colors.mauve + "ff";
+
+  lock = pkgs.writeShellScriptBin "lock" ''
+        exec swaylock \
+          --screenshots \
+          --clock \
+          --indicator \
+          --indicator-radius 100 \
+          --indicator-thickness 7 \
+          --effect-blur 7x5 \
+          --effect-vignette 0.5:0.5 \
+          --fade-in 0\
+          --ring-color ${lib.strings.removePrefix "#" colors.peach}
+    '';
 in {
   options.modules.sway = {
     enable = lib.mkEnableOption "Sway WM and the associated configurations";
@@ -62,8 +75,20 @@ in {
         pkgs.nautilus
         pkgs.networkmanagerapplet
         pkgs.qpwgraph
+        lock
       ];
-
+# automatically mount drives
+      services.udiskie = {
+        enable = true;
+        settings = {
+# workaround for
+# https://github.com/nix-community/home-manager/issues/632
+          program_options = {
+# replace with your favorite file manager
+            file_manager = "${pkgs.nautilus}/bin/nautilus";
+          };
+        };
+      };
       services.easyeffects.enable = true;
 
       services.blueman-applet = {

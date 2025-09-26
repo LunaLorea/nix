@@ -3,18 +3,6 @@
   colors,
   ...
 }: let
-  lock = ''
-    exec swaylock \
-           --screenshots \
-           --clock \
-           --indicator \
-           --indicator-radius 100 \
-           --indicator-thickness 7 \
-           --effect-blur 7x5 \
-           --effect-vignette 0.5:0.5 \
-           --fade-in 0\
-           --ring-color ${lib.strings.removePrefix "#" colors.peach}
-  '';
 in {
   wayland.windowManager.sway = {
     enable = true;
@@ -23,13 +11,17 @@ in {
 
     extraConfig = ''
       # Enable locking on closing the lid
-      bindswitch --reload --locked lid:on ${lock}
+      bindswitch --reload --locked lid:on lock
 
       # Applications that should float on start
       for_window [app_id=".blueman-manager-wrapped"] move scratchpad; scratchpad show
       for_window [app_id="nm-connection-editor"] move scratchpad; scratchpad show
       for_window [class="1Password"] move scratchpad; scratchpad show
       for_window [title="ncspot"] move scratchpad; scratchpad show
+      for_window [window_type="dialog"] floating enable
+      for_window [window_role="dialog"] floating enable
+      assign [class="discord"] workspace number 10
+      assign [app_id="Firefox-messages"] workspace number 10
     '';
 
     config = let
@@ -126,7 +118,7 @@ in {
         # Open Notification Center
         "${modifier}+Shift+n" = "exec swaync-client -t -sw";
         # Lock Sway
-        "${modifier}+Grave" = lock;
+        "${modifier}+Grave" = "lock";
         # Change focused Window
         "Shift+Alt+Tab" = "[con_id=$(swaymsg -t get_tree | ~/.config/nix/scripts/alttab t)] focus";
         "${modifier}+s" = "splitv";
