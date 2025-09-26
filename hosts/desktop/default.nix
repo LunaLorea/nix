@@ -55,21 +55,45 @@
       mangohud
     ];
 
-    wayland.windowManager.sway.config.output = {
-      HDMI-A-1 = {
-        scale = "1";
-        position = "0 0";
-        transform = "270";
+    wayland.windowManager.sway.config = {
+      output = {
+        HDMI-A-1 = {
+          scale = "1";
+          position = "0 0";
+          transform = "270";
+        };
+        DP-2 = {
+          scale = "1";
+          position = "1080 400";
+          mode = "1920x1080@144Hz";
+          adaptive_sync = "on";
+          modeline = "452.50  1920 2088 2296 2672  1080 1083 1088 1177 -hsync +vsync";
+        };
+        DP-3 = {
+          scale = "1";
+          position = "3000 400";
+        };
       };
-      DP-1 = {
-        scale = "1";
-        position = "1080 400";
-        mode = "1920x1080@144Hz";
-      };
-      DP-2 = {
-        scale = "1";
-        position = "3000 400";
-      };
+
+      workspaceOutputAssign = [
+        {
+          workspace = "10";
+          output = "HDMI-A-1";
+        }
+        {
+          workspace = "1";
+          output = "DP-2";
+        }
+        {
+          workspace = "2";
+          output = "DP-3";
+        }
+      ];
+      
+      startup = [
+        # Start 1Password in the background
+        {command = "swaymsg exec discord && sleep 3 && swaymsg splitv && swaymsg exec firefox -P messages -no-remote --name Firefox-message && swaymsg splith";}
+      ];
     };
 
     programs.zsh.shellAliases = {
