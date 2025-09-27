@@ -32,6 +32,7 @@
       }
       # Theme
       catppuccin-nvim
+      rose-pine
 
       # Quickly switch between Files
       harpoon
@@ -55,6 +56,8 @@
       knap
       # File Tree
       nvim-tree-lua
+
+      nvim-colorizer-lua
 
       (nvim-treesitter.withPlugins (p: [
         p.tree-sitter-nix

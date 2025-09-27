@@ -5,7 +5,7 @@ local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
 -- Set Colorscheme and remove background
 function ColorMyPencils()
-  vim.cmd.colorscheme "catppuccin-mocha"
+  vim.cmd.colorscheme "rose-pine"
 	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 	vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
@@ -267,6 +267,6 @@ end
 vim.api.nvim_set_keymap('n', '<leader>t', ':lua ToggleTerm()<CR>', { noremap = true, silent = true })
 kmap({'n', 'v'}, 'Y', '"+y')
 
-
+require'colorizer'.setup()
 
 
