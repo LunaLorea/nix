@@ -63,11 +63,32 @@
             settings = {
               "browser.startup.homepage" = "https://web.whatsapp.com/|https://web.threema.ch/#!/welcome|https://web.telegram.org/|https://mail.proton.me/";
               "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-              "extensions.activeThemeID" = "firefox-compact-dark@mozilla.org";
               "sidebar.revamp" = true;
               "sidebar.verticalTabs" = true;
               "sidebar.main.tools" = "";
               "layout.css.prefers-color-scheme.content-override" = 0;
+              "browser.sessionstore.max_resumed_crashes" = 0;
+              "browser.sessionstore.resume_from_crash" = false;
+            };
+            userChrome = ''
+              /* Hide different gui items*/
+              #nav-bar,
+              #navigator-toolbox,
+              #newtab-button-container  {
+                visibility: collapse !important;
+              }
+            '';
+          };
+          calendar = {
+            id = 2;
+            isDefault = false;
+            settings = {
+              "browser.startup.homepage" = "https://calendar.proton.me";
+              "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+              "sidebar.main.tools" = "";
+              "layout.css.prefers-color-scheme.content-override" = 0;
+              "browser.sessionstore.max_resumed_crashes" = 0;
+              "browser.sessionstore.resume_from_crash" = false;
             };
             userChrome = ''
               /* Hide different gui items*/
