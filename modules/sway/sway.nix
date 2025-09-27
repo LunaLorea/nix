@@ -20,6 +20,7 @@ in {
       for_window [title="ncspot"] move scratchpad; scratchpad show
       for_window [window_type="dialog"] floating enable
       for_window [window_role="dialog"] floating enable
+      for_window [app_id="Firefox-calendar"] floating enable
       assign [class="discord"] workspace number 10
       assign [app_id="Firefox-messages"] workspace number 10
     '';
