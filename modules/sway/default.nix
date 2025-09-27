@@ -100,7 +100,7 @@ in {
 
       programs.kitty = {
         enable = true;
-        themeFile = "Catppuccin-Macchiato";
+        themeFile = "rose-pine";
         settings = {
           background_opacity = "0.85";
         };
