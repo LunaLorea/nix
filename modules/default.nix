@@ -11,5 +11,6 @@
     ./silent-boot
     ./sway
     ./firefox
+    ./quickshell
   ];
 }

@@ -16,6 +16,7 @@
     gaming.enable = true;
     _1password.enable = true;
     firefox.enable = true;
+    quickshell.enable = true;
   };
 
   environment.defaultPackages = with pkgs; [
@@ -30,7 +31,6 @@
     imports = [
       # Window manager plus all the additional pkgs like waybar
       ../../homemanager-modules/neovim
-      ../../homemanager-modules/shell
       ../../homemanager-modules/git
       ../../homemanager-modules/studying
       ../../homemanager-modules/nextcloud-client

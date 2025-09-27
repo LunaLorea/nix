@@ -1,17 +1,14 @@
 import Quickshell // for PanelWindow
 import Quickshell.Io // for Process
 import QtQuick // for Text
+import QtQuick.Layouts
+import "Commons"
+import "Modules/Bar"
 
-import qs.Modules
 
-PanelWindow {
-  anchors {
-    top: true
-    left: true
-    bottom: true
-  }
 
-  //implicitWidth: 30
-
+ShellRoot {
+  id: shellRoot
   
+  Bar {}
 }
