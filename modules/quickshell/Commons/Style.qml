@@ -58,4 +58,18 @@ Singleton {
 
   property int barHeight: 38
   property int capsuleHeight: 28
+
+  property real baseWidgetSize: 33
+
+  // Animation duration (ms)
+  property int animationFast: 150
+  property int animationNormal: 300
+  property int animationSlow: 450
+  property int animationSlowest: 750
+
+  // Delays
+  property int tooltipDelay: 300
+  property int tooltipDelayLong: 1200
+  property int pillDelay: 500
+
 }

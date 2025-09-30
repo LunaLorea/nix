@@ -4,12 +4,15 @@ import QtQuick
 import QtQuick.Layouts
 import "../../Commons"
 import "Widgets"
+import qs.Widgets
+import qs.Services
 
 
 PanelWindow {
   id: root
   anchors {
-    bottom: true
+    bottom: (Settings.barPosition == "bottom")
+    top: (Settings.barPosition == "top")
     left: true
     right: true
   }
@@ -50,6 +53,7 @@ PanelWindow {
           spacing: Style.marginS
 
           Clock {}
+          Bluetooth{}
         }
 
         // middle section
@@ -80,15 +84,8 @@ PanelWindow {
           spacing: Style.marginS
 
 
-          Repeater {
-            model: 6
-            delegate: Rectangle {
-              id: top
-              color: Colors.mPrimary
-              implicitWidth: 20
-              implicitHeight: 20
-            }
-          }
+          ControlCenter {}
+          
         }
       }
     }
