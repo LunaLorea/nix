@@ -4,23 +4,19 @@
   lib,
   host,
   ...
-}: 
-let
+}: let
   cfg = config.modules.quickshell;
-in
-{
-
+in {
   options.modules.quickshell = {
     enable = lib.mkEnableOption "quickshell bar";
   };
 
-  
   config = lib.mkIf config.modules.quickshell.enable {
     environment.defaultPackages = with pkgs; [
       quickshell
     ];
 
-    home-manager.users.${host.userName} = { ... }: {
+    home-manager.users.${host.userName} = {...}: {
       imports = [
         ./qml-colors.nix
       ];
@@ -33,10 +29,6 @@ in
           name = "shell.qml";
         };
       };
-
-      
     };
   };
-
-
 }

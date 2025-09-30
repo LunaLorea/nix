@@ -95,208 +95,208 @@ in {
     };
     # CSS Style settings
     style = ''
-      * {
-        font-family: "0xProto";
-        font-weight: bold;
-        font-size: 1rem;
-        border: none;
-        box-shadow: none;
-        text-shadow: none;
-        color: white;
-      }
-
-    .body {
-      padding-right: 5px;
-      font-size: 0.8rem;
-    }
-
-      /*
-      .notification-row {
-          outline: none;
-          margin: 20px;
-          padding: 0;
-      }
-
-      .notification {
-          background: transparent;
-          margin: 0px;
-      }
-
-      .notification-content {
-          background: none;
-          padding: 7px;
+        * {
+          font-family: "0xProto";
+          font-weight: bold;
+          font-size: 1rem;
           border: none;
-          margin: 0;
-      }
-
-      \\
-      .close-button {
-          text-shadow: none;
-          padding: 0;
-          border-radius: 0px;
-          margin-top: 5px;
-          margin-right: 5px;
-      }
-
-      .close-button:hover {
           box-shadow: none;
-          transition: all .15s ease-in-out;
-          border: none
-      }
-
-      .notification-action {
-          border-top: none;
-          border-radius: 0px;
-          background: ${colors.surface0};
-      }
-
-      .notification-default-action:hover,
-      .notification-action:hover {
-      }
-
-      .summary {
-        padding-top: 7px;
-          font-size: 13px;
-          color: ${colors.subtext0};
-      }
-
-      .time {
-          font-size: 11px;
-          margin-right: 24px;
-      }
+          text-shadow: none;
+          color: white;
+        }
 
       .body {
-          font-size: 12px;
-          background: ${colors.base};
-          color: ${colors.text};
-          opacity: 0.7;
+        padding-right: 5px;
+        font-size: 0.8rem;
       }
 
-      .control-center {
-          border: 0;
-          border-radius: 0px;
-      }
+        /*
+        .notification-row {
+            outline: none;
+            margin: 20px;
+            padding: 0;
+        }
 
-      .control-center-list {
-          background: transparent;
-      }
+        .notification {
+            background: transparent;
+            margin: 0px;
+        }
 
-      .control-center-list-placeholder {
-          opacity: .5;
-      }
+        .notification-content {
+            background: none;
+            padding: 7px;
+            border: none;
+            margin: 0;
+        }
 
-      .floating-notifications {
-          dis
-      }
+        \\
+        .close-button {
+            text-shadow: none;
+            padding: 0;
+            border-radius: 0px;
+            margin-top: 5px;
+            margin-right: 5px;
+        }
 
-      .blank-window {
-          background: alpha(black, 0.1);
-      }
+        .close-button:hover {
+            box-shadow: none;
+            transition: all .15s ease-in-out;
+            border: none
+        }
 
-      .widget-title {
-          padding: 5px 10px;
-          margin: 10px 10px 5px 10px;
-          font-size: 3rem;
-          border-radius: 5px;
-      }
+        .notification-action {
+            border-top: none;
+            border-radius: 0px;
+            background: ${colors.surface0};
+        }
 
-      .widget-title>button {
-          font-size: 1rem;
-          text-shadow: none;
-          background: ${colors.surface0};
-          box-shadow: none;
-          border-radius: 5px;
-      }
+        .notification-default-action:hover,
+        .notification-action:hover {
+        }
 
-      .widget-title>button:hover {
-          background: ${colors.red};
-          color: ${colors.crust};
-      }
+        .summary {
+          padding-top: 7px;
+            font-size: 13px;
+            color: ${colors.subtext0};
+        }
 
-      .widget-dnd {
-          padding: 5px 10px;
-          margin: 5px 10px 10px 10px;
-          font-size: large;
-      }
+        .time {
+            font-size: 11px;
+            margin-right: 24px;
+        }
 
-      .widget-dnd>switch {
-          background: ${colors.red};
-      }
+        .body {
+            font-size: 12px;
+            background: ${colors.base};
+            color: ${colors.text};
+            opacity: 0.7;
+        }
 
-      .widget-dnd>switch:checked {
-          background: ${colors.green};
-      }
+        .control-center {
+            border: 0;
+            border-radius: 0px;
+        }
 
-      .widget-dnd>switch slider {
-          background: ${colors.surface0};
-          border: 0;
-          border-radius: 5px;
-      }
+        .control-center-list {
+            background: transparent;
+        }
 
-      .widget-dnd>switch:checked slider {
-          background: ${colors.surface0};
-          border-radius: 5px;
-      }
+        .control-center-list-placeholder {
+            opacity: .5;
+        }
 
-      .widget-label {
-          margin: 10px 10px 5px 10px;
-      }
+        .floating-notifications {
+            dis
+        }
 
-      .widget-label>label {
-          font-size: 1rem;
-      }
+        .blank-window {
+            background: alpha(black, 0.1);
+        }
 
-      .widget-mpris {
-          padding: 5px 10px 0px 0px;
-          margin: 5px 10px 5px 10px;
-          border-radius: 0px;
-      }
+        .widget-title {
+            padding: 5px 10px;
+            margin: 10px 10px 5px 10px;
+            font-size: 3rem;
+            border-radius: 5px;
+        }
 
-      .widget-mpris > box > button {
-          border-radius: 5px;
-      }
+        .widget-title>button {
+            font-size: 1rem;
+            text-shadow: none;
+            background: ${colors.surface0};
+            box-shadow: none;
+            border-radius: 5px;
+        }
 
-      .widget-mpris-player {
-          padding: 5px 10px;
-          margin: 10px;
-      }
+        .widget-title>button:hover {
+            background: ${colors.red};
+            color: ${colors.crust};
+        }
 
-      .widget-mpris-title {
-          font-weight: 700;
-          font-size: 1.25rem;
-      }
+        .widget-dnd {
+            padding: 5px 10px;
+            margin: 5px 10px 10px 10px;
+            font-size: large;
+        }
 
-      .widget-mpris-subtitle {
-          font-size: 1.1rem;
-      }
+        .widget-dnd>switch {
+            background: ${colors.red};
+        }
 
-      .widget-buttons-grid {
-          font-size: 25px;
-          padding: 5px;
-          margin: 5px 10px 10px 10px;
-          border-radius: 5px;
-      }
+        .widget-dnd>switch:checked {
+            background: ${colors.green};
+        }
 
-      .widget-buttons-grid>flowbox>flowboxchild>button {
-          margin: 3px;
-          background: ${colors.surface0};
-          border-radius: 5px;
-      }
+        .widget-dnd>switch slider {
+            background: ${colors.surface0};
+            border: 0;
+            border-radius: 5px;
+        }
 
-      .widget-buttons-grid>flowbox>flowboxchild>button:hover {
-          background: ${colors.overlay0};
-      }
+        .widget-dnd>switch:checked slider {
+            background: ${colors.surface0};
+            border-radius: 5px;
+        }
 
-      .widget-menubar>box>.menu-button-bar>button {
-          border: none;
-          background: transparent;
-      }
+        .widget-label {
+            margin: 10px 10px 5px 10px;
+        }
 
-      .topbar-buttons>button {
-          border: none;
-          background: transparent;
-      }
-      */
+        .widget-label>label {
+            font-size: 1rem;
+        }
+
+        .widget-mpris {
+            padding: 5px 10px 0px 0px;
+            margin: 5px 10px 5px 10px;
+            border-radius: 0px;
+        }
+
+        .widget-mpris > box > button {
+            border-radius: 5px;
+        }
+
+        .widget-mpris-player {
+            padding: 5px 10px;
+            margin: 10px;
+        }
+
+        .widget-mpris-title {
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .widget-mpris-subtitle {
+            font-size: 1.1rem;
+        }
+
+        .widget-buttons-grid {
+            font-size: 25px;
+            padding: 5px;
+            margin: 5px 10px 10px 10px;
+            border-radius: 5px;
+        }
+
+        .widget-buttons-grid>flowbox>flowboxchild>button {
+            margin: 3px;
+            background: ${colors.surface0};
+            border-radius: 5px;
+        }
+
+        .widget-buttons-grid>flowbox>flowboxchild>button:hover {
+            background: ${colors.overlay0};
+        }
+
+        .widget-menubar>box>.menu-button-bar>button {
+            border: none;
+            background: transparent;
+        }
+
+        .topbar-buttons>button {
+            border: none;
+            background: transparent;
+        }
+        */
     '';
   };
 }

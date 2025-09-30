@@ -38,7 +38,7 @@
           shellAliases = {
             ll = "ls -l";
             rebuild = "sudo nixos-rebuild switch --flake /home/${host.userName}/.config/nix#${host.hostName}";
-            update = "nix flake update --flake /home/${host.userName}/.config/nix#laptop";
+            update = "nix flake update --flake /home/${host.userName}/.config/nix";
             tree = "eza --tree --level=5";
           };
           history.size = 10000;

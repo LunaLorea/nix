@@ -100,7 +100,7 @@
     # used for mounting SAMBA shares
     pkgs.cifs-utils
   ];
-  
+
   # needed for usb auto mounting
   services.udisks2.enable = true;
 

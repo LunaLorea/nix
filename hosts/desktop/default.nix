@@ -21,7 +21,6 @@
 
   environment.defaultPackages = with pkgs; [
     usbutils
-    libsForQt5.xp-pen-g430-driver
   ];
 
   programs.wshowkeys.enable = true;
@@ -89,7 +88,7 @@
           output = "DP-3";
         }
       ];
-      
+
       startup = [
         # Start 1Password in the background
         {command = "swaymsg exec discord && sleep 3 && swaymsg splitv && swaymsg exec firefox -P messages -no-remote --name Firefox-message && swaymsg splith";}

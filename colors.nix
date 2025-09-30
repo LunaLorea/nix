@@ -22,7 +22,6 @@
   mantle = "#1e2030";
   crust = "#181926";
 
-
   # Updated Colors
   bg-primary = "#191724";
   bg-secondary = "#1f1d2e";
@@ -38,7 +37,7 @@
   magenta = "#c4a7e7";
   hl-low = "#21202e";
   hl-medium = "#403d52";
-  hl-high  = "#524f67";
+  hl-high = "#524f67";
 
   Primary = "#c7a1d8";
   OnPrimary = "#1a151f";
@@ -63,5 +62,4 @@
 
   Outline = "#342c42";
   Shadow = "#120f18";
-
 }

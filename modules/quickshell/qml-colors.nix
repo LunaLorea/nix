@@ -2,54 +2,52 @@
   colors,
   pkgs,
   ...
-}:
-let
-qml-file = pkgs.writeTextFile {
-  name = "Colors.qml";
-  text = ''
-pragma Singleton
+}: let
+  qml-file = pkgs.writeTextFile {
+    name = "Colors.qml";
+    text = ''
+      pragma Singleton
 
-import Quickshell
-import QtQuick
+      import Quickshell
+      import QtQuick
 
-Singleton {
-  id: root
-  
-  // --- Key Colors:
-  property color mPrimary: "${colors.Primary}"
-  property color mOnPrimary: "${colors.OnPrimary}"
+      Singleton {
+        id: root
 
-  property color mSecondary: "${colors.Secondary}"
-  property color mOnSecondary: "${colors.OnSecondary}"
+        // --- Key Colors:
+        property color mPrimary: "${colors.Primary}"
+        property color mOnPrimary: "${colors.OnPrimary}"
 
-  property color mTertiary: "${colors.Tertiary}"
-  property color mOnTertiary: "${colors.OnTertiary}"
+        property color mSecondary: "${colors.Secondary}"
+        property color mOnSecondary: "${colors.OnSecondary}"
 
-  
-  // --- Utility Colors:
-  property color mError: "${colors.Error}"
-  property color mOnError: "${colors.OnError}"
-
-  property color mWarning: "${colors.Warning}"
-  property color mOnWarning: "${colors.OnWarning}"
+        property color mTertiary: "${colors.Tertiary}"
+        property color mOnTertiary: "${colors.OnTertiary}"
 
 
-  // --- Surface Colors:
-  property color mSurface: "${colors.Surface}"
-  property color mOnSurface: "${colors.OnSurface}"
+        // --- Utility Colors:
+        property color mError: "${colors.Error}"
+        property color mOnError: "${colors.OnError}"
 
-  property color mSurfaceVariant: "${colors.SurfaceVariant}"
-  property color mOnSurfaceVariant: "${colors.OnSurfaceVariant}"
+        property color mWarning: "${colors.Warning}"
+        property color mOnWarning: "${colors.OnWarning}"
 
-  property color mOutline: "${colors.Outline}"
-  property color mShadow: "${colors.Shadow}"
 
-  property color transparent: "transparent"
-}
+        // --- Surface Colors:
+        property color mSurface: "${colors.Surface}"
+        property color mOnSurface: "${colors.OnSurface}"
+
+        property color mSurfaceVariant: "${colors.SurfaceVariant}"
+        property color mOnSurfaceVariant: "${colors.OnSurfaceVariant}"
+
+        property color mOutline: "${colors.Outline}"
+        property color mShadow: "${colors.Shadow}"
+
+        property color transparent: "transparent"
+      }
     '';
   };
-in
-{
+in {
   home.file.colors-qml-dev = {
     enable = true;
     source = qml-file;
@@ -61,5 +59,3 @@ in
     target = "./.config/quickshell/Commons/Colors.qml";
   };
 }
-
-
