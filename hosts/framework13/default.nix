@@ -14,6 +14,7 @@
     fingerprintreader.enable = true;
     _1password.enable = true;
     firefox.enable = true;
+    quickshell.enable = true;
   };
 
   home-manager.users.${host.userName} = {...}: {
