@@ -61,7 +61,7 @@ in {
         ./sway.nix
         ./swaync.nix
         ./swaylock.nix
-        ./waybar.nix
+        #./waybar.nix
         ./cheatsheet.nix
       ];
 
@@ -76,6 +76,7 @@ in {
         pkgs.networkmanagerapplet
         pkgs.qpwgraph
         lock
+        pkgs.pwvucontrol
       ];
       # automatically mount drives
       services.udiskie = {

@@ -60,6 +60,7 @@ Singleton {
   property int capsuleHeight: 28
 
   property real baseWidgetSize: 33
+  property real sliderWidth: 200
 
   // Animation duration (ms)
   property int animationFast: 150

@@ -90,6 +90,7 @@ in {
           tap = "enabled";
           tap_button_map = "lrm";
           dwt = "enabled";
+          middle_emulation = "enabled";
         };
       };
 

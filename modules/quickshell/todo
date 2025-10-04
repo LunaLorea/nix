@@ -1,4 +1,3 @@
-audio panel
 launcher
 cheatsheet
 network panel
@@ -8,3 +7,7 @@ controll center
 pomodoro timer
 notification center
 bonus: calendar inside quickshell container rather than firefox
+PC stats (battery cpu drive etc.)
+scaling implementations
+
+use nix to build settings file (monitor config specifically for per host customization)

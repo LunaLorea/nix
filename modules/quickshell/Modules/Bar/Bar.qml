@@ -17,7 +17,10 @@ PanelWindow {
     right: true
   }
 
-  implicitHeight: Style.barHeight
+  property ShellScreen modelData: Quickshell.screens[0]
+  property real scaling: ScalingService.getScreenScale(modelData)
+  
+  implicitHeight: Style.barHeight * scaling
   color: Colors.transparent
 
   Loader {
@@ -53,7 +56,6 @@ PanelWindow {
           spacing: Style.marginS
 
           Clock {}
-          Bluetooth{}
         }
 
         // middle section
@@ -84,6 +86,8 @@ PanelWindow {
           spacing: Style.marginS
 
 
+          Bluetooth {}
+          Audio {}
           ControlCenter {}
           
         }

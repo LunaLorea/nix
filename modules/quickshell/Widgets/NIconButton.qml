@@ -28,6 +28,7 @@ Rectangle {
   signal clicked
   signal rightClicked
   signal middleClicked
+  signal wheel(int delta)
 
   implicitWidth: baseSize
   implicitHeight: baseSize
@@ -91,5 +92,6 @@ Rectangle {
         root.middleClicked()
       }
     }
+    onWheel: wheel => root.wheel(wheel.angleDelta.y)
   }
 }

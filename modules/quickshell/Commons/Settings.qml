@@ -9,11 +9,20 @@ Singleton {
 
   // --- Bar Settings
   property real backgroundOpacity: 1
-  property string barPosition: "bottom" // "top" "bottom"
+  property string barPosition: "top" // "top" "bottom"
   property list<string> barMonitors: []
 
   // --- Clock Settings
   property string clockFormat: "HH:mm"
+
+
+  // --- Monitors
+  property list<var> monitorsScaling: [
+    {
+      "name": "eDP-1",
+      "scale": 1.5
+    }
+  ]
 
   signal settingsLoaded
 

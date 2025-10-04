@@ -38,6 +38,11 @@ Singleton {
     "bt-device-tv": "󰑈",
     "bt-device-controller": "󰊴",
 
+    "volume-zero": "󰕿",
+    "volume-low": "󰖀",
+    "volume-high": "󰕾",
+    "volume-mute": "󰝟",
+
     "nix": "󱄅"
   }
 }
