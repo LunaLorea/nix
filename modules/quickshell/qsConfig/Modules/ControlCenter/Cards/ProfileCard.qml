@@ -52,7 +52,7 @@ NBox {
       colorBg: Colors.mSurface
       colorFg: Colors.mOnSurface
       icon: "shutdown"
-      onClicked: Quickshell.execDetached(["shutdown -h now"])
+      onClicked: Quickshell.execDetached(["shutdown", "-h", "now"])
     }
     NIconButton {
       id: reboot
