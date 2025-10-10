@@ -25,7 +25,7 @@ NIconButton {
   }
 
   tooltipText: "Scroll to change Volume click to mute\nrightclick to open audio Panel\nmiddle click to open pwvucontroll\nVolume: " 
-  baseSize: Style.capsuleHeight
+  baseSize: Style.capsuleHeight * scaling
   colorBg: Colors.mSurfaceVariant
   colorFg: Colors.mOnSurface
   icon: getIcon()

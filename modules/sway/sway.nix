@@ -11,7 +11,7 @@ in {
 
     extraConfig = ''
       # Enable locking on closing the lid
-      bindswitch --reload --locked lid:on lock
+      bindswitch --reload --locked lid:on systemctl hybrid-sleep; lock
 
       # Applications that should float on start
       for_window [app_id=".blueman-manager-wrapped"] move scratchpad; scratchpad show
@@ -98,6 +98,10 @@ in {
       startup = [
         # Start 1Password in the background
         {command = "1password --silent";}
+        {
+          command = "quickshell kill; quickshell";
+          always = true;
+        }
       ];
 
       # Change the Keybindings
@@ -206,11 +210,6 @@ in {
         "${modifier}+Control+Up" = "move workspace to output up";
         "${modifier}+Control+Down" = "move workspace to output down";
       };
-      bars = [
-        {
-          command = "waybar";
-        }
-      ];
       fonts = {
         names = ["JetBrainsMono Nerd Font" "0xProto Nerd Font"];
         size = 16.0;

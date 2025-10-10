@@ -147,11 +147,13 @@ PopupWindow {
     // Get screen dimensions - try multiple methods
     var screenWidth = Screen.width
     var screenHeight = Screen.height
+    var screenX = 0
 
     // Try to get screen from target item
     if (targetItem) {
       if (targetItem.screen) {
         screenWidth = targetItem.screen.width
+        screenX = targetItem.screen.x
         screenHeight = targetItem.screen.height
         scaling = ScalingService.getScreenScale(targetItem.screen)
       }
@@ -213,7 +215,9 @@ PopupWindow {
           selectedPosition = positions[i]
           break
         }
+
       }
+
 
       // If none fit perfectly
       if (!selectedPosition) {
@@ -224,7 +228,7 @@ PopupWindow {
         selectedPosition = positions[0]
       }
 
-      newAnchorX = selectedPosition.x
+      newAnchorX = selectedPosition.x 
       newAnchorY = selectedPosition.y
 
       // Adjust horizontal position to keep tooltip on screen
@@ -259,7 +263,7 @@ PopupWindow {
     }
 
     // Apply position
-    anchorX = newAnchorX
+    anchorX = newAnchorX + screenX
     anchorY = newAnchorY
     isPositioned = true
     pendingShow = false

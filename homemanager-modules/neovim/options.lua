@@ -269,4 +269,6 @@ kmap({'n', 'v'}, 'Y', '"+y')
 
 require'colorizer'.setup()
 
-
+require("lspconfig").qmlls.setup {
+  cmd = {"qmlls", "-E"}
+}

@@ -16,7 +16,26 @@
     gaming.enable = true;
     _1password.enable = true;
     firefox.enable = true;
-    quickshell.enable = true;
+    quickshell = {
+      enable = true;
+      developerMode.enable = true;
+      monitors = {
+        "*" = {};
+        "DP-2" = {
+          barWidgets = {
+            left = [
+              "clock"
+            ];
+            right = [
+              "bluetooth"
+              "audio"
+              "controlCenter"
+            ];
+          };
+          scale = 1.0;
+        };
+      };
+    };
   };
 
   environment.defaultPackages = with pkgs; [
@@ -26,32 +45,32 @@
   programs.wshowkeys.enable = true;
 
   home-manager.users.${host.userName} = {...}: {
-    # Modules
+# Modules
     imports = [
-      # Window manager plus all the additional pkgs like waybar
+# Window manager plus all the additional pkgs like waybar
       ../../homemanager-modules/neovim
-      ../../homemanager-modules/git
-      ../../homemanager-modules/studying
-      ../../homemanager-modules/nextcloud-client
-      ../../homemanager-modules/man
-      ../../homemanager-modules/ncspot
+        ../../homemanager-modules/git
+        ../../homemanager-modules/studying
+        ../../homemanager-modules/nextcloud-client
+        ../../homemanager-modules/man
+        ../../homemanager-modules/ncspot
     ];
 
     home.packages = with pkgs; [
       jq
 
-      sioyek
+        sioyek
 
-      rubber
-      texliveFull
+        rubber
+        texliveFull
 
-      discord
-      filezilla
-      vlc
+        discord
+        filezilla
+        vlc
 
-      heroic
-      gamemode
-      mangohud
+        heroic
+        gamemode
+        mangohud
     ];
 
     wayland.windowManager.sway.config = {
@@ -75,28 +94,28 @@
       };
 
       workspaceOutputAssign = [
-        {
-          workspace = "10";
-          output = "HDMI-A-1";
-        }
-        {
-          workspace = "1";
-          output = "DP-2";
-        }
-        {
-          workspace = "2";
-          output = "DP-3";
-        }
+      {
+        workspace = "10";
+        output = "HDMI-A-1";
+      }
+      {
+        workspace = "1";
+        output = "DP-2";
+      }
+      {
+        workspace = "2";
+        output = "DP-3";
+      }
       ];
 
       startup = [
-        # Start 1Password in the background
-        {command = "swaymsg exec discord && sleep 3 && swaymsg splitv && swaymsg exec firefox -P messages -no-remote --name Firefox-message && swaymsg splith";}
+# Start 1Password in the background
+      {command = "swaymsg exec discord && sleep 3 && swaymsg splitv && swaymsg exec firefox -P messages -no-remote --name Firefox-message && swaymsg splith";}
       ];
     };
 
     programs.zsh.shellAliases = {
-      # Reboot into windows
+# Reboot into windows
       reboot-windows = "systemctl reboot --boot-loader-entry=auto-windows";
     };
   };

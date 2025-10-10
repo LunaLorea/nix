@@ -28,10 +28,10 @@ NPanel {
       spacing: content.cardSpacing
 
 
-      //ProfileCard {
-        //Layout.fillWidth: true
-        //Loyout.preferredHeight: 64 * scaling
-      //}
+      ProfileCard {
+        Layout.fillWidth: true
+        Layout.preferredHeight: 64 * scaling
+      }
 
     }
   }

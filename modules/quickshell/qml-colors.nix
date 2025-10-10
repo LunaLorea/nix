@@ -51,10 +51,10 @@ in {
   home.file.colors-qml-dev = {
     enable = true;
     source = qml-file;
-    target = "./.config/nix/modules/quickshell/Commons/Colors.qml";
+    target = "./.config/nix/modules/quickshell/qsConfig/Commons/Colors.qml";
   };
-  home.file.colors-qml = {
-    enable = true;
+  xdg.configFile.colors-qml = {
+    enable = false;
     source = qml-file;
     target = "./.config/quickshell/Commons/Colors.qml";
   };

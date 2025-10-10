@@ -1,0 +1,34 @@
+pragma Singleton
+
+import QtQuick
+import Quickshell
+import qs.Modules.Bar.Widgets
+import qs.Commons
+
+Singleton {
+  id: root
+
+  readonly property var widgetList: {
+    "audio": audioComponent,
+    "bluetooth": bluetoothComponent,
+    "clock": clockComponent,
+    "controlCenter": ccComponent
+  }
+
+  readonly property Component audioComponent: Component {
+    Audio {}
+  }
+  readonly property Component bluetoothComponent: Component {
+    Bluetooth {}
+  }
+  readonly property Component clockComponent: Component {
+    Clock {}
+  }
+  readonly property Component ccComponent: Component {
+    ControlCenter {}
+  }
+
+  function getWidget(id) {
+    return widgetList[id] || null
+  }
+}

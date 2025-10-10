@@ -47,6 +47,11 @@ Singleton {
     willOpen()
   }
 
+  function closeAllPanels() {
+    if ( openedPanel !== null && openedPanel !== undefined ) {
+      openedPanel.close()
+    }
+  }
   function willClosePanel(panel) {
     hasOpenedPanel = false
 

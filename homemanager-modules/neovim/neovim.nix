@@ -75,6 +75,7 @@
         p.tree-sitter-typescript
         p.tree-sitter-latex
         p.tree-sitter-glsl
+        p.tree-sitter-qmljs
       ]))
     ];
   };
@@ -86,6 +87,7 @@
     lua-language-server
     texlab
     glsl_analyzer
+    qt6.full
 
     #HTML/CSS/JSON/ESLint language servers extracted from vscode.
     vscode-langservers-extracted

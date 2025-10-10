@@ -13,7 +13,7 @@ NIconButton {
   property real scaling: 1.0
 
   tooltipText: "Open Control Center"
-  baseSize: Style.capsuleHeight
+  baseSize: Style.capsuleHeight * scaling
   colorBg: Colors.mSurfaceVariant
   colorFg: Colors.mOnSurface
   icon: "nix"

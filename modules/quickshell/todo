@@ -3,11 +3,7 @@ cheatsheet
 network panel
 workspace panel
 visual overhaul - flatter more console like view
-controll center
+controll center / notification center
 pomodoro timer
-notification center
 bonus: calendar inside quickshell container rather than firefox
 PC stats (battery cpu drive etc.)
-scaling implementations
-
-use nix to build settings file (monitor config specifically for per host customization)

@@ -137,8 +137,8 @@ Loader {
     PanelWindow {
       id: panelWindow
       
-      readonly property string barPosition: Settings.barPosition
-      readonly property bool barIsVisible: (screen !== null) && (Settings.barMonitors.includes(screen.name) || (Settings.barMonitors.length === 0))
+      readonly property string barPosition: Settings.monitors[0].barPosition
+      readonly property bool barIsVisible: true
       
 
       Component.onCompleted: {
@@ -146,14 +146,6 @@ Loader {
         dimmingOpacity = Style.opacityHeavy
       }
 
-      Connections {
-        target: ScalingService
-        function onScaleChanged(screenName, scale) {
-          if ((screen !== null) && (screenName === screen.name)) {
-            root.scaling = scaling = scale
-          }
-        }
-      }
 
       Connections {
         target: panelWindow

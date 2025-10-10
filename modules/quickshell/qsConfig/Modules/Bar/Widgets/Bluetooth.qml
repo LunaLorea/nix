@@ -10,10 +10,12 @@ import qs.Widgets
 NIconButton {
   id: root
 
+  property real scaling: 1.0
   property ShellScreen screen
 
+
   tooltipText: "Open bluetooth widget."
-  baseSize: Style.capsuleHeight
+  baseSize: Style.capsuleHeight * scaling
   colorBg: Colors.mSurfaceVariant
   colorFg: Colors.mOnSurface
   icon: BluetoothService.discovering ? "bluetooth-disc" : (BluetoothService.enabled ? "bluetooth-on" : "bluetooth-off")

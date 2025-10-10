@@ -8,6 +8,8 @@ import qs.Services
 Rectangle {
   id: root
 
+  property ShellScreen screen
+
   property real baseSize: Style.baseWidgetSize
 
   property string icon
@@ -70,7 +72,7 @@ Rectangle {
     hoverEnabled: true
     onEntered: {
       hovering = root.enabled ? true : false
-      TooltipService.show(root, root.tooltipText)
+      TooltipService.show(root, root.tooltipText, "auto", 1000)
       root.entered()
     }
     onExited: {

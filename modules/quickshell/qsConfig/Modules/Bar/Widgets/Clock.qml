@@ -10,11 +10,13 @@ Rectangle {
   id: root
 
   readonly property var now: Time.date
+  property real scaling: 1.0
+  property ShellScreen screen
 
-  implicitWidth: loader.width + 2 * Style.marginM
-  implicitHeight: Style.capsuleHeight
+  implicitWidth: (loader.width + 2 * Style.marginM * scaling)
+  implicitHeight: Style.capsuleHeight * scaling
 
-  radius: Style.radiusS
+  radius: Style.radiusS * scaling
   color: Colors.mSurfaceVariant
 
   Item {
@@ -38,7 +40,7 @@ Rectangle {
             visible: text !== ""
             text: modelData
 
-            font.pointSize: Style.fontSizeS
+            font.pointSize: Style.fontSizeS * root.scaling
             color: Colors.mPrimary
 
             wrapMode: Text.WordWrap

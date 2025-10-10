@@ -43,6 +43,11 @@ Singleton {
     "volume-high": "󰕾",
     "volume-mute": "󰝟",
 
-    "nix": "󱄅"
+    "nix": "󱄅",
+    "lock": "󰍁",
+    "signout": "",
+    "shutdown": "󰐥",
+    "reboot": "󰑙",
+    "hibernate": "󰽥"
   }
 }
