@@ -61,6 +61,7 @@ in {
         ./sway.nix
         ./swaync.nix
         ./swaylock.nix
+        ./swayidle.nix
         #./waybar.nix
         ./cheatsheet.nix
       ];
@@ -153,10 +154,23 @@ in {
 
     # enables monitor hotplugging
     systemd.user.services.kanshi = {
-      # description = "kanshi daemon";
+    # description = "kanshi daemon";
       serviceConfig = {
         Type = "simple";
         ExecStart = ''${pkgs.kanshi}/bin/kanshi -c kanshi_config_file'';
+      };
+    };
+
+    # enable battery manager
+    services.auto-cpufreq.enable = true;
+    services.auto-cpufreq.settings = {
+      battery = {
+        governor = "powersave";
+        turbo = "never";
+      };
+      charger = {
+        governor = "performance";
+        turbo = "auto";
       };
     };
 
