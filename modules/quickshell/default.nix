@@ -37,6 +37,8 @@
       Singleton {
         id: root
 
+        property string shellName: "quickBar"
+
         // --- bar settings
         property var bar: {
           "backgroundOpacity": ${lib.strings.floatToString cfg.bar.backgroundOpacity},
@@ -60,6 +62,8 @@
           Logger.log("Settings", "Settings loaded")
           settingsLoaded()
         }
+        // --- Persistant Files
+        property string cacheDir: Quickshell.env("HOME") + "/.cache" + "/" + shellName + "/"
       }
       '';
 
@@ -92,7 +96,9 @@ in {
           barWidgets = {
             left = lib.mkOption {
               type = lib.types.listOf lib.types.str;
-              default = [];
+              default = [
+                "workspaces"
+              ];
             };
             middle = lib.mkOption {
               type = lib.types.listOf lib.types.str;
@@ -101,6 +107,7 @@ in {
             right = lib.mkOption {
               type = lib.types.listOf lib.types.str;
               default = [
+                "wifi"
                 "bluetooth"
                 "audio"
                 "controlCenter"

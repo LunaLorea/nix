@@ -10,12 +10,11 @@ import qs.Widgets
 NPanel {
   id: root
 
-  preferredWidth: 500 * scaling
-  preferredHeight: 700 * scaling
+  preferredWidth: 400 * scaling
+  preferredHeight: 500 * scaling
 
 
   panelKeyboardFocus: true
-  scaling: 1
 
   property var activeScrollView: null
 

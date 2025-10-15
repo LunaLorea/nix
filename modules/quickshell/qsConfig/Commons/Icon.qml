@@ -48,6 +48,16 @@ Singleton {
     "signout": "",
     "shutdown": "󰐥",
     "reboot": "󰑙",
-    "hibernate": "󰽥"
+    "hibernate": "󰽥",
+
+    "ethernet": "",
+    "wifi-off": "󰤮",
+    "signal_wifi_bad": "󰤫",
+    "wifi-0": "󰤟",
+    "wifi-1": "󰤢",
+    "wifi-2": "󰤥",
+    "wifi": "󰤨",
+    "connect": "󱘖"
+    
   }
 }

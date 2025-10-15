@@ -11,8 +11,8 @@ import qs.Widgets
 NPanel {
   id: root
 
-  preferredWidth: 380
-  preferredHeight: 500
+  preferredWidth: 400 * scaling
+  preferredHeight: 500 * scaling
   panelKeyboardFocus: true
   scaling: 1
 
