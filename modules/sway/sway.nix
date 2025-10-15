@@ -59,6 +59,7 @@ in {
 
       gaps = {
         inner = 8;
+        outer = 3;
         smartBorders = "on";
       };
 
@@ -98,9 +99,14 @@ in {
       startup = [
         # Start 1Password in the background
         {command = "1password --silent";}
+
+        # Start the quickshell bar on startup
+        {command = "quickshell";}
+      ];
+
+      bars = [
         {
-          command = "quickshell kill; quickshell";
-          always = true;
+          command = "quickshell";
         }
       ];
 

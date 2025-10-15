@@ -22,42 +22,42 @@
   in {
     enable = true;
     timeouts = [
-    {
-      timeout = 30; # in seconds
-        command = "${pkgs.libnotify}/bin/notify-send 'Locking in 30 seconds' -t 5000";
-    }
-  {
-      timeout = 60;
-      command = lock;
-    }
-    {
-      timeout = 70;
-      command = display "off";
-      resumeCommand = display "on";
-    }
-    {
-      timeout = 120;
-      command = "${pkgs.systemd}/bin/systemctl hybrid-sleep";
-    }
+      {
+        timeout = 300; # in seconds
+          command = "${pkgs.libnotify}/bin/notify-send 'Locking in 30 seconds' -t 5000";
+      }
+      {
+        timeout = 600;
+        command = lock;
+      }
+      {
+        timeout = 900;
+        command = display "off";
+        resumeCommand = display "on";
+      }
+      {
+        timeout = 1200;
+        command = "${pkgs.systemd}/bin/systemctl hybrid-sleep";
+      }
     ];
     events = [
-    {
-      event = "before-sleep";
-# adding duplicated entries for the same event may not work
-      command = (display "off") + "; " + lock;
-    }
-    {
-      event = "after-resume";
-      command = display "on";
-    }
-    {
-      event = "lock";
-      command = (display "off") + "; " + lock;
-    }
-    {
-      event = "unlock";
-      command = display "on";
-    }
+      {
+        event = "before-sleep";
+        # adding duplicated entries for the same event may not work
+        command = (display "off") + "; " + lock;
+      }
+      {
+        event = "after-resume";
+        command = display "on";
+      }
+      {
+        event = "lock";
+        command = (display "off") + "; " + lock;
+      }
+      {
+        event = "unlock";
+        command = display "on";
+      }
     ];
   };
 }

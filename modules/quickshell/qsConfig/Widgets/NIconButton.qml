@@ -20,8 +20,8 @@ Rectangle {
   property bool allowClickWhenDisabled: false
   property bool hovering: false
 
-  property color colorBg: Colors.mSurfaceVariant
-  property color colorFg: Colors.mPrimary
+  property color colorBg: Settings.bar.capsule ? Colors.mSurfaceVariant : Colors.mSurface
+  property color colorFg: Colors.mOnSurface
   property color colorBgHover: Colors.mTertiary
   property color colorFgHover: Colors.mOnTertiary
 
@@ -37,7 +37,7 @@ Rectangle {
 
 
   color: root.enabled && root.hovering ? colorBgHover : colorBg
-  radius: width * 0.5
+  radius: Settings.bar.capsule ? width * 0.5 : Style.radiusXS
 
   Behavior on color {
     ColorAnimation {

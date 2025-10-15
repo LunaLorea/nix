@@ -14,8 +14,6 @@ NIconButton {
 
   tooltipText: "Open Control Center"
   baseSize: Style.capsuleHeight * scaling
-  colorBg: Colors.mSurfaceVariant
-  colorFg: Colors.mOnSurface
   icon: "nix"
   onClicked: PanelService.getPanel("controlCenterPanel")?.toggle(this)
   onRightClicked: PanelService.getPanel("controlCenterPanel")?.toggle(this)

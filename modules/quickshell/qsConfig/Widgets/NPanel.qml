@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Effects
 import Quickshell
 import Quickshell.Wayland
 import qs.Commons
@@ -143,7 +144,7 @@ Loader {
 
       Component.onCompleted: {
         Logger.log("NPanel", "Opened", root.objectName, "on Screen", screen.name)
-        dimmingOpacity = Style.opacityHeavy
+        dimmingOpacity = 0 //Style.opacityHeavy
       }
 
 
@@ -199,6 +200,19 @@ Loader {
       }
 
       Rectangle {
+        RectangularShadow {
+          id: panelShadow
+          anchors.fill: panelBackground
+          radius: panelBackground.radius
+          blur: 50 * scaling
+          spread: 2 * scaling
+          color: Qt.darker(Colors.mPrimary)
+        }
+        Rectangle {
+          anchors.fill: parent
+          radius: parent.radius
+          color: parent.color
+        }
         id: panelBackground
         color: panelBackgroundColor
         radius: Style.radiusL * scaling
@@ -234,7 +248,7 @@ Loader {
         scale: root.scaleValue
         opacity: root.isMasked ? 0 : root.opacityValue
         x: isDragged ? manualX : calculatedX
-        y: isDragged ? manualY : calculatedY
+        y: (isDragged ? manualY : calculatedY) + (Settings.bar.floating ? Style.marginS : 0)
 
         // ---------------------------------------------
         // Does not account for corners are they are negligible and helps keep the code clean.

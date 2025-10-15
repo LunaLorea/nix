@@ -39,7 +39,9 @@
 
         // --- bar settings
         property var bar: {
-          "backgroundOpacity": ${lib.strings.floatToString cfg.bar.backgroundOpacity}
+          "backgroundOpacity": ${lib.strings.floatToString cfg.bar.backgroundOpacity},
+          "capsule": ${lib.boolToString cfg.bar.capsule},
+          "floating": ${lib.boolToString cfg.bar.floating}
         }
 
         // --- monitors
@@ -90,11 +92,11 @@ in {
           barWidgets = {
             left = lib.mkOption {
               type = lib.types.listOf lib.types.str;
-              default = ["clock"];
+              default = [];
             };
             middle = lib.mkOption {
               type = lib.types.listOf lib.types.str;
-              default = [];
+              default = ["clock"];
             };
             right = lib.mkOption {
               type = lib.types.listOf lib.types.str;
@@ -114,12 +116,20 @@ in {
     bar = {
       backgroundOpacity = lib.mkOption {
         type = lib.types.float;
-        default = 0.8;
+        default = 0.0;
       };
       clockFormat = lib.mkOption {
         type = lib.types.str;
-        default = "HH:mm";
+        default = "HH:mm ddd dd.MM.yy";
       };
+      capsule = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+      };
+      floating = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+      };  
     };
   };
 

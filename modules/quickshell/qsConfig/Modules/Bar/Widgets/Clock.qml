@@ -13,11 +13,11 @@ Rectangle {
   property real scaling: 1.0
   property ShellScreen screen
 
-  implicitWidth: (loader.width + 2 * Style.marginM * scaling)
+  implicitWidth: (loader.width + 2 * (Settings.bar.capsule ? Style.marginM : 0) * scaling)
   implicitHeight: Style.capsuleHeight * scaling
 
   radius: Style.radiusS * scaling
-  color: Colors.mSurfaceVariant
+  color: Settings.bar.capsule ? Colors.mSurfaceVariant : Colors.transparent
 
   Item {
     id: clockContainer
@@ -41,7 +41,7 @@ Rectangle {
             text: modelData
 
             font.pointSize: Style.fontSizeS * root.scaling
-            color: Colors.mPrimary
+            color: Colors.mOnSurface
 
             wrapMode: Text.WordWrap
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter

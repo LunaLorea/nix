@@ -16,8 +16,6 @@ NIconButton {
 
   tooltipText: "Open bluetooth widget."
   baseSize: Style.capsuleHeight * scaling
-  colorBg: Colors.mSurfaceVariant
-  colorFg: Colors.mOnSurface
   icon: BluetoothService.discovering ? "bluetooth-disc" : (BluetoothService.enabled ? "bluetooth-on" : "bluetooth-off")
   onClicked: PanelService.getPanel("bluetoothPanel")?.toggle(this)
   onRightClicked: BluetoothService.setBluetoothEnabled(!BluetoothService.enabled)

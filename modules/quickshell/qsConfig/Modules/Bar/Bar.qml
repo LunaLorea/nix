@@ -30,7 +30,7 @@ Variants {
       }
 
 
-      implicitHeight: Style.barHeight * scaling
+      implicitHeight: (Style.barHeight + Style.marginXS) * scaling
       color: Colors.transparent
 
       Loader {
@@ -41,95 +41,33 @@ Variants {
         sourceComponent: Item {
           anchors.fill: parent
           clip: true
-          Rectangle {
-            id: bar
-            anchors.fill: parent
-            color: Qt.alpha(Colors.mSurface, Settings.bar.backgroundOpacity)
-          }
 
           MouseArea {
             anchors.fill: parent
             acceptedButtons: Qt.RightButton
           }
 
-
-
-          Item {
+          Rectangle {
             anchors.fill: parent
+            color: Colors.mSurface
+            opacity: Settings.bar.backgroundOpacity
+          }
 
-            // left section
-            RowLayout {
-              anchors.verticalCenter: parent.verticalCenter
-              anchors.left: parent.left
-              anchors.leftMargin: Style.marginM
+          // --- Bar Layout
+          Item {
 
-              spacing: Style.marginS
-
-              Repeater {
-                model: ScalingService.getScreenBarWidgets(root.modelData, "left")
-                delegate: BarWidgetLoader {
-                  widgetId: (modelData !== undefined ? modelData : "")
-                  widgetProps: {
-                    "screen": root.modelData || null,
-                    "scaling": ScalingService.getScreenScale(screen),
-                    "widgetId": modelData.id,
-                  }
-                  Layout.alignment: Qt.AlignHCenter
-                }
-              }
+            anchors {
+              fill: parent
+              leftMargin: Settings.bar.floating ? Style.marginS * scaling : 0
+              rightMargin: Settings.bar.floating ? Style.marginS * scaling : 0
+              topMargin: Settings.bar.floating ? Style.marginXS * scaling : 0
             }
-
-            // middle section
-            RowLayout {
-              anchors.horizontalCenter: parent.horizontalCenter
-              anchors.verticalCenter: parent.verticalCenter
-
-              spacing: Style.marginS
-
-              Repeater {
-                model: ScalingService.getScreenBarWidgets(root.modelData, "middle")
-                delegate: BarWidgetLoader {
-                  widgetId: (modelData !== undefined ? modelData : "")
-                  widgetProps: {
-                    "screen": root.modelData || null,
-                    "scaling": ScalingService.getScreenScale(root.modelData),
-                    "widgetId": modelData.id,
-                  }
-                  Layout.alignment: Qt.AlignHCenter
-                }
-              }
-              Repeater {
-                model: 6
-                delegate: Rectangle {
-                  id: top
-                  color: Colors.mPrimary
-                  implicitWidth: 20
-                  implicitHeight: 20
-                }
-              }
-            }
-
-            // right section
-            RowLayout {
-              id: test
-              anchors.verticalCenter: parent.verticalCenter
-              anchors.right: parent.right
-              anchors.rightMargin: Style.marginM
-
-              spacing: Style.marginS
-
-
-              Repeater {
-                model: ScalingService.getScreenBarWidgets(root.modelData, "right")
-                delegate: BarWidgetLoader {
-                  widgetId: (modelData !== undefined ? modelData : "")
-                  widgetProps: {
-                    "screen": root.modelData || null,
-                    "scaling": ScalingService.getScreenScale(screen),
-                    "widgetId": modelData.id,
-                  }
-                  Layout.alignment: Qt.AlignHCenter
-                }
+            // Sections
+            Repeater {
+              model: ["left", "middle", "right"]
+              delegate: NBarSection {
+                position: modelData
+                screen: root.modelData
               }
             }
           }

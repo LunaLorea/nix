@@ -49,8 +49,11 @@ NBox {
 
       tooltipText: "shutdown"
       baseSize: Style.capsuleHeight * scaling
-      colorBg: Colors.mSurface
-      colorFg: Colors.mOnSurface
+      colorBg: Colors.mSurfaceVariant
+      border {
+        width: Style.borderS * scaling
+        color: Qt.darker(Colors.mOnSurfaceVariant)
+      }
       icon: "shutdown"
       onClicked: Quickshell.execDetached(["shutdown", "-h", "now"])
     }
@@ -61,8 +64,11 @@ NBox {
 
       tooltipText: "reboot"
       baseSize: Style.capsuleHeight * scaling
-      colorBg: Colors.mSurface
-      colorFg: Colors.mOnSurface
+      colorBg: Colors.mSurfaceVariant
+      border {
+        width: Style.borderS * scaling
+        color: Qt.darker(Colors.mOnSurfaceVariant)
+      }
       icon: "reboot"
       onClicked: Quickshell.execDetached(["reboot"])
     }
@@ -73,8 +79,11 @@ NBox {
 
       tooltipText: "lock with swaylock"
       baseSize: Style.capsuleHeight * scaling
-      colorBg: Colors.mSurface
-      colorFg: Colors.mOnSurface
+      colorBg: Colors.mSurfaceVariant
+      border {
+        width: Style.borderS * scaling
+        color: Qt.darker(Colors.mOnSurfaceVariant)
+      }
       icon: "lock"
       onClicked: function() {
         PanelService.closeAllPanels()
@@ -88,8 +97,11 @@ NBox {
 
       tooltipText: "hibernate"
       baseSize: Style.capsuleHeight * scaling
-      colorBg: Colors.mSurface
-      colorFg: Colors.mOnSurface
+      colorBg: Colors.mSurfaceVariant
+      border {
+        width: Style.borderS * scaling
+        color: Qt.darker(Colors.mOnSurfaceVariant)
+      }
       icon: "hibernate"
       onClicked: function() {
         PanelService.closeAllPanels()

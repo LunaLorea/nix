@@ -19,28 +19,14 @@
     quickshell = {
       enable = true;
       developerMode.enable = true;
-      monitors = {
-        "*" = {};
-        "DP-2" = {
-          barWidgets = {
-            left = [
-              "clock"
-            ];
-            right = [
-              "bluetooth"
-              "audio"
-              "controlCenter"
-            ];
-          };
-          scale = 1.0;
-        };
-      };
     };
   };
 
   environment.defaultPackages = with pkgs; [
     usbutils
   ];
+
+  hardware.opentabletdriver.enable = true;
 
   programs.wshowkeys.enable = true;
 
