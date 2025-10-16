@@ -94,7 +94,6 @@ Singleton {
     if (!cacheAdapter.wifiState)
       return
 
-    Logger.log("scanning")
     if (scanning) {
       // Mark current scan results to be ignored and schedule a new scan
       Logger.log("Network", "Scan already in progress, will ignore results and rescan")

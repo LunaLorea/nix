@@ -41,14 +41,24 @@ Rectangle {
       // Loading Widgets from Settings
       model: ScalingService.getScreenBarWidgets(root.modelData, position)
 
-      delegate: BarWidgetLoader {
-        widgetId: (modelData !== undefined ? modelData : "")
-        widgetProps: {
-          "screen": root.modelData || null,
-          "scaling": ScalingService.getScreenScale(root.modelData),
-          "widgetId": modelData.id,
+      delegate: RowLayout {
+        spacing: Style.marginS
+        Rectangle {
+          anchors.rightMargin: Style.marginS
+          visible: (model.index > 0)
+          width: 2
+          height: Style.capsuleHeight
+          color: Colors.mOutline
         }
-        Layout.alignment: Qt.AlignHCenter
+        BarWidgetLoader {
+          widgetId: (modelData !== undefined ? modelData : "")
+          widgetProps: {
+            "screen": root.modelData || null,
+            "scaling": ScalingService.getScreenScale(root.modelData),
+            "widgetId": modelData.id,
+          }
+          Layout.alignment: Qt.AlignHCenter
+        }
       }
     }
   }

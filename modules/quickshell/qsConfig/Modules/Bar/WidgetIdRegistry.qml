@@ -14,7 +14,8 @@ Singleton {
     "clock": clockComponent,
     "controlCenter": ccComponent,
     "workspaces": wsComponent,
-    "wifi": wifiComponent
+    "wifi": wifiComponent,
+    "systemMonitor": smComponent
   }
 
   readonly property Component audioComponent: Component {
@@ -34,6 +35,9 @@ Singleton {
   }
   readonly property Component wifiComponent: Component {
     WiFi {}
+  }
+  readonly property Component smComponent: Component {
+    SystemMonitor {}
   }
 
   function getWidget(id) {

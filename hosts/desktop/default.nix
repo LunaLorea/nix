@@ -19,6 +19,16 @@
     quickshell = {
       enable = true;
       developerMode.enable = true;
+      monitors = {
+        "*" = {};
+        "HDMI-A-1" = {
+          barWidgets = {
+            left = [
+              "workspaces"
+            ];
+          };
+        };
+      };
     };
   };
 

@@ -60,6 +60,6 @@
   SurfaceVariant = "#262130";
   OnSurfaceVariant = "#a79ab0";
 
-  Outline = "#342c42";
+  Outline = "#3f374f";
   Shadow = "#120f18";
 }

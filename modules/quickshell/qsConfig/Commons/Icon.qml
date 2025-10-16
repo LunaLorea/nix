@@ -57,7 +57,13 @@ Singleton {
     "wifi-1": "󰤢",
     "wifi-2": "󰤥",
     "wifi": "󰤨",
-    "connect": "󱘖"
-    
+    "connect": "󱘖",
+
+    "cpu-usage": "",
+    "cpu-temp": "",
+    "memory": "",
+    "download-speed": "󰁅",
+    "upload-speed": "󰁝",
+    "storage": ""
   }
 }

@@ -97,6 +97,7 @@ in {
             left = lib.mkOption {
               type = lib.types.listOf lib.types.str;
               default = [
+                "systemMonitor"
                 "workspaces"
               ];
             };
