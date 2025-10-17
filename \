@@ -1,8 +1,0 @@
-{ ... }: {
- 
- # Modules
-  imports = [
-    ../../modules/windowmanager
-  ];
-
-}

@@ -24,7 +24,6 @@ Singleton {
     "refresh": "󰑐",
     "close": "󰅖",
 
-
     "bluetooth-on": "󰂯",
     "bluetooth-off": "󰂲",
     "bluetooth-disc": "󰂱",
@@ -64,6 +63,11 @@ Singleton {
     "memory": "",
     "download-speed": "󰁅",
     "upload-speed": "󰁝",
-    "storage": ""
+    "storage": "",
+
+    "pomodoro": "",
+    "pomodoro-working": "",
+    "pomodoro-pause": "",
+    "pomodoro-break": "󰶞"
   }
 }

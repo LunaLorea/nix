@@ -21,7 +21,7 @@ Rectangle {
     id: percentMetrics
     font.weight: Style.fontWeightMedium
     font.pointSize: textSize
-    text: "99%" // Use the longest possible string for measurement
+    text: "100%" // Use the longest possible string for measurement
   }
 
   TextMetrics {

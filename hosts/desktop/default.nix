@@ -36,6 +36,7 @@
     usbutils
   ];
 
+
   hardware.opentabletdriver.enable = true;
 
   programs.wshowkeys.enable = true;

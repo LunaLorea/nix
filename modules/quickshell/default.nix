@@ -108,6 +108,7 @@ in {
             right = lib.mkOption {
               type = lib.types.listOf lib.types.str;
               default = [
+                "pomodoro"
                 "wifi"
                 "bluetooth"
                 "audio"
@@ -144,6 +145,7 @@ in {
   config = lib.mkIf config.modules.quickshell.enable {
     environment.defaultPackages = with pkgs; [
       quickshell
+      openpomodoro-cli
     ];
 
     home-manager.users.${host.userName} = {...}: {

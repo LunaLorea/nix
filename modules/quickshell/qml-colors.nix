@@ -32,6 +32,8 @@
         property color mWarning: "${colors.Warning}"
         property color mOnWarning: "${colors.OnWarning}"
 
+        property color mGreen: "${colors.teal}"
+
 
         // --- Surface Colors:
         property color mSurface: "${colors.Surface}"

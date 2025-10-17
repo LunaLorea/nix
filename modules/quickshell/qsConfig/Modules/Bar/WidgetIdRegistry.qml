@@ -15,7 +15,8 @@ Singleton {
     "controlCenter": ccComponent,
     "workspaces": wsComponent,
     "wifi": wifiComponent,
-    "systemMonitor": smComponent
+    "systemMonitor": smComponent,
+    "pomodoro": pomComponent
   }
 
   readonly property Component audioComponent: Component {
@@ -39,6 +40,10 @@ Singleton {
   readonly property Component smComponent: Component {
     SystemMonitor {}
   }
+  readonly property Component pomComponent: Component {
+    Pomodoro {}
+  }
+
 
   function getWidget(id) {
     return widgetList[id] || null
