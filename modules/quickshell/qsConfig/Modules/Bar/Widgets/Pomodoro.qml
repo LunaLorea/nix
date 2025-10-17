@@ -11,7 +11,9 @@ Item {
   implicitWidth: childrenRect.width
   implicitHeight: Style.capsuleHeight
 
-  property string tooltipText: finished + "pomodoros completed today"
+  property string tooltipText: finished + " pomodoro" + (finished != 1 ? "s" : "") + " completed today."
+  property real scaling: 1
+  property ShellScreen screen
 
   property int duration: 25
   property int breakDuration: 5
@@ -157,6 +159,7 @@ Item {
       } else if (mouse.button === Qt.RightButton) {
         root.rightClick()
       }
+      TooltipService.hide()
     }
     onWheel: function (wheel) {
       if ( root.state != 0 && root.state != 3 ) { return } 
@@ -192,9 +195,9 @@ Item {
 
 
   Rectangle {
-    width: childrenRect.width + Style.marginM * 2
-    height: 25
-    radius: Style.radiusXS
+    width: (childrenRect.width + Style.marginM * 2)
+    height: 25 * root.scaling
+    radius: Style.radiusXS * root.scaling
     color: Colors.transparent
     anchors.centerIn: parent
 
@@ -205,14 +208,15 @@ Item {
         left: parent.left
         leftMargin: Style.marginM
       }
-      spacing: Style.marginS
+      spacing: Style.marginS * root.scaling
       NIcon {
         icon: root.icon
-        font.pointSize: Style.capsuleHeight * 0.48
+        font.pointSize: Style.capsuleHeight * 0.48 * root.scaling
       }
 
       NText {
         text: root.display
+        scaling: root.scaling
         Layout.alignment: Qt.AlignVCenter
       }
     }
@@ -222,8 +226,8 @@ Item {
     property real completeness: root.completeness
     visible: root.state != 0
     width: ((childrenRect.width + Style.marginM * 2) * ((0.49 < completeness && 0.51 > completeness) ? 0.49 : completeness))
-    height: 25
-    radius: Style.radiusXS
+    height: 25 * root.scaling
+    radius: Style.radiusXS * root.scaling
     color: getColor()
     function getColor() {
       switch (root.state) {
@@ -262,12 +266,13 @@ Item {
       spacing: Style.marginS
       NIcon {
         icon: root.icon
-        font.pointSize: Style.capsuleHeight * 0.48
+        font.pointSize: Style.capsuleHeight * 0.48 * root.scaling
         color: Colors.mOnPrimary
       }
 
       NText {
         text: root.display
+        scaling: root.scaling
         Layout.alignment: Qt.AlignVCenter
         color: Colors.mOnPrimary
         elide: Text.ElideNone

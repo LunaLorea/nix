@@ -18,11 +18,11 @@ Singleton {
 
   function onSettingsLoaded() {
     // Initialize cache from Settings once they are loaded on startup
-    var monitors =Settings.monitors || []
+    var monitors = Settings.monitors || []
     for (var i = 0; i < monitors.length; i++) {
       if (monitors[i].name && monitors[i].scale !== undefined) {
         currentMonitors[monitors[i].name] = {
-          scale: monitors[i].scale,
+          scale: monitors[i].scale / 4.5,
           showBar: monitors[i].showBar,
           barPosition: monitors[i].barPosition,
           barWidgets: monitors[i].barWidgets
@@ -100,7 +100,8 @@ Singleton {
   function getScreenScale(aScreen) {
     try {
       if (aScreen !== undefined && aScreen.name !== undefined) {
-        return getScreenScaleByName(aScreen.name)
+        var scale = getScreenScaleByName(aScreen.name) * aScreen.physicalPixelDensity
+        return scale
       }
     } catch (e) {
 
@@ -113,7 +114,10 @@ Singleton {
   // Get scale from cache for better performance
   function getScreenScaleByName(aScreenName) {
     try {
-      var scale = currentMonitors[aScreenName].scale || currentMonitors["*"].scale
+      var scale = currentMonitors["*"].scale
+      if (currentMonitors[aScreenName] !== undefined) {
+        scale = currentMonitors[aScreenName].scale
+      }
       if ((scale !== undefined) && (scale != null)) {
         return scale
       }

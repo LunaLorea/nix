@@ -88,6 +88,7 @@ Singleton {
       }
       // Emit signal to notify listeners that workspace list has been updated
       workspacesChanged()
+      Logger.log("compserv", workspaces.count)
     }
 
     function syncWindows() {

@@ -1,4 +1,5 @@
 import Quickshell
+import Quickshell.Io
 import QtQuick
 import QtQuick.Layouts
 import qs.Commons
@@ -9,7 +10,7 @@ import qs.Widgets
 Item {
   id: root
 
-  property real scaling
+  property real scaling: 1
   property ShellScreen screen
 
   property bool isDestroying: false
@@ -45,26 +46,28 @@ Item {
   function refreshWorkspaces() {
     localWorkspaces.clear()
     if (screen !== null) {
+      Logger.log("test")
       for (var i = 0; i < CompositorService.workspaces.count; i++) {
         const ws = CompositorService.workspaces.get(i)
         localWorkspaces.append(ws)
       }
     }
     workspaceRepeater.model = localWorkspaces
+    Logger.log("Workspaces", localWorkspaces.count)
   }
 
   RowLayout {
-    spacing: Style.marginS
+    spacing: Style.marginS * scaling
 
     Repeater {
       id: workspaceRepeater
       model: root.localWorkspaces
 
       Rectangle {
-        width: Settings.bar.capsule ? (model.isFocused ? 40 : Style.capsuleHeight) : Style.capsuleHeight
-        height: 25
+        width: (Settings.bar.capsule ? (model.isFocused ? 40 : Style.capsuleHeight) : Style.capsuleHeight) * scaling
+        height: 25 * scaling
         color: model.isFocused ? Colors.mOutline : Colors.mSurface
-        radius: Settings.bar.capsule ? width * 0.5 : Style.radiusXS
+        radius: (Settings.bar.capsule ? width * 0.5 : Style.radiusXS) * scaling
 
         Behavior on color {
           ColorAnimation {
@@ -95,7 +98,7 @@ Item {
 
           text: model.name
           color: parent.text
-
+          scaling: scaling
         }
 
         MouseArea {

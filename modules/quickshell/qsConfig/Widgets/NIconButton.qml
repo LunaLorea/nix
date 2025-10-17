@@ -9,6 +9,7 @@ Rectangle {
   id: root
 
   property ShellScreen screen
+  property real scaling: 1.0
 
   property real baseSize: Style.baseWidgetSize
 
@@ -49,7 +50,7 @@ Rectangle {
 
   NIcon {
     icon: root.icon
-    font.pointSize: Math.max(1, root.width * 0.48)
+    font.pointSize: Math.max(1, root.width * 0.48 * scaling)
     color: root.enabled && root.hovering ? colorFgHover : colorFg
 
     x: (root.width - width) / 2

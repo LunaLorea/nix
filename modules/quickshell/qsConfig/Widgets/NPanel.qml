@@ -12,8 +12,8 @@ Loader {
   property real scaling: 1.0
 
   property Component panelContent: null
-  property real preferredWidth: 700
-  property real preferredHeight: 900
+  property real preferredWidth: 400 * Math.sqrt(scaling)
+  property real preferredHeight: 500 * Math.sqrt(scaling)
   property real preferredWidthRatio
   property real preferredHeightRatio
   property color panelBackgroundColor: Colors.mSurface

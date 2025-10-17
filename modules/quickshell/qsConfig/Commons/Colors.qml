@@ -1,1 +1,1 @@
-/nix/store/4sxcmylqm2bj8n9swbr3823wnvj6sz0k-home-manager-files/.config/nix/modules/quickshell/qsConfig/Commons/Colors.qml
+/nix/store/msx3grjn1n5wv6bm688xrylp6kwi3w31-home-manager-files/.config/nix/modules/quickshell/qsConfig/Commons/Colors.qml

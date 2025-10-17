@@ -180,7 +180,7 @@ in {
             text = settingsText;
           };
         };
-        settingsDev = lib.mkIf cfg.developerMode.enable {
+        settingsDev = {
           enable = true;
           target = "${cfg.developerMode.path}/Commons/Settings.qml";
           source = pkgs.writeTextFile {

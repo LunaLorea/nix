@@ -14,7 +14,22 @@
     fingerprintreader.enable = true;
     _1password.enable = true;
     firefox.enable = true;
-    quickshell.enable = true;
+    quickshell = {
+      enable = true;
+      developerMode.enable = true;
+      monitors = {
+        "*" = {
+          barWidgets = {
+            left = [
+              "workspaces"
+            ];
+          };
+        };
+        "eDP-1" = {
+          scale = 0.8;
+        };
+      };
+    };
   };
 
   home-manager.users.${host.userName} = {...}: {

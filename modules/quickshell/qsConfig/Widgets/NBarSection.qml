@@ -9,9 +9,11 @@ import qs.Modules.Bar.Widgets
 import qs.Modules.Bar
 
 Rectangle {
+  id: root
 
   property string position: "middle"
   property ShellScreen screen
+  property real scaling: ScalingService.getScreenScale(screen)
 
 
   color: (childrenRect.width > 0) ? Colors.mSurface : Colors.transparent
@@ -19,6 +21,7 @@ Rectangle {
 
   implicitWidth: childrenRect.width + Style.marginM * 2
   implicitHeight: Style.barHeight * scaling
+
 
   anchors {
     left: (position == "left") ? parent.left : undefined
@@ -28,7 +31,7 @@ Rectangle {
 
   // Widgets
   RowLayout {
-    spacing: Style.marginS
+    spacing: Style.marginS * scaling
 
     anchors {
       left: parent.left
@@ -39,23 +42,22 @@ Rectangle {
     Repeater {
 
       // Loading Widgets from Settings
-      model: ScalingService.getScreenBarWidgets(root.modelData, position)
+      model: ScalingService.getScreenBarWidgets(root.screen, position)
 
       delegate: RowLayout {
-        spacing: Style.marginS
+        spacing: Style.marginS * scaling
         Rectangle {
-          anchors.rightMargin: Style.marginS
+          anchors.rightMargin: Style.marginS * scaling
           visible: (model.index > 0)
           width: 2
-          height: Style.capsuleHeight
+          height: Style.capsuleHeight * scaling
           color: Colors.mOutline
         }
         BarWidgetLoader {
           widgetId: (modelData !== undefined ? modelData : "")
           widgetProps: {
-            "screen": root.modelData || null,
-            "scaling": ScalingService.getScreenScale(root.modelData),
-            "widgetId": modelData.id,
+            "screen": root.screen || null,
+            "scaling": root.scaling,
           }
           Layout.alignment: Qt.AlignHCenter
         }

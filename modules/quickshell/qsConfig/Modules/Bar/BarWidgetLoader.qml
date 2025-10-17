@@ -15,7 +15,6 @@ Item {
 
   Loader {
     id: loader
-    anchors.fill: parent
     active: widgetId !== ""
     sourceComponent: WidgetIdRegistry.getWidget(root.widgetId)
     onLoaded: {
