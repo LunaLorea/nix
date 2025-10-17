@@ -59,8 +59,16 @@
 
     programs.kitty.font.size = 16;
 
-    wayland.windowManager.sway.config.output.eDP-1 = {
-      scale = "1";
+    wayland.windowManager.sway.config = {
+      output.eDP-1 = {
+        scale = "1";
+      };
+      workspaceOutputAssign = [
+      {
+        workspace = "1";
+        output = "eDP-1";
+      }
+      ];
     };
   };
 }

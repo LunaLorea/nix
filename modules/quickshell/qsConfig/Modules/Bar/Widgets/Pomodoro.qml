@@ -263,7 +263,7 @@ Item {
         left: parent.left
         leftMargin: Style.marginM
       }
-      spacing: Style.marginS
+      spacing: Style.marginS * root.scaling
       NIcon {
         icon: root.icon
         font.pointSize: Style.capsuleHeight * 0.48 * root.scaling
