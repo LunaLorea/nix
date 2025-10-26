@@ -8,66 +8,60 @@ Slider {
   id: root
 
   property var cutoutColor: Colors.mSurface
-  property bool snapAlways: true
+  property bool snapAlways: false
   property real heightRatio: 0.7
 
   readonly property real knobDiameter: Math.round((Style.baseWidgetSize * heightRatio * scaling) / 2) * 2
   readonly property real trackHeight: Math.round((knobDiameter * 0.4) / 2) * 2
-  readonly property real cutoutExtra: Math.round((Style.baseWidgetSize * 0.1 * scaling) / 2) * 2
+  readonly property real cutoutExtra: 0
+
+  property int wheelAccumulator: 0
 
   padding: cutoutExtra / 2
 
   snapMode: snapAlways ? Slider.SnapAlways : Slider.SnapOnRelease
   implicitHeight: Math.max(trackHeight, knobDiameter)
 
+  stepSize: 0.2
+
   background: Rectangle {
-    x: root.leftPadding
     y: root.topPadding + root.availableHeight / 2 - height / 2
     implicitWidth: Style.sliderWidth
     implicitHeight: trackHeight
-    width: root.availableWidth
     height: implicitHeight
-    radius: height / 2
-    color: Qt.alpha(Colors.mSurface, 0.5)
-    border.color: Qt.alpha(Colors.mOutline, 0.5)
-    border.width: Math.max(1, Style.borderS * scaling)
+    radius: Style.marginXXS
+    color: Colors.mOutline
 
     // A container composite shape that puts a semicircle on the end
     Item {
       id: activeTrackContainer
-      width: root.visualPosition * parent.width
+      width: parent.width
       height: parent.height
       clip: true
 
-      // The rounded end cap made from a rounded rectangle
-      Rectangle {
-        width: parent.height
-        height: parent.height
-        radius: width / 2
-        color: Qt.darker(Colors.mPrimary, 1.2) //starting color of gradient
-      }
 
       // The main rectangle
       Rectangle {
         x: parent.height / 2
-        width: parent.width - x // Fills the rest of the container
+        width: root.visualPosition * parent.width
+        anchors.left: parent.left
         height: parent.height
-        radius: 0
+        radius: Style.marginXXS
         // Animated gradient fill
         gradient: Gradient {
           orientation: Gradient.Horizontal
           GradientStop {
             position: 0.0
-            color: Qt.darker(Colors.mPrimary, 1.2)
+            color: Qt.darker(Colors.mTertiary, 1.2)
             Behavior on color {
-             ColorAnimation {
+              ColorAnimation {
                 duration: 300
               }
             }
           }
           GradientStop {
             position: 0.5
-            color: Colors.mPrimary
+            color: Colors.mTertiary
             SequentialAnimation on position {
               loops: Animation.Infinite
               NumberAnimation {
@@ -91,40 +85,30 @@ Slider {
         }
       }
     }
-
-    // Circular cutout
-    Rectangle {
-      id: knobCutout
-      implicitWidth: knobDiameter + cutoutExtra
-      implicitHeight: knobDiameter + cutoutExtra
-      radius: width / 2
-      color: root.cutoutColor !== undefined ? root.cutoutColor : Colors.mSurface
-      x: root.leftPadding + root.visualPosition * (root.availableWidth - root.knobDiameter) - cutoutExtra
-      anchors.verticalCenter: parent.verticalCenter
-    }
   }
 
   handle: Item {
-    implicitWidth: knobDiameter
-    implicitHeight: knobDiameter
-    x: root.leftPadding + root.visualPosition * (root.availableWidth - width)
+    implicitWidth: 0
+    implicitHeight: 0
     anchors.verticalCenter: parent.verticalCenter
 
     Rectangle {
       id: knob
-      implicitWidth: knobDiameter
-      implicitHeight: knobDiameter
-      radius: width / 2
-      color: root.pressed ? Colors.mTertiary : Colors.mSurface
-      border.color: Colors.mPrimary
-      border.width: Math.max(1, Style.borderL * scaling)
-      anchors.centerIn: parent
-
-      Behavior on color {
-       ColorAnimation {
-          duration: Style.animationFast
+      color: Colors.transparent
+      anchors.fill: parent
+    }
+  }
+    MouseArea {
+      anchors.fill: parent
+      onWheel: function(wheel) {
+        root.wheelAccumulator += wheel.angleDelta.y
+        if (root.wheelAccumulator >= 120) {
+          root.wheelAccumulator = 0
+          root.increase()
+        } else if (root.wheelAccumulator <= -120) {
+          root.wheelAccumulator = 0
+          root.decrease()
         }
       }
     }
-  }
 }

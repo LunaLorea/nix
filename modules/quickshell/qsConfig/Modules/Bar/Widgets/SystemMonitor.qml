@@ -18,6 +18,14 @@ Rectangle {
   radius: Style.radiusM
   color: Settings.bar.capsule ? Colors.mSurfaceVariant : Colors.transparent
 
+  MouseArea {
+    id: mouseArea
+    anchors.fill: parent
+    onClicked: Quickshell.execDetached(["floating", "kitty", "btm"])
+    acceptedButtons: Qt.LeftButton
+    cursorShape: Qt.PointingHandCursor
+  }
+
   RowLayout {
     id: mainRow
     anchors.centerIn: parent

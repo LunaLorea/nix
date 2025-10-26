@@ -41,6 +41,11 @@
         hostName = "desktop";
         userName = "luna";
       };
+
+      server = mkHost {
+        hostName = "server";
+        userName = "luna";
+      };
     };
   };
 }

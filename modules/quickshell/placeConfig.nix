@@ -7,7 +7,7 @@
   filterGenerated = item: !(lib.strings.hasInfix "Settings" item) && !(lib.strings.hasInfix "Colors" item);
 
   turnIntoFiles = path: {
-    name = ''${lib.lists.last ( lib.strings.splitString "/" ( builtins.toString path )) }'';
+    name = ''${lib.lists.last (lib.strings.splitString "/" (builtins.toString path))}'';
     value = {
       enable = true;
       target = "./.config/quickshell${lib.strings.removePrefix (builtins.toString ./qsConfig) path}";

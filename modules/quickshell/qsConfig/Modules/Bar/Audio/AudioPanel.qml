@@ -10,10 +10,6 @@ import qs.Widgets
 NPanel {
   id: root
 
-  preferredWidth: 400 * Math.sqrt(scaling)
-  preferredHeight: 500 * Math.sqrt(scaling)
-
-
   panelKeyboardFocus: true
 
   property var activeScrollView: null
@@ -73,45 +69,6 @@ NPanel {
         anchors.fill: parent
         anchors.margins: Style.marginL * scaling
 
-        // Header row
-        RowLayout {
-          id: headerRow
-          Layout.fillWidth: true
-          Layout.alignment: Qt.AlignTop
-          spacing: Style.marginS * scaling
-          implicitWidth: contentLayout
-          implicitHeight: childrenRect.height
-
-          // Main icon
-          NIcon {
-            icon: "volume-high"
-            color: Colors.mPrimary
-            font.pointSize: Style.fontSizeXXL * scaling
-          }
-
-          // Main title
-          NText {
-            text: "Audio Panel"
-            font.pointSize: Style.fontSizeXL * scaling
-            font.weight: Style.fontWeightBold
-            color: Colors.mPrimary
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignVCenter
-          }
-
-          // Close button
-          NIconButton {
-            icon: "close"
-            tooltipText: "Close Audio Panel"
-            Layout.alignment: Qt.AlignVCenter
-            onClicked: root.close()
-          }
-        }
-
-        // Divider
-        NDivider {
-          Layout.fillWidth: true
-        }
 
         // Tab content area
         Rectangle {
@@ -142,7 +99,8 @@ NPanel {
                   anchors.margins: Style.marginL * scaling
                   implicitWidth: contentLayout
 
-                  ColumnLayout {
+                  RowLayout {
+                    id: inputSlider
                     spacing: Style.marginXS * scaling
 
                     // Pipewire seems a bit finicky, if we spam too many volume changes it breaks easily
@@ -166,9 +124,19 @@ NPanel {
                       }
                     }
 
-                    NLabel {
-                      label: "Output Volume"
-                      description: "System output volume level"
+
+                    NIconButton{
+                      icon: getIcon()
+                      onClicked: {
+                        AudioService.setOutputMuted(!AudioService.muted)
+                      }
+
+                      function getIcon() {
+                        if (AudioService.muted) {
+                          return "volume-mute"
+                        }
+                        return (AudioService.volume <= Number.EPSILON) ? "volume-zero" : (AudioService.volume <= 0.5) ? "volume-low" : "volume-high"
+                      }
                     }
 
                     NValueSlider {
@@ -182,31 +150,65 @@ NPanel {
                     }
                   }
 
-                  // Mute Toggle
-                  ColumnLayout {
-                    spacing: Style.marginS * scaling
-                    Layout.fillWidth: true
+                  ButtonGroup {
+                    id: sinks
+                  }
 
-                    NToggle {
-                      label: "Mute audio output"
-                      description: "Mute the system's main audio output."
-                      checked: AudioService.muted
-                      onToggled: checked => {
-                        if (AudioService.sink && AudioService.sink.audio) {
-                          AudioService.sink.audio.muted = checked
+                  ColumnLayout {
+                    spacing: Style.marginXS * scaling
+                    implicitWidth: inputSlider.width
+                    Layout.bottomMargin: Style.marginL * scaling
+                    Layout.leftMargin: Style.marginS
+
+                    Repeater {
+                      id: sinkRepeater
+                      model: AudioService.sinks
+                      Item {
+                        Layout.fillWidth: true
+                        implicitHeight: childrenRect.height
+                        RowLayout {
+                          implicitWidth: parent.width
+                          property color textColor: AudioService.sink?.id === modelData.id ? Colors.mTertiary : Colors.mOnSurfaceVariant
+                          NText {
+                            text: "["
+                            color: parent.textColor
+                            Layout.alignment: Qt.AlignLeft
+                          }
+                          NText {
+                            text: modelData.description
+                            color: parent.textColor
+                            Layout.alignment: Qt.AlignLeft
+                            Layout.fillWidth: true
+                          }
+                          NText {
+                            text: "]"
+                            color: parent.textColor
+                            Layout.alignment: Qt.AlignRight
+                          }
+
+                        }
+
+                        MouseArea {
+                          anchors.fill: parent
+                          onClicked: {
+                            AudioService.setAudioSink(modelData)
+                            localVolume = AudioService.volume
+                          }
                         }
                       }
                     }
                   }
 
+
+
                   // Input Volume
-                  ColumnLayout {
+                  RowLayout {
                     spacing: Style.marginXS * scaling
                     Layout.fillWidth: true
 
-                    NLabel {
-                      label: "Input Volume"
-                      description: "Microphone input volume level"
+                    NIconButton {
+                      icon: AudioService.inputMuted ? "microphone-mute" : "microphone"
+                      onClicked: AudioService.setInputMuted(!AudioService.inputMuted)
                     }
 
                     NValueSlider {
@@ -219,95 +221,48 @@ NPanel {
                       onMoved: value => AudioService.setInputVolume(value)
                     }
                   }
-
-                  // Input Mute Toggle
-                  ColumnLayout {
-                    spacing: Style.marginS * scaling
-                    Layout.fillWidth: true
-
-                    NToggle {
-                      label: "Mute audio input"
-                      description: "Mute the default audio input (microphone)."
-                      checked: AudioService.inputMuted
-                      onToggled: checked => AudioService.setInputMuted(checked)
-                    }
+                  ButtonGroup {
+                    id: sources
                   }
 
-
-
-                  NDivider {
-                    Layout.fillWidth: true
-                    Layout.topMargin: Style.marginXL * scaling
-                    Layout.bottomMargin: Style.marginXL * scaling
-                  }
-
-                  // AudioService Devics
                   ColumnLayout {
-                    spacing: Style.marginS * scaling
+                    spacing: Style.marginXS * scaling
                     Layout.fillWidth: true
+                    Layout.leftMargin: Style.marginS
 
-                    NHeader {
-                      label: "Audio Devices"
-                      description: "Configure available audio input and output devices"
-                    }
-
-                    // -------------------------------
-                    // Output Devices
-                    ButtonGroup {
-                      id: sinks
-                    }
-
-                    ColumnLayout {
-                      spacing: Style.marginXS * scaling
-                      Layout.fillWidth: true
-                      Layout.bottomMargin: Style.marginL * scaling
-
-                      NLabel {
-                        label: "Output device"
-                        description: "Select the desired audio output device."
-                      }
-
-                      Repeater {
-                        model: AudioService.sinks
-                        NRadioButton {
-                          ButtonGroup.group: sinks
-                          required property PwNode modelData
-                          text: modelData.description
-                          checked: AudioService.sink?.id === modelData.id
-                          onClicked: {
-                            AudioService.setAudioSink(modelData)
-                            localVolume = AudioService.volume
+                    Repeater {
+                      model: AudioService.sources
+                      //Layout.fillWidth: true
+                      Item {
+                        Layout.fillWidth: true
+                        implicitHeight: childrenRect.height
+                        RowLayout {
+                          implicitWidth: parent.width
+                          property color textColor: AudioService.source?.id === modelData.id ? Colors.mTertiary : Colors.mOnSurfaceVariant
+                          NText {
+                            text: "["
+                            color: parent.textColor
+                            Layout.alignment: Qt.AlignLeft
                           }
-                          Layout.fillWidth: true
+                          NText {
+                            text: modelData.description
+                            color: parent.textColor
+                            Layout.alignment: Qt.AlignLeft
+                            Layout.fillWidth: true
+                          }
+                          NText {
+                            text: "]"
+                            color: parent.textColor
+                            Layout.alignment: Qt.AlignRight
+                          }
+
                         }
-                      }
-                    }
 
-                    // -------------------------------
-                    // Input Devices
-                    ButtonGroup {
-                      id: sources
-                    }
-
-                    ColumnLayout {
-                      spacing: Style.marginXS * scaling
-                      Layout.fillWidth: true
-
-                      NLabel {
-                        label: "Input devices"
-                        description: "Select the desired audio input device."
-                      }
-
-                      Repeater {
-                        model: AudioService.sources
-                        //Layout.fillWidth: true
-                        NRadioButton {
-                          ButtonGroup.group: sources
-                          required property PwNode modelData
-                          text: modelData.description
-                          checked: AudioService.source?.id === modelData.id
-                          onClicked: AudioService.setAudioSource(modelData)
-                          Layout.fillWidth: true
+                        MouseArea {
+                          anchors.fill: parent
+                          onClicked: {
+                            AudioService.setAudioSource(modelData)
+                          }
                         }
                       }
                     }

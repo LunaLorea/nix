@@ -11,6 +11,8 @@ Item {
   implicitWidth: childrenRect.width
   implicitHeight: Style.capsuleHeight
 
+  anchors.centerIn: parent
+
   property string tooltipText: finished + " pomodoro" + (finished != 1 ? "s" : "") + " completed today."
   property real scaling: 1
   property ShellScreen screen
@@ -135,100 +137,6 @@ Item {
     completeness = state == 1 ? ((currentDuration - remainingTime) / currentDuration) : (remainingTime / currentDuration)
   }
 
-  function leftClick() {
-    start()
-  }
-
-  function rightClick() {
-    state = 0
-    pomodoro.running = false
-    currentDuration = duration * 60
-    remainingTime = 0
-    completeness = 0
-    display = (duration < 10 ? "0" : "") + duration + ":00"
-  }
-
-  MouseArea {
-    anchors.fill: parent
-    cursorShape: root.enabled ? Qt.PointingHandCursor : Qt.ArrowCursor
-    acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
-    hoverEnabled: true
-    onClicked: function(mouse) {
-      if (mouse.button === Qt.LeftButton) {
-        root.leftClick()
-      } else if (mouse.button === Qt.RightButton) {
-        root.rightClick()
-      }
-      TooltipService.hide()
-    }
-    onWheel: function (wheel) {
-      if ( root.state != 0 && root.state != 3 ) { return } 
-      root.wheelAccumulator += wheel.angleDelta.y
-      var delta = 0
-      if (root.wheelAccumulator >= 120) {
-        root.wheelAccumulator = 0
-        delta = 1
-      } else if (root.wheelAccumulator <= -120) {
-        root.wheelAccumulator = 0
-        delta = -1
-      }
-      if (root.state == 0) {
-        root.duration =  Math.max(root.duration + delta, 1)
-        root.display = (root.duration < 10 ? "0" : "") + root.duration + ":00"
-      }
-      if (root.state == 3 && root.finished % 4 != 0) {
-        root.breakDuration = Math.max(root.breakDuration + delta, 1)
-        root.display = (root.breakDuration < 10 ? "0" : "") + root.breakDuration + ":00"
-      }
-      if (root.state == 3 && root.finished % 4 == 0) {
-        root.longBreakDuration = Math.max(root.longBreakDuration + delta, 1)
-        root.display = (root.longBreakDuration < 10 ? "0" : "") + root.longBreakDuration + ":00"
-      }
-    }
-    onEntered: {
-      TooltipService.show(root, root.tooltipText, "auto", 1000)
-    }
-    onExited: {
-      TooltipService.hide()
-    }
-  }
-
-
-  Rectangle {
-    width: (childrenRect.width + Style.marginM * 2)
-    height: 25 * root.scaling
-    radius: Style.radiusXS * root.scaling
-    color: Colors.transparent
-    anchors.centerIn: parent
-
-    RowLayout {
-      anchors {
-        top: parent.top
-        bottom: parent.bottom
-        left: parent.left
-        leftMargin: Style.marginM
-      }
-      spacing: Style.marginS * root.scaling
-      NIcon {
-        icon: root.icon
-        font.pointSize: Style.capsuleHeight * 0.48 * root.scaling
-      }
-
-      NText {
-        text: root.display
-        scaling: root.scaling
-        Layout.alignment: Qt.AlignVCenter
-      }
-    }
-  }
-  Rectangle {
-    id: progressBar
-    property real completeness: root.completeness
-    visible: root.state != 0
-    width: ((childrenRect.width + Style.marginM * 2) * ((0.49 < completeness && 0.51 > completeness) ? 0.49 : completeness))
-    height: 25 * root.scaling
-    radius: Style.radiusXS * root.scaling
-    color: getColor()
     function getColor() {
       switch (root.state) {
         case 1:
@@ -243,10 +151,106 @@ Item {
         return Colors.transparent
       }
     }
-    //? Colors.mWarning : ((root.done) ? Colors.mGreen : Colors.mTertiary)
-    anchors {
-      verticalCenter: parent.verticalCenter
+
+  function leftClick() {
+    start()
+  }
+
+  function rightClick() {
+    state = 0
+    pomodoro.running = false
+    currentDuration = duration * 60
+    remainingTime = 0
+    completeness = 0
+    display = (duration < 10 ? "0" : "") + duration + ":00"
+  }
+
+
+
+  Rectangle {
+    width: (bgText.width + Style.marginM * 2 * root.scaling)
+    height: 25 * root.scaling
+    radius: Style.radiusXS * root.scaling
+    color: Colors.transparent
+    anchors.verticalCenter: parent.verticalCenter
+
+    RowLayout {
+      id: bgText
+      anchors {
+        top: parent.top
+        bottom: parent.bottom
+        left: parent.left
+        leftMargin: Style.marginM * root.scaling
+      }
+      spacing: Style.marginS * root.scaling
+      NIcon {
+        icon: root.icon
+        font.pointSize: Style.capsuleHeight * 0.48 * root.scaling
+      }
+
+      NText {
+        text: root.display
+        scaling: root.scaling
+        Layout.alignment: Qt.AlignVCenter
+      }
     }
+
+    MouseArea {
+      anchors.fill: parent
+      cursorShape: root.enabled ? Qt.PointingHandCursor : Qt.ArrowCursor
+      acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
+      hoverEnabled: true
+      onClicked: function(mouse) {
+        if (mouse.button === Qt.LeftButton) {
+          root.leftClick()
+        } else if (mouse.button === Qt.RightButton) {
+          root.rightClick()
+        }
+        TooltipService.hide()
+      }
+      onWheel: function (wheel) {
+        if ( root.state != 0 && root.state != 3 ) { return } 
+        root.wheelAccumulator += wheel.angleDelta.y
+        var delta = 0
+        if (root.wheelAccumulator >= 120) {
+          root.wheelAccumulator = 0
+          delta = 1
+        } else if (root.wheelAccumulator <= -120) {
+          root.wheelAccumulator = 0
+          delta = -1
+        }
+        if (root.state == 0) {
+          root.duration =  Math.max(root.duration + delta, 1)
+          root.display = (root.duration < 10 ? "0" : "") + root.duration + ":00"
+        }
+        if (root.state == 3 && root.finished % 4 != 0) {
+          root.breakDuration = Math.max(root.breakDuration + delta, 1)
+          root.display = (root.breakDuration < 10 ? "0" : "") + root.breakDuration + ":00"
+        }
+        if (root.state == 3 && root.finished % 4 == 0) {
+          root.longBreakDuration = Math.max(root.longBreakDuration + delta, 1)
+          root.display = (root.longBreakDuration < 10 ? "0" : "") + root.longBreakDuration + ":00"
+        }
+      }
+      onEntered: {
+        TooltipService.show(root, root.tooltipText, "auto", 1000)
+      }
+      onExited: {
+        TooltipService.hide()
+      }
+    }
+  }
+  Rectangle {
+    id: progressBar
+    property real completeness: root.completeness
+    visible: true //root.state != 0
+    width: (fgText.width + Style.marginM * 2 * root.scaling) * completeness
+    height: 25 * root.scaling
+    radius: Style.radiusXS * root.scaling
+    color: root.getColor()
+    //? Colors.mWarning : ((root.done) ? Colors.mGreen : Colors.mTertiary)
+    anchors.verticalCenter: parent.verticalCenter
+    z: 1
     clip: true
 
     Behavior on width {
@@ -257,11 +261,12 @@ Item {
     }
 
     RowLayout {
+      id: fgText
       anchors {
         top: parent.top
         bottom: parent.bottom
         left: parent.left
-        leftMargin: Style.marginM
+        leftMargin: Style.marginM * root.scaling
       }
       spacing: Style.marginS * root.scaling
       NIcon {

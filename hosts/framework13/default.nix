@@ -64,10 +64,10 @@
         scale = "1";
       };
       workspaceOutputAssign = [
-      {
-        workspace = "1";
-        output = "eDP-1";
-      }
+        {
+          workspace = "1";
+          output = "eDP-1";
+        }
       ];
     };
   };

@@ -25,19 +25,9 @@ NBox {
     }
     spacing: Style.marginS * scaling
 
-    NImageCircled {
-      width: Style.baseWidgetSize * 1.25 * scaling
-      height: Style.baseWidgetSize * 1.25 * scaling
-      imagePath: Settings.avatarImage
-      borderColor: Colors.mOutline
-      borderWidth: Math.max(1, Style.borderM * scaling)
-    }
-
     NText {
-      text: "Luna"
-      font.pointSize: Style.fontSizeXXL * scaling
-      font.weight: Style.fontWeightBold
-      color: Colors.mPrimary
+      text: Settings.userName + "@" + Settings.hostName
+      color: Colors.mOnSurface
       Layout.fillWidth: true
     }
 

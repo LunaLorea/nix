@@ -10,7 +10,7 @@ import qs.Widgets
 Item {
   id: root
 
-  property real scaling: 1
+  property real scaling
   property ShellScreen screen
 
   property bool isDestroying: false
@@ -46,14 +46,12 @@ Item {
   function refreshWorkspaces() {
     localWorkspaces.clear()
     if (screen !== null) {
-      Logger.log("test")
       for (var i = 0; i < CompositorService.workspaces.count; i++) {
         const ws = CompositorService.workspaces.get(i)
         localWorkspaces.append(ws)
       }
     }
     workspaceRepeater.model = localWorkspaces
-    Logger.log("Workspaces", localWorkspaces.count)
   }
 
   RowLayout {
@@ -105,6 +103,7 @@ Item {
           anchors.fill: parent
 
           hoverEnabled: true
+          cursorShape: Qt.PointingHandCursor
 
           onEntered: {
             parent.color = Colors.mTertiary

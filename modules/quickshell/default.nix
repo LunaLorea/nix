@@ -6,68 +6,72 @@
   ...
 }: let
   cfg = config.modules.quickshell;
-  mkQmlListFromList = list: if list == [] then "" else 
-  ''"${lib.strings.concatStringsSep "\",\n          \"" list}"'';
+  mkQmlListFromList = list:
+    if list == []
+    then ""
+    else ''"${lib.strings.concatStringsSep "\",\n          \"" list}"'';
 
   mkMonitorsList = name: attrs: ''
-  {
-        "name": "${name}",
-        "scale": ${lib.strings.floatToString attrs.scale},
-        "showBar": ${lib.boolToString attrs.showBar},
-        "barPosition": "${attrs.barPosition}",
-        "barWidgets": {
-          "left": [
-            ${mkQmlListFromList attrs.barWidgets.left}
-          ],
-          "middle": [
-            ${mkQmlListFromList attrs.barWidgets.middle}
-          ],
-          "right": [
-            ${mkQmlListFromList attrs.barWidgets.right}
-          ]
-        }
-      }'';
+    {
+          "name": "${name}",
+          "scale": ${lib.strings.floatToString attrs.scale},
+          "showBar": ${lib.boolToString attrs.showBar},
+          "barPosition": "${attrs.barPosition}",
+          "barWidgets": {
+            "left": [
+              ${mkQmlListFromList attrs.barWidgets.left}
+            ],
+            "middle": [
+              ${mkQmlListFromList attrs.barWidgets.middle}
+            ],
+            "right": [
+              ${mkQmlListFromList attrs.barWidgets.right}
+            ]
+          }
+        }'';
   settingsText = ''
-      pragma Singleton
+    pragma Singleton
 
-      import Quickshell
-      import QtQuick
-      import qs.Commons
+    import Quickshell
+    import QtQuick
+    import qs.Commons
 
-      Singleton {
-        id: root
+    Singleton {
+      id: root
 
-        property string shellName: "quickBar"
+      property string shellName: "quickBar"
 
-        // --- bar settings
-        property var bar: {
-          "backgroundOpacity": ${lib.strings.floatToString cfg.bar.backgroundOpacity},
-          "capsule": ${lib.boolToString cfg.bar.capsule},
-          "floating": ${lib.boolToString cfg.bar.floating}
-        }
+      // --- System information
+      property string userName: "${host.userName}"
+      property string hostName: "${host.hostName}"
 
-        // --- monitors
-        property list<var> monitors: [
-          ${lib.strings.concatStringsSep ",\n    " (lib.mapAttrsToList mkMonitorsList cfg.monitors)}
-        ]
-
-
-        // --- Clock Settings
-        property string clockFormat: "${cfg.bar.clockFormat}"
-
-
-        signal settingsLoaded
-
-        Component.onCompleted: {
-          Logger.log("Settings", "Settings loaded")
-          settingsLoaded()
-        }
-        // --- Persistant Files
-        property string cacheDir: Quickshell.env("HOME") + "/.cache" + "/" + shellName + "/"
+      // --- bar settings
+      property var bar: {
+        "backgroundOpacity": ${lib.strings.floatToString cfg.bar.backgroundOpacity},
+        "capsule": ${lib.boolToString cfg.bar.capsule},
+        "floating": ${lib.boolToString cfg.bar.floating}
       }
-      '';
+
+      // --- monitors
+      property list<var> monitors: [
+        ${lib.strings.concatStringsSep ",\n    " (lib.mapAttrsToList mkMonitorsList cfg.monitors)}
+      ]
 
 
+      // --- Clock Settings
+      property string clockFormat: "${cfg.bar.clockFormat}"
+
+
+      signal settingsLoaded
+
+      Component.onCompleted: {
+        Logger.log("Settings", "Settings loaded")
+        settingsLoaded()
+      }
+      // --- Persistant Files
+      property string cacheDir: Quickshell.env("HOME") + "/.cache" + "/" + shellName + "/"
+    }
+  '';
 in {
   options.modules.quickshell = {
     enable = lib.mkEnableOption "quickshell bar";
@@ -79,7 +83,7 @@ in {
       };
     };
     monitors = lib.mkOption {
-      type = lib.types.attrsOf ( lib.types.submodule ({ ... }: {
+      type = lib.types.attrsOf (lib.types.submodule ({...}: {
         options = {
           scale = lib.mkOption {
             type = lib.types.float;
@@ -129,7 +133,7 @@ in {
       };
       clockFormat = lib.mkOption {
         type = lib.types.str;
-        default = "HH:mm ddd dd.MM.yy";
+        default = "HH:mm dd/MM/yy";
       };
       capsule = lib.mkOption {
         type = lib.types.bool;
@@ -138,7 +142,7 @@ in {
       floating = lib.mkOption {
         type = lib.types.bool;
         default = true;
-      };  
+      };
     };
   };
 
@@ -147,6 +151,8 @@ in {
       quickshell
       openpomodoro-cli
     ];
+
+    services.upower.enable = true;
 
     home-manager.users.${host.userName} = {...}: {
       imports = [

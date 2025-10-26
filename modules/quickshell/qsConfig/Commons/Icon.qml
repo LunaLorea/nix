@@ -42,6 +42,9 @@ Singleton {
     "volume-high": "󰕾",
     "volume-mute": "󰝟",
 
+    "microphone": "",
+    "microphone-mute": "󰍭",
+
     "nix": "󱄅",
     "lock": "󰍁",
     "signout": "",

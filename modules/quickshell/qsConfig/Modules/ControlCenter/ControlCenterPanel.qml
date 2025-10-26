@@ -10,8 +10,7 @@ import qs.Widgets
 NPanel {
   id: root
 
-  preferredWidth: 400 * Math.sqrt(scaling)
-  preferredHeight: 500 * Math.sqrt(scaling)
+  Component.onCompleted: Logger.log(scaling)
   panelKeyboardFocus: true
 
   panelContent: Item {
@@ -29,6 +28,7 @@ NPanel {
 
 
       ProfileCard {
+        scaling: root.scaling
         Layout.fillWidth: true
         Layout.preferredHeight: 64 * scaling
       }

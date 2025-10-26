@@ -19,7 +19,7 @@ Rectangle {
   color: (childrenRect.width > 0) ? Colors.mSurface : Colors.transparent
   radius: Style.radiusXXS
 
-  implicitWidth: childrenRect.width + Style.marginM * 2
+  implicitWidth: widgets.width + Style.marginM * 2 * scaling
   implicitHeight: Style.barHeight * scaling
 
 
@@ -31,12 +31,11 @@ Rectangle {
 
   // Widgets
   RowLayout {
-    spacing: Style.marginS * scaling
+    id: widgets
+    //spacing: Style.marginS * scaling
 
     anchors {
-      left: parent.left
-      leftMargin: Style.marginM
-      verticalCenter: parent.verticalCenter
+      centerIn: parent
     }
 
     Repeater {
@@ -47,7 +46,6 @@ Rectangle {
       delegate: RowLayout {
         spacing: Style.marginS * scaling
         Rectangle {
-          anchors.rightMargin: Style.marginS * scaling
           visible: (model.index > 0)
           width: 2
           height: Style.capsuleHeight * scaling

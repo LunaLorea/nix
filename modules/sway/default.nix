@@ -12,7 +12,7 @@
 
     ${pkgs.sway}/bin/swaymsg -t subscribe -m '[ "window" ]' \
       | jq --unbuffered --argjson pid "$pid" '.container | select(.pid == $pid) | .id' \
-      | xargs -I '@' -- ${pkgs.sway}/bin/swaymsg '[ con_id=@ ] move scratchpad'
+      | xargs -I '@' -- ${pkgs.sway}/bin/swaymsg '[ con_id=@ ] floating enable'
 
     subscription=$!
 
@@ -46,6 +46,7 @@
 in {
   options.modules.sway = {
     enable = lib.mkEnableOption "Sway WM and the associated configurations";
+    test = "siesie";
   };
 
   config = lib.mkIf config.modules.sway.enable {
@@ -71,12 +72,12 @@ in {
         pkgs.slurp
         pkgs.wl-clipboard
         pkgs.baobab
-        pkgs.gnome-calculator
-        pkgs.gnome-system-monitor
+        pkgs.bottom
         pkgs.nautilus
         pkgs.networkmanagerapplet
         pkgs.qpwgraph
         lock
+        sway-floating
         pkgs.pwvucontrol
       ];
       # automatically mount drives
@@ -154,7 +155,7 @@ in {
 
     # enables monitor hotplugging
     systemd.user.services.kanshi = {
-    # description = "kanshi daemon";
+      # description = "kanshi daemon";
       serviceConfig = {
         Type = "simple";
         ExecStart = ''${pkgs.kanshi}/bin/kanshi -c kanshi_config_file'';

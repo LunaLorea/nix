@@ -10,7 +10,7 @@ PopupWindow {
 
   property string text: ""
   property string direction: "auto" // "auto", "left", "right", "top", "bottom"
-  property int margin: Style.marginXS // distance from target
+  property int margin: Style.marginS // distance from target
   property int padding: Style.marginM
   property int delay: 0
   property int hideDelay: 0
@@ -108,7 +108,7 @@ PopupWindow {
   // Function to show tooltip
   function show(target, tipText, customDirection, showDelay) {
     if (!target || !tipText || tipText === "")
-      return
+    return
 
     delay = showDelay
 
@@ -167,7 +167,8 @@ PopupWindow {
     root.implicitHeight = tipHeight
 
     // Get target's global position
-    const targetGlobal = targetItem.mapToGlobal(0, 0)
+    const targetGlobal = Qt.point(targetItem.screen.x, targetItem.screen.y)
+    const targetScreenPos = targetItem.mapToGlobal(0, 0).x - screenX
     const targetWidth = targetItem.width
     const targetHeight = targetItem.height
 
@@ -183,30 +184,30 @@ PopupWindow {
 
       // Try positions in order of available space
       const positions = [{
-                           "dir": "bottom",
-                           "space": spaceBottom,
-                           "x": (targetWidth - tipWidth) / 2,
-                           "y": targetHeight + margin * scaling,
-                           "fits": spaceBottom >= tipHeight + margin * scaling
-                         }, {
-                           "dir": "top",
-                           "space": spaceTop,
-                           "x": (targetWidth - tipWidth) / 2,
-                           "y": -tipHeight - margin * scaling,
-                           "fits": spaceTop >= tipHeight + margin * scaling
-                         }, {
-                           "dir": "right",
-                           "space": spaceRight,
-                           "x": targetWidth + margin * scaling,
-                           "y": (targetHeight - tipHeight) / 2,
-                           "fits": spaceRight >= tipWidth + margin * scaling
-                         }, {
-                           "dir": "left",
-                           "space": spaceLeft,
-                           "x": -tipWidth - margin * scaling,
-                           "y": (targetHeight - tipHeight) / 2,
-                           "fits": spaceLeft >= tipWidth + margin * scaling
-                         }]
+        "dir": "bottom",
+        "space": spaceBottom,
+        "x": (targetWidth - tipWidth) / 2,
+        "y": targetHeight + margin * scaling,
+        "fits": spaceBottom >= tipHeight + margin * scaling
+      }, {
+        "dir": "top",
+        "space": spaceTop,
+        "x": (targetWidth - tipWidth) / 2,
+        "y": -tipHeight - margin * scaling,
+        "fits": spaceTop >= tipHeight + margin * scaling
+      }, {
+        "dir": "right",
+        "space": spaceRight,
+        "x": targetWidth + margin * scaling,
+        "y": (targetHeight - tipHeight) / 2,
+        "fits": spaceRight >= tipWidth + margin * scaling
+      }, {
+        "dir": "left",
+        "space": spaceLeft,
+        "x": -tipWidth - margin * scaling,
+        "y": (targetHeight - tipHeight) / 2,
+        "fits": spaceLeft >= tipWidth + margin * scaling
+      }]
 
       // Find first position that fits
       var selectedPosition = null
@@ -234,28 +235,28 @@ PopupWindow {
       // Adjust horizontal position to keep tooltip on screen
       if (direction === "auto") {
         const globalX = targetGlobal.x + newAnchorX
-        if (globalX < 0) {
-          newAnchorX = -targetGlobal.x + margin * scaling
-        } else if (globalX + tipWidth > screenWidth) {
-          newAnchorX = screenWidth - targetGlobal.x - tipWidth - margin * scaling
+        if (targetScreenPos < 0) {
+          //newAnchorX = -targetGlobal.x + margin * scaling
+        } else if (targetScreenPos + tipWidth > screenWidth) {
+          newAnchorX = screenWidth - (targetItem.mapToGlobal(0 ,0).x - screenX) - tipWidth - margin * scaling
         }
       }
     } else {
       // Manual direction positioning
       switch (direction) {
-      case "left":
+        case "left":
         newAnchorX = -tipWidth - margin * scaling
         newAnchorY = (targetHeight - tipHeight) / 2
         break
-      case "right":
+        case "right":
         newAnchorX = targetWidth + margin * scaling
         newAnchorY = (targetHeight - tipHeight) / 2
         break
-      case "top":
+        case "top":
         newAnchorX = (targetWidth - tipWidth) / 2
         newAnchorY = -tipHeight - margin * scaling
         break
-      case "bottom":
+        case "bottom":
         newAnchorX = (targetWidth - tipWidth) / 2
         newAnchorY = targetHeight + margin * scaling
         break
@@ -263,7 +264,7 @@ PopupWindow {
     }
 
     // Apply position
-    anchorX = newAnchorX + screenX
+    anchorX = newAnchorX 
     anchorY = newAnchorY
     isPositioned = true
     pendingShow = false
@@ -280,10 +281,10 @@ PopupWindow {
 
     // Force anchor update after showing
     Qt.callLater(() => {
-                   if (root.anchor && root.visible) {
-                     root.anchor.updateAnchor()
-                   }
-                 })
+      if (root.anchor && root.visible) {
+        root.anchor.updateAnchor()
+      }
+    })
   }
 
   // Function to hide tooltip
@@ -304,7 +305,7 @@ PopupWindow {
 
   function startHideAnimation() {
     if (!visible || animatingOut)
-      return
+    return
 
     animatingOut = true
     showAnimation.stop() // Stop show animation if running
@@ -378,9 +379,7 @@ PopupWindow {
     Rectangle {
       anchors.fill: parent
       color: Colors.mSurface
-      border.color: Colors.mOutline
-      border.width: Math.max(1, Style.borderS * root.scaling)
-      radius: Style.radiusS * root.scaling
+      radius: Style.radiusXXS * root.scaling
 
       // Only show content when we have text
       visible: root.text !== ""

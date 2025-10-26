@@ -9,11 +9,11 @@ Loader {
   id: root
 
   property ShellScreen screen
-  property real scaling: 1.0
+  property real scaling: ScalingService.getScreenScale(screen)
 
   property Component panelContent: null
-  property real preferredWidth: 400 * Math.sqrt(scaling)
-  property real preferredHeight: 500 * Math.sqrt(scaling)
+  property real preferredWidth: 500 * Math.sqrt(scaling)
+  property real preferredHeight: 700 * Math.sqrt(scaling)
   property real preferredWidthRatio
   property real preferredHeightRatio
   property color panelBackgroundColor: Colors.mSurface
@@ -215,7 +215,7 @@ Loader {
         }
         id: panelBackground
         color: panelBackgroundColor
-        radius: Style.radiusL * scaling
+        radius: Style.radiusXXS * scaling
 
         //Dragging support
         property bool draggable: root.draggable

@@ -27,7 +27,7 @@
     environment.shells = with pkgs; [zsh];
     environment.pathsToLink = ["/share/zsh"];
 
-    home-manager.users.${host.userName} = {...}: {
+    home-manager.users.${host.userName} = _: {
       programs = {
         zsh = {
           enable = true;
@@ -37,7 +37,7 @@
 
           shellAliases = {
             ll = "eza -l --git";
-            rebuild = "sudo nixos-rebuild switch --flake /home/${host.userName}/.config/nix#${host.hostName}";
+            rebuild = "alejandra /home/${host.userName}/.config/nix/. && sudo nixos-rebuild switch --flake /home/${host.userName}/.config/nix#${host.hostName} --sudo && kill $(qs list --all | grep 'Process ID:' | awk 'NR=1 {print $3}') && swaymsg exec qs";
             update = "nix flake update --flake /home/${host.userName}/.config/nix";
             tree = "eza --tree --level=5 -l --git";
           };

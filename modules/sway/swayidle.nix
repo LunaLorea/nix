@@ -1,30 +1,30 @@
-{ 
+{
   pkgs,
   lib,
   colors,
   ...
-}:{
+}: {
   services.swayidle = let
-  # Sway
-  display = status: "swaymsg output * power ${status}";
-  lock = ''
-    ${pkgs.swaylock-effects}/bin/swaylock \
-      --screenshots \
-      --clock \
-      --indicator \
-      --indicator-radius 100 \
-      --indicator-thickness 7 \
-      --effect-blur 7x5 \
-      --effect-vignette 0.5:0.5 \
-      --fade-in 0\
-      --ring-color ${lib.strings.removePrefix "#" colors.peach}\
-      -f'';
+    # Sway
+    display = status: "swaymsg output * power ${status}";
+    lock = ''
+      ${pkgs.swaylock-effects}/bin/swaylock \
+        --screenshots \
+        --clock \
+        --indicator \
+        --indicator-radius 100 \
+        --indicator-thickness 7 \
+        --effect-blur 7x5 \
+        --effect-vignette 0.5:0.5 \
+        --fade-in 0\
+        --ring-color ${lib.strings.removePrefix "#" colors.peach}\
+        -f'';
   in {
     enable = true;
     timeouts = [
       {
         timeout = 300; # in seconds
-          command = "${pkgs.libnotify}/bin/notify-send 'Locking in 30 seconds' -t 5000";
+        command = "${pkgs.libnotify}/bin/notify-send 'Locking in 30 seconds' -t 5000";
       }
       {
         timeout = 600;

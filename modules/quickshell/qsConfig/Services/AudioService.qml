@@ -79,7 +79,6 @@ Singleton {
     function onMutedChanged() {
       root._inputMuted = (source?.audio.muted ?? true)
       Logger.log("AudioService", "OnInputMuteChanged:", root._inputMuted)
-      ToastService.showNotice(I18n.tr("settings.audio.devices.input-device.label"), root._inputMuted ? I18n.tr("toast.audio.muted") : I18n.tr("toast.audio.unmuted"))
     }
   }
 

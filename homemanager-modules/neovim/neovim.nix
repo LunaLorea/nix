@@ -34,6 +34,9 @@
       catppuccin-nvim
       rose-pine
 
+      # Lualine for a better statusline
+      lualine-nvim
+
       # Quickly switch between Files
       harpoon
 
