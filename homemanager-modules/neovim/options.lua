@@ -274,3 +274,7 @@ require("lspconfig").qmlls.setup {
 }
 
 require('lualine').setup()
+
+require('render-markdown').setup({
+    completions = { lsp = { enabled = true } },
+})

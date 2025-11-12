@@ -55,6 +55,9 @@
       vim-lsp
       luasnip
 
+      # Markdown plugins
+      render-markdown-nvim
+
       # Latex auto compile automation
       knap
       # File Tree
@@ -74,9 +77,11 @@
         p.tree-sitter-cpp
         p.tree-sitter-css
         p.tree-sitter-html
+        p.tree-sitter-yaml
         p.tree-sitter-javascript
         p.tree-sitter-typescript
         p.tree-sitter-latex
+        p.tree-sitter-markdown
         p.tree-sitter-glsl
         p.tree-sitter-qmljs
       ]))
@@ -91,6 +96,7 @@
     texlab
     glsl_analyzer
     qt6.full
+    python313Packages.pylatexenc
 
     #HTML/CSS/JSON/ESLint language servers extracted from vscode.
     vscode-langservers-extracted

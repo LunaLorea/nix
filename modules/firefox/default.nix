@@ -56,6 +56,13 @@
         profiles = {
           default = {
             name = "default";
+            settings = {
+              "sidebar.verticalTabs" = "true";
+              "browser.toolbars.bookmarks.visibility" = "never";
+              "browser.uiCustomization.navBarWhenVerticalTabs" = ''["back-button","forward-button","stop-reload-button","customizableui-special-spring1","vertical-spacer","urlbar-container","customizableui-special-spring2","downloads-button","fxa-toolbar-menu-button","unified-extensions-button","ublock0_raymondhill_net-browser-action","_d634138d-c276-4fc8-924b-40a0ea21d284_-browser-action","jid1-mnnxcxisbpnsxq_jetpack-browser-action","sponsorblocker_ajay_app-browser-action"]'';
+              "browser.ml.chat.enabled" = "false";
+              "sidebar.main.tools" = "bookmarks";
+            };
           };
           messages = {
             id = 1;
@@ -69,6 +76,7 @@
               "layout.css.prefers-color-scheme.content-override" = 0;
               "browser.sessionstore.max_resumed_crashes" = 0;
               "browser.sessionstore.resume_from_crash" = false;
+              "browser.ml.chat.enabled" = "false";
             };
             userChrome = ''
               /* Hide different gui items*/

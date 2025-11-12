@@ -8,7 +8,7 @@ import qs.Services
 import qs.Modules.Bar.Widgets
 import qs.Modules.Bar
 
-Rectangle {
+Item {
   id: root
 
   property string position: "middle"
@@ -16,10 +16,14 @@ Rectangle {
   property real scaling: ScalingService.getScreenScale(screen)
 
 
-  color: (childrenRect.width > 0) ? Colors.mSurface : Colors.transparent
-  radius: Style.radiusXXS
+  Rectangle {
+    anchors.fill: parent
+    opacity: Settings.bar.backgroundOpacity.section
+    color: (widgets.width > 0) ? Colors.mSurface : Colors.transparent
+    radius: Settings.bar.floating ? Style.radiusXXS : 0
+  }
 
-  implicitWidth: widgets.width + Style.marginM * 2 * scaling
+  implicitWidth: widgets.width + (Settings.bar.floating ? (Style.marginM * 2) : 0) * scaling
   implicitHeight: Style.barHeight * scaling
 
 
@@ -46,10 +50,11 @@ Rectangle {
       delegate: RowLayout {
         spacing: Style.marginS * scaling
         Rectangle {
-          visible: (model.index > 0)
+          visible: (model.index > 0) && (Settings.bar.backgroundOpacity.widgetSeparator > 0)
           width: 2
           height: Style.capsuleHeight * scaling
           color: Colors.mOutline
+          opacity: Settings.bar.backgroundOpacity.widgetSeparator
         }
         BarWidgetLoader {
           widgetId: (modelData !== undefined ? modelData : "")

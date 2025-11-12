@@ -11,8 +11,6 @@
   modules = {
   };
 
-
-
   home-manager.users.${host.userName} = {...}: {
     # Modules
     imports = [

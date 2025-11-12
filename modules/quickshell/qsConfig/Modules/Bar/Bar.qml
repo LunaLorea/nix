@@ -30,7 +30,7 @@ Variants {
       }
 
 
-      implicitHeight: (Style.barHeight + Style.marginXS) * scaling
+      implicitHeight:  (Style.barHeight + ( Settings.bar.floating ? Style.marginXS : 0 )) * scaling
       color: Colors.transparent
 
       Loader {
@@ -50,7 +50,7 @@ Variants {
           Rectangle {
             anchors.fill: parent
             color: Colors.mSurface
-            opacity: Settings.bar.backgroundOpacity
+            opacity: Settings.bar.backgroundOpacity.bar
           }
 
           // --- Bar Layout

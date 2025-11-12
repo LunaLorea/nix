@@ -21,7 +21,8 @@ Rectangle {
   property bool allowClickWhenDisabled: false
   property bool hovering: false
 
-  property color colorBg: Settings.bar.capsule ? Colors.mSurfaceVariant : Colors.mSurface
+  property color colorBg: Settings.bar.backgroundOpacity.section > 0 ?
+    (Settings.bar.capsule ? Colors.mSurfaceVariant : Colors.mSurface) : Colors.transparent
   property color colorFg: Colors.mOnSurface
   property color colorBgHover: Colors.mTertiary
   property color colorFgHover: Colors.mOnTertiary

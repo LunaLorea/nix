@@ -47,7 +47,11 @@
 
       // --- bar settings
       property var bar: {
-        "backgroundOpacity": ${lib.strings.floatToString cfg.bar.backgroundOpacity},
+        "backgroundOpacity": {
+          "bar": ${lib.strings.floatToString cfg.bar.backgroundOpacity.bar},
+          "section": ${lib.strings.floatToString cfg.bar.backgroundOpacity.section},
+          "widgetSeparator": ${lib.strings.floatToString cfg.bar.backgroundOpacity.widgetSeparator}
+        },
         "capsule": ${lib.boolToString cfg.bar.capsule},
         "floating": ${lib.boolToString cfg.bar.floating}
       }
@@ -127,9 +131,19 @@ in {
       };
     };
     bar = {
-      backgroundOpacity = lib.mkOption {
-        type = lib.types.float;
-        default = 0.0;
+      backgroundOpacity = {
+        bar = lib.mkOption {
+          type = lib.types.float;
+          default = 0.0;
+        };
+        section = lib.mkOption {
+          type = lib.types.float;
+          default = 0.0;
+        };
+        widgetSeparator = lib.mkOption {
+          type = lib.types.float;
+          default = 0.0;
+        };
       };
       clockFormat = lib.mkOption {
         type = lib.types.str;
@@ -141,7 +155,7 @@ in {
       };
       floating = lib.mkOption {
         type = lib.types.bool;
-        default = true;
+        default = false;
       };
     };
   };

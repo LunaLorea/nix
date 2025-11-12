@@ -3,6 +3,7 @@
   pkgs,
   host,
   lib,
+  config,
   ...
 }: {
   imports = [
@@ -27,6 +28,23 @@
           };
         };
       };
+    };
+  };
+
+  services.navidrome = {
+    enable = true;
+    settings = {
+      MusicFolder = "/mnt/music";
+    };
+  };
+
+  systemd.services.navidrome.serviceConfig.BindReadOnlyPaths = ["/mnt/audiobooks"];
+
+  systemd.tmpfiles.settings.navidromeLibs = {
+    "/mnt/audiobooks"."d" = {
+      mode = ":700";
+      user = ":${config.services.navidrome.user}";
+      group = ":${config.services.navidrome.group}";
     };
   };
 

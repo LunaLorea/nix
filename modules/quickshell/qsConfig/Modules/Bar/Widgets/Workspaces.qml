@@ -64,7 +64,7 @@ Item {
       Rectangle {
         width: (Settings.bar.capsule ? (model.isFocused ? 40 : Style.capsuleHeight) : Style.capsuleHeight) * scaling
         height: 25 * scaling
-        color: model.isFocused ? Colors.mOutline : Colors.mSurface
+        color: model.isFocused ? Colors.mOutline : ( Settings.bar.backgroundOpacity.section > 0 ? Colors.mSurface : Colors.transparent )
         radius: (Settings.bar.capsule ? width * 0.5 : Style.radiusXS) * scaling
 
         Behavior on color {

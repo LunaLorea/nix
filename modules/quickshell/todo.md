@@ -1,0 +1,6 @@
+- [ ] launcher
+- [ ] cheatsheet
+- [ ] controll center / notification center
+- [ ] bonus: calendar inside quickshell container rather than firefox
+- [ ] battery
+

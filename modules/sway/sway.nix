@@ -76,7 +76,7 @@ in {
 
       output = {
         "*" = {
-          bg = ''${builtins.path {path = ../../media/background-image.png;}} fill'';
+          bg = ''${builtins.path {path = ../../media/background-image.jpeg;}} fill'';
         };
       };
 
