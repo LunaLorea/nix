@@ -20,7 +20,7 @@
         --ring-color ${lib.strings.removePrefix "#" colors.peach}\
         -f'';
   in {
-    enable = true;
+    enable = false;
     timeouts = [
       {
         timeout = 300; # in seconds

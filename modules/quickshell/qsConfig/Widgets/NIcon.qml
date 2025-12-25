@@ -22,6 +22,6 @@ Text {
     return Icon.get(icon)
   }
 
-  color: Colors.mOnSurface
+  color: Colors.fgSecondary
   verticalAlignment: Text.AlignVCenter
 }

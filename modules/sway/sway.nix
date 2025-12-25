@@ -99,36 +99,25 @@ in {
       startup = [
         # Start 1Password in the background
         {command = "1password --silent";}
-
-        # Start the quickshell bar on startup
-        {command = "quickshell";}
       ];
 
-      bars = [
-        {
-          command = "quickshell";
-        }
-      ];
+      bars = [];
 
       # Change the Keybindings
       keybindings = {
         # Open Appliation Launcher
         "${modifier}+Space" = "exec fuzzel";
         # Open Firefox
-        "${modifier}+f" = "exec firefox";
-        # Open ncspot (tui spotify)
-        "${modifier}+c" = "exec switch-cheatsheet";
+        "${modifier}+e" = "exec firefox";
 
         # Open Console
-        "${modifier}+t" = "exec ${terminal}";
+        "${modifier}+i" = "exec ${terminal}";
         # Open Smile emoji picker
         "${modifier}+Comma" = "exec smile";
         # Reload Sway configs
         "${modifier}+Shift+c" = "reload";
         # Kill focused window
-        "${modifier}+q" = "kill";
-        # Open Notification Center
-        "${modifier}+Shift+n" = "exec swaync-client -t -sw";
+        "${modifier}+z" = "kill";
         # Lock Sway
         "${modifier}+Grave" = "lock";
         # Change focused Window
@@ -142,7 +131,6 @@ in {
 
         "Alt+Tab" = "[con_id=$(swaymsg -t get_tree | ~/.config/nix/scripts/alttab t)] focus";
         # Open Messages App
-        "${modifier}+m" = "exec firefox -P messages -no-remote";
         # Open 1Password Quick Access
         "${modifier}+p" = "exec 1password --quick-access";
 
@@ -166,16 +154,16 @@ in {
         "Print" = ''exec wayshot -s "$(slurp)" --stdout | wl-copy'';
 
         # Move focus
-        "${modifier}+l" = "focus right";
-        "${modifier}+h" = "focus left";
-        "${modifier}+k" = "focus up";
-        "${modifier}+j" = "focus down";
+        "${modifier}+r" = "focus right";
+        "${modifier}+t" = "focus left";
+        "${modifier}+m" = "focus up";
+        "${modifier}+n" = "focus down";
 
         # Move containers within workspace
-        "${modifier}+Shift+l" = "move right";
-        "${modifier}+Shift+h" = "move left";
-        "${modifier}+Shift+k" = "move up";
-        "${modifier}+Shift+j" = "move down";
+        "${modifier}+Shift+r" = "move right";
+        "${modifier}+Shift+t" = "move left";
+        "${modifier}+Shift+m" = "move up";
+        "${modifier}+Shift+n" = "move down";
 
         # Workspaces:
         # Switching between Workspaces
@@ -203,18 +191,18 @@ in {
         "${modifier}+Shift+0" = "move container to workspace number 10; workspace number 10";
 
         # Rotate through workspaces on current monitor
-        "${modifier}+Left" = "workspace prev_on_output";
-        "${modifier}+Right" = "workspace next_on_output";
+        "${modifier}+d" = "workspace prev_on_output";
+        "${modifier}+h" = "workspace next_on_output";
 
         # Rotate Containers through workspaces on current monitor
-        "${modifier}+Shift+Right" = "move container to workspace next_on_output; workspace next_on_output;";
-        "${modifier}+Shift+Left" = "move container to workspace prev_on_output; workspace prev_on_output;";
+        "${modifier}+Shift+d" = "move container to workspace next_on_output; workspace next_on_output;";
+        "${modifier}+Shift+h" = "move container to workspace prev_on_output; workspace prev_on_output;";
 
         # Move Workspace to other monitors based on direction
-        "${modifier}+Control+Left" = "move workspace to output left";
-        "${modifier}+Control+Right" = "move workspace to output right";
-        "${modifier}+Control+Up" = "move workspace to output up";
-        "${modifier}+Control+Down" = "move workspace to output down";
+        "${modifier}+Control+t" = "move workspace to output left";
+        "${modifier}+Control+r" = "move workspace to output right";
+        "${modifier}+Control+m" = "move workspace to output up";
+        "${modifier}+Control+n" = "move workspace to output down";
       };
       fonts = {
         names = ["JetBrainsMono Nerd Font" "0xProto Nerd Font"];

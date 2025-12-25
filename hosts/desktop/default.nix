@@ -4,6 +4,8 @@
   host,
   lib,
   config,
+  merremia,
+  inputs,
   ...
 }: {
   imports = [
@@ -30,6 +32,16 @@
       };
     };
   };
+
+  merremia = let
+  in {
+    enable = true;
+    systemd.enable = true;
+    config.colors.colortheme = merremia.lib.readBase16 ./tokyo-city-dark.yaml;
+  };
+
+  programs.adb.enable = true;
+  users.users.luna.extraGroups = ["adbusers"];
 
   services.navidrome = {
     enable = true;
@@ -125,7 +137,7 @@
         DP-2 = {
           scale = "1";
           position = "1080 400";
-          mode = "1920x1080@144Hz";
+          mode = "1920x1080@60Hz";
           adaptive_sync = "on";
           modeline = "452.50  1920 2088 2296 2672  1080 1083 1088 1177 -hsync +vsync";
         };

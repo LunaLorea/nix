@@ -278,3 +278,5 @@ require('lualine').setup()
 require('render-markdown').setup({
     completions = { lsp = { enabled = true } },
 })
+
+require('gitsigns').setup()

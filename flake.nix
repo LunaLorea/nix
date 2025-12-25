@@ -9,6 +9,12 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    merremia = {
+      url = "git+https://codeberg.org/lunalore/Merremia?ref=main";
+      #url = "path:/home/luna/Documents/Merremia";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -16,6 +22,7 @@
     nixpkgs,
     nixpkgs-stable,
     home-manager,
+    merremia,
     ...
   } @ inputs: let
     colors = import ./colors.nix;
@@ -23,9 +30,10 @@
     mkHost = host:
       nixpkgs.lib.nixosSystem {
         specialArgs = {
-          inherit inputs colors host;
+          inherit inputs colors host merremia;
         };
         modules = [
+          merremia.nixosModules.default
           ./hosts/${host.hostName}
           ./configuration.nix
         ];

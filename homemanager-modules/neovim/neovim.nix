@@ -45,6 +45,7 @@
 
       # git client
       vim-fugitive
+      gitsigns-nvim
 
       # Language servers
       lsp-zero-nvim

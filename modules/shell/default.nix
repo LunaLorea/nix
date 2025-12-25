@@ -37,7 +37,7 @@
 
           shellAliases = {
             ll = "eza -l --git";
-            rebuild = "alejandra /home/${host.userName}/.config/nix/. && sudo nixos-rebuild switch --flake /home/${host.userName}/.config/nix#${host.hostName} --sudo && kill $(qs list --all | grep 'Process ID:' | awk 'NR=1 {print $3}') && swaymsg exec qs";
+            rebuild = "alejandra /home/${host.userName}/.config/nix/. && sudo nixos-rebuild switch --flake /home/${host.userName}/.config/nix#${host.hostName} --sudo && systemctl --user restart merremia.service";
             update = "nix flake update --flake /home/${host.userName}/.config/nix";
             nixgc = "sudo nix-collect-garbage --delete-older-than 7d && sudo nix-store --gc && nix-store --optimise";
             tree = "eza --tree --level=5 -l --git";
