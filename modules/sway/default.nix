@@ -55,6 +55,8 @@ in {
       wrapperFeatures.gtk = true;
     };
 
+    environment.systemPackages = [pkgs.kitty];
+
     programs.dconf.enable = true;
 
     home-manager.users.${host.userName} = {...}: {
@@ -79,6 +81,8 @@ in {
         lock
         sway-floating
         pkgs.pwvucontrol
+        # Music player
+        pkgs.feishin
       ];
       # automatically mount drives
       services.udiskie = {
