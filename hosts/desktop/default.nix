@@ -19,53 +19,69 @@
     gaming.enable = true;
     _1password.enable = true;
     firefox.enable = true;
-    quickshell = {
-      enable = true;
-      developerMode.enable = true;
+    neovim.enable = true;
+  };
+
+  fileSystems."/mnt/home-lab" = {
+    device = "luna@192.168.1.42:/mnt/pool";
+    fsType = "sshfs";
+    options = [
+      "nodev"
+      "noatime"
+      "allow_other"
+      "IdentityFile=/root/.ssh/id_ed25519"
+    ];
+  };
+  merremia = let
+  in {
+    enable = true;
+    systemd.enable = true;
+    config = {
+      colors = {
+        colortheme = merremia.lib.readBase16 ./tokyo-city-dark.yaml;
+      };
       monitors = {
-        "*" = {};
-        "HDMI-A-1" = {
-          barWidgets = {
-            left = ["workspaces"];
+        "DP-1" = {
+          scale = 1.0;
+        };
+      };
+    };
+    modules = {
+      bar = {
+        monitors = {
+          "HDMI-A-1" = {
+            widgets = {
+              left = ["workspaces"];
+            };
           };
         };
       };
     };
   };
 
-  merremia = let
-  in {
-    enable = true;
-    systemd.enable = true;
-    config.colors.colortheme = merremia.lib.readBase16 ./tokyo-city-dark.yaml;
-  };
-
-  programs.adb.enable = true;
-  users.users.luna.extraGroups = ["adbusers"];
-
-  services.navidrome = {
-    enable = true;
-    settings = {
-      MusicFolder = "/mnt/music";
-    };
-  };
-
-  systemd.services.navidrome.serviceConfig.BindReadOnlyPaths = ["/mnt/audiobooks"];
-
-  systemd.tmpfiles.settings.navidromeLibs = {
-    "/mnt/audiobooks"."d" = {
-      mode = ":700";
-      user = ":${config.services.navidrome.user}";
-      group = ":${config.services.navidrome.group}";
-    };
-  };
-
   environment.defaultPackages = with pkgs; [
     usbutils
-    wayneko
     krita
+    signal-desktop
   ];
-
+  environment.systemPackages = with pkgs; [
+    gparted
+    cifs-utils
+  ];
+  security.polkit.enable = true;
+  systemd.user.services.polkit-gnome-authentication-agent-1 = {
+    description = "polkit-gnome-authentication-agent-1";
+    wantedBy = ["graphical-session.target"];
+    wants = ["graphical-session.target"];
+    after = ["graphical-session.target"];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+      Restart = "on-failure";
+      RestartSec = 1;
+      TimeoutStopSec = 10;
+    };
+  };
   services.searx = {
     enable = true;
     package = pkgs.searxng;
@@ -102,7 +118,7 @@
     # Modules
     imports = [
       # Window manager plus all the additional pkgs like waybar
-      ../../homemanager-modules/neovim
+      # ../../homemanager-modules/neovim
       ../../homemanager-modules/git
       ../../homemanager-modules/studying
       ../../homemanager-modules/nextcloud-client
@@ -125,6 +141,8 @@
       heroic
       gamemode
       mangohud
+
+      picard
     ];
 
     wayland.windowManager.sway.config = {
