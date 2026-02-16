@@ -11,7 +11,6 @@
     ./silent-boot
     ./sway
     ./firefox
-    ./quickshell
     ./neovim
   ];
 }
