@@ -12,5 +12,6 @@
     ./sway
     ./firefox
     ./quickshell
+    ./neovim
   ];
 }
