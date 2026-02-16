@@ -11,8 +11,13 @@
     };
 
     merremia = {
-      url = "git+https://codeberg.org/lunalore/Merremia?ref=main";
-      #url = "path:/home/luna/Documents/Merremia";
+      #url = "git+https://codeberg.org/lunalore/Merremia?ref=main";
+      url = "path:/home/luna/Documents/Merremia";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nvf = {
+      url = "github:NotAShelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -27,10 +32,12 @@
   } @ inputs: let
     colors = import ./colors.nix;
 
+    recursiveImport = path: (import ./lib/recursiveImport.nix) nixpkgs path;
+
     mkHost = host:
       nixpkgs.lib.nixosSystem {
         specialArgs = {
-          inherit inputs colors host merremia;
+          inherit inputs colors host merremia recursiveImport;
         };
         modules = [
           merremia.nixosModules.default
