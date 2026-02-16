@@ -5,9 +5,12 @@
 }: {
   programs.git = {
     enable = true;
-    userEmail = "git@lunalorea.ch";
-    userName = "Luna Zehnder";
-
+    settings = {
+      user = {
+        email = "git@lunalorea.ch";
+        name = "Luna Zehnder";
+      };
+    };
     signing = {
       signByDefault = true;
       signer = "${pkgs._1password-gui}/share/1password/op-ssh-sign";
