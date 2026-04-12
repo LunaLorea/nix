@@ -41,6 +41,15 @@
   # Enable bluetooth
   hardware.bluetooth.enable = true;
 
+  # Configure sops-nix
+  sops = {
+    defaultSopsFile = ./secrets.yaml;
+    age = {
+      keyFile = "/var/lib/sops-nix/key.txt";
+      generateKey = true;
+    };
+  };
+
   # Set your time zone.
   time.timeZone = "Europe/Zurich";
 
@@ -64,6 +73,8 @@
     variant = "noted";
   };
 
+  console.useXkbConfig = true;
+
   services.avahi = {
     enable = true;
     nssmdns4 = true;
@@ -80,7 +91,7 @@
   users.users.${host.userName} = {
     isNormalUser = true;
     description = host.userName;
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "media"];
   };
 
   home-manager = {

@@ -19,6 +19,8 @@
       wget
 
       openssh
+
+      alejandra
     ];
 
     # Set default shell

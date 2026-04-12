@@ -1,0 +1,127 @@
+definitions:
+  user_attributes:
+    vaultwarden_roles:
+      expression: '"vaultwarden_admins" in groups ? ["admin"] : "vaultwarden_users" in groups ? ["user"] : [""]'
+    sftpgo_role:
+      expression: '"sftpgo_admins" in groups ? "admin" : "sftpgo_managers" in groups ? "manager" : "user"'
+identity_providers:
+  oidc:
+    ## The other portions of the mandatory OpenID Connect 1.0 configuration go here.
+    ## See: https://www.authelia.com/c/oidc
+    claims_policies:
+      vaultwarden:
+        id_token: ['vaultwarden_roles']
+        custom_claims:
+          vaultwarden_roles: {}
+      sftpgo:
+        id_token: ['preferred_username', 'sftpgo_role']
+        custom_claims:
+          sftpgo_role: {}
+    scopes:
+      vaultwarden:
+        claims: ['vaultwarden_roles']
+      sftpgo:
+        claims:
+          - 'sftpgo_role'
+    # hmac secret and private key given by env variables
+    clients:
+      - client_id: {{ secret "/run/secrets/hosts/myriorama/vaultwarden/oidc_client_id" | mindent 10 "|" | msquote }}
+        client_name: 'Vaultwarden'
+        client_secret: {{ secret "/run/secrets/hosts/myriorama/vaultwarden/oidc_client_secret/authelia" | mindent 10 "|" | msquote }}
+        public: false
+        authorization_policy: 'two_factor'
+        require_pkce: true
+        pkce_challenge_method: 'S256'
+        claims_policy: 'vaultwarden'
+        redirect_uris:
+          - 'https://vaultwarden.wuffli.art/identity/connect/oidc-signin'
+        scopes:
+          - 'openid'
+          - 'offline_access'
+          - 'profile'
+          - 'email'
+          - 'vaultwarden'
+        response_types:
+          - 'code'
+        grant_types:
+          - 'authorization_code'
+          - 'refresh_token'
+        access_token_signed_response_alg: 'none'
+        userinfo_signed_response_alg: 'none'
+        token_endpoint_auth_method: 'client_secret_basic'
+      - client_id: {{ secret "/run/secrets/hosts/myriorama/jellyfin/oidc_client_id" | mindent 10 "|" | msquote }}
+        client_name: 'Jellyfin'
+        # Client secret should be randomly generated
+        client_secret: {{ secret "/run/secrets/hosts/myriorama/jellyfin/oidc_client_secret/authelia" | mindent 10 "|" | msquote }}
+        token_endpoint_auth_method: 'client_secret_post'
+        authorization_policy: 'one_factor'
+        redirect_uris:
+          - 'https://jellyfin.wuffli.art/sso/OID/redirect/authelia'
+      - client_id: {{ secret "/run/secrets/hosts/myriorama/audiobookshelf/oidc_client_id" | mindent 10 "|" | msquote }}
+        client_name: 'audiobookshelf'
+        client_secret: {{ secret "/run/secrets/hosts/myriorama/audiobookshelf/oidc_client_secret/authelia" | mindent 10 "|" | msquote }}
+        public: false
+        authorization_policy: 'one_factor'
+        require_pkce: true
+        pkce_challenge_method: 'S256'
+        redirect_uris:
+          - 'https://audiobookshelf.wuffli.art/auth/openid/callback'
+          - 'https://audiobookshelf.wuffli.art/auth/openid/mobile-redirect'
+          - 'audiobookshelf://oauth'
+        scopes:
+          - 'openid'
+          - 'profile'
+          - 'groups'
+          - 'email'
+        response_types:
+          - 'code'
+        grant_types:
+          - 'authorization_code'
+        access_token_signed_response_alg: 'none'
+        userinfo_signed_response_alg: 'none'
+        token_endpoint_auth_method: 'client_secret_basic'
+      - client_id: {{ secret "/run/secrets/hosts/myriorama/immich/oidc_client_id" | mindent 10 "|" | msquote }}
+        client_name: 'immich'
+        client_secret: {{ secret "/run/secrets/hosts/myriorama/immich/oidc_client_secret/authelia" | mindent 10 "|" | msquote }}
+        public: false
+        authorization_policy: 'two_factor'
+        require_pkce: false
+        pkce_challenge_method: ''
+        redirect_uris:
+          - 'https://immich.wuffli.art/auth/login'
+          - 'https://immich.wuffli.art/user-settings'
+          - 'app.immich:///oauth-callback'
+        scopes:
+          - 'openid'
+          - 'profile'
+          - 'email'
+        response_types:
+          - 'code'
+        grant_types:
+          - 'authorization_code'
+        access_token_signed_response_alg: 'none'
+        userinfo_signed_response_alg: 'none'
+        token_endpoint_auth_method: 'client_secret_post'
+      - client_id: {{ secret "/run/secrets/hosts/myriorama/sftpgo/oidc_client_id" | mindent 10 "|" | msquote }}
+        client_name: 'SFTPGo'
+        client_secret: {{ secret "/run/secrets/hosts/myriorama/sftpgo/oidc_client_secret/authelia" | mindent 10 "|" | msquote }}
+        public: false
+        authorization_policy: 'two_factor'
+        claims_policy: 'sftpgo'
+        require_pkce: false
+        pkce_challenge_method: ''
+        redirect_uris:
+          - 'https://sftpgo.wuffli.art/web/oidc/redirect'
+          - 'https://sftpgo.wuffli.art/web/oauth2/redirect'
+        scopes:
+          - 'openid'
+          - 'profile'
+          - 'email'
+          - 'sftpgo'
+        response_types:
+          - 'code'
+        grant_types:
+          - 'authorization_code'
+        access_token_signed_response_alg: 'none'
+        userinfo_signed_response_alg: 'none'
+        token_endpoint_auth_method: 'client_secret_basic'

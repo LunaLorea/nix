@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -11,8 +10,8 @@
     };
 
     merremia = {
-      #url = "git+https://codeberg.org/lunalore/Merremia?ref=main";
-      url = "path:/home/luna/Documents/Merremia";
+      url = "git+https://codeberg.org/lunalore/Merremia?ref=main";
+      #url = "path:/home/luna/Documents/Merremia";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -20,14 +19,26 @@
       url = "github:NotAShelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    unmanic-nix = {
+      url = "github:psoewish/unmanic-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    vpn-confinement.url = "github:Maroka-chan/VPN-Confinement";
   };
 
   outputs = {
     self,
     nixpkgs,
-    nixpkgs-stable,
     home-manager,
     merremia,
+    sops-nix,
     ...
   } @ inputs: let
     colors = import ./colors.nix;
@@ -41,6 +52,7 @@
         };
         modules = [
           merremia.nixosModules.default
+          sops-nix.nixosModules.sops
           ./hosts/${host.hostName}
           ./configuration.nix
         ];
@@ -57,8 +69,8 @@
         userName = "luna";
       };
 
-      server = mkHost {
-        hostName = "server";
+      myriorama = mkHost {
+        hostName = "myriorama";
         userName = "luna";
       };
     };
