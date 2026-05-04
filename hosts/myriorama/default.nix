@@ -8,8 +8,6 @@
   imports = [
     # Hardware Configuration for this spcific device
     ./hardware-configuration.nix
-    # ./nvidia.nix
-    inputs.vpn-confinement.nixosModules.default
   ];
 
   modules = {
@@ -33,6 +31,9 @@
       localUsers = true;
       userlistEnable = true;
       userlist = ["luna"];
+    };
+    couchdb = {
+      enable = true;
     };
   };
 

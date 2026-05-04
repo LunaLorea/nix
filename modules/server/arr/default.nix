@@ -3,6 +3,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }: let
   inherit
@@ -18,6 +19,7 @@ in {
   options.modules.server.arr = {
     enable = mkEnableOption "qbittorrent module";
   };
+  imports = [inputs.vpn-confinement.nixosModules.default];
   config = mkIf cfg.enable {
     users.groups.media = {};
     networking.firewall = {
@@ -103,6 +105,10 @@ in {
           Network.PortForwardingEnabled = false;
           Preferences = {
             General.Locale = "en";
+            WebUI = {
+              Username = "admin";
+              Password_PBKDF2 = "m92jiZsmBS3w3vlUzgT+Mw==:GxK/fjsirr2KXtwDzyBKbo82jSpLctb8UvsG2GLxgUOI+fcPi7gjDh87rS8WEo/32iSUaQM6WI5pYGOJLrgz2Q==";
+            };
           };
         };
       };
