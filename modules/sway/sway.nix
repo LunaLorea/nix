@@ -1,9 +1,4 @@
-{
-  lib,
-  colors,
-  ...
-}: let
-in {
+{...}: {
   wayland.windowManager.sway = {
     enable = true;
 
@@ -23,38 +18,15 @@ in {
       for_window [app_id="Firefox-calendar"] floating enable
       assign [class="discord"] workspace number 10
       assign [app_id="Firefox-messages"] workspace number 10
+      for_window [title="Extension: (Bitwarden Password Manager) - Bitwarden — Mozilla Firefox"] move scratchpad; scratchpad show
     '';
 
-    config = let
-      sway-colors = {
-        focused = {
-          border = "#00000000";
-          background = colors.base;
-          childBorder = colors.mauve;
-          indicator = colors.red;
-          text = colors.text;
-        };
-        focusedInactive = {
-          border = "#000000";
-          background = colors.base;
-          childBorder = colors.lavender;
-          indicator = colors.red;
-          text = colors.text;
-        };
-        unfocused = {
-          border = "#00000000";
-          background = colors.base;
-          childBorder = "#00000000";
-          indicator = colors.red;
-          text = colors.text;
-        };
-      };
-    in rec {
+    config = rec {
       modifier = "Mod4";
       # Use kitty as default terminal
       terminal = "kitty";
 
-      colors = sway-colors;
+      #colors = sway-colors;
       # Setup the colors for a beautiful sway enviornemnt
 
       gaps = {
@@ -74,18 +46,12 @@ in {
         }
       ];
 
-      output = {
-        "*" = {
-          bg = ''${builtins.path {path = ../../media/background-image.jpeg;}} fill'';
-        };
-      };
-
       defaultWorkspace = "1";
 
       input = {
         "*" = {
-          xkb_layout = "de,ch,us";
-          xkb_variant = "noted,de,dvorak";
+          xkb_layout = "de,ch";
+          xkb_variant = "noted,de";
         };
         "type:touchpad" = {
           tap = "enabled";
@@ -205,8 +171,8 @@ in {
         "${modifier}+Control+n" = "move workspace to output down";
       };
       fonts = {
-        names = ["JetBrainsMono Nerd Font" "0xProto Nerd Font"];
-        size = 16.0;
+        #names = ["JetBrainsMono Nerd Font" "0xProto Nerd Font"];
+        #size = 16.0;
       };
     };
   };

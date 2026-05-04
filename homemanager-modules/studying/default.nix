@@ -7,4 +7,6 @@
     obsidian
     anki
   ];
+
+  programs.obsidian.enable = true;
 }

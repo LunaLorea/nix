@@ -61,8 +61,6 @@ in {
             formatOnSave = true;
           };
 
-          theme.name = "catppuccin";
-
           undoFile = {
             enable = true;
             path = "/home/${host.userName}/.vim/undodir";

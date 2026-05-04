@@ -4,6 +4,7 @@
   pkgs,
   colors,
   config,
+  merremia,
   ...
 }: let
   sway-floating = pkgs.writeShellScriptBin "floating" ''
@@ -54,6 +55,17 @@ in {
       enable = true;
       wrapperFeatures.gtk = true;
     };
+    stylix = {
+      enable = true;
+      polarity = "dark";
+      autoEnable = true;
+      image = pkgs.fetchurl {
+        url = "https://immich.wuffli.art/api/assets/fa4ebdb6-78cd-421b-8ece-82b1e04b1266/thumbnail?key=H4HaPfmhM_rC7YWnBNMRZ7hq1Hm3sDdX1vNxqcljq5c_vm9q4lUF01TJlNiiUHSir6A&size=preview&c=SOcFDYKKeYegeXhDh6d4dnc8j%2FaS&edited=true";
+        hash = "sha256-Cl7n4DOo/Dqu4P3xjDTN7/iREyt+HQh9mDX7wAUib08=";
+      };
+    };
+
+    merremia.config.colors.colortheme = merremia.lib.importBase16.fromAttrs config.lib.stylix.colors;
 
     environment.systemPackages = [pkgs.kitty];
 
@@ -83,6 +95,9 @@ in {
         pkgs.pwvucontrol
         # Music player
         pkgs.feishin
+        # Movie player
+        pkgs.jellyfin-desktop
+        pkgs.cinny-desktop
       ];
       # automatically mount drives
       services.udiskie = {
@@ -107,11 +122,10 @@ in {
 
       programs.kitty = {
         enable = true;
-        themeFile = "rose-pine";
         settings = {
-          background_opacity = "0.85";
+          background_opacity = lib.mkForce "0.85";
         };
-        font.name = "JetBrainsMono Nerd Font";
+        #font.name = "JetBrainsMono Nerd Font";
       };
       programs.fuzzel = {
         enable = true;
@@ -120,15 +134,6 @@ in {
           main = {
             terminal = "kitty";
             layer = "overlay";
-          };
-          colors = {
-            background = fuzzel-background;
-            text = fuzzel-text;
-            match = fuzzel-match;
-            selection = fuzzel-selection;
-            selection-text = fuzzel-text;
-            selection-match = fuzzel-match;
-            border = fuzzel-border;
           };
         };
       };

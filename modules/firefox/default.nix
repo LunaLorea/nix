@@ -2,6 +2,7 @@
   host,
   config,
   lib,
+  pkgs,
   ...
 }: {
   options.modules.firefox = {
@@ -24,38 +25,151 @@
           DisablePocket = true;
           DisableFirefoxAccounts = true;
           DisableAccounts = true;
-          ExtensionSettings = {
-            "*".installation_mode = "normal"; # blocks all addons except the ones specified below
+          DisableForgetButton = true;
+          DisableProfileImport = true;
+          DisableProfileRefresh = true;
+          DisableSetDesktopBackground = true;
+          DisableFormHistory = true;
+
+          DisplayMenuBar = "never";
+          DontCheckDefaultBrowser = true;
+          OfferToSaveLogins = false;
+
+          ExtensionSettings = let
+            moz = short: "https://addons.mozilla.org/firefox/downloads/latest/${short}/latest.xpi";
+          in {
+            "*".installation_mode = "blocked"; # blocks all addons except the ones specified below
             # uBlock Origin:
             "uBlock0@raymondhill.net" = {
-              install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
+              install_url = moz "ublock-origin";
               installation_mode = "force_installed";
             };
             # Privacy Badger:
             "jid1-MnnxcxisBPnSXQ@jetpack" = {
-              install_url = "https://addons.mozilla.org/firefox/downloads/latest/privacy-badger17/latest.xpi";
-              installation_mode = "force_installed";
-            };
-            # 1Password:
-            "{d634138d-c276-4fc8-924b-40a0ea21d284}" = {
-              install_url = "https://addons.mozilla.org/firefox/downloads/latest/1password-x-password-manager/latest.xpi";
-              installation_mode = "force_installed";
-            };
-            # Catppuccin theme
-            "{15cb5e64-94bd-41aa-91cf-751bb1a84972}" = {
-              install_url = "https://addons.mozilla.org/firefox/downloads/latest/catppuccin-macchiato-lavender2/latest.xpi";
+              install_url = moz "privacy-badger17";
               installation_mode = "force_installed";
             };
             # Improve Youtube
             "{3c6bf0cc-3ae2-42fb-9993-0d33104fdcaf}" = {
-              install_url = "https://addons.mozilla.org/firefox/downloads/latest/youtube-addon/latest.xpi";
-              installation_mode = "force_install";
+              install_url = moz "youtube-addon";
+              installation_mode = "force_installed";
+            };
+            # Bitwarden Client
+            "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
+              install_url = moz "bitwarden-password-manager";
+              installation_mode = "force_installed";
+            };
+            # Sponser Block
+            "sponsorBlocker@ajay.app" = {
+              install_url = moz "sponsorblock";
+              installation_mode = "force_installed";
+            };
+          };
+
+          "3rdparty".Extensions = {
+            "uBlock0@raymondhill.net".adminSettings = {
+              userSettings = rec {
+                uiTheme = "dark";
+                uiAccentCustom = true;
+                uiAccentCustom0 = "#8300ff";
+                cloudStorageEnabled = lib.mkForce false;
+
+                importedLists = [
+                  "https:#filters.adtidy.org/extension/ublock/filters/3.txt"
+                  "https:#github.com/DandelionSprout/adfilt/raw/master/LegitimateURLShortener.txt"
+                ];
+
+                externalLists = lib.concatStringsSep "\n" importedLists;
+              };
+
+              selectedFilterLists = [
+                "CZE-0"
+                "adguard-generic"
+                "adguard-annoyance"
+                "adguard-social"
+                "adguard-spyware-url"
+                "easylist"
+                "easyprivacy"
+                "https:#github.com/DandelionSprout/adfilt/raw/master/LegitimateURLShortener.txt"
+                "plowe-0"
+                "ublock-abuse"
+                "ublock-badware"
+                "ublock-filters"
+                "ublock-privacy"
+                "ublock-quick-fixes"
+                "ublock-unbreak"
+                "urlhaus-1"
+              ];
             };
           };
         };
         profiles = {
           default = {
             name = "default";
+            search = {
+              force = true;
+              default = "DuckDuckGo";
+              privateDefault = "DuckDuckGo";
+
+              engines = {
+                "Nix Packages" = {
+                  urls = [
+                    {
+                      template = "https://search.nixos.org/packages";
+                      params = [
+                        {
+                          name = "channel";
+                          value = "unstable";
+                        }
+                        {
+                          name = "query";
+                          value = "{searchTerms}";
+                        }
+                      ];
+                    }
+                  ];
+                  icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+                  definedAliases = ["@np"];
+                };
+
+                "Nix Options" = {
+                  urls = [
+                    {
+                      template = "https://search.nixos.org/options";
+                      params = [
+                        {
+                          name = "channel";
+                          value = "unstable";
+                        }
+                        {
+                          name = "query";
+                          value = "{searchTerms}";
+                        }
+                      ];
+                    }
+                  ];
+                  icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+                  definedAliases = ["@no"];
+                };
+
+                "NixOS Wiki" = {
+                  urls = [
+                    {
+                      template = "https://wiki.nixos.org/w/index.php";
+                      params = [
+                        {
+                          name = "search";
+                          value = "{searchTerms}";
+                        }
+                      ];
+                    }
+                  ];
+                  icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+                  definedAliases = ["@nw"];
+                };
+              };
+            };
+
             settings = {
               "sidebar.verticalTabs" = "true";
               "browser.toolbars.bookmarks.visibility" = "never";
@@ -64,57 +178,6 @@
               "sidebar.main.tools" = "bookmarks";
             };
           };
-          messages = {
-            id = 1;
-            isDefault = false;
-            settings = {
-              "browser.startup.homepage" = "https://web.whatsapp.com/|https://web.threema.ch/#!/welcome|https://web.telegram.org/|https://mail.proton.me/";
-              "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-              "sidebar.revamp" = true;
-              "sidebar.verticalTabs" = true;
-              "sidebar.main.tools" = "";
-              "layout.css.prefers-color-scheme.content-override" = 0;
-              "browser.sessionstore.max_resumed_crashes" = 0;
-              "browser.sessionstore.resume_from_crash" = false;
-              "browser.ml.chat.enabled" = "false";
-            };
-            userChrome = ''
-              /* Hide different gui items*/
-              #nav-bar,
-              #navigator-toolbox,
-              #newtab-button-container  {
-                visibility: collapse !important;
-              }
-            '';
-          };
-          calendar = {
-            id = 2;
-            isDefault = false;
-            settings = {
-              "browser.startup.homepage" = "https://calendar.proton.me";
-              "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-              "sidebar.main.tools" = "";
-              "layout.css.prefers-color-scheme.content-override" = 0;
-              "browser.sessionstore.max_resumed_crashes" = 0;
-              "browser.sessionstore.resume_from_crash" = false;
-            };
-            userChrome = ''
-              /* Hide different gui items*/
-              #nav-bar,
-              #navigator-toolbox,
-              #newtab-button-container  {
-                visibility: collapse !important;
-              }
-            '';
-          };
-        };
-      };
-
-      xdg.desktopEntries = {
-        messages = {
-          name = "Messages";
-          exec = "firefox -P messages -no-remote --name Firefox-messages";
-          icon = builtins.path {path = ./media/messages_icon.png;};
         };
       };
     };

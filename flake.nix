@@ -31,6 +31,11 @@
     };
 
     vpn-confinement.url = "github:Maroka-chan/VPN-Confinement";
+
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -39,6 +44,7 @@
     home-manager,
     merremia,
     sops-nix,
+    stylix,
     ...
   } @ inputs: let
     colors = import ./colors.nix;
@@ -53,6 +59,7 @@
         modules = [
           merremia.nixosModules.default
           sops-nix.nixosModules.sops
+          stylix.nixosModules.stylix
           ./hosts/${host.hostName}
           ./configuration.nix
         ];

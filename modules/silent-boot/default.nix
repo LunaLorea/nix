@@ -27,7 +27,7 @@
       # Enable pretty splashscreen animation
       plymouth = {
         enable = true;
-        theme = "hexagon_dots_alt";
+        theme = lib.mkForce "hexagon_dots_alt";
         themePackages = with pkgs; [
           # By default we would install all themes
           (adi1090x-plymouth-themes.override {
