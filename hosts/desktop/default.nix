@@ -20,25 +20,27 @@
     _1password.enable = true;
     firefox.enable = true;
     neovim.enable = true;
+    shell.enable = true;
   };
 
-  fileSystems."/mnt/home-lab" = {
-    device = "luna@192.168.1.42:/mnt/pool";
-    fsType = "sshfs";
-    options = [
-      "nodev"
-      "noatime"
-      "allow_other"
-      "IdentityFile=/root/.ssh/id_ed25519"
-    ];
+  fileSystems = {
+    "/mnt/home-lab" = {
+      device = "luna@192.168.178.26:/mnt/pool";
+      fsType = "sshfs";
+      options = [
+        "nodev"
+        "noatime"
+        "allow_other"
+        "IdentityFile=/root/.ssh/id_ed25519"
+      ];
+    };
   };
-  merremia = let
-  in {
+  merremia = {
     enable = true;
     systemd.enable = true;
     config = {
       colors = {
-        colortheme = merremia.lib.readBase16 ./tokyo-city-dark.yaml;
+        #colortheme = merremia.lib.readBase16 ./tokyo-city-dark.yaml;
       };
       monitors = {
         "DP-1" = {
@@ -110,7 +112,13 @@
     '';
   };
 
-  hardware.opentabletdriver.enable = true;
+  hardware.opentabletdriver = {
+    enable = true;
+    package = import ./otd.nix {
+      inherit lib;
+      inherit pkgs;
+    };
+  };
 
   programs.wshowkeys.enable = true;
 
@@ -118,7 +126,6 @@
     # Modules
     imports = [
       # Window manager plus all the additional pkgs like waybar
-      # ../../homemanager-modules/neovim
       ../../homemanager-modules/git
       ../../homemanager-modules/studying
       ../../homemanager-modules/nextcloud-client
@@ -149,19 +156,19 @@
       output = {
         HDMI-A-1 = {
           scale = "1";
-          position = "0 0";
+          position = "3840 0";
           transform = "270";
         };
         DP-2 = {
           scale = "1";
-          position = "1080 400";
+          position = "1920 400";
           mode = "1920x1080@60Hz";
           adaptive_sync = "on";
           modeline = "452.50  1920 2088 2296 2672  1080 1083 1088 1177 -hsync +vsync";
         };
         DP-3 = {
           scale = "1";
-          position = "3000 400";
+          position = "0 400";
         };
       };
 
