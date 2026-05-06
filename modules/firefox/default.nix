@@ -11,8 +11,11 @@
 
   config = lib.mkIf config.modules.firefox.enable {
     home-manager.users.${host.userName} = {...}: {
+      stylix.targets.firefox.profileNames = ["default"];
       programs.firefox = {
         enable = true;
+        # Adopting behavior from new homeState version "26.05".
+        configPath = "${config.home-manager.users.${host.userName}.xdg.configHome}/mozilla/firefox";
         policies = {
           DisableTelemetry = true;
           DisableFirefoxStudies = true;
@@ -108,8 +111,8 @@
             name = "default";
             search = {
               force = true;
-              default = "DuckDuckGo";
-              privateDefault = "DuckDuckGo";
+              default = "ddg";
+              privateDefault = "ddg";
 
               engines = {
                 "Nix Packages" = {
