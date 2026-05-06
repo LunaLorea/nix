@@ -34,7 +34,7 @@ in {
             nix.enable = true;
             python.enable = true;
             rust.enable = true;
-            ts.enable = true;
+            typescript.enable = true;
             bash.enable = true;
             lua.enable = true;
             java.enable = true;
