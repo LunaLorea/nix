@@ -117,7 +117,7 @@
         "XF86AudioMedia" = "exec floating ${terminal} ncspot; scratchpad show";
 
         # Make a screenshot
-        "Print" = ''exec wayshot -s "$(slurp)" --stdout | wl-copy'';
+        "Print" = ''exec wayshot -g --clipboard'';
 
         # Move focus
         "${modifier}+r" = "focus right";
