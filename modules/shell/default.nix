@@ -38,6 +38,9 @@
           autosuggestion.enable = true;
           syntaxHighlighting.enable = true;
 
+          # Set to comply with default behavior from 26.05
+          dotDir = "${config.home-manager.users.${host.userName}.xdg.configHome}/zsh";
+
           shellAliases = {
             ll = "eza -l --git";
             rebuild = "sudo nixos-rebuild switch --flake /home/${host.userName}/.config/nix#${host.hostName} --sudo";
