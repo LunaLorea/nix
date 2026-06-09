@@ -18,7 +18,6 @@
       for_window [app_id="Firefox-calendar"] floating enable
       assign [class="discord"] workspace number 10
       assign [app_id="Firefox-messages"] workspace number 10
-      for_window [title="Extension: (Bitwarden Password Manager) - Bitwarden — Mozilla Firefox"] move scratchpad; scratchpad show
     '';
 
     config = rec {
@@ -117,7 +116,7 @@
         "XF86AudioMedia" = "exec floating ${terminal} ncspot; scratchpad show";
 
         # Make a screenshot
-        "Print" = ''exec wayshot -g --clipboard'';
+        "Print" = "exec wayshot -g --clipboard";
 
         # Move focus
         "${modifier}+r" = "focus right";
