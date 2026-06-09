@@ -3,7 +3,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     # Hardware Configuration for this spcific device
     ./hardware-configuration.nix
@@ -36,7 +37,7 @@
     gaming.enable = true;
   };
 
-  home-manager.users.${host.userName} = {...}: {
+  home-manager.users.${host.userName} = { ... }: {
     # Modules
     imports = [
       # Window manager plus all the additional pkgs like waybar

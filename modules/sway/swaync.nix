@@ -4,8 +4,10 @@
   pkgs,
   colors,
   ...
-}: let
-in {
+}:
+let
+in
+{
   services.swaync = {
     enable = true;
     # Settings

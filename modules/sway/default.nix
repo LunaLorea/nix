@@ -6,7 +6,8 @@
   config,
   merremia,
   ...
-}: let
+}:
+let
   sway-floating = pkgs.writeShellScriptBin "floating" ''
     $@ &
     pid=$!
@@ -44,7 +45,8 @@
       --fade-in 0\
       --ring-color ${lib.strings.removePrefix "#" colors.peach}
   '';
-in {
+in
+{
   options.modules.sway = {
     enable = lib.mkEnableOption "Sway WM and the associated configurations";
     test = "siesie";
@@ -74,7 +76,7 @@ in {
 
     programs.dconf.enable = true;
 
-    home-manager.users.${host.userName} = {...}: {
+    home-manager.users.${host.userName} = { ... }: {
       imports = [
         ./sway.nix
         ./swaync.nix
@@ -159,7 +161,7 @@ in {
     ];
 
     fonts.packages =
-      [] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+      [ ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
     # polkit for sway
     security.polkit.enable = true;

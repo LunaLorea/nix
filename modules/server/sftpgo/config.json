@@ -51,12 +51,7 @@
         "period": 1000,
         "burst": 1,
         "type": 2,
-        "protocols": [
-          "SSH",
-          "FTP",
-          "DAV",
-          "HTTP"
-        ],
+        "protocols": ["SSH", "FTP", "DAV", "HTTP"],
         "generate_defender_events": false,
         "entries_soft_limit": 100,
         "entries_hard_limit": 150
@@ -287,12 +282,7 @@
           "client_secret_file": "/run/secrets/hosts/myriorama/sftpgo/oidc_client_secret/sftpgo",
           "config_url": "https://auth.wuffli.art",
           "redirect_base_url": "https://sftpgo.wuffli.art",
-          "scopes": [
-            "openid",
-            "profile",
-            "email",
-            "sftpgo"
-          ],
+          "scopes": ["openid", "profile", "email", "sftpgo"],
           "username_field": "preferred_username",
           "role_field": "sftpgo_role",
           "implicit_roles": false,

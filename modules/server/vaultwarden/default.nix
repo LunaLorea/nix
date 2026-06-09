@@ -2,14 +2,15 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.modules.server.vaultwarden;
-  inherit
-    (lib)
+  inherit (lib)
     mkEnableOption
     mkIf
     ;
-in {
+in
+{
   options.modules.server.vaultwarden = {
     enable = mkEnableOption "ssh server";
   };

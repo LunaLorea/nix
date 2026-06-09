@@ -4,7 +4,8 @@
   inputs,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     # Hardware Configuration for this spcific device
     ./hardware-configuration.nix
@@ -30,7 +31,7 @@
       writeEnable = true;
       localUsers = true;
       userlistEnable = true;
-      userlist = ["luna"];
+      userlist = [ "luna" ];
     };
     couchdb = {
       enable = true;
@@ -47,7 +48,7 @@
     "dm-cache-default"
   ];
 
-  home-manager.users.${host.userName} = {...}: {
+  home-manager.users.${host.userName} = { ... }: {
     # Modules
     imports = [
       # Window manager plus all the additional pkgs like waybar

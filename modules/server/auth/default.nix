@@ -2,17 +2,19 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   inherit (lib) mkAfter mkIf mkEnableOption;
   cfg = config.modules.server.auth;
-in {
+in
+{
   options.modules.server.auth = {
     enable = mkEnableOption "auth service";
   };
   config = mkIf cfg.enable {
     users = {
       users."authelia-wuffli" = {
-        extraGroups = ["redis-wuffli"];
+        extraGroups = [ "redis-wuffli" ];
       };
     };
     users = {
@@ -20,7 +22,7 @@ in {
         group = "lldap";
         isSystemUser = true;
       };
-      groups.lldap = {};
+      groups.lldap = { };
     };
     services = {
       redis.servers.wuffli.enable = true;
@@ -59,7 +61,7 @@ in {
           ps.vectorchord
         ];
         settings = {
-          shared_preload_libraries = ["vchord.so"];
+          shared_preload_libraries = [ "vchord.so" ];
           search_path = "\"$user\", public, vectors";
         };
       };
@@ -115,7 +117,7 @@ in {
             claims_policies = {
             };
             cors = {
-              endpoints = ["token"];
+              endpoints = [ "token" ];
               allowed_origins_from_client_redirect_uris = true;
             };
             authorization_policies.default = {
@@ -136,16 +138,18 @@ in {
           server.endpoints.authz.forward-auth.implementation = "ForwardAuth";
         };
         # Templates don't work correctly when parsed from Nix, so our OIDC clients are defined here
-        settingsFiles = [./oidc_clients.yaml];
-        secrets = let
-          directory = "/run/secrets/hosts/myriorama/authelia";
-        in {
-          jwtSecretFile = "${directory}/jwt_secret";
-          oidcIssuerPrivateKeyFile = "${directory}/jwks_secret";
-          oidcHmacSecretFile = "${directory}/hmac_secret";
-          sessionSecretFile = "${directory}/session_secret";
-          storageEncryptionKeyFile = "${directory}/storage_encryption_key";
-        };
+        settingsFiles = [ ./oidc_clients.yaml ];
+        secrets =
+          let
+            directory = "/run/secrets/hosts/myriorama/authelia";
+          in
+          {
+            jwtSecretFile = "${directory}/jwt_secret";
+            oidcIssuerPrivateKeyFile = "${directory}/jwks_secret";
+            oidcHmacSecretFile = "${directory}/hmac_secret";
+            sessionSecretFile = "${directory}/session_secret";
+            storageEncryptionKeyFile = "${directory}/storage_encryption_key";
+          };
         environmentVariables = {
           AUTHELIA_AUTHENTICATION_BACKEND_LDAP_PASSWORD_FILE = "/run/secrets/hosts/myriorama/authelia/lldap_pw";
           AUTHELIA_NOTIFIER_SMTP_PASSWORD_FILE = "/run/secrets/hosts/myriorama/authelia/smtp_pw";

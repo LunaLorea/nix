@@ -5,10 +5,10 @@
   host,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.modules.neovim;
-  inherit
-    (lib)
+  inherit (lib)
     mkOption
     mkEnableOption
     mkIf
@@ -25,7 +25,8 @@
       hash = "sha256-F7aS8d6jJQQoIGkG2o4KNnDZAIrq0c+otIHvjdoGbtY=";
     };
   };
-in {
+in
+{
   options.modules.neovim = {
     enable = mkEnableOption "Neovim";
   };
@@ -35,7 +36,7 @@ in {
   ];
 
   config = mkIf cfg.enable {
-    home-manager.users.${host.userName} = {...}: {
+    home-manager.users.${host.userName} = { ... }: {
       home.packages = with pkgs; [
         (treefmt.withConfig {
           runtimeInputs = [
@@ -55,7 +56,7 @@ in {
               # Nix
               nixfmt = {
                 command = "nixfmt";
-                includes = ["*.nix"];
+                includes = [ "*.nix" ];
               };
 
               # Python
@@ -92,13 +93,13 @@ in {
                   "*.yaml"
                   "*.yml"
                 ];
-                options = ["--write"];
+                options = [ "--write" ];
               };
 
               # Rust
               rustfmt = {
                 command = "rustfmt";
-                includes = ["*.rs"];
+                includes = [ "*.rs" ];
                 options = [
                   "--config"
                   "skip_children=true"
@@ -110,27 +111,27 @@ in {
               # TOML
               tombi = {
                 command = "tombi";
-                includes = ["*.toml"];
-                options = ["format"];
+                includes = [ "*.toml" ];
+                options = [ "format" ];
               };
 
               # Lua
               stylua = {
                 command = "stylua";
-                includes = ["*.lua"];
+                includes = [ "*.lua" ];
               };
 
               # SQL
               sqruff = {
                 command = "sqruff";
-                includes = ["*.sql"];
-                options = ["fix"];
+                includes = [ "*.sql" ];
+                options = [ "fix" ];
               };
 
               # QML
               qmlformat = {
                 command = "qmlformat";
-                includes = ["*.qml"];
+                includes = [ "*.qml" ];
                 options = [
                   "--inplace"
                   "--indent-width=${lib.toString config.programs.nvf.settings.vim.options.tabstop}"
@@ -150,7 +151,7 @@ in {
           viAlias = true;
           vimAlias = true;
 
-          startPlugins = [yuck];
+          startPlugins = [ yuck ];
 
           languages = {
             nix.enable = true;
@@ -189,7 +190,7 @@ in {
           formatter.conform-nvim = {
             # https://github.com/stevearc/conform.nvim
             enable = true;
-            setupOpts.formatters_by_ft."*" = ["treefmt"]; # "*" matches all files as treefmt handles all formatting
+            setupOpts.formatters_by_ft."*" = [ "treefmt" ]; # "*" matches all files as treefmt handles all formatting
           };
 
           undoFile = {

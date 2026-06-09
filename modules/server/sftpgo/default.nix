@@ -3,14 +3,15 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.modules.server.sftpgo;
-  inherit
-    (lib)
+  inherit (lib)
     mkEnableOption
     mkIf
     ;
-in {
+in
+{
   options.modules.server.sftpgo = {
     enable = mkEnableOption "sftpgo service";
   };
@@ -18,7 +19,10 @@ in {
   config = mkIf cfg.enable {
     networking.firewall = {
       enable = true;
-      allowedTCPPorts = [8090 2022];
+      allowedTCPPorts = [
+        8090
+        2022
+      ];
     };
     services.sftpgo = {
       enable = true;

@@ -4,10 +4,14 @@
   pkgs,
   colors,
   ...
-}: let
-  waybar-module-pomodoro = import ''${builtins.path {path = ../../custom-pkgs/waybar-module-pomodoro.nix;}}'' {inherit pkgs;};
-in {
-  home.packages = [waybar-module-pomodoro]; # Pomodoro module import
+}:
+let
+  waybar-module-pomodoro = import "${builtins.path {
+    path = ../../custom-pkgs/waybar-module-pomodoro.nix;
+  }}" { inherit pkgs; };
+in
+{
+  home.packages = [ waybar-module-pomodoro ]; # Pomodoro module import
   programs.waybar = {
     enable = true;
     systemd.enable = false;
@@ -24,9 +28,18 @@ in {
           "*"
         ];
 
-        modules-left = ["clock" "battery" "bluetooth"];
-        modules-center = ["sway/workspaces"];
-        modules-right = ["tray" "sway/language" "custom/pomodoro" "custom/notifications"];
+        modules-left = [
+          "clock"
+          "battery"
+          "bluetooth"
+        ];
+        modules-center = [ "sway/workspaces" ];
+        modules-right = [
+          "tray"
+          "sway/language"
+          "custom/pomodoro"
+          "custom/notifications"
+        ];
 
         "sway/workspaces" = {
           on-click = "activate";
@@ -75,7 +88,7 @@ in {
           status-icons = {
             paused = "⏸";
           };
-          ignored-players = ["firefox"];
+          ignored-players = [ "firefox" ];
         };
         "clock" = {
           interval = 60;

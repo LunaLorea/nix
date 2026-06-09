@@ -7,7 +7,8 @@
   merremia,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     # Hardware Configuration for this spcific device
     ./hardware-configuration.nix
@@ -54,7 +55,7 @@
         monitors = {
           "HDMI-A-1" = {
             widgets = {
-              left = ["workspaces"];
+              left = [ "workspaces" ];
             };
           };
         };
@@ -76,9 +77,9 @@
   security.polkit.enable = true;
   systemd.user.services.polkit-gnome-authentication-agent-1 = {
     description = "polkit-gnome-authentication-agent-1";
-    wantedBy = ["graphical-session.target"];
-    wants = ["graphical-session.target"];
-    after = ["graphical-session.target"];
+    wantedBy = [ "graphical-session.target" ];
+    wants = [ "graphical-session.target" ];
+    after = [ "graphical-session.target" ];
     serviceConfig = {
       Type = "simple";
       ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
@@ -105,7 +106,7 @@
 
   programs.wshowkeys.enable = true;
 
-  home-manager.users.${host.userName} = {...}: {
+  home-manager.users.${host.userName} = { ... }: {
     # Modules
     imports = [
       # Window manager plus all the additional pkgs like waybar
@@ -172,7 +173,9 @@
 
       startup = [
         # Start 1Password in the background
-        {command = "swaymsg exec discord && sleep 3 && swaymsg splitv && swaymsg exec firefox -P messages -no-remote --name Firefox-message && swaymsg splith";}
+        {
+          command = "swaymsg exec discord && sleep 3 && swaymsg splitv && swaymsg exec firefox -P messages -no-remote --name Firefox-message && swaymsg splith";
+        }
       ];
     };
 

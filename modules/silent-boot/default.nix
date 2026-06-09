@@ -3,7 +3,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   options.modules.silent-boot = {
     enable = lib.mkEnableOption "silent boot with a nice splashscreen";
   };
@@ -31,7 +32,7 @@
         themePackages = with pkgs; [
           # By default we would install all themes
           (adi1090x-plymouth-themes.override {
-            selected_themes = ["hexagon_dots_alt"];
+            selected_themes = [ "hexagon_dots_alt" ];
           })
         ];
       };

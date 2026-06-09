@@ -1,5 +1,4 @@
-nixpkgs: path: (
-  nixpkgs.lib.filter (x: nixpkgs.lib.hasSuffix ".nix" x) (
-    nixpkgs.lib.filesystem.listFilesRecursive path
-  )
-)
+nixpkgs: path:
+(nixpkgs.lib.filter (x: nixpkgs.lib.hasSuffix ".nix" x) (
+  nixpkgs.lib.filesystem.listFilesRecursive path
+))

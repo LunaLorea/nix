@@ -2,7 +2,8 @@
   pkgs,
   colors,
   ...
-}: let
+}:
+let
   background-color = colors.base + "dd";
 
   sway-cs = pkgs.writeText "sway-cs" (builtins.readFile ./cheatsheets/sway-cs);
@@ -80,7 +81,8 @@
       ${pkgs.nwg-wrapper}/bin/nwg-wrapper -t $sheet -c bindings.css -p right -mr 200 -l 2
     fi
   '';
-in {
+in
+{
   home.packages = with pkgs; [
     nwg-wrap
   ];

@@ -38,58 +38,62 @@
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    home-manager,
-    merremia,
-    sops-nix,
-    stylix,
-    ...
-  } @ inputs: let
-    colors = import ./colors.nix;
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      merremia,
+      sops-nix,
+      stylix,
+      ...
+    }@inputs:
+    let
+      colors = import ./colors.nix;
 
-    recursiveImport = path: (import ./lib/recursiveImport.nix) nixpkgs path;
+      recursiveImport = path: (import ./lib/recursiveImport.nix) nixpkgs path;
 
-    mkHost = host:
-      nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit
-            inputs
-            colors
-            host
-            merremia
-            recursiveImport
-            ;
+      mkHost =
+        host:
+        nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit
+              inputs
+              colors
+              host
+              merremia
+              recursiveImport
+              ;
+          };
+          modules = [
+            sops-nix.nixosModules.sops
+            stylix.nixosModules.stylix
+            ./hosts/${host.hostName}
+            ./configuration.nix
+          ];
         };
-        modules = [
-          sops-nix.nixosModules.sops
-          stylix.nixosModules.stylix
-          ./hosts/${host.hostName}
-          ./configuration.nix
-        ];
-      };
-  in {
-    nixosConfigurations = {
-      framework13 = mkHost {
-        hostName = "framework13";
-        userName = "luna";
-      };
+    in
+    {
+      nixosConfigurations = {
+        framework13 = mkHost {
+          hostName = "framework13";
+          userName = "luna";
+        };
 
-      epitome = mkHost {
-        hostName = "epitome";
-        userName = "luna";
-      };
+        epitome = mkHost {
+          hostName = "epitome";
+          userName = "luna";
+        };
 
-      desktop = mkHost {
-        hostName = "desktop";
-        userName = "luna";
-      };
+        desktop = mkHost {
+          hostName = "desktop";
+          userName = "luna";
+        };
 
-      myriorama = mkHost {
-        hostName = "myriorama";
-        userName = "luna";
+        myriorama = mkHost {
+          hostName = "myriorama";
+          userName = "luna";
+        };
       };
     };
-  };
 }

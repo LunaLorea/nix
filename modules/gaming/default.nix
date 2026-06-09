@@ -4,10 +4,12 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   setToChLayout = pkgs.writeShellScriptBin "setToChLayout" "setxkbmap ch";
   setTonotedLayout = pkgs.writeShellScriptBin "setTonotedLayout" "setxkbmap de noted";
-in {
+in
+{
   options.modules.gaming = {
     enable = lib.mkEnableOption "steam and other gaming focused applications";
   };
@@ -23,7 +25,7 @@ in {
       localNetworkGameTransfers.openFirewall = true;
     };
 
-    home-manager.users.${host.userName} = {...}: {
+    home-manager.users.${host.userName} = { ... }: {
       home.packages = with pkgs; [
         heroic
         prismlauncher

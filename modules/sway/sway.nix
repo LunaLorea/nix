@@ -1,4 +1,4 @@
-{...}: {
+{ ... }: {
   wayland.windowManager.sway = {
     enable = true;
 
@@ -63,10 +63,10 @@
       # Commands to be executed on startup
       startup = [
         # Start 1Password in the background
-        {command = "1password --silent";}
+        { command = "1password --silent"; }
       ];
 
-      bars = [];
+      bars = [ ];
 
       # Change the Keybindings
       keybindings = {

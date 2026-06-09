@@ -4,14 +4,15 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   options.modules.firefox = {
     enable = lib.mkEnableOption "the firefox module";
   };
 
   config = lib.mkIf config.modules.firefox.enable {
-    home-manager.users.${host.userName} = {...}: {
-      stylix.targets.firefox.profileNames = ["default"];
+    home-manager.users.${host.userName} = { ... }: {
+      stylix.targets.firefox.profileNames = [ "default" ];
       programs.firefox = {
         enable = true;
         # Adopting behavior from new homeState version "26.05".
@@ -38,36 +39,38 @@
           DontCheckDefaultBrowser = true;
           OfferToSaveLogins = false;
 
-          ExtensionSettings = let
-            moz = short: "https://addons.mozilla.org/firefox/downloads/latest/${short}/latest.xpi";
-          in {
-            "*".installation_mode = "blocked"; # blocks all addons except the ones specified below
-            # uBlock Origin:
-            "uBlock0@raymondhill.net" = {
-              install_url = moz "ublock-origin";
-              installation_mode = "force_installed";
+          ExtensionSettings =
+            let
+              moz = short: "https://addons.mozilla.org/firefox/downloads/latest/${short}/latest.xpi";
+            in
+            {
+              "*".installation_mode = "blocked"; # blocks all addons except the ones specified below
+              # uBlock Origin:
+              "uBlock0@raymondhill.net" = {
+                install_url = moz "ublock-origin";
+                installation_mode = "force_installed";
+              };
+              # Privacy Badger:
+              "jid1-MnnxcxisBPnSXQ@jetpack" = {
+                install_url = moz "privacy-badger17";
+                installation_mode = "force_installed";
+              };
+              # Improve Youtube
+              "{3c6bf0cc-3ae2-42fb-9993-0d33104fdcaf}" = {
+                install_url = moz "youtube-addon";
+                installation_mode = "force_installed";
+              };
+              # Bitwarden Client
+              "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
+                install_url = moz "bitwarden-password-manager";
+                installation_mode = "force_installed";
+              };
+              # Sponser Block
+              "sponsorBlocker@ajay.app" = {
+                install_url = moz "sponsorblock";
+                installation_mode = "force_installed";
+              };
             };
-            # Privacy Badger:
-            "jid1-MnnxcxisBPnSXQ@jetpack" = {
-              install_url = moz "privacy-badger17";
-              installation_mode = "force_installed";
-            };
-            # Improve Youtube
-            "{3c6bf0cc-3ae2-42fb-9993-0d33104fdcaf}" = {
-              install_url = moz "youtube-addon";
-              installation_mode = "force_installed";
-            };
-            # Bitwarden Client
-            "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
-              install_url = moz "bitwarden-password-manager";
-              installation_mode = "force_installed";
-            };
-            # Sponser Block
-            "sponsorBlocker@ajay.app" = {
-              install_url = moz "sponsorblock";
-              installation_mode = "force_installed";
-            };
-          };
 
           "3rdparty".Extensions = {
             "uBlock0@raymondhill.net".adminSettings = {
@@ -132,7 +135,7 @@
                     }
                   ];
                   icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-                  definedAliases = ["@np"];
+                  definedAliases = [ "@np" ];
                 };
 
                 "Nix Options" = {
@@ -152,7 +155,7 @@
                     }
                   ];
                   icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-                  definedAliases = ["@no"];
+                  definedAliases = [ "@no" ];
                 };
 
                 "NixOS Wiki" = {
@@ -168,7 +171,7 @@
                     }
                   ];
                   icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-                  definedAliases = ["@nw"];
+                  definedAliases = [ "@nw" ];
                 };
               };
             };
@@ -176,7 +179,8 @@
             settings = {
               "sidebar.verticalTabs" = "true";
               "browser.toolbars.bookmarks.visibility" = "never";
-              "browser.uiCustomization.navBarWhenVerticalTabs" = ''["back-button","forward-button","stop-reload-button","customizableui-special-spring1","vertical-spacer","urlbar-container","customizableui-special-spring2","downloads-button","fxa-toolbar-menu-button","unified-extensions-button","ublock0_raymondhill_net-browser-action","_d634138d-c276-4fc8-924b-40a0ea21d284_-browser-action","jid1-mnnxcxisbpnsxq_jetpack-browser-action","sponsorblocker_ajay_app-browser-action"]'';
+              "browser.uiCustomization.navBarWhenVerticalTabs" =
+                ''["back-button","forward-button","stop-reload-button","customizableui-special-spring1","vertical-spacer","urlbar-container","customizableui-special-spring2","downloads-button","fxa-toolbar-menu-button","unified-extensions-button","ublock0_raymondhill_net-browser-action","_d634138d-c276-4fc8-924b-40a0ea21d284_-browser-action","jid1-mnnxcxisbpnsxq_jetpack-browser-action","sponsorblocker_ajay_app-browser-action"]'';
               "browser.ml.chat.enabled" = "false";
               "sidebar.main.tools" = "bookmarks";
             };

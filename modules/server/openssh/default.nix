@@ -2,21 +2,22 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.modules.server.openssh;
-  inherit
-    (lib)
+  inherit (lib)
     mkEnableOption
     mkIf
     ;
-in {
+in
+{
   options.modules.server.openssh = {
     enable = mkEnableOption "ssh server";
   };
   config = mkIf cfg.enable {
     networking.firewall = {
       enable = true;
-      allowedTCPPorts = [22];
+      allowedTCPPorts = [ 22 ];
       allowPing = true;
     };
     services.openssh = {
@@ -24,7 +25,7 @@ in {
       settings = {
         PasswordAuthentication = false;
         PermitRootLogin = "no";
-        AllowUsers = ["luna"];
+        AllowUsers = [ "luna" ];
       };
     };
   };

@@ -2,7 +2,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     ./1password
     ./fingerprintreader

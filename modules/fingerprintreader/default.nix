@@ -2,7 +2,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   options.modules.fingerprintreader = {
     enable = lib.mkEnableOption "the fingerprintreader module";
   };

@@ -2,14 +2,15 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   cfg = config.modules.server.immich;
-  inherit
-    (lib)
+  inherit (lib)
     mkEnableOption
     mkIf
     ;
-in {
+in
+{
   options.modules.server.immich = {
     enable = mkEnableOption "immich service";
   };

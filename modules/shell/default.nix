@@ -4,7 +4,8 @@
   lib,
   config,
   ...
-}: {
+}:
+{
   options.modules.shell = {
     enable = lib.mkEnableOption "the shell module";
   };
@@ -26,8 +27,8 @@
     # Set default shell
     programs.zsh.enable = true;
     users.defaultUserShell = pkgs.zsh;
-    environment.shells = with pkgs; [zsh];
-    environment.pathsToLink = ["/share/zsh"];
+    environment.shells = with pkgs; [ zsh ];
+    environment.pathsToLink = [ "/share/zsh" ];
 
     home-manager.users.${host.userName} = _: {
       programs = {
@@ -48,7 +49,11 @@
 
           oh-my-zsh = {
             enable = true;
-            plugins = ["git" "fzf" "git"];
+            plugins = [
+              "git"
+              "fzf"
+              "git"
+            ];
             theme = "robbyrussell";
           };
         };

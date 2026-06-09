@@ -2,14 +2,15 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.modules.server.cloudflared;
-  inherit
-    (lib)
+  inherit (lib)
     mkEnableOption
     mkIf
     ;
-in {
+in
+{
   options.modules.server.cloudflared = {
     enable = mkEnableOption "cloudflare tunnel.";
   };
