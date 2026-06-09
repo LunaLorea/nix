@@ -11,7 +11,7 @@
 
     merremia = {
       url = "git+https://codeberg.org/lunalore/Merremia?ref=main";
-      #url = "path:/home/luna/Documents/Merremia";
+      #url = "path:/home/luna/Projects/Merremia";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -54,10 +54,15 @@
     mkHost = host:
       nixpkgs.lib.nixosSystem {
         specialArgs = {
-          inherit inputs colors host merremia recursiveImport;
+          inherit
+            inputs
+            colors
+            host
+            merremia
+            recursiveImport
+            ;
         };
         modules = [
-          merremia.nixosModules.default
           sops-nix.nixosModules.sops
           stylix.nixosModules.stylix
           ./hosts/${host.hostName}
@@ -68,6 +73,11 @@
     nixosConfigurations = {
       framework13 = mkHost {
         hostName = "framework13";
+        userName = "luna";
+      };
+
+      epitome = mkHost {
+        hostName = "epitome";
         userName = "luna";
       };
 
