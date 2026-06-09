@@ -1,7 +1,6 @@
 {
   host,
   pkgs,
-  merremia,
   lib,
   ...
 }: {
@@ -12,7 +11,22 @@
 
   nixpkgs.config.android_sdk.accept_license = true;
 
-  environment.systemPackages = with pkgs; [sblast pulseaudioFull ffmpeg_7-headless jellyfin-desktop];
+  environment.systemPackages = with pkgs; [
+    sblast
+    pulseaudioFull
+    ffmpeg_7-headless
+    jellyfin-desktop
+    rclone
+  ];
+
+  # In /etc/nixos/configuration.nix
+  virtualisation.docker = {
+    enable = true;
+    rootless.enable = false;
+  };
+
+  # Optional: Add your user to the "docker" group to run docker without sudo
+  #users.users.${host.userName}.extraGroups = [ "docker" ];
 
   modules = {
     silent-boot.enable = true;
@@ -21,17 +35,9 @@
     _1password.enable = true;
     firefox.enable = true;
     neovim.enable = true;
+    gaming.enable = true;
   };
 
-  merremia = let
-  in {
-    enable = true;
-    systemd.enable = true;
-    config.colors.colortheme = merremia.lib.importBase16.fromFile (pkgs.fetchurl {
-      url = "https://raw.githubusercontent.com/tinted-theming/base16-schemes/refs/heads/main/rose-pine-dawn.yaml";
-      hash = "sha256-TItRIXGUQ0SNrUWE+CBV2fgYypSx+voj9Zf6PVDSoDo=";
-    });
-  };
   home-manager.users.${host.userName} = {...}: {
     # Modules
     imports = [
@@ -56,7 +62,7 @@
       vlc
     ];
 
-    programs.kitty.font.size = 16;
+    programs.kitty.font.size = lib.mkForce 16;
 
     wayland.windowManager.sway.config = {
       output.eDP-1 = {

@@ -55,19 +55,22 @@ in {
       enable = true;
       wrapperFeatures.gtk = true;
     };
+    services.upower.enable = true;
     stylix = {
       enable = true;
       polarity = "dark";
       autoEnable = true;
       image = pkgs.fetchurl {
-        url = "https://immich.wuffli.art/api/assets/fa4ebdb6-78cd-421b-8ece-82b1e04b1266/thumbnail?key=H4HaPfmhM_rC7YWnBNMRZ7hq1Hm3sDdX1vNxqcljq5c_vm9q4lUF01TJlNiiUHSir6A&size=preview&c=SOcFDYKKeYegeXhDh6d4dnc8j%2FaS&edited=true";
-        hash = "sha256-Cl7n4DOo/Dqu4P3xjDTN7/iREyt+HQh9mDX7wAUib08=";
+        url = "https://github.com/Narmis-E/onedark-wallpapers/blob/main/minimal/od_error.png?raw=true";
+        hash = "sha256-OItnngkLB8TPUtbiq4UHydcqIlOPGR59GZwxwiBA3ps=";
       };
+      base16Scheme = ./onedark.yaml;
     };
 
-    merremia.config.colors.colortheme = merremia.lib.importBase16.fromAttrs config.lib.stylix.colors;
-
-    environment.systemPackages = [pkgs.kitty];
+    environment.systemPackages = with pkgs; [
+      kitty
+      signal-desktop
+    ];
 
     programs.dconf.enable = true;
 
@@ -81,6 +84,11 @@ in {
         ./cheatsheet.nix
       ];
 
+      merremia = {
+        enable = true;
+        systemd.enable = true;
+        colors.colortheme = merremia.lib.importBase16.fromAttrs config.lib.stylix.colors;
+      };
       home.packages = [
         pkgs.wayshot
         pkgs.slurp
@@ -122,10 +130,6 @@ in {
 
       programs.kitty = {
         enable = true;
-        settings = {
-          background_opacity = lib.mkForce "0.85";
-        };
-        #font.name = "JetBrainsMono Nerd Font";
       };
       programs.fuzzel = {
         enable = true;
@@ -154,7 +158,8 @@ in {
       "${pkgs.bluez}/libexec/bluetooth/bluetoothd -f /etc/bluetooth/main.conf --experimental"
     ];
 
-    fonts.packages = [] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+    fonts.packages =
+      [] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
     # polkit for sway
     security.polkit.enable = true;
@@ -167,7 +172,7 @@ in {
       # description = "kanshi daemon";
       serviceConfig = {
         Type = "simple";
-        ExecStart = ''${pkgs.kanshi}/bin/kanshi -c kanshi_config_file'';
+        ExecStart = "${pkgs.kanshi}/bin/kanshi -c kanshi_config_file";
       };
     };
 

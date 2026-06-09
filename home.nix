@@ -1,8 +1,16 @@
-{host, ...}: {
+{
+  host,
+  merremia,
+  ...
+}: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
+
+  imports = [merremia.homeModules.default];
   home.username = host.userName;
   home.homeDirectory = "/home/${host.userName}";
+
+  xdg.enable = true;
 
   nixpkgs = {
     config = {

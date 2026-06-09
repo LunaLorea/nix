@@ -5,10 +5,12 @@
   pkgs,
   pkgs-stable,
   inputs,
+  merremia,
   colors,
   host,
   ...
-}: {
+}:
+{
   imports = [
     inputs.home-manager.nixosModules.default
 
@@ -26,9 +28,12 @@
   };
 
   # Enable Flakes
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
-  nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
+  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
   networking.hostName = host.hostName; # Define your hostname.
 
@@ -91,12 +96,21 @@
   users.users.${host.userName} = {
     isNormalUser = true;
     description = host.userName;
-    extraGroups = ["networkmanager" "wheel" "media"];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "media"
+    ];
   };
 
   home-manager = {
     extraSpecialArgs = {
-      inherit inputs colors host;
+      inherit
+        inputs
+        colors
+        host
+        merremia
+        ;
       pkgs-unstable = pkgs-stable;
     };
     users.${host.userName} = import ./home.nix;
