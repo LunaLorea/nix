@@ -78,7 +78,9 @@
     variant = "noted";
   };
 
-  console.useXkbConfig = true;
+  console = {
+    useXkbConfig = true;
+  };
 
   services.avahi = {
     enable = true;

@@ -14,6 +14,7 @@
     ./hardware-configuration.nix
   ];
 
+  qt.enable = true;
   modules = {
     sway.enable = true;
     silent-boot.enable = true;
@@ -37,31 +38,14 @@
       ];
     };
   };
-  merremia = {
+
+  # In /etc/nixos/configuration.nix
+  virtualisation.docker = {
     enable = true;
-    systemd.enable = true;
-    config = {
-      colors = {
-        #colortheme = merremia.lib.readBase16 ./tokyo-city-dark.yaml;
-      };
-      monitors = {
-        "DP-1" = {
-          scale = 1.0;
-        };
-      };
-    };
-    modules = {
-      bar = {
-        monitors = {
-          "HDMI-A-1" = {
-            widgets = {
-              left = [ "workspaces" ];
-            };
-          };
-        };
-      };
-    };
   };
+
+  # Optional: Add your user to the "docker" group to run docker without sudo
+  users.users.luna.extraGroups = [ "docker" ];
 
   environment.defaultPackages = with pkgs; [
     usbutils
@@ -73,6 +57,7 @@
     inkscape
     cifs-utils
     libation
+    slack
   ];
   security.polkit.enable = true;
   systemd.user.services.polkit-gnome-authentication-agent-1 = {
@@ -117,6 +102,31 @@
       ../../homemanager-modules/ncspot
     ];
 
+    merremia = {
+      enable = true;
+      systemd.enable = true;
+      config = {
+        monitors = [
+          {
+            name = "DP-1";
+            scale = 1.0;
+          }
+        ];
+      };
+      modules = {
+        bar = {
+          monitors = {
+            "HDMI-A-1" = {
+              widgets = {
+                left = [ "workspaces" ];
+              };
+            };
+          };
+        };
+      };
+    };
+    qt.enable = true;
+
     home.packages = with pkgs; [
       jq
 
@@ -140,19 +150,14 @@
       output = {
         HDMI-A-1 = {
           scale = "1";
-          position = "3840 0";
-          transform = "270";
+          position = "0 0";
         };
         DP-2 = {
           scale = "1";
-          position = "1920 400";
+          position = "1920 0";
           mode = "1920x1080@60Hz";
           adaptive_sync = "on";
           modeline = "452.50  1920 2088 2296 2672  1080 1083 1088 1177 -hsync +vsync";
-        };
-        DP-3 = {
-          scale = "1";
-          position = "0 400";
         };
       };
 

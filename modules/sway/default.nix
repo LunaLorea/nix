@@ -123,9 +123,6 @@ in
       };
       services.easyeffects.enable = true;
 
-      services.blueman-applet = {
-        enable = true;
-      };
       services.network-manager-applet = {
         enable = true;
       };
@@ -166,8 +163,18 @@ in
     # polkit for sway
     security.polkit.enable = true;
 
-    # Enable the gnome display manager
-    services.displayManager.gdm.enable = true;
+    # Enable the ly display manager
+    services.displayManager.ly = {
+      enable = true;
+      settings = {
+        default_input = "password";
+        animation = "dur_file";
+        dur_file_path = "/etc/ly/blackhole-smooth-240x67.dur";
+        full_color = true;
+      };
+    };
+    # kmscon tty
+    services.kmscon.enable = true;
 
     # enables monitor hotplugging
     systemd.user.services.kanshi = {

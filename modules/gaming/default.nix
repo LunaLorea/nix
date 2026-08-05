@@ -25,6 +25,8 @@ in
       localNetworkGameTransfers.openFirewall = true;
     };
 
+    programs.gamescope.enable = true;
+
     home-manager.users.${host.userName} = { ... }: {
       home.packages = with pkgs; [
         heroic
