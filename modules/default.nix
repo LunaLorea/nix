@@ -6,13 +6,15 @@
 {
   imports = [
     ./1password
+    ./browser
     ./fingerprintreader
+    ./firefox
     ./gaming
+    ./neovim
+    ./server
     ./shell
     ./silent-boot
     ./sway
-    ./firefox
-    ./neovim
-    ./server
+    ./wm
   ];
 }
