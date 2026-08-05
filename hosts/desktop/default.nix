@@ -1,11 +1,6 @@
 {
-  custom-modules,
   pkgs,
   host,
-  lib,
-  config,
-  merremia,
-  inputs,
   ...
 }:
 {
@@ -16,15 +11,16 @@
 
   qt.enable = true;
   modules = {
-    sway.enable = true;
-    silent-boot.enable = true;
-    gaming.enable = true;
     _1password.enable = true;
-    neovim.enable = true;
-    shell.enable = true;
-    server.arr.enable = false;
-    wm.enable = true;
     browser.enable = true;
+    defaultApps.enable = true;
+    gaming.enable = true;
+    neovim.enable = true;
+    server.arr.enable = false;
+    shell.enable = true;
+    silent-boot.enable = true;
+    theming.enable = true;
+    wm.enable = true;
   };
 
   fileSystems = {
@@ -93,16 +89,6 @@
   programs.wshowkeys.enable = true;
 
   home-manager.users.${host.userName} = { ... }: {
-    # Modules
-    imports = [
-      # Window manager plus all the additional pkgs like waybar
-      ../../homemanager-modules/git
-      ../../homemanager-modules/studying
-      ../../homemanager-modules/nextcloud-client
-      ../../homemanager-modules/man
-      ../../homemanager-modules/ncspot
-    ];
-
     merremia = {
       enable = true;
       systemd.enable = true;
@@ -146,43 +132,15 @@
 
       picard
     ];
+    wayland.windowManager.mango = {
+      enable = true;
 
-    wayland.windowManager.sway.config = {
-      output = {
-        HDMI-A-1 = {
-          scale = "1";
-          position = "0 0";
-        };
-        DP-2 = {
-          scale = "1";
-          position = "1920 0";
-          mode = "1920x1080@60Hz";
-          adaptive_sync = "on";
-          modeline = "452.50  1920 2088 2296 2672  1080 1083 1088 1177 -hsync +vsync";
-        };
+      settings = {
+        monitorrule = [
+          "name:HDMI-A-1,width:1920,height:1080,x:0,y:0"
+          "name:DP-2,width:1920,height:1080,refresh:144.0,x:1920,y:0"
+        ];
       };
-
-      workspaceOutputAssign = [
-        {
-          workspace = "10";
-          output = "HDMI-A-1";
-        }
-        {
-          workspace = "1";
-          output = "DP-2";
-        }
-        {
-          workspace = "2";
-          output = "DP-3";
-        }
-      ];
-
-      startup = [
-        # Start 1Password in the background
-        {
-          command = "swaymsg exec discord && sleep 3 && swaymsg splitv && swaymsg exec firefox -P messages -no-remote --name Firefox-message && swaymsg splith";
-        }
-      ];
     };
 
     programs.zsh.shellAliases = {

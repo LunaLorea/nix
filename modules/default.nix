@@ -14,7 +14,8 @@
     ./server
     ./shell
     ./silent-boot
-    ./sway
+    ./theming
     ./wm
+    ./defaultApps
   ];
 }

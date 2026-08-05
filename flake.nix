@@ -12,8 +12,7 @@
     };
 
     merremia = {
-      #url = "git+https://codeberg.org/lunalore/Merremia?ref=main";
-      url = "path:/home/luna/Projects/Merremia";
+      url = "git+https://codeberg.org/lunalore/Merremia?ref=main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

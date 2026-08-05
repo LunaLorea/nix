@@ -3,6 +3,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 {
@@ -12,6 +13,7 @@
 
   config = lib.mkIf config.modules.browser.enable {
     home-manager.users.${host.userName} = { ... }: {
+      imports = [ inputs.zen-browser.homeModules.beta ];
       stylix.targets.zen-browser.profileNames = [ "default" ];
       programs.zen-browser = {
         enable = true;

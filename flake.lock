@@ -264,14 +264,18 @@
         "systems": "systems_2"
       },
       "locked": {
-        "lastModified": 1780002953,
-        "narHash": "sha256-Y30TmDMCCKbgTewPNgN89MPIaHrvLf2FNq2QYjpz+LI=",
-        "path": "/home/luna/Projects/Merremia",
-        "type": "path"
+        "lastModified": 1780685901,
+        "narHash": "sha256-5PVzGDaxariTldtuAsT+dpH/SnbRV665yICBnmo3B70=",
+        "ref": "main",
+        "rev": "27bd4554ce7da783670306256810971ffba54563",
+        "revCount": 79,
+        "type": "git",
+        "url": "https://codeberg.org/lunalore/Merremia"
       },
       "original": {
-        "path": "/home/luna/Projects/Merremia",
-        "type": "path"
+        "ref": "main",
+        "type": "git",
+        "url": "https://codeberg.org/lunalore/Merremia"
       }
     },
     "mnw": {

@@ -10,6 +10,8 @@ let
   cfg = config.modules.wm;
 in
 {
+  imports = [ inputs.mango.nixosModules.mango ];
+
   options.modules.wm = {
     enable = lib.mkEnableOption "MangoWM configuration";
 
@@ -25,6 +27,24 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+
+    programs.mango = {
+      enable = true;
+      addLoginEntry = true;
+    };
+
+    # Enable the ly display manager
+    services.displayManager.ly = {
+      enable = true;
+      settings = {
+        default_input = "password";
+        animation = "dur_file";
+        dur_file_path = "/etc/ly/blackhole-smooth-240x67.dur";
+        full_color = true;
+      };
+    };
+    # kmscon tty
+    services.kmscon.enable = true;
     home-manager.users.${host.userName} = { ... }: {
       imports = [ inputs.mango.hmModules.mango ];
       home.packages = with pkgs; [
@@ -38,6 +58,11 @@ in
         grim # screenshot tool
         slurp # screen area selection
       ];
+
+      home.keyboard = {
+        layout = "de,ch";
+        variant = "noted";
+      };
 
       services = {
         playerctld.enable = true; # playback control
