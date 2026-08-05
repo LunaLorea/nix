@@ -20,10 +20,11 @@
     silent-boot.enable = true;
     gaming.enable = true;
     _1password.enable = true;
-    firefox.enable = true;
     neovim.enable = true;
     shell.enable = true;
     server.arr.enable = false;
+    wm.enable = true;
+    browser.enable = true;
   };
 
   fileSystems = {
