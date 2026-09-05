@@ -1,8 +1,7 @@
 {
   host,
   pkgs,
-  inputs,
-  lib,
+  config,
   ...
 }:
 {
@@ -14,15 +13,42 @@
   modules = {
     neovim.enable = true;
     server = {
-      matrix.enable = true;
-      immich.enable = true;
-      sftpgo.enable = true;
       arr.enable = true;
-      openssh.enable = true;
-      cloudflared.enable = true;
+      attic.enable = true;
       auth.enable = true;
+      cloudflared.enable = true;
+      immich.enable = true;
+      mastodon.enable = true;
+      matrix.enable = true;
+      openssh.enable = true;
+      searxng.enable = true;
+      sftpgo.enable = true;
+      thelounge.enable = true;
       vaultwarden.enable = true;
+      git = {
+        runner.enable = true;
+      };
     };
+  };
+
+  hardware.graphics.enable = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
+  boot = {
+    kernelModules = [
+      "nvidia"
+      "i915"
+      "nvidia_modeset"
+      "nvidia_uvm"
+      "nvidia_drm"
+    ];
+    kernelParams = [ "nvidia-drm.fbdev=1" ];
+  };
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = false;
+    powerManagement.finegrained = false;
+    open = false; # see the note above
+    package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
   };
 
   services = {
@@ -51,8 +77,6 @@
   home-manager.users.${host.userName} = { ... }: {
     # Modules
     imports = [
-      # Window manager plus all the additional pkgs like waybar
-      ../../homemanager-modules/man
     ];
   };
 }

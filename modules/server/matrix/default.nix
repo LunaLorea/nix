@@ -15,9 +15,11 @@ in
   options.modules.server.matrix = {
     enable = mkEnableOption "matrix stack";
   };
+  imports = [ ./mautrix-whatsapp.nix ];
   config = mkIf cfg.enable {
     services.matrix-continuwuity = {
       enable = true;
+      #package = pkgs-nightly.matrix-continuwuity;
       settings = {
         global = {
           server_name = "lorea.dev";
@@ -26,7 +28,10 @@ in
           allow_registration = false;
           allow_encryption = true;
           allow_federation = true;
-          trusted_servers = [ "matrix.org" ];
+          trusted_servers = [
+            "matrix.org"
+            "studentchat.ethz.ch"
+          ];
           well_known = {
             client = "https://matrix.lorea.dev";
             server = "matrix.lorea.dev:443";

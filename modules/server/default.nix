@@ -1,12 +1,17 @@
 { ... }: {
   imports = [
-    ./immich
-    ./matrix
     ./arr
-    ./sftpgo
-    ./openssh
-    ./cloudflared
+    ./attic
     ./auth
+    ./cloudflared
+    ./git
+    ./immich
+    ./mastodon
+    ./matrix
+    ./openssh
+    ./searxng
+    ./sftpgo
+    ./thelounge
     ./vaultwarden
   ];
 }

@@ -25,19 +25,9 @@ identity_providers:
           - "sftpgo_role"
     # hmac secret and private key given by env variables
     clients:
-      - client_id:
-          {
-            {
-              secret "/run/secrets/hosts/myriorama/vaultwarden/oidc_client_id" | mindent 10 "|" | msquote,
-            },
-          }
+      - client_id: {{ secret "/run/secrets/hosts/myriorama/vaultwarden/oidc_client_id" | mindent 10 "|" | msquote }}
         client_name: "Vaultwarden"
-        client_secret:
-          {
-            {
-              secret "/run/secrets/hosts/myriorama/vaultwarden/oidc_client_secret/authelia" | mindent 10 "|" | msquote,
-            },
-          }
+        client_secret: {{ secret "/run/secrets/hosts/myriorama/vaultwarden/oidc_client_secret/authelia" | mindent 10 "|" | msquote }}
         public: false
         authorization_policy: "two_factor"
         require_pkce: true
@@ -59,37 +49,27 @@ identity_providers:
         access_token_signed_response_alg: "none"
         userinfo_signed_response_alg: "none"
         token_endpoint_auth_method: "client_secret_basic"
-      - client_id:
-          {
-            {
-              secret "/run/secrets/hosts/myriorama/jellyfin/oidc_client_id" | mindent 10 "|" | msquote,
-            },
-          }
+      - client_id: {{ secret "/run/secrets/hosts/myriorama/jellyfin/oidc_client_id" | mindent 10 "|" | msquote }}
         client_name: "Jellyfin"
         # Client secret should be randomly generated
-        client_secret:
-          {
-            {
-              secret "/run/secrets/hosts/myriorama/jellyfin/oidc_client_secret/authelia" | mindent 10 "|" | msquote,
-            },
-          }
+        client_secret: {{ secret "/run/secrets/hosts/myriorama/jellyfin/oidc_client_secret/authelia" | mindent 10 "|" | msquote }}
         token_endpoint_auth_method: "client_secret_post"
         authorization_policy: "one_factor"
         redirect_uris:
           - "https://jellyfin.wuffli.art/sso/OID/redirect/authelia"
-      - client_id:
-          {
-            {
-              secret "/run/secrets/hosts/myriorama/audiobookshelf/oidc_client_id" | mindent 10 "|" | msquote,
-            },
-          }
+        scopes:
+          - "openid"
+          - "profile"
+          - "groups"
+        response_types:
+          - "code"
+        grant_types:
+          - "authorization_code"
+        access_token_signed_response_alg: "none"
+        userinfo_signed_response_alg: "none"
+      - client_id: {{ secret "/run/secrets/hosts/myriorama/audiobookshelf/oidc_client_id" | mindent 10 "|" | msquote }}
         client_name: "audiobookshelf"
-        client_secret:
-          {
-            {
-              secret "/run/secrets/hosts/myriorama/audiobookshelf/oidc_client_secret/authelia" | mindent 10 "|" | msquote,
-            },
-          }
+        client_secret: {{ secret "/run/secrets/hosts/myriorama/audiobookshelf/oidc_client_secret/authelia" | mindent 10 "|" | msquote }}
         public: false
         authorization_policy: "one_factor"
         require_pkce: true
@@ -110,19 +90,9 @@ identity_providers:
         access_token_signed_response_alg: "none"
         userinfo_signed_response_alg: "none"
         token_endpoint_auth_method: "client_secret_basic"
-      - client_id:
-          {
-            {
-              secret "/run/secrets/hosts/myriorama/immich/oidc_client_id" | mindent 10 "|" | msquote,
-            },
-          }
+      - client_id: {{ secret "/run/secrets/hosts/myriorama/immich/oidc_client_id" | mindent 10 "|" | msquote }}
         client_name: "immich"
-        client_secret:
-          {
-            {
-              secret "/run/secrets/hosts/myriorama/immich/oidc_client_secret/authelia" | mindent 10 "|" | msquote,
-            },
-          }
+        client_secret: {{ secret "/run/secrets/hosts/myriorama/immich/oidc_client_secret/authelia" | mindent 10 "|" | msquote }}
         public: false
         authorization_policy: "two_factor"
         require_pkce: false
@@ -142,19 +112,9 @@ identity_providers:
         access_token_signed_response_alg: "none"
         userinfo_signed_response_alg: "none"
         token_endpoint_auth_method: "client_secret_post"
-      - client_id:
-          {
-            {
-              secret "/run/secrets/hosts/myriorama/sftpgo/oidc_client_id" | mindent 10 "|" | msquote,
-            },
-          }
+      - client_id: {{ secret "/run/secrets/hosts/myriorama/sftpgo/oidc_client_id" | mindent 10 "|" | msquote }}
         client_name: "SFTPGo"
-        client_secret:
-          {
-            {
-              secret "/run/secrets/hosts/myriorama/sftpgo/oidc_client_secret/authelia" | mindent 10 "|" | msquote,
-            },
-          }
+        client_secret: {{ secret "/run/secrets/hosts/myriorama/sftpgo/oidc_client_secret/authelia" | mindent 10 "|" | msquote }}
         public: false
         authorization_policy: "two_factor"
         claims_policy: "sftpgo"

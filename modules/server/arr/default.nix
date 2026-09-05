@@ -5,9 +5,9 @@
   pkgs,
   inputs,
   ...
-}:
-let
-  inherit (lib)
+}: let
+  inherit
+    (lib)
     getExe
     mkIf
     mkEnableOption
@@ -15,14 +15,14 @@ let
 
   cfg = config.modules.server.arr;
   netns = "proton";
-in
-{
+in {
   options.modules.server.arr = {
     enable = mkEnableOption "qbittorrent module";
   };
-  imports = [ inputs.vpn-confinement.nixosModules.default ];
+  imports = [inputs.vpn-confinement.nixosModules.default];
   config = mkIf cfg.enable {
-    users.groups.media = { };
+    users.users.jellyfin.extraGroups = ["video" "render"];
+    users.groups.media = {};
     networking.firewall = {
       enable = true;
       allowedTCPPorts = [
@@ -129,186 +129,188 @@ in
         "127.0.0.1/32"
       ];
       # Make qBittorrent web UI accessible on the bridge interface
-      portMappings =
-        let
-          qbittorrent = config.services.qbittorrent;
-        in
-        [
-          {
-            from = qbittorrent.webuiPort;
-            to = qbittorrent.webuiPort;
-          }
-          {
-            # Lidarr
-            from = 8686;
-            to = 8686;
-          }
-          {
-            # Prowlarr
-            from = 9696;
-            to = 9696;
-          }
-          {
-            # Radarr
-            from = 7878;
-            to = 7878;
-          }
-          {
-            # Readarr
-            from = 8787;
-            to = 8787;
-          }
-          {
-            # Sonarr
-            from = 8989;
-            to = 8989;
-          }
-          {
-            # seer
-            from = 5055;
-            to = 5055;
-          }
-        ];
+      portMappings = let
+        qbittorrent = config.services.qbittorrent;
+      in [
+        {
+          from = qbittorrent.webuiPort;
+          to = qbittorrent.webuiPort;
+        }
+        {
+          # Lidarr
+          from = 8686;
+          to = 8686;
+        }
+        {
+          # Prowlarr
+          from = 9696;
+          to = 9696;
+        }
+        {
+          # Radarr
+          from = 7878;
+          to = 7878;
+        }
+        {
+          # Readarr
+          from = 8787;
+          to = 8787;
+        }
+        {
+          # Sonarr
+          from = 8989;
+          to = 8989;
+        }
+        {
+          # seer
+          from = 5055;
+          to = 5055;
+        }
+      ];
     };
 
-    systemd.services =
-      let
-        customCreateShellScript =
-          {
-            pkgs,
-            pname,
-            src,
-            version ? "1.0",
-            deps,
-          }:
-          pkgs.stdenv.mkDerivation {
-            inherit pname src version;
+    systemd.services = let
+      customCreateShellScript = {
+        pkgs,
+        pname,
+        src,
+        version ? "1.0",
+        deps,
+      }:
+        pkgs.stdenv.mkDerivation {
+          inherit pname src version;
 
-            nativeBuildInputs = [ pkgs.makeWrapper ];
+          nativeBuildInputs = [pkgs.makeWrapper];
 
-            phases = [ "installPhase" ];
+          phases = ["installPhase"];
 
-            installPhase = ''
-              mkdir -p $out/bin
-              install -m +x $src $out/bin/${pname}
+          installPhase = ''
+            mkdir -p $out/bin
+            install -m +x $src $out/bin/${pname}
 
-              wrapProgram $out/bin/${pname} \
-                --prefix PATH : ${lib.makeBinPath deps}
-            '';
+            wrapProgram $out/bin/${pname} \
+              --prefix PATH : ${lib.makeBinPath deps}
+          '';
 
-            meta.mainProgram = pname;
-          };
-
-        qbittorrent-vpn-port-update = customCreateShellScript {
-          inherit pkgs;
-
-          pname = "qbittorrent-vpn-port-update";
-          src = ./script.sh;
-          deps = with pkgs; [
-            curl
-            gawk
-            iptables
-            jq
-            libnatpmp
-          ];
+          meta.mainProgram = pname;
         };
-      in
-      {
-        qbittorrent = {
-          vpnConfinement = {
-            enable = true;
-            vpnNamespace = "proton";
-          };
-        };
-        # Automatically update the qBittorrent torrenting port with the one forwarded in ProtonVPN
-        qbittorrent-vpn-port-update = {
+
+      qbittorrent-vpn-port-update = customCreateShellScript {
+        inherit pkgs;
+
+        pname = "qbittorrent-vpn-port-update";
+        src = ./script.sh;
+        deps = with pkgs; [
+          curl
+          gawk
+          iptables
+          jq
+          libnatpmp
+        ];
+      };
+    in {
+      jellyfin.serviceConfig = {
+        PrivateDevices = lib.mkForce false;
+        DevicePolicy = lib.mkForce "auto";
+      };
+      qbittorrent = {
+        vpnConfinement = {
           enable = true;
-          description = "Automatically update the qBittorrent torrenting port with the one forwarded in ProtonVPN";
-          after = [ "qbittorrent.service" ];
-          requires = [ "qbittorrent.service" ];
-          wantedBy = [ "multi-user.target" ];
-          environment = {
-            # The VPN connection interface
-            VPN_INTERFACE = "${netns}0";
-            QBITTORRENT_WEBUI_HOST = "127.0.0.1";
-            QBITTORRENT_WEBUI_PORT = toString config.services.qbittorrent.webuiPort;
-            QBITTORRENT_WEBUI_USERNAME = "admin";
-            QBITTORRENT_WEBUI_PASSWORD_FILE = "/run/secrets/hosts/myriorama/qbittorrent/password";
-            INITIAL_DELAY_SEC = "10";
-            CHECK_INTERVAL_SEC = "60";
-            ERROR_INTERVAL_SEC = "5";
-            ERROR_INTERVAL_COUNT = "5";
-          };
-          serviceConfig = {
-            Type = "simple";
-            ExecStart = getExe qbittorrent-vpn-port-update;
-          };
-          vpnConfinement = {
-            enable = true;
-            vpnNamespace = netns;
-          };
+          vpnNamespace = "proton";
         };
-
-        lidarr = {
-          vpnConfinement = {
-            enable = true;
-            vpnNamespace = netns;
-          };
+      };
+      # Automatically update the qBittorrent torrenting port with the one forwarded in ProtonVPN
+      qbittorrent-vpn-port-update = {
+        enable = true;
+        description = "Automatically update the qBittorrent torrenting port with the one forwarded in ProtonVPN";
+        after = ["qbittorrent.service"];
+        requires = ["qbittorrent.service"];
+        wantedBy = ["multi-user.target"];
+        environment = {
+          # The VPN connection interface
+          VPN_INTERFACE = "${netns}0";
+          QBITTORRENT_WEBUI_HOST = "127.0.0.1";
+          QBITTORRENT_WEBUI_PORT = toString config.services.qbittorrent.webuiPort;
+          QBITTORRENT_WEBUI_USERNAME = "admin";
+          QBITTORRENT_WEBUI_PASSWORD_FILE = "/run/secrets/hosts/myriorama/qbittorrent/password";
+          INITIAL_DELAY_SEC = "10";
+          CHECK_INTERVAL_SEC = "60";
+          ERROR_INTERVAL_SEC = "5";
+          ERROR_INTERVAL_COUNT = "5";
         };
-        prowlarr = {
-          # Make Prowlarr run in the VPN namespace so it has the same IP as qBittorrent
-          vpnConfinement = {
-            enable = true;
-            vpnNamespace = netns;
-          };
+        serviceConfig = {
+          Type = "simple";
+          ExecStart = getExe qbittorrent-vpn-port-update;
         };
-        radarr = {
-          vpnConfinement = {
-            enable = true;
-            vpnNamespace = netns;
-          };
-        };
-        readarr = {
-          vpnConfinement = {
-            enable = true;
-            vpnNamespace = netns;
-          };
-        };
-        sonarr = {
-          vpnConfinement = {
-            enable = true;
-            vpnNamespace = netns;
-          };
-        };
-        seerr = {
-          vpnConfinement = {
-            enable = true;
-            vpnNamespace = netns;
-          };
+        vpnConfinement = {
+          enable = true;
+          vpnNamespace = netns;
         };
       };
 
+      lidarr = {
+        vpnConfinement = {
+          enable = true;
+          vpnNamespace = netns;
+        };
+      };
+      prowlarr = {
+        # Make Prowlarr run in the VPN namespace so it has the same IP as qBittorrent
+        vpnConfinement = {
+          enable = true;
+          vpnNamespace = netns;
+        };
+      };
+      radarr = {
+        vpnConfinement = {
+          enable = true;
+          vpnNamespace = netns;
+        };
+      };
+      readarr = {
+        vpnConfinement = {
+          enable = true;
+          vpnNamespace = netns;
+        };
+      };
+      sonarr = {
+        vpnConfinement = {
+          enable = true;
+          vpnNamespace = netns;
+        };
+      };
+      seerr = {
+        vpnConfinement = {
+          enable = true;
+          vpnNamespace = netns;
+        };
+      };
+    };
     sops = {
       templates.wireguard-config-file = {
         content =
           # ini
           ''
             [Interface]
-            # Key for myriorama
-            # Bouncing = 5
-            # NetShield = 1
+            # Key for myriorama1
+            # Bouncing = 1
+            # NetShield = 0
             # Moderate NAT = off
             # NAT-PMP (Port Forwarding) = on
             # VPN Accelerator = on
             PrivateKey = ${config.sops.placeholder."hosts/myriorama/protonvpn/private_key"}
-            Address = 10.2.0.2/32
-            DNS = 10.2.0.1
+            Address = 10.2.0.2/32, 2a07:b944::2:2/128
+            DNS = 10.2.0.1, 2a07:b944::2:1
 
             [Peer]
-            # CH#631
-            PublicKey = snSASVcKZegpITPNw2scm44NBC6NPUropoTkfEGtq18=
-            AllowedIPs = 0.0.0.0/0
-            Endpoint = 79.127.184.1:51820
+            # CH#431
+            PublicKey = eFSYPwVvu0LYCDu5LtoJu89FKAXku2ho0JRMCMYswhY=
+            AllowedIPs = 0.0.0.0/0, ::/0
+            Endpoint = 185.230.125.34:51820
+
+            # Uncomment the following line (delete the # symbol) to connect to Proton VPN using IPv6.
+            # Endpoint = [2001:ac8:28:a4f::10]:51820
+            PersistentKeepalive = 25
           '';
         owner = "qbittorrent";
       };
