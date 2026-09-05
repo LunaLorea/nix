@@ -46,10 +46,13 @@
         home-manager.follows = "home-manager";
       };
     };
+
     mango = {
       url = "github:mangowm/mango";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    affinity-nix.url = "github:mrshmllow/affinity-nix";
   };
 
   outputs =
@@ -107,12 +110,6 @@
     in
     {
       nixosConfigurations = {
-        framework13 = mkHost {
-          hostName = "framework13";
-          userName = "luna";
-          system = "x86_64-linux";
-        };
-
         epitome = mkHost {
           hostName = "epitome";
           userName = "luna";
