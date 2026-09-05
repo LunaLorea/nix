@@ -1,0 +1,24 @@
+name: Check Flake
+on:
+  push:
+    paths:
+      - "**/*.nix"
+      - "**/flake.lock"
+  workflow_dispatch:
+  
+jobs:
+  nix-flake-check:
+    runs-on: alpine-latest
+    steps:
+      - name: Install Lix
+        uses: https://git.gradient.moe/actions/install-lix@v1
+      - name: Checkout repository
+        uses: actions/checkout@v5
+      - name: Setup Attic Cache
+        uses: ./.forgejo/setup-attic-cache
+        with:
+          attic-token: ${{ secrets.ATTIC_TOKEN }}
+      - name: Run nix flake check
+        run: nix flake check
+      
+      # No need to push to cache, this is meant to be a quick action
