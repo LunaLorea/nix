@@ -39,12 +39,20 @@ in
       settings = {
         default_input = "password";
         animation = "dur_file";
-        dur_file_path = "/etc/ly/blackhole-smooth-240x67.dur";
+        dur_file_path = "${pkgs.fetchurl {
+          url = "https://codeberg.org/fairyglade/ly-community/raw/commit/2f22cfaf7d17598c8f60f562d56e16d74b6c99ab/animations/dur/blackhole-smooth-240x67.dur";
+          hash = "sha256-wo3FzPtngCsg/bRSDTYHQqKnMp4vY+Btm14vakJERBU=";
+        }}";
         full_color = true;
       };
     };
     # kmscon tty
-    services.kmscon.enable = true;
+    services.kmscon = {
+      enable = true;
+      extraOptions = "--term xterm-256color";
+      config = { };
+    };
+
     home-manager.users.${host.userName} = { ... }: {
       imports = [ inputs.mango.hmModules.mango ];
       home.packages = with pkgs; [
@@ -89,9 +97,14 @@ in
             edge_scroller_pointer_focus = 0;
             scroller_default_proportion = 0.67;
 
+            autostart_sh = ''
+              merremia &
+              merremia-wallpaper &
+            '';
+
             binds = [
-              "SUPER,q,killclient"
-              "SUPER+SHIFT,q,killclient,force"
+              "SUPER,z,killclient"
+              "SUPER+SHIFT,z,killclient,force"
               "SUPER,r,reload_config"
               "SUPER,k,setkeymode,window"
 
@@ -104,6 +117,9 @@ in
 
               # Launcher
               "SUPER,Space,spawn,fuzzel"
+
+              # Browser
+              "Super,e,spawn,zen-beta"
 
               # Clipboard
               "SUPER,v,spawn_shell,cliphist list | rofi -dmenu | cliphist decode | wl-copy"
