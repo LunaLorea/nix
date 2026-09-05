@@ -4,6 +4,7 @@
 {
   pkgs,
   pkgs-stable,
+  pkgs-nightly,
   inputs,
   merremia,
   colors,
@@ -112,8 +113,9 @@
         colors
         host
         merremia
+        pkgs-stable
+        pkgs-nightly
         ;
-      pkgs-unstable = pkgs-stable;
     };
     users.${host.userName} = import ./home.nix;
   };

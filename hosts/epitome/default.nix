@@ -17,37 +17,43 @@
     jellyfin-desktop
     rclone
   ];
-
+  fileSystems = {
+    "/mnt/home-lab" = {
+      device = "luna@sftpgo.wuffli.art:/mnt/pool";
+      fsType = "sshfs";
+      options = [
+        "nodev"
+        "noatime"
+        "allow_other"
+        "IdentityFile=/root/.ssh/id_ed25519"
+      ];
+    };
+  };
   # In /etc/nixos/configuration.nix
   virtualisation.docker = {
     enable = true;
     rootless.enable = false;
   };
-
-  # Optional: Add your user to the "docker" group to run docker without sudo
-  #users.users.${host.userName}.extraGroups = [ "docker" ];
-
-  modules = {
-    silent-boot.enable = true;
-    fingerprintreader.enable = true;
-    sway.enable = true;
-    _1password.enable = true;
-    firefox.enable = true;
-    neovim.enable = true;
-    gaming.enable = true;
+  networking.firewall = {
+    allowedUDPPorts = [ 51820 ]; # Clients and peers can use the same port, see listenport
   };
+  modules = {
+    _1password.enable = true;
+    browser.enable = true;
+    defaultApps.enable = true;
+    fingerprintreader.enable = true;
+    firefox.enable = true;
+    gaming.enable = true;
+    neovim.enable = true;
+    silent-boot.enable = true;
+    theming.enable = true;
+    wm.enable = true;
+  };
+
+  services.upower.enable = true;
 
   home-manager.users.${host.userName} = { ... }: {
     # Modules
-    imports = [
-      # Window manager plus all the additional pkgs like waybar
-      ../../homemanager-modules/ncspot
-      ../../homemanager-modules/git
-      ../../homemanager-modules/studying
-      ../../homemanager-modules/nextcloud-client
-      ../../homemanager-modules/man
-    ];
-
     home.packages = with pkgs; [
       jq
 
