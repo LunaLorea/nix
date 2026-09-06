@@ -1,0 +1,39 @@
+name: Build all systems
+on:
+  # Nightly build at 4 AM
+  schedule:
+    - cron: "0 4 * * *"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: alpine-latest
+    steps:
+      - name: Install Lix
+        uses: https://git.gradient.moe/actions/install-lix@v1
+      - name: Checkout repository
+        uses: actions/checkout@v5
+      - name: Setup Attic Cache
+        uses: ./.forgejo/setup-attic-cache
+        with:
+          attic-token: ${{ secrets.ATTIC_TOKEN }}
+      - name: Fetch flake inputs
+        run: nix flake archive --no-update-lock-file
+      - name: Run Build Desktop
+        id: build0
+        run: nix build .#nixosConfigurations.desktop.config.system.build.toplevel
+        continue-on-error: true
+      - name: Run Build Myriorama
+        id: build1
+        run: nix build .#nixosConfigurations.myriorama.config.system.build.toplevel
+        continue-on-error: true
+      - name: Run Build Epitome
+        id: build2
+        run: nix build .#nixosConfigurations.epitome.config.system.build.toplevel
+        continue-on-error: true
+      - name: Cache all store paths to Attic
+        uses: ./.forgejo/cache-to-attic
+      - name: On failure
+        if: ${{ steps.build0.outcome == 'failure' || steps.build1.outcome == 'failure' || steps.build2.outcome == 'failure' }}
+        run: exit 1
+
