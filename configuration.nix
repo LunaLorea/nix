@@ -29,10 +29,20 @@
   };
 
   # Enable Flakes
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  nix.settings = {
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+    substituters = [
+      "https://nix-community.cachix.org"
+      "https://cache.lorea.dev"
+    ];
+    trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "myriorama:xpV92HJL80tJtom5W++emPbRCv7Vh6fChZ+AUDpeH/o="
+    ];
+  };
 
   nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
