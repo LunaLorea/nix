@@ -17,15 +17,22 @@ in
       instances.default = {
         enable = true;
         secrets.server.connections = {
-          default = {
-            token_url = "/run/secrets/hosts/myriorama/git/runner/token";
+          forgejo = {
+            token_url = "/run/secrets/hosts/myriorama/git/runner/forgejo";
+          };
+          codeberg = {
+            token_url = "/run/secrets/hosts/myriorama/git/runner/codeberg";
           };
         };
         settings = {
           server.connections = {
-            default = {
+            forgejo = {
               url = "https://git.lorea.dev/";
               uuid = "5f5847bc-0498-4325-8b2d-cb955d283419";
+            };
+            codeberg = {
+              url = "https://codeberg.org/";
+              uuid = "752adb26-8188-4987-9bc7-8fa29051fcee";
             };
           };
           runner.labels = [
@@ -58,6 +65,7 @@ in
       DynamicUser = lib.mkForce false;
       User = "forgejo-runner";
     };
-    sops.secrets."hosts/myriorama/git/runner/token".owner = "forgejo-runner";
+    sops.secrets."hosts/myriorama/git/runner/forgejo".owner = "forgejo-runner";
+    sops.secrets."hosts/myriorama/git/runner/codeberg".owner = "forgejo-runner";
   };
 }
