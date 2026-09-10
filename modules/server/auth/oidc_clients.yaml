@@ -135,3 +135,24 @@ identity_providers:
         access_token_signed_response_alg: "none"
         userinfo_signed_response_alg: "none"
         token_endpoint_auth_method: "client_secret_basic"
+      - client_id: {{ secret "/run/secrets/hosts/myriorama/git/forgejo/oidc_client_id" | mindent 10 "|" | msquote }}
+        client_name: 'Forgejo'
+        client_secret: {{ secret "/run/secrets/hosts/myriorama/git/forgejo/oidc_client_secret/authelia" | mindent 10 "|" | msquote }}
+        public: false
+        authorization_policy: 'two_factor'
+        require_pkce: true
+        pkce_challenge_method: 'S256'
+        redirect_uris:
+          - 'https://git.lorea.dev/user/oauth2/Authelia/callback'
+        scopes:
+          - 'openid'
+          - 'email'
+          - 'profile'
+          - 'groups'
+        response_types:
+          - 'code'
+        grant_types:
+          - 'authorization_code'
+        access_token_signed_response_alg: 'none'
+        userinfo_signed_response_alg: 'none'
+        token_endpoint_auth_method: 'client_secret_basic'

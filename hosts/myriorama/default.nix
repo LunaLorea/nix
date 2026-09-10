@@ -26,6 +26,7 @@
       thelounge.enable = true;
       vaultwarden.enable = true;
       git = {
+        forgejo.enable = true;
         runner.enable = true;
       };
     };

@@ -12,19 +12,27 @@ in
     enable = lib.mkEnableOption "forgejo runner";
   };
   config = lib.mkIf cfg.enable {
-    services.gitea-actions-runner = {
+    services.forgejo-runner = {
       package = pkgs.forgejo-runner;
       instances.default = {
         enable = true;
-        name = "myriorama";
-        url = "https://codeberg.org";
-        # Obtaining the path to the runner token file may differ
-        # tokenFile should be in format TOKEN=<secret>, since it's EnvironmentFile for systemd
-        tokenFile = "/run/secrets/hosts/myriorama/git/runner/token";
-        labels = [
-          "docker:docker://node:24-alpine"
-          "alpine-latest:docker://node:24-alpine"
-        ];
+        secrets.server.connections = {
+          default = {
+            token_url = "/run/secrets/hosts/myriorama/git/runner/token";
+          };
+        };
+        settings = {
+          server.connections = {
+            default = {
+              url = "https://git.lorea.dev/";
+              uuid = "5f5847bc-0498-4325-8b2d-cb955d283419";
+            };
+          };
+          runner.labels = [
+            "docker:docker://node:24-alpine"
+            "alpine-latest:docker://node:24-alpine"
+          ];
+        };
       };
     };
     virtualisation.podman = {
@@ -34,19 +42,22 @@ in
     };
 
     users = {
-      users.gitea-runner = {
+      users.forgejo-runner = {
         enable = true;
-        group = "gitea-runner";
+        group = "forgejo-runner";
         isSystemUser = true;
 
         extraGroups = [
           "podman"
         ];
       };
-      groups.gitea-runner = { };
+      groups.forgejo-runner = { };
     };
 
-    systemd.services.gitea-runner-default.serviceConfig.DynamicUser = lib.mkForce false;
-    sops.secrets."hosts/myriorama/git/runner/token".owner = "gitea-runner";
+    systemd.services.forgejo-runner-default.serviceConfig = {
+      DynamicUser = lib.mkForce false;
+      User = "forgejo-runner";
+    };
+    sops.secrets."hosts/myriorama/git/runner/token".owner = "forgejo-runner";
   };
 }
