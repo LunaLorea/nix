@@ -1,6 +1,7 @@
 {
   pkgs,
   host,
+  inputs,
   ...
 }:
 {
@@ -12,6 +13,7 @@
   qt.enable = true;
   modules = {
     _1password.enable = true;
+    affinity.enable = true;
     browser.enable = true;
     defaultApps.enable = true;
     gaming.enable = true;

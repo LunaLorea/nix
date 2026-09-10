@@ -6,7 +6,9 @@
 {
   imports = [
     ./1password
+    ./affinity
     ./browser
+    ./defaultApps
     ./fingerprintreader
     ./firefox
     ./gaming
@@ -16,6 +18,5 @@
     ./silent-boot
     ./theming
     ./wm
-    ./defaultApps
   ];
 }
