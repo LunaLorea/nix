@@ -14,9 +14,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v5
       - name: Setup Attic Cache
-        uses: ./.forgejo/setup-attic-cache
+        uses: actions/setup-attic-cache@v1
         with:
-          attic-token: ${{ secrets.ATTIC_TOKEN }}
+          attic_token: ${{ secrets.ATTIC_TOKEN }}
       - name: Fetch flake inputs
         run: nix flake archive --no-update-lock-file
       - name: Run Build Desktop
@@ -32,7 +32,9 @@ jobs:
         run: nix build .#nixosConfigurations.epitome.config.system.build.toplevel
         continue-on-error: true
       - name: Cache all store paths to Attic
-        uses: ./.forgejo/cache-to-attic
+        uses: actions/cache-to-attic@v1
+        with:
+          attic_cache: ${{ vars.ATTIC_CACHE }}
       - name: On failure
         if: ${{ steps.build0.outcome == 'failure' || steps.build1.outcome == 'failure' || steps.build2.outcome == 'failure' }}
         run: exit 1
