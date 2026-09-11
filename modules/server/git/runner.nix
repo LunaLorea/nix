@@ -62,10 +62,9 @@ in
     };
 
     systemd.services.forgejo-runner-default.serviceConfig = {
-      DynamicUser = lib.mkForce false;
-      User = "forgejo-runner";
+      ImportCredential = "tokens:/run/secrets/hosts/myriorama/git/runner/*";
     };
-    sops.secrets."hosts/myriorama/git/runner/forgejo".owner = "forgejo-runner";
-    sops.secrets."hosts/myriorama/git/runner/codeberg".owner = "forgejo-runner";
+    sops.secrets."hosts/myriorama/git/runner/forgejo" = { };
+    sops.secrets."hosts/myriorama/git/runner/codeberg" = { };
   };
 }
