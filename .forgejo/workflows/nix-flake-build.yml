@@ -21,7 +21,7 @@ jobs:
         uses: actions/setup-attic-cache@v1
         with:
           attic-url: 'https://cache.forall.systems'
-          attic-cache: ''
+          attic-cache: 'affinity'
           attic-token: 'cache.forall.systems:5PmD7QO4MSF8YgyRZtkSGXRDo96H3bybIf2SsQh8ScI='
       - name: Update flake
         run: nix flake update
