@@ -13,10 +13,16 @@ jobs:
         uses: https://git.gradient.moe/actions/install-lix@v1
       - name: Checkout repository
         uses: actions/checkout@v5
-      - name: Setup Attic Cache
+      - name: Setup Private Attic Cache
         uses: actions/setup-attic-cache@v1
         with:
           attic_token: ${{ secrets.ATTIC_TOKEN }}
+      - name: Setup affinity-nix Cache
+        uses: actions/setup-attic-cache@v1
+        with:
+          attic_url: 'https://cache.forall.systems'
+          attic_cache: ''
+          attic_token: 'cache.forall.systems:5PmD7QO4MSF8YgyRZtkSGXRDo96H3bybIf2SsQh8ScI='
       - name: Update flake
         run: nix flake update
       - name: Fetch flake inputs
