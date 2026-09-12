@@ -189,7 +189,6 @@ in
     sops.secrets = {
       "hosts/myriorama/git/forgejo/smtp_pw".owner = "forgejo";
       "hosts/myriorama/git/forgejo/admin_pw".owner = "forgejo";
-      "hosts/myriorama/git/forgejo/ssh_keys".owner = "forgejo";
       "hosts/myriorama/git/forgejo/oidc_client_secret/authelia".owner = "authelia-wuffli";
       "hosts/myriorama/git/forgejo/oidc_client_id".owner = "authelia-wuffli";
     };

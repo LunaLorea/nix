@@ -8,5 +8,15 @@
   },
   "lockFileMaintenance": {
     "enabled": true
-  }
+  },
+  "packageRules": [
+    {
+      "matchManagers": [
+        "github-actions"
+      ],
+      "registryUrls": [
+        "https://git.lorea.dev"
+      ]
+    }
+  ]
 }

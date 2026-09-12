@@ -27,6 +27,7 @@
       vaultwarden.enable = true;
       git = {
         forgejo.enable = true;
+        renovate.enable = true;
         runner.enable = true;
       };
     };

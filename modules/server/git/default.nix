@@ -1,6 +1,7 @@
 { ... }: {
   imports = [
-    ./runner.nix
     ./forgejo.nix
+    ./renovate.nix
+    ./runner.nix
   ];
 }
