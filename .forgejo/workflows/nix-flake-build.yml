@@ -17,8 +17,12 @@ jobs:
         uses: actions/setup-attic-cache@v1
         with:
           attic_token: ${{ secrets.ATTIC_TOKEN }}
+      - name: Update flake
+        run: nix flake update
       - name: Fetch flake inputs
         run: nix flake archive --no-update-lock-file
+      - name: Check flake
+        run: nix flake check
       - name: Run Build Desktop
         id: build0
         run: nix build .#nixosConfigurations.desktop.config.system.build.toplevel
@@ -38,4 +42,6 @@ jobs:
       - name: On failure
         if: ${{ steps.build0.outcome == 'failure' || steps.build1.outcome == 'failure' || steps.build2.outcome == 'failure' }}
         run: exit 1
+      - name: Push on success
+        run: git push
 
