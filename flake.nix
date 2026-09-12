@@ -12,7 +12,7 @@
     };
 
     merremia = {
-      url = "git+https://codeberg.org/lunalore/Merremia?ref=main";
+      url = "git+https://codeberg.org/lunalorea/Merremia?ref=main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
