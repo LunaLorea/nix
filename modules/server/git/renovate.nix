@@ -35,7 +35,7 @@ in
             enabled = true;
           };
         };
-        schedule = "*-*-* 04:00:00";
+        schedule = "*-*-* *:00:00";
       };
     };
     sops.secrets."hosts/myriorama/git/renovate/forgejo_token" = { };
