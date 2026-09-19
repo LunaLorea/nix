@@ -176,6 +176,13 @@
               };
             };
 
+            mods = [
+              "e74cb40a-f3b8-445a-9826-1b1b6e41b846" # Custom uiFont
+              "f7c71d9a-bce2-420f-ae44-a64bd92975ab" # Better Unloaded Tabs
+              "a6335949-4465-4b71-926c-4a52d34bc9c0" # Better Find Bar
+              "ad97bb70-0066-4e42-9b5f-173a5e42c6fc" # SuperPins
+            ];
+
             settings = {
               "sidebar.verticalTabs" = "true";
               "browser.toolbars.bookmarks.visibility" = "never";
@@ -183,6 +190,123 @@
                 ''["back-button","forward-button","stop-reload-button","customizableui-special-spring1","vertical-spacer","urlbar-container","customizableui-special-spring2","downloads-button","fxa-toolbar-menu-button","unified-extensions-button","ublock0_raymondhill_net-browser-action","_d634138d-c276-4fc8-924b-40a0ea21d284_-browser-action","jid1-mnnxcxisbpnsxq_jetpack-browser-action","sponsorblocker_ajay_app-browser-action"]'';
               "browser.ml.chat.enabled" = "false";
               "sidebar.main.tools" = "bookmarks";
+              "font.name.monospace.x-western" = lib.mkForce "0xProto Nerd Font Mono";
+              "font.name.sans-serif.x-western" = lib.mkForce "0xProto Nerd Font";
+              "font.name.serif.x-western" = lib.mkForce "0xProto Nerd Font";
+            };
+
+            pinsForce = true;
+            pinsForceAction = "remove";
+            pins = {
+              "Proton Mail" = {
+                id = "9d8a8f91-7e29-4688-ae2e-da4e49d4a179";
+                url = "https://mail.protonmail.com";
+                position = 100;
+                isEssential = true;
+              };
+              "Proton Calendar" = {
+                id = "9d8a8f91-7e29-4688-ae2e-da4e49d4a465";
+                url = "https://calendar.proton.me/";
+                position = 101;
+                isEssential = true;
+              };
+            };
+
+            spaceRouting = {
+              # Link previews / external opens with no matching rule land here.
+              defaultExternalRoute = "0";
+
+              routes = {
+                "codeberg" = {
+                  reference = "codeberg.org";
+                  openIn = "1";
+                };
+                "forgejo" = {
+                  reference = "git.lorea.dev";
+                  openIn = "1";
+                };
+                "github" = {
+                  reference = "github.com";
+                  openIn = "1";
+                };
+
+                "reddit" = {
+                  reference = "reddit.com";
+                  openIn = "0";
+                };
+                "youtube" = {
+                  reference = "youtube.com";
+                  openIn = "0";
+                };
+              };
+            };
+
+            spacesForce = true;
+            spaces = {
+              Entertainment = {
+                id = "0";
+                icon = "";
+                pins = {
+                  "YouTube" = {
+                    id = "cdd10fab-4fc5-494b-9041-325e5759195b";
+                    url = "https://youtube.com/";
+                    position = 102;
+                  };
+                  "Jellyfin" = {
+                    id = "cdd10fab-4fc5-494b-9041-325e575csieb";
+                    url = "https://jellyfin.wuffli.art/";
+                    position = 103;
+                  };
+                  "Twitch" = {
+                    id = "cdd10fab-4fc5-494b-9041-325e575cseti";
+                    url = "https://twitch.tv/";
+                    position = 104;
+                  };
+                };
+              };
+              Development = {
+                id = "1";
+                icon = "󰅪";
+                pins = {
+                  "Forgejo" = {
+                    id = "cnsiethcsrne";
+                    url = "https://git.lorea.dev/";
+                    position = 1;
+                  };
+                };
+              };
+              Studying = {
+                id = "2";
+                icon = "";
+                pins = {
+                  "Moodle" = {
+                    id = "chrsienothsirnet";
+                    url = "https://moodle-app2.let.ethz.ch/my/";
+                    position = 1;
+                  };
+                  "Exam Collection" = {
+                    id = "hrnlmoturntoieh";
+                    url = "https://exams.vis.ethz.ch/";
+                    position = 2;
+                  };
+                };
+              };
+              Work = {
+                id = "3";
+                icon = "󰙸";
+                pins = {
+                  "Confluence" = {
+                    id = "hrcsiwälymufeal";
+                    url = "https://unlimited.ethz.ch/spaces/CSNOW/pages/491520264/HS26+27+-+Semester+Dashboard";
+                    position = 1;
+                  };
+                  "CSNOW Mail" = {
+                    id = "auhontuhrntsie";
+                    url = "https://outlook.office.com/mail/infkdeptcsnow@ethz.mail.onmicrosoft.com/";
+                    position = 2;
+                  };
+                };
+              };
             };
           };
         };
