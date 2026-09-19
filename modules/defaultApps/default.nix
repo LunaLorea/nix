@@ -68,21 +68,36 @@ in
     };
 
     home-manager.users.${host.userName} = { ... }: {
-      home.packages = [
-        pkgs.nautilus
-        pkgs.networkmanagerapplet
-        pkgs.qpwgraph
-        pkgs.pwvucontrol
-        # Music player
-        pkgs.feishin
-        # Movie player
-        pkgs.jellyfin-desktop
-        pkgs.cinny-desktop
-        pkgs.signal-desktop
-        # Studying
-        pkgs.obsidian
-        pkgs.anki
-      ];
+      home.packages =
+        let
+          nixpkgs-pr-sable-desktop = import (pkgs.applyPatches {
+            src = pkgs.path;
+            patches = [
+              (pkgs.fetchpatch2 {
+                url = "https://github.com/NixOS/nixpkgs/pull/548099.diff?full_index=1";
+                hash = "sha256-W6jQ6K4e2qQqm9R++hYzP80jqtPvQ9ezhHuF9jTlMjc=";
+              })
+            ];
+          }) { inherit (pkgs.stdenv) system; };
+        in
+        with pkgs;
+        [
+          nautilus
+          networkmanagerapplet
+          qpwgraph
+          pwvucontrol
+          # Music player
+          feishin
+          # Movie player
+          jellyfin-desktop
+          signal-desktop
+          # Studying
+          obsidian
+          anki
+        ]
+        ++ [
+          nixpkgs-pr-sable-desktop.sable-desktop
+        ];
       # automatically mount drives
       services.udiskie = {
         enable = true;
