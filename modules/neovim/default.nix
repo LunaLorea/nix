@@ -180,6 +180,10 @@ in
             softtabstop = 2;
             shiftwidth = 0;
             autoindent = true;
+            foldcolumn = "1";
+            foldlevel = 99;
+            foldlevelstart = 99;
+            foldenable = true;
           };
 
           lsp = {
@@ -222,6 +226,16 @@ in
           ui = {
             colorizer.enable = true;
             smartcolumn.setupOpts.colorcolumn = 80;
+            nvim-ufo = {
+              enable = true;
+              setupOpts = lib.mkLuaInline ''
+                {
+                	    	  provider_selector = function(bufnr, filetype, buftype)
+                	          return {'lsp', 'indent'}
+                		  end
+                		}
+              '';
+            };
           };
 
           keymaps = [
@@ -229,6 +243,16 @@ in
               key = "<leader>u";
               mode = "n";
               action = "<cmd>UndotreeToggle<CR>";
+            }
+            {
+              key = "zR";
+              mode = "n";
+              action = "require('ufo').openAllFolds";
+            }
+            {
+              key = "zM";
+              mode = "n";
+              action = "require('ufo').closeAllFolds";
             }
           ];
 
