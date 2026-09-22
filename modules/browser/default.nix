@@ -199,13 +199,13 @@
             pinsForceAction = "remove";
             pins = {
               "Proton Mail" = {
-                id = "9d8a8f91-7e29-4688-ae2e-da4e49d4a179";
+                id = "proton-mail";
                 url = "https://mail.protonmail.com";
                 position = 100;
                 isEssential = true;
               };
               "Proton Calendar" = {
-                id = "9d8a8f91-7e29-4688-ae2e-da4e49d4a465";
+                id = "proton-calendar";
                 url = "https://calendar.proton.me/";
                 position = 101;
                 isEssential = true;
@@ -219,24 +219,28 @@
               routes = {
                 "codeberg" = {
                   reference = "codeberg.org";
-                  openIn = "1";
+                  openIn = "development";
                 };
                 "forgejo" = {
                   reference = "git.lorea.dev";
-                  openIn = "1";
+                  openIn = "development";
                 };
                 "github" = {
                   reference = "github.com";
-                  openIn = "1";
+                  openIn = "development";
                 };
 
-                "reddit" = {
-                  reference = "reddit.com";
-                  openIn = "0";
-                };
                 "youtube" = {
                   reference = "youtube.com";
-                  openIn = "0";
+                  openIn = "entertainment";
+                };
+                "bluesky" = {
+                  reference = "bsky.app";
+                  openIn = "entertainment";
+                };
+                "mastodon" = {
+                  reference = "social.lorea.dev";
+                  openIn = "entertainment";
                 };
               };
             };
@@ -244,64 +248,84 @@
             spacesForce = true;
             spaces = {
               Entertainment = {
-                id = "0";
+                id = "entertainment";
                 icon = "";
                 pins = {
                   "YouTube" = {
-                    id = "cdd10fab-4fc5-494b-9041-325e5759195b";
+                    id = "youtube";
                     url = "https://youtube.com/";
                     position = 102;
                   };
                   "Jellyfin" = {
-                    id = "cdd10fab-4fc5-494b-9041-325e575csieb";
+                    id = "jellyfin";
                     url = "https://jellyfin.wuffli.art/";
                     position = 103;
                   };
                   "Twitch" = {
-                    id = "cdd10fab-4fc5-494b-9041-325e575cseti";
+                    id = "twitch";
                     url = "https://twitch.tv/";
                     position = 104;
                   };
                 };
               };
               Development = {
-                id = "1";
+                id = "development";
                 icon = "󰅪";
                 pins = {
                   "Forgejo" = {
-                    id = "cnsiethcsrne";
+                    id = "forgejo";
                     url = "https://git.lorea.dev/";
                     position = 1;
+                  };
+                  "Codeberg" = {
+                    id = "codeberg";
+                    url = "https://codeberg.org/";
+                    position = 2;
+                  };
+                  "Github" = {
+                    id = "github";
+                    url = "https://github.com/";
+                    position = 3;
                   };
                 };
               };
               Studying = {
-                id = "2";
+                id = "studying";
                 icon = "";
                 pins = {
                   "Moodle" = {
-                    id = "chrsienothsirnet";
+                    id = "moodle";
                     url = "https://moodle-app2.let.ethz.ch/my/";
                     position = 1;
                   };
                   "Exam Collection" = {
-                    id = "hrnlmoturntoieh";
+                    id = "examcollection";
                     url = "https://exams.vis.ethz.ch/";
                     position = 2;
+                  };
+                  "MyStudies" = {
+                    id = "mystudies";
+                    url = "https://www.lehrbetrieb.ethz.ch/myStudies/login.view";
+                    position = 3;
+                  };
+                  "EduApp" = {
+                    id = "eduapp";
+                    url = "https://eduapp.ethz.ch/";
+                    position = 4;
                   };
                 };
               };
               Work = {
-                id = "3";
+                id = "work";
                 icon = "󰙸";
                 pins = {
                   "Confluence" = {
-                    id = "hrcsiwälymufeal";
+                    id = "confluence";
                     url = "https://unlimited.ethz.ch/spaces/CSNOW/pages/491520264/HS26+27+-+Semester+Dashboard";
                     position = 1;
                   };
                   "CSNOW Mail" = {
-                    id = "auhontuhrntsie";
+                    id = "csnow-mail";
                     url = "https://outlook.office.com/mail/infkdeptcsnow@ethz.mail.onmicrosoft.com/";
                     position = 2;
                   };
