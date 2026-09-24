@@ -30,6 +30,9 @@
     environment.shells = with pkgs; [ zsh ];
     environment.pathsToLink = [ "/share/zsh" ];
 
+    security.sudo-rs.enable = true;
+    security.sudo.enable = false;
+
     home-manager.users.${host.userName} = _: {
       programs = {
         zsh = {
@@ -43,7 +46,7 @@
 
           shellAliases = {
             ll = "eza -l --git";
-            rebuild = "sudo nixos-rebuild switch --flake /home/${host.userName}/.config/nix#${host.hostName} --sudo";
+            rebuild = "nixos-rebuild switch --flake /home/${host.userName}/.config/nix#${host.hostName} --ask-sudo-password";
             update = "nix flake update --flake /home/${host.userName}/.config/nix";
             nixgc = "sudo nix-collect-garbage --delete-older-than 7d && sudo nix-store --gc && nix-store --optimise";
             tree = "eza --tree --level=5 -l --git";
