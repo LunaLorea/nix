@@ -66,6 +66,9 @@
     };
   };
 
+  # Enable Keyring
+  services.gnome.gnome-keyring.enable = true;
+
   # Set your time zone.
   time.timeZone = "Europe/Zurich";
 
