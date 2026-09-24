@@ -38,13 +38,13 @@
     allowedUDPPorts = [ 51820 ]; # Clients and peers can use the same port, see listenport
   };
   modules = {
-    _1password.enable = true;
     browser.enable = true;
     defaultApps.enable = true;
     fingerprintreader.enable = true;
     firefox.enable = true;
     gaming.enable = true;
     neovim.enable = true;
+    passwordmanager.enable = true;
     silent-boot.enable = true;
     theming.enable = true;
     wm.enable = true;

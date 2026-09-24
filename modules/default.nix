@@ -5,7 +5,6 @@
 }:
 {
   imports = [
-    ./1password
     ./affinity
     ./browser
     ./defaultApps
@@ -13,6 +12,7 @@
     ./firefox
     ./gaming
     ./neovim
+    ./passwordmanager
     ./server
     ./shell
     ./silent-boot
