@@ -229,45 +229,11 @@
                   reference = "github.com";
                   openIn = "development";
                 };
-
-                "youtube" = {
-                  reference = "youtube.com";
-                  openIn = "entertainment";
-                };
-                "bluesky" = {
-                  reference = "bsky.app";
-                  openIn = "entertainment";
-                };
-                "mastodon" = {
-                  reference = "social.lorea.dev";
-                  openIn = "entertainment";
-                };
               };
             };
 
             spacesForce = true;
             spaces = {
-              Entertainment = {
-                id = "entertainment";
-                icon = "";
-                pins = {
-                  "YouTube" = {
-                    id = "youtube";
-                    url = "https://youtube.com/";
-                    position = 102;
-                  };
-                  "Jellyfin" = {
-                    id = "jellyfin";
-                    url = "https://jellyfin.wuffli.art/";
-                    position = 103;
-                  };
-                  "Twitch" = {
-                    id = "twitch";
-                    url = "https://twitch.tv/";
-                    position = 104;
-                  };
-                };
-              };
               Development = {
                 id = "development";
                 icon = "󰅪";
